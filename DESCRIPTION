@@ -17,8 +17,16 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
+    magrittr,
+    purrr,
     sf,
     spdep,
+    stats,
     terra
+Suggests: 
+    raster,
+    stars
 LinkingTo: 
     Rcpp
+Depends: 
+    R (>= 4.1.0)
