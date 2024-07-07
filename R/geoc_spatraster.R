@@ -4,6 +4,8 @@
 #' for variable in raster data. The resulting output is A SpatRaster object.
 #'
 #' @param r Raster data that can be converted to `SpatRaster` by `terra::rast()`.
+#' @param normalize (optional) Whether to further normalizes the spatial local complexity.
+#' Default is `TRUE`
 #'
 #' @return A SpatRaster object
 #' @export
@@ -28,7 +30,7 @@
 #' a = geoc_raster(m)
 #' a
 #'
-geoc_raster = \(r){
+geoc_raster = \(r,normalize = TRUE){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
@@ -38,8 +40,10 @@ geoc_raster = \(r){
   geocres = terra::focalCpp(r,w = 3,
                             RasterGeocSpatialDependence,
                             fillvalue = NA)
-  seq(1,terra::nlyr(geocres)) %>%
-    purrr::map(\(i) terra::app(geocres[[i]],normalize_vector)) %>%
-    terra::rast() -> geocres
+  if (normalize) {
+    seq(1,terra::nlyr(geocres)) %>%
+      purrr::map(\(i) terra::app(geocres[[i]],normalize_vector)) %>%
+      terra::rast() -> geocres
+  }
   return(geocres)
 }

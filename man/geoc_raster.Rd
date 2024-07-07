@@ -4,10 +4,13 @@
 \alias{geoc_raster}
 \title{calculates geocomplexity for raster data}
 \usage{
-geoc_raster(r)
+geoc_raster(r, normalize = TRUE)
 }
 \arguments{
 \item{r}{Raster data that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
+
+\item{normalize}{(optional) Whether to further normalizes the spatial local complexity.
+Default is \code{TRUE}}
 }
 \value{
 A SpatRaster object
