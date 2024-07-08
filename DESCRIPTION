@@ -27,7 +27,8 @@ Imports:
 Suggests: 
     ggplot2,
     raster,
-    stars
+    stars,
+    viridis
 LinkingTo: 
     Rcpp
 Depends: 

@@ -30,4 +30,11 @@ inc = dplyr::select(income,Income)
 gc = geocd_vector(inc)
 gc
 
+library(ggplot2)
+library(viridis)
+ggplot(gc) +
+   geom_sf(aes(fill = Geocomplexiy_Income)) +
+   scale_fill_viridis(option="mako", direction = -1) +
+   theme_bw()
+
 }
