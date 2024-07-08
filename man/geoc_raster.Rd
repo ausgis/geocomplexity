@@ -9,7 +9,7 @@ geoc_raster(r, order = 1, normalize = TRUE)
 \arguments{
 \item{r}{Raster data that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
 
-\item{order}{(optional) The order of the adjacency object.Default is \code{1}.}
+\item{order}{(optional) The order of the adjacency object. Default is \code{1}.}
 
 \item{normalize}{(optional) Whether to further normalizes the spatial local complexity.
 Default is \code{TRUE}}
@@ -23,16 +23,14 @@ for variable in raster data.
 }
 \examples{
 library(terra)
-m = matrix(
-  c(3,3,3,3,1,3,
-    3,3,3,2,1,2,
-    3,3,3,1,2,1,
-    1,3,2,2,2,2,
-    2,2,2,1,1,2,
-    1,2,1,1,1,1),
-  nrow = 6,
-  byrow = TRUE
-)
+m = matrix(c(3,3,3,3,1,3,
+             3,3,3,2,1,2,
+             3,3,3,1,2,1,
+             1,3,2,2,2,2,
+             2,2,2,1,1,2,
+             1,2,1,1,1,1),
+           nrow = 6,
+           byrow = TRUE)
 m = rast(m)
 plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
 a1 = geoc_raster(m,1)
