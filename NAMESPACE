@@ -3,6 +3,7 @@
 export("%>%")
 export(geocd_raster)
 export(geocd_vector)
+export(geocs_vector)
 export(inverse_distance_weight)
 export(normalize_vector)
 export(standardize_vector)

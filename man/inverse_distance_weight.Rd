@@ -4,16 +4,12 @@
 \alias{inverse_distance_weight}
 \title{calculate inverse distance weight}
 \usage{
-inverse_distance_weight(locx, locy, power = 1, is_arc = FALSE)
+inverse_distance_weight(sfj, power = 1)
 }
 \arguments{
-\item{locx}{The x axis location.}
-
-\item{locy}{The y axis location.}
+\item{sfj}{Vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
 \item{power}{(optional) Default is 1. Set to 2 for gravity weights.}
-
-\item{is_arc}{(optional) FALSE (default) or TRUE, whether to compute arc distance.}
 }
 \value{
 A inverse distance weight matrices with class of \code{matrix}.
@@ -26,10 +22,9 @@ The inverse distance weight formula is
 \eqn{w_{ij} = 1 / d_{ij}^\alpha}
 }
 \examples{
-x = 1:10
-y = 1:10
-inverse_distance_weight(x,y)
-inverse_distance_weight(x,y,is_arc = TRUE)
+data("income")
+wt = inverse_distance_weight(income)
+wt[1:5,1:5]
 
 }
 \author{

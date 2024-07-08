@@ -37,26 +37,30 @@ normalize_vector = \(x){
 #' The inverse distance weight formula is
 #' \eqn{w_{ij} = 1 / d_{ij}^\alpha}
 #'
-#' @param locx The x axis location.
-#' @param locy The y axis location.
+#' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param power (optional) Default is 1. Set to 2 for gravity weights.
-#' @param is_arc (optional) FALSE (default) or TRUE, whether to compute arc distance.
 #'
 #' @return A inverse distance weight matrices with class of `matrix`.
 #' @export
 #'
 #' @examples
-#' x = 1:10
-#' y = 1:10
-#' inverse_distance_weight(x,y)
-#' inverse_distance_weight(x,y,is_arc = TRUE)
+#' data("income")
+#' wt = inverse_distance_weight(income)
+#' wt[1:5,1:5]
 #'
-inverse_distance_weight = \(locx,locy,power = 1,is_arc = FALSE){
+inverse_distance_weight = \(sfj,power = 1){
+  if (!inherits(sfj,'sf')){
+    sfj = sf::st_as_sf(sfj)
+  }
+  is_arc = ifelse(sf::st_is_longlat(sfj),TRUE,FALSE)
+  coords = sfj %>%
+    sf::st_point_on_surface() %>%
+    sf::st_coordinates() %>%
+    {.[,c('X','Y')]}
   if (is_arc) {
-    distij = stats::as.dist(geosphere::distm(matrix(c(locx,locy),
-                                                    ncol = 2)))
+    distij = stats::as.dist(geosphere::distm(coords))
   } else {
-    distij = stats::dist(data.frame(locx,locy))
+    distij = stats::dist(as.data.frame(coords))
   }
   wij = 1 / distij ^ power
   return(as.matrix(wij))
