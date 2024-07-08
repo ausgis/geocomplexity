@@ -5,8 +5,8 @@
 #'
 #' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get it from
-#' `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not provided, `geocomplexity` will use
-#' a first-order queen adjacency binary matrix.
+#' `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not provided, `geocomplexity` will
+#' use a first-order queen adjacency binary matrix.
 #' @param normalize (optional) Whether to further normalizes the spatial local complexity.
 #' Default is `TRUE`
 #'
