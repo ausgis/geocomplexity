@@ -27,14 +27,14 @@ for variable in vector data based on spatial similarity.
 \examples{
 library(sf)
 data("income")
-inc = dplyr::select(income,Income)
-gc = geocs_vector(inc)
+income = dplyr::select(income,-SA3_CODE16)
+gc = geocs_vector(income)
 gc
 
 library(ggplot2)
 library(viridis)
 ggplot(gc) +
-   geom_sf(aes(fill = Geocomplexity_Income)) +
+   geom_sf(aes(fill = Geocomplexity_Income_Gini)) +
    scale_fill_viridis(option="mako", direction = -1) +
    theme_bw()
 

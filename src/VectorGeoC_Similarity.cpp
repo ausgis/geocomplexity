@@ -5,14 +5,14 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericVector VectorGeoCSimilarity(NumericVector x,
+NumericVector VectorGeoCSimilarity(NumericMatrix xobs,
                                    NumericMatrix wt){
-  NumericVector out(x.size());
-  for (int i = 0; i < x.size(); ++i) {
-    double zi = x[i];
-    NumericVector zs(x.size());
-    for (int n = 0; n < x.size(); ++n) {
-      zs[n] = cosine_similarity(zi,x[n]);
+  NumericVector out(xobs.nrow());
+  for (int i = 0; i < xobs.nrow(); ++i) {
+    NumericVector zi = xobs(i,_);
+    NumericVector zs(xobs.nrow());
+    for (int n = 0; n < xobs.nrow(); ++n) {
+      zs[n] = cosine_similarity(zi,xobs(n,_));
     }
     out[i] = spatial_variance(zs,wt);
   }

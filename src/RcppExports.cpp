@@ -85,14 +85,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // VectorGeoCSimilarity
-NumericVector VectorGeoCSimilarity(NumericVector x, NumericMatrix wt);
-RcppExport SEXP _geocomplexity_VectorGeoCSimilarity(SEXP xSEXP, SEXP wtSEXP) {
+NumericVector VectorGeoCSimilarity(NumericMatrix xobs, NumericMatrix wt);
+RcppExport SEXP _geocomplexity_VectorGeoCSimilarity(SEXP xobsSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type xobs(xobsSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
-    rcpp_result_gen = Rcpp::wrap(VectorGeoCSimilarity(x, wt));
+    rcpp_result_gen = Rcpp::wrap(VectorGeoCSimilarity(xobs, wt));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -25,7 +25,7 @@ VectorGeoCDependence <- function(x, wt) {
     .Call(`_geocomplexity_VectorGeoCDependence`, x, wt)
 }
 
-VectorGeoCSimilarity <- function(x, wt) {
-    .Call(`_geocomplexity_VectorGeoCSimilarity`, x, wt)
+VectorGeoCSimilarity <- function(xobs, wt) {
+    .Call(`_geocomplexity_VectorGeoCSimilarity`, xobs, wt)
 }
 

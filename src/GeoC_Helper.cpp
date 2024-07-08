@@ -30,14 +30,22 @@ double sd_nona(NumericVector x) {
   return xres;
 }
 
-double cosine_similarity(double A, double B) {
-  double dot_product = A * B;
-  double norm_A = A * A;
-  double norm_B = B * B;
-  if (norm_A == 0 || norm_B == 0) {
-    return 0;
+double cosine_similarity(NumericVector A, NumericVector B) {
+  int n = A.size();
+  double dot_product = 0.0;
+  double norm_A = 0.0;
+  double norm_B = 0.0;
+
+  for(int i = 0; i < n; i++) {
+    dot_product += A[i] * B[i];
+    norm_A += A[i] * A[i];
+    norm_B += B[i] * B[i];
   }
-  return dot_product / (sqrt(norm_A) * sqrt(norm_B));
+
+  norm_A = sqrt(norm_A);
+  norm_B = sqrt(norm_B);
+
+  return dot_product / (norm_A * norm_B);
 }
 
 IntegerVector rcpp_which(LogicalVector x){

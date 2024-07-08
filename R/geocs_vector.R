@@ -17,14 +17,14 @@
 #' @examples
 #' library(sf)
 #' data("income")
-#' inc = dplyr::select(income,Income)
-#' gc = geocs_vector(inc)
+#' income = dplyr::select(income,-SA3_CODE16)
+#' gc = geocs_vector(income)
 #' gc
 #'
 #' library(ggplot2)
 #' library(viridis)
 #' ggplot(gc) +
-#'    geom_sf(aes(fill = Geocomplexity_Income)) +
+#'    geom_sf(aes(fill = Geocomplexity_Income_Gini)) +
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
@@ -38,15 +38,12 @@ geocs_vector = \(sfj,wt = NULL,normalize = TRUE){
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 standardize_vector))
-  vectlayername = names(sfj_attr)
-  geocvec = dplyr::mutate(sfj_attr,
-                          dplyr::across(dplyr::everything(),
-                                        \(.x) VectorGeoCSimilarity(.x,wt)))
+  vectlayername = paste(names(sfj_attr),collapse = '_')
+  geocvec = VectorGeoCSimilarity(as.matrix(sfj_attr),wt)
   if (normalize) {
-    geocvec = dplyr::mutate(geocvec,
-                            dplyr::across(dplyr::everything(),
-                                          normalize_vector))
+    geocvec = normalize_vector(geocvec)
   }
+  geocvec = tibble::as_tibble_col(geocvec)
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
   geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
   return(geocvec)
