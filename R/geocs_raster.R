@@ -54,6 +54,7 @@ geocs_raster = \(r,order = 1,normalize = TRUE){
     geocres = normalize_vector(geocres)
   }
   r1 = r[[1]]
+  terra::values(r1) = geocres
   names(r1) = paste0('Geocomplexity_',rastlayername)
   return(r1)
 }

@@ -33,7 +33,6 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
       }
     }
     out[n] = res / pow(wi.size(),2);
-    Rcout << "out[n]: " << out[n] << "\n";
   }
   return out;
 }
