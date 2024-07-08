@@ -13,11 +13,12 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
   int ncell = pow(w,2);
   for (int n = 0; n < x.nrow(); ++n){
     IntegerVector wi = rcpp_seq(n*ncell,(n+1)*ncell-1);
-    Rcout << "wi_1: " << wi << "\n";
+    // Rcout << "wi_1: " << wi << "\n";
     wi = w_sp[wi];
+    // Rcout << "wi_2: " << wi << "\n";
     wi = wi[!is_na(wi)];
-    Rcout << "wi_2: " << wi << "\n";
-    Rcout << "wi_2.size(): " << wi.size() << "\n";
+    // Rcout << "wi_3: " << wi << "\n";
+    // Rcout << "wi_3.size(): " << wi.size() << "\n";
     NumericVector zn = x(n,_);
     NumericVector resn(wi.size());
     for (int i = 0 ; i < wi.size(); ++i){
