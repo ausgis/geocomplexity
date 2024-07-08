@@ -17,3 +17,7 @@ RasterGeoCDependence <- function(x, ni = 9L, nw = 9L) {
     .Call(`_geocomplexity_RasterGeoCDependence`, x, ni, nw)
 }
 
+VectorGeoCDependence <- function(x, wt) {
+    .Call(`_geocomplexity_VectorGeoCDependence`, x, wt)
+}
+

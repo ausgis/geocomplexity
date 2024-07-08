@@ -1,32 +1,8 @@
 #include <Rcpp.h>
+#include "GeoC_Helper.h"
 using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp11)]]
-
-double sum_nona(NumericVector x) {
-  NumericVector x1 = x[!is_na(x)];
-  return sum(x1);
-}
-
-double mean_nona(NumericVector x) {
-  NumericVector x1 = x[!is_na(x)];
-  return mean(x1);
-}
-
-List remove_index(List lst, int idx) {
-  int n = lst.size();
-  if (idx < 0 || idx >= n) {
-    stop("Index out of bounds");
-  }
-  List result(n - 1);
-  int result_idx = 0;
-  for (int i = 0; i < n; ++i) {
-    if (i != idx) {
-      result[result_idx++] = lst[i];
-    }
-  }
-  return result;
-}
 
 // [[Rcpp::export]]
 List RasterQueenNeighbors(int rows, int cols) {
@@ -76,12 +52,18 @@ List RasterGeoCNeighbors(int rows, int cols) {
 double RasterGeoCDependenceOne(NumericVector x,
                                size_t ni = 9,
                                size_t nw = 9){
+  NumericVector x1 = x[!is_na(x)];
+  int m = x1.size() - 1;
+  if (m <= 0) {
+    m = 1;
+  }
   int center_idx = (nw - 1) / 2;
+  double zi = x[center_idx];
   NumericVector wt_i (nw,1);
   wt_i[center_idx] = 0;
   List wt_j = RasterGeoCNeighbors(sqrt(nw),sqrt(nw));
   NumericVector x_j = x[wt_i != 0];
-  double localf = -1.0 / 8 * x[4] * sum_nona(x * wt_i);
+  double localf = -1.0 / m * zi * sum_nona(x * wt_i);
   double surroundf = 0;
   for (int n = 0; n < wt_j.size(); ++n){
     IntegerVector j_index = wt_j[n];
@@ -89,7 +71,7 @@ double RasterGeoCDependenceOne(NumericVector x,
     double surroundv = mean_nona(xj);
     surroundf += x_j[n] * surroundv;
   }
-  double res = localf + -1.0 / 8 * surroundf;
+  double res = localf + -1.0 / m * surroundf;
   return res;
 }
 
