@@ -15,14 +15,13 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
     IntegerVector wi = rcpp_seq(n*ncell,(n+1)*ncell-1);
     Rcout << "wi_1: " << wi << "\n";
     wi = w_sp[wi];
-    // wi = wi[!is_na(wi)];
-    wi = wi[wi!=-888888];
+    wi = wi[!is_na(wi)];
     Rcout << "wi_2: " << wi << "\n";
     Rcout << "wi_2.size(): " << wi.size() << "\n";
     NumericVector zn = x(n,_);
     NumericVector resn(wi.size());
     for (int i = 0 ; i < wi.size(); ++i){
-      NumericVector zi = x(wi[n],_);
+      NumericVector zi = x(wi[i],_);
       double zs = cosine_similarity(zn,zi);
       resn[i] = zs;
     }

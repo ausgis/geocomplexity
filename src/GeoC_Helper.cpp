@@ -67,7 +67,7 @@ IntegerVector extract_window(IntegerMatrix mat, int window_size) {
   int cols = mat.ncol();
   int half_window = window_size / 2;
   int result_size = rows * cols * window_size * window_size;
-  IntegerVector result(result_size, -888888);
+  IntegerVector result(result_size, R_NaInt);
 
   int index = 0;
   for (int r = 0; r < rows; ++r) {
@@ -79,7 +79,7 @@ IntegerVector extract_window(IntegerMatrix mat, int window_size) {
           if (new_r >= 0 && new_r < rows && new_c >= 0 && new_c < cols) {
             result[index] = mat(new_r, new_c);
           } else {
-            result[index] = -888888;
+            result[index] = R_NaInt;
           }
           index++;
         }
