@@ -32,6 +32,7 @@ geoc_vector = \(sfj,wt = NULL,normalize = TRUE){
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 standardize_vector))
+  vectlayername = names(sfj_attr)
   geocvec = dplyr::mutate(sfj_attr,
                           dplyr::across(dplyr::everything(),
                                         \(.x) VectorGeoCDependence(.x,wt)))
@@ -40,6 +41,7 @@ geoc_vector = \(sfj,wt = NULL,normalize = TRUE){
                             dplyr::across(dplyr::everything(),
                                           normalize_vector))
   }
+  names(geocvec) = paste0('Geocomplexiy_',vectlayername)
   geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
   return(geocvec)
 }

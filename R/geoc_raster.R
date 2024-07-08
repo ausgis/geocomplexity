@@ -22,6 +22,7 @@
 #'            nrow = 6,
 #'            byrow = TRUE)
 #' m = rast(m)
+#' names(m) = 'sim'
 #' plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
 #' gc1 = geoc_raster(m,1)
 #' gc2 = geoc_raster(m,2)
@@ -32,6 +33,7 @@ geoc_raster = \(r,order = 1,normalize = TRUE){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
+  rastlayername = names(r)
   seq(1,terra::nlyr(r)) %>%
     purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
     terra::rast() -> r
@@ -43,5 +45,6 @@ geoc_raster = \(r,order = 1,normalize = TRUE){
       purrr::map(\(i) terra::app(geocres[[i]],normalize_vector)) %>%
       terra::rast() -> geocres
   }
+  names(geocres) = paste0('Geocomplexiy_',rastlayername)
   return(geocres)
 }
