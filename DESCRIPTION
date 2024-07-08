@@ -34,4 +34,4 @@ LinkingTo:
 Depends: 
     R (>= 4.1.0)
 LazyData: true
-URL: https://spatlyu.github.io/geocomplexity/
+URL: https://spatlyu.github.io/geocomplexity/, https://github.com/SpatLyu/geocomplexity/
