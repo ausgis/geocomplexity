@@ -61,13 +61,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // VectorGeoCDependence
-NumericVector VectorGeoCDependence(NumericVector x, IntegerMatrix wt);
+NumericVector VectorGeoCDependence(NumericVector x, NumericMatrix wt);
 RcppExport SEXP _geocomplexity_VectorGeoCDependence(SEXP xSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type wt(wtSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
     rcpp_result_gen = Rcpp::wrap(VectorGeoCDependence(x, wt));
     return rcpp_result_gen;
 END_RCPP

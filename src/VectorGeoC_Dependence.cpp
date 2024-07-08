@@ -6,19 +6,24 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector VectorGeoCDependence(NumericVector x,
-                                   IntegerMatrix wt){
+                                   NumericMatrix wt){
   NumericVector out(x.size());
   for (int i = 0; i < x.size(); ++i) {
     double zi = x[i];
-    IntegerVector wtj = wt(i, _);
+    NumericVector wtj = wt(i, _);
     IntegerVector j = rcpp_which(wtj != 0);
     int m = j.size();
+    Rprintf("m : %i",m);
+    for (int n = 0; n < m; ++n) {
+      Rprintf("%ith j: %i",n,j[n]);
+    }
     NumericVector zj = x[j];
     NumericVector wtj_z = multiply_vector(wtj[j],zj);
     double localf = -1.0 / m * zi * sum_nona(wtj_z);
+    Rprintf("localf : %f",localf);
     double surroundf = 0;
     for (int n = 0; n < m; ++n) {
-      IntegerVector wtk = wt(j[n], _);
+      NumericVector wtk = wt(j[n], _);
       IntegerVector k = rcpp_which(wtk != 0);
       k = intersect(j, k);
       NumericVector zk = zj[k];

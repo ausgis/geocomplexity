@@ -18,14 +18,12 @@ IntegerVector rcpp_which(LogicalVector x){
   return v[x];
 }
 
-NumericVector multiply_vector(IntegerVector intVec, NumericVector numVec) {
-  int n = intVec.size();
+NumericVector multiply_vector(NumericVector numvec1, NumericVector numvec2) {
+  int n = numvec1.size();
   NumericVector result(n);
-
   for(int i = 0; i < n; ++i) {
-    result[i] = intVec[i] * numVec[i];
+    result[i] = numvec1[i] * numvec2[i];
   }
-
   return result;
 }
 
