@@ -13,20 +13,16 @@ NumericVector VectorGeoCDependence(NumericVector x,
     NumericVector wtj = wt(i, _);
     IntegerVector j = rcpp_which(wtj != 0);
     int m = j.size();
-    Rprintf("m : %i",m);
-    for (int n = 0; n < m; ++n) {
-      Rprintf("%ith j: %i",n,j[n]);
-    }
     NumericVector zj = x[j];
     NumericVector wtj_z = multiply_vector(wtj[j],zj);
     double localf = -1.0 / m * zi * sum_nona(wtj_z);
-    Rprintf("localf : %f",localf);
     double surroundf = 0;
     for (int n = 0; n < m; ++n) {
-      NumericVector wtk = wt(j[n], _);
+      int kn = j[n];
+      NumericVector wtk = wt(kn, _);
       IntegerVector k = rcpp_which(wtk != 0);
       k = intersect(j, k);
-      NumericVector zk = zj[k];
+      NumericVector zk = x[k];
       NumericVector wtk_z = multiply_vector(wtj[k],zk);
       wtk_z = multiply_vector(wtk[k],wtk_z);
       double surroundv = mean_nona(wtk_z);
