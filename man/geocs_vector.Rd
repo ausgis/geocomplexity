@@ -14,7 +14,7 @@ spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} packa
 provided, \code{geocomplexity} will use a first-order inverse distance weight matrix via
 \code{inverse_distance_weight()}.}
 
-\item{normalize}{(optional) Whether to further normalizes the geocomplexity.
+\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
 }
 \value{

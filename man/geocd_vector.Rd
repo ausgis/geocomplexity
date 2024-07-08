@@ -13,7 +13,7 @@ geocd_vector(sfj, wt = NULL, normalize = TRUE)
 spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not
 provided, \code{geocomplexity} will use a first-order queen adjacency binary matrix.}
 
-\item{normalize}{(optional) Whether to further normalizes the geocomplexity.
+\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
 }
 \value{

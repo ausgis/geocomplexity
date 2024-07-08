@@ -11,7 +11,7 @@ geocd_raster(r, order = 1, normalize = TRUE)
 
 \item{order}{(optional) The order of the adjacency object. Default is \code{1}.}
 
-\item{normalize}{(optional) Whether to further normalizes the geocomplexity.
+\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
 }
 \value{

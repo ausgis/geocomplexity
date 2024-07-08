@@ -7,7 +7,7 @@
 #' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
 #' provided, `geocomplexity` will use a first-order inverse distance weight matrix via
 #' `inverse_distance_weight()`.
-#' @param normalize (optional) Whether to further normalizes the geocomplexity.
+#' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
 #'
 #' @return An sf object
