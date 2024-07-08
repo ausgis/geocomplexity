@@ -4,6 +4,7 @@
 #' for variable in raster data. The resulting output is A SpatRaster object.
 #'
 #' @param r Raster data that can be converted to `SpatRaster` by `terra::rast()`.
+#' @param order (optional) The order of the adjacency object.Default is `1`.
 #' @param normalize (optional) Whether to further normalizes the spatial local complexity.
 #' Default is `TRUE`
 #'
@@ -27,17 +28,19 @@
 #'
 #' m = rast(m)
 #' plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
-#' a = geoc_raster(m)
-#' a
+#' a1 = geoc_raster(m,1)
+#' a2 = geoc_raster(m,2)
+#' a1
+#' a2
 #'
-geoc_raster = \(r,normalize = TRUE){
+geoc_raster = \(r,order = 1,normalize = TRUE){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
   seq(1,terra::nlyr(r)) %>%
     purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
     terra::rast() -> r
-  geocres = terra::focalCpp(r,w = 3,
+  geocres = terra::focalCpp(r,w = 2*order + 1,
                             RasterGeoCDependence,
                             fillvalue = NA)
   if (normalize) {
