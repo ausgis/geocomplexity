@@ -24,8 +24,7 @@ Imports:
     sf,
     spdep,
     stats,
-    terra,
-    utils
+    terra
 Suggests: 
     ggplot2,
     raster,
