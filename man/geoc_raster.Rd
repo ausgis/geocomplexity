@@ -19,12 +19,10 @@ A SpatRaster object
 }
 \description{
 This function calculates geocomplexity, a geospatial local complexity indicator,
-for variable in raster data. The resulting output is A SpatRaster object.
+for variable in raster data.
 }
 \examples{
-
 library(terra)
-
 m = matrix(
   c(3,3,3,3,1,3,
     3,3,3,2,1,2,
@@ -35,7 +33,6 @@ m = matrix(
   nrow = 6,
   byrow = TRUE
 )
-
 m = rast(m)
 plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
 a1 = geoc_raster(m,1)
