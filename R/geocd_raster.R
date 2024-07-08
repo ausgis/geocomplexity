@@ -45,6 +45,6 @@ geocd_raster = \(r,order = 1,normalize = TRUE){
       purrr::map(\(i) terra::app(geocres[[i]],normalize_vector)) %>%
       terra::rast() -> geocres
   }
-  names(geocres) = paste0('Geocomplexiy_',rastlayername)
+  names(geocres) = paste0('Geocomplexity_',rastlayername)
   return(geocres)
 }
