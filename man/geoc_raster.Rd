@@ -12,7 +12,7 @@ geoc_raster(r, order = 1, normalize = TRUE)
 \item{order}{(optional) The order of the adjacency object. Default is \code{1}.}
 
 \item{normalize}{(optional) Whether to further normalizes the spatial local complexity.
-Default is \code{TRUE}}
+Default is \code{TRUE}.}
 }
 \value{
 A SpatRaster object

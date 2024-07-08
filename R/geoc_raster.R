@@ -6,7 +6,7 @@
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.
 #' @param normalize (optional) Whether to further normalizes the spatial local complexity.
-#' Default is `TRUE`
+#' Default is `TRUE`.
 #'
 #' @return A SpatRaster object
 #' @export

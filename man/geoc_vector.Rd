@@ -9,12 +9,12 @@ geoc_vector(sfj, wt = NULL, normalize = TRUE)
 \arguments{
 \item{sfj}{Vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
-\item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. You can get it from
-\code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not provided, \code{geocomplexity} will
-use a first-order queen adjacency binary matrix.}
+\item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. You can get a
+spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not
+provided, \code{geocomplexity} will use a first-order queen adjacency binary matrix.}
 
 \item{normalize}{(optional) Whether to further normalizes the spatial local complexity.
-Default is \code{TRUE}}
+Default is \code{TRUE}.}
 }
 \value{
 An sf object
