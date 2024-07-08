@@ -23,6 +23,7 @@ NumericVector VectorGeoCDependence(NumericVector x,
       k = intersect(j, k);
       NumericVector zk = zj[k];
       NumericVector wtk_z = multiply_vector(wtj[k],zk);
+      wtk_z = multiply_vector(wtk[k],wtk_z);
       double surroundv = mean_nona(wtk_z);
       surroundf += zj[n] * surroundv;
     }
