@@ -21,6 +21,25 @@ double mean_nona(NumericVector x) {
   return xres;
 }
 
+double sd_nona(NumericVector x) {
+  NumericVector x1 = x[!is_na(x)];
+  double xres = sd(x1);
+  // if (NumericVector::is_na(xres)) {
+  //   xres = 0;
+  // }
+  return xres;
+}
+
+double cosine_similarity(double A, double B) {
+  double dot_product = A * B;
+  double norm_A = A * A;
+  double norm_B = B * B;
+  if (norm_A == 0 || norm_B == 0) {
+    return 0;
+  }
+  return dot_product / (sqrt(norm_A) * sqrt(norm_B));
+}
+
 IntegerVector rcpp_which(LogicalVector x){
   IntegerVector v = seq(0,x.size()-1);
   return v[x];
@@ -33,6 +52,32 @@ NumericVector multiply_vector(NumericVector numvec1, NumericVector numvec2) {
     result[i] = numvec1[i] * numvec2[i];
   }
   return result;
+}
+
+double matrix_sum(NumericMatrix mat) {
+  int nrow = mat.nrow();
+  int ncol = mat.ncol();
+  double out = 0;
+  for (int i = 0; i < nrow; ++i) {
+    for (int j = 0; j < ncol; ++j) {
+      out += mat(i, j);
+    }
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+double spatial_variance(NumericVector x, NumericMatrix wt) {
+  int n = x.size();
+  double out = 0;
+  for(int i = 0; i < n; ++i) {
+    for(int j = 0; j < n; ++j) {
+      double w = wt(i, j);
+      out += w * pow((x[i]-x[j]),2) / 2;
+    }
+  }
+  out = out / matrix_sum(wt);
+  return out;
 }
 
 List remove_index(List lst, int idx) {
