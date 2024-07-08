@@ -9,8 +9,8 @@ RasterGeoCNeighbors <- function(rows, cols) {
     .Call(`_geocomplexity_RasterGeoCNeighbors`, rows, cols)
 }
 
-RasterGeoCDependenceOne <- function(x) {
-    .Call(`_geocomplexity_RasterGeoCDependenceOne`, x)
+RasterGeoCDependenceOne <- function(x, ni = 9L, nw = 9L) {
+    .Call(`_geocomplexity_RasterGeoCDependenceOne`, x, ni, nw)
 }
 
 RasterGeoCDependence <- function(x, ni = 9L, nw = 9L) {

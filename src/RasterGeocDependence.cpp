@@ -13,6 +13,21 @@ double mean_nona(NumericVector x) {
   return mean(x1);
 }
 
+List remove_index(List lst, int idx) {
+  int n = lst.size();
+  if (idx < 0 || idx >= n) {
+    stop("Index out of bounds");
+  }
+  List result(n - 1);
+  int result_idx = 0;
+  for (int i = 0; i < n; ++i) {
+    if (i != idx) {
+      result[result_idx++] = lst[i];
+    }
+  }
+  return result;
+}
+
 // [[Rcpp::export]]
 List RasterQueenNeighbors(int rows, int cols) {
   List neighbors(rows * cols);
@@ -54,20 +69,17 @@ List RasterGeoCNeighbors(int rows, int cols) {
       result[i * rows + j] = intersection;
     }
   }
-  return result;
+  return remove_index(result,center_idx);
 }
 
 // [[Rcpp::export]]
-double RasterGeoCDependenceOne(NumericVector x){
-  NumericVector wt_i = NumericVector::create(1,1,1,1,0,1,1,1,1);
-  List wt_j = List::create(IntegerVector::create(1,3),
-                           IntegerVector::create(0,2,3,5),
-                           IntegerVector::create(1,5),
-                           IntegerVector::create(0,1,6,7),
-                           IntegerVector::create(1,2,7,8),
-                           IntegerVector::create(3,7),
-                           IntegerVector::create(3,5,6,8),
-                           IntegerVector::create(5,7));
+double RasterGeoCDependenceOne(NumericVector x,
+                               size_t ni = 9,
+                               size_t nw = 9){
+  int center_idx = (nw - 1) / 2;
+  NumericVector wt_i (nw,1);
+  wt_i[center_idx] = 0;
+  List wt_j = RasterGeoCNeighbors(sqrt(nw),sqrt(nw));
   NumericVector x_j = x[wt_i != 0];
   double localf = -1.0 / 8 * x[4] * sum_nona(x * wt_i);
   double surroundf = 0;
@@ -91,7 +103,7 @@ NumericVector RasterGeoCDependence(NumericVector x,
       for (size_t j = 0; j < nw; ++j) {
         chunk[j] = x[i * nw + j];
       }
-      out[i] = RasterGeoCDependenceOne(chunk);
+      out[i] = RasterGeoCDependenceOne(chunk,ni,nw);
     }
     return out;
 }

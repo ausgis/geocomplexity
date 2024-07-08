@@ -35,13 +35,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // RasterGeoCDependenceOne
-double RasterGeoCDependenceOne(NumericVector x);
-RcppExport SEXP _geocomplexity_RasterGeoCDependenceOne(SEXP xSEXP) {
+double RasterGeoCDependenceOne(NumericVector x, size_t ni, size_t nw);
+RcppExport SEXP _geocomplexity_RasterGeoCDependenceOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCDependenceOne(x));
+    Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
+    Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCDependenceOne(x, ni, nw));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -62,7 +64,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_RasterQueenNeighbors", (DL_FUNC) &_geocomplexity_RasterQueenNeighbors, 2},
     {"_geocomplexity_RasterGeoCNeighbors", (DL_FUNC) &_geocomplexity_RasterGeoCNeighbors, 2},
-    {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 1},
+    {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 3},
     {"_geocomplexity_RasterGeoCDependence", (DL_FUNC) &_geocomplexity_RasterGeoCDependence, 3},
     {NULL, NULL, 0}
 };
