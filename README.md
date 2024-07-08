@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdverse <img src="man/figures/logo.png" align="right" height="120"/>
+# geocomplexity <img src="man/figures/logo.png" align="right" height="120"/>
 
 <!-- badges: start -->
 
@@ -31,7 +31,7 @@ devtools::install_github("SpatLyu/geocomplexity",
                          dep = TRUE)
 ```
 
-or install the binary version of **geocomplexity** from
+You can also install the binary version of **geocomplexity** from
 [r-universe](https://spatlyu.r-universe.dev/geocomplexity):
 
 ``` r

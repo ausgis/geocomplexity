@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gdverse <img src="man/figures/logo.png" align="right" height="120"/>
+# geocomplexity <img src="man/figures/logo.png" align="right" height="120"/>
 
 <!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/geocomplexity)](https://CRAN.R-project.org/package=geocomplexity)
@@ -42,7 +42,7 @@ devtools::install_github("SpatLyu/geocomplexity",
                          dep = TRUE)
 ```
 
-or install the binary version of **geocomplexity** from [r-universe](https://spatlyu.r-universe.dev/geocomplexity):
+You can also install the binary version of **geocomplexity** from [r-universe](https://spatlyu.r-universe.dev/geocomplexity):
 
 ```r
 install.packages("geocomplexity", 
