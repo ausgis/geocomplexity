@@ -7,7 +7,7 @@
 geoc_raster(r, order = 1, normalize = TRUE)
 }
 \arguments{
-\item{r}{Raster data that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
+\item{r}{Raster object that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
 
 \item{order}{(optional) The order of the adjacency object. Default is \code{1}.}
 
@@ -33,9 +33,9 @@ m = matrix(c(3,3,3,3,1,3,
            byrow = TRUE)
 m = rast(m)
 plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
-a1 = geoc_raster(m,1)
-a2 = geoc_raster(m,2)
-a1
-a2
+gc1 = geoc_raster(m,1)
+gc2 = geoc_raster(m,2)
+gc1
+gc2
 
 }

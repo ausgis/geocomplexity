@@ -18,6 +18,17 @@ IntegerVector rcpp_which(LogicalVector x){
   return v[x];
 }
 
+NumericVector multiply_vector(IntegerVector intVec, NumericVector numVec) {
+  int n = intVec.size();
+  NumericVector result(n);
+
+  for(int i = 0; i < n; ++i) {
+    result[i] = intVec[i] * numVec[i];
+  }
+
+  return result;
+}
+
 List remove_index(List lst, int idx) {
   int n = lst.size();
   if (idx < 0 || idx >= n) {

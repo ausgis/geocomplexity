@@ -2,6 +2,7 @@
 
 export("%>%")
 export(geoc_raster)
+export(geoc_vector)
 export(normalize_vector)
 export(standardize_vector)
 importFrom(magrittr,"%>%")

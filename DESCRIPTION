@@ -25,6 +25,7 @@ Imports:
     stats,
     terra
 Suggests: 
+    ggplot2,
     raster,
     stars
 LinkingTo: 

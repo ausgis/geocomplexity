@@ -10,18 +10,20 @@ NumericVector VectorGeoCDependence(NumericVector x,
   NumericVector out(x.size());
   for (int i = 0; i < x.size(); ++i) {
     double zi = x[i];
-    IntegerVector wtj = wt(i , _);
+    IntegerVector wtj = wt(i, _);
     IntegerVector j = rcpp_which(wtj != 0);
     int m = j.size();
     NumericVector zj = x[j];
-    double localf = -1.0 / m * zi * sum_nona(zj);
+    NumericVector wtj_z = multiply_vector(wtj[j],zj);
+    double localf = -1.0 / m * zi * sum_nona(wtj_z);
     double surroundf = 0;
     for (int n = 0; n < m; ++n) {
-      IntegerVector wtk = wt(j[n] , _);
+      IntegerVector wtk = wt(j[n], _);
       IntegerVector k = rcpp_which(wtk != 0);
       k = intersect(j, k);
       NumericVector zk = zj[k];
-      double surroundv = mean_nona(zk);
+      NumericVector wtk_z = multiply_vector(wtj[k],zk);
+      double surroundv = mean_nona(wtk_z);
       surroundf += zj[n] * surroundv;
     }
     out[i] = localf + -1.0 / m * surroundf;
