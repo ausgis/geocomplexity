@@ -1,7 +1,7 @@
-#' @title calculates geocomplexity for vector data
+#' @title calculates geocomplexity for vector data based on spatial dependence
 #' @description
 #' This function calculates geocomplexity, a geospatial local complexity indicator,
-#' for variable in vector data.
+#' for variable in vector data based on spatial dependence.
 #'
 #' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
@@ -17,10 +17,10 @@
 #' library(sf)
 #' data("income")
 #' inc = dplyr::select(income,Income)
-#' gc = geoc_vector(inc)
+#' gc = geocd_vector(inc)
 #' gc
 #'
-geoc_vector = \(sfj,wt = NULL,normalize = TRUE){
+geocd_vector = \(sfj,wt = NULL,normalize = TRUE){
   if (!inherits(sfj,'sf')){
     sfj = sf::st_as_sf(sfj)
   }

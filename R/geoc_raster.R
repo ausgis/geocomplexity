@@ -1,7 +1,7 @@
-#' @title calculates geocomplexity for raster data
+#' @title calculates geocomplexity for raster data based on spatial dependence
 #' @description
 #' This function calculates geocomplexity, a geospatial local complexity indicator,
-#' for variable in raster data.
+#' for variable in raster data based on spatial dependence.
 #'
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.
@@ -24,12 +24,12 @@
 #' m = rast(m)
 #' names(m) = 'sim'
 #' plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
-#' gc1 = geoc_raster(m,1)
-#' gc2 = geoc_raster(m,2)
+#' gc1 = geocd_raster(m,1)
+#' gc2 = geocd_raster(m,2)
 #' gc1
 #' gc2
 #'
-geoc_raster = \(r,order = 1,normalize = TRUE){
+geocd_raster = \(r,order = 1,normalize = TRUE){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
@@ -37,7 +37,7 @@ geoc_raster = \(r,order = 1,normalize = TRUE){
   seq(1,terra::nlyr(r)) %>%
     purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
     terra::rast() -> r
-  geocres = terra::focalCpp(r,w = 2*order + 1,
+  geocres = terra::focalCpp(r, w = 2*order + 1,
                             RasterGeoCDependence,
                             fillvalue = NA)
   if (normalize) {
