@@ -5,50 +5,6 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-List RasterQueenNeighbors(int rows, int cols) {
-  List neighbors(rows * cols);
-
-  for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
-      IntegerVector adj;
-      for (int di = -1; di <= 1; ++di) {
-        for (int dj = -1; dj <= 1; ++dj) {
-          if (di == 0 && dj == 0) continue;
-          int ni = i + di;
-          int nj = j + dj;
-          if (ni >= 0 && ni < rows && nj >= 0 && nj < cols) {
-            adj.push_back(ni * cols + nj);
-          }
-        }
-      }
-      neighbors[i * cols + j] = adj;
-    }
-  }
-  return neighbors;
-}
-
-// [[Rcpp::export]]
-List RasterGeoCNeighbors(int rows, int cols) {
-  int center_row = rows / 2;
-  int center_col = cols / 2;
-  int center_idx = center_row * cols + center_col;
-
-  List neighbors = RasterQueenNeighbors(rows, cols);
-  IntegerVector center_neighbors = neighbors[center_idx];
-
-  List result(rows*cols);
-  for (int i = 0; i < rows; ++i) {
-    IntegerVector row_intersection(cols);
-    for (int j = 0; j < cols; ++j) {
-      IntegerVector current_neighbors = neighbors[i * cols + j];
-      IntegerVector intersection = intersect(center_neighbors, current_neighbors);
-      result[i * rows + j] = intersection;
-    }
-  }
-  return remove_index(result,center_idx);
-}
-
-// [[Rcpp::export]]
 double RasterGeoCDependenceOne(NumericVector x,
                                size_t ni = 9,
                                size_t nw = 9){

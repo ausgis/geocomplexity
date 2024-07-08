@@ -1,7 +1,6 @@
 #' @title calculates geocomplexity for vector data based on spatial similarity
 #' @description
-#' This function calculates geocomplexity, a geospatial local complexity indicator,
-#' for variable in vector data based on spatial similarity.
+#' This function calculates geocomplexity for in vector data based on spatial similarity.
 #'
 #' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
@@ -38,6 +37,9 @@ geocs_vector = \(sfj,wt = NULL,normalize = TRUE){
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 standardize_vector))
+  if (ncol(sfj_attr) == 1) {
+    stop('To use `geocs_vector`, the number of attribute columns in sfj must be greater than or equal to 2')
+  }
   vectlayername = paste(names(sfj_attr),collapse = '_')
   geocvec = VectorGeoCSimilarity(as.matrix(sfj_attr),wt)
   if (normalize) {

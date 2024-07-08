@@ -1,7 +1,6 @@
 #' @title calculates geocomplexity for raster data based on spatial dependence
 #' @description
-#' This function calculates geocomplexity, a geospatial local complexity indicator,
-#' for variable in raster data based on spatial dependence.
+#' This function calculates geocomplexity for raster data based on spatial dependence.
 #'
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.

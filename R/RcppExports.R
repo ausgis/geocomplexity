@@ -5,20 +5,16 @@ spatial_variance <- function(x, wt) {
     .Call(`_geocomplexity_spatial_variance`, x, wt)
 }
 
-RasterQueenNeighbors <- function(rows, cols) {
-    .Call(`_geocomplexity_RasterQueenNeighbors`, rows, cols)
-}
-
-RasterGeoCNeighbors <- function(rows, cols) {
-    .Call(`_geocomplexity_RasterGeoCNeighbors`, rows, cols)
-}
-
 RasterGeoCDependenceOne <- function(x, ni = 9L, nw = 9L) {
     .Call(`_geocomplexity_RasterGeoCDependenceOne`, x, ni, nw)
 }
 
 RasterGeoCDependence <- function(x, ni = 9L, nw = 9L) {
     .Call(`_geocomplexity_RasterGeoCDependence`, x, ni, nw)
+}
+
+RasterGeoCSimilarity <- function(x, iw, w) {
+    .Call(`_geocomplexity_RasterGeoCSimilarity`, x, iw, w)
 }
 
 VectorGeoCDependence <- function(x, wt) {

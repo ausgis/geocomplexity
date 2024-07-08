@@ -18,8 +18,7 @@ Default is \code{TRUE}.}
 A SpatRaster object
 }
 \description{
-This function calculates geocomplexity, a geospatial local complexity indicator,
-for variable in raster data based on spatial dependence.
+This function calculates geocomplexity for raster data based on spatial dependence.
 }
 \examples{
 library(terra)

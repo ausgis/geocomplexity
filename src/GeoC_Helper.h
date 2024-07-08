@@ -10,7 +10,11 @@ double matrix_sum(Rcpp::NumericMatrix mat);
 double cosine_similarity(Rcpp::NumericVector A, Rcpp::NumericVector B);
 double spatial_variance(Rcpp::NumericVector x, Rcpp::NumericMatrix wt);
 Rcpp::IntegerVector rcpp_which(Rcpp::LogicalVector x);
+Rcpp::IntegerVector rcpp_seq(int start, int end);
+Rcpp::IntegerVector extract_window(Rcpp::IntegerMatrix mat, int window_size);
 Rcpp::NumericVector multiply_vector(Rcpp::NumericVector numvec1, Rcpp::NumericVector numvec2);
 Rcpp::List remove_index(Rcpp::List lst, int idx);
+Rcpp::List RasterQueenNeighbors(int rows, int cols);
+Rcpp::List RasterGeoCNeighbors(int rows, int cols);
 
 #endif // GEO_C_HELPER_H

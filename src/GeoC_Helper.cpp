@@ -53,6 +53,42 @@ IntegerVector rcpp_which(LogicalVector x){
   return v[x];
 }
 
+IntegerVector rcpp_seq(int start, int end) {
+  int size = end - start + 1;
+  IntegerVector result(size);
+  for(int i = 0; i < size; ++i) {
+    result[i] = start + i;
+  }
+  return result;
+}
+
+IntegerVector extract_window(IntegerMatrix mat, int window_size) {
+  int rows = mat.nrow();
+  int cols = mat.ncol();
+  int half_window = window_size / 2;
+  int result_size = rows * cols * window_size * window_size;
+  IntegerVector result(result_size, -888888);
+
+  int index = 0;
+  for (int r = 0; r < rows; ++r) {
+    for (int c = 0; c < cols; ++c) {
+      for (int wr = -half_window; wr <= half_window; ++wr) {
+        for (int wc = -half_window; wc <= half_window; ++wc) {
+          int new_r = r + wr;
+          int new_c = c + wc;
+          if (new_r >= 0 && new_r < rows && new_c >= 0 && new_c < cols) {
+            result[index] = mat(new_r, new_c);
+          } else {
+            result[index] = -888888;
+          }
+          index++;
+        }
+      }
+    }
+  }
+  return result;
+}
+
 NumericVector multiply_vector(NumericVector numvec1, NumericVector numvec2) {
   int n = numvec1.size();
   NumericVector result(n);
@@ -101,4 +137,46 @@ List remove_index(List lst, int idx) {
     }
   }
   return result;
+}
+
+List RasterQueenNeighbors(int rows, int cols) {
+  List neighbors(rows * cols);
+
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+      IntegerVector adj;
+      for (int di = -1; di <= 1; ++di) {
+        for (int dj = -1; dj <= 1; ++dj) {
+          if (di == 0 && dj == 0) continue;
+          int ni = i + di;
+          int nj = j + dj;
+          if (ni >= 0 && ni < rows && nj >= 0 && nj < cols) {
+            adj.push_back(ni * cols + nj);
+          }
+        }
+      }
+      neighbors[i * cols + j] = adj;
+    }
+  }
+  return neighbors;
+}
+
+List RasterGeoCNeighbors(int rows, int cols) {
+  int center_row = rows / 2;
+  int center_col = cols / 2;
+  int center_idx = center_row * cols + center_col;
+
+  List neighbors = RasterQueenNeighbors(rows, cols);
+  IntegerVector center_neighbors = neighbors[center_idx];
+
+  List result(rows*cols);
+  for (int i = 0; i < rows; ++i) {
+    IntegerVector row_intersection(cols);
+    for (int j = 0; j < cols; ++j) {
+      IntegerVector current_neighbors = neighbors[i * cols + j];
+      IntegerVector intersection = intersect(center_neighbors, current_neighbors);
+      result[i * rows + j] = intersection;
+    }
+  }
+  return remove_index(result,center_idx);
 }

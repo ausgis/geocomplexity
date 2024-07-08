@@ -20,8 +20,7 @@ Default is \code{TRUE}.}
 An sf object
 }
 \description{
-This function calculates geocomplexity, a geospatial local complexity indicator,
-for variable in vector data based on spatial dependence.
+This function calculates geocomplexity for vector data based on spatial dependence.
 }
 \examples{
 library(sf)

@@ -22,30 +22,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// RasterQueenNeighbors
-List RasterQueenNeighbors(int rows, int cols);
-RcppExport SEXP _geocomplexity_RasterQueenNeighbors(SEXP rowsSEXP, SEXP colsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type rows(rowsSEXP);
-    Rcpp::traits::input_parameter< int >::type cols(colsSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterQueenNeighbors(rows, cols));
-    return rcpp_result_gen;
-END_RCPP
-}
-// RasterGeoCNeighbors
-List RasterGeoCNeighbors(int rows, int cols);
-RcppExport SEXP _geocomplexity_RasterGeoCNeighbors(SEXP rowsSEXP, SEXP colsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type rows(rowsSEXP);
-    Rcpp::traits::input_parameter< int >::type cols(colsSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCNeighbors(rows, cols));
-    return rcpp_result_gen;
-END_RCPP
-}
 // RasterGeoCDependenceOne
 double RasterGeoCDependenceOne(NumericVector x, size_t ni, size_t nw);
 RcppExport SEXP _geocomplexity_RasterGeoCDependenceOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
@@ -69,6 +45,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
     Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
     rcpp_result_gen = Rcpp::wrap(RasterGeoCDependence(x, ni, nw));
+    return rcpp_result_gen;
+END_RCPP
+}
+// RasterGeoCSimilarity
+NumericVector RasterGeoCSimilarity(NumericMatrix x, IntegerMatrix iw, int w);
+RcppExport SEXP _geocomplexity_RasterGeoCSimilarity(SEXP xSEXP, SEXP iwSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type iw(iwSEXP);
+    Rcpp::traits::input_parameter< int >::type w(wSEXP);
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCSimilarity(x, iw, w));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -99,10 +88,9 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
-    {"_geocomplexity_RasterQueenNeighbors", (DL_FUNC) &_geocomplexity_RasterQueenNeighbors, 2},
-    {"_geocomplexity_RasterGeoCNeighbors", (DL_FUNC) &_geocomplexity_RasterGeoCNeighbors, 2},
     {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 3},
     {"_geocomplexity_RasterGeoCDependence", (DL_FUNC) &_geocomplexity_RasterGeoCDependence, 3},
+    {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 3},
     {"_geocomplexity_VectorGeoCDependence", (DL_FUNC) &_geocomplexity_VectorGeoCDependence, 2},
     {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 2},
     {NULL, NULL, 0}
