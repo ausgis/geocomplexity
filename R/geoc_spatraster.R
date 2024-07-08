@@ -38,7 +38,7 @@ geoc_raster = \(r,normalize = TRUE){
     purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
     terra::rast() -> r
   geocres = terra::focalCpp(r,w = 3,
-                            RasterGeocSpatialDependence,
+                            RasterGeocDependence,
                             fillvalue = NA)
   if (normalize) {
     seq(1,terra::nlyr(geocres)) %>%

@@ -14,7 +14,7 @@ double mean_nona(NumericVector x) {
 }
 
 // [[Rcpp::export]]
-double RasterGeocSpatialDependenceOne(NumericVector x){
+double RasterGeocDependenceOne(NumericVector x){
   NumericVector wt_i = NumericVector::create(1,1,1,1,0,1,1,1,1);
   List wt_j = List::create(IntegerVector::create(1,3),
                            IntegerVector::create(0,2,3,5),
@@ -38,7 +38,7 @@ double RasterGeocSpatialDependenceOne(NumericVector x){
 }
 
 // [[Rcpp::export]]
-NumericVector RasterGeocSpatialDependence(NumericVector x,
+NumericVector RasterGeocDependence(NumericVector x,
                                           size_t ni = 9,
                                           size_t nw = 9){
     NumericVector out(ni);
@@ -47,7 +47,7 @@ NumericVector RasterGeocSpatialDependence(NumericVector x,
       for (size_t j = 0; j < nw; ++j) {
         chunk[j] = x[i * nw + j];
       }
-      out[i] = RasterGeocSpatialDependenceOne(chunk);
+      out[i] = RasterGeocDependenceOne(chunk);
     }
     return out;
 }

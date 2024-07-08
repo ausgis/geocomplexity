@@ -10,34 +10,34 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// RasterGeocSpatialDependenceOne
-double RasterGeocSpatialDependenceOne(NumericVector x);
-RcppExport SEXP _geocomplexity_RasterGeocSpatialDependenceOne(SEXP xSEXP) {
+// RasterGeocDependenceOne
+double RasterGeocDependenceOne(NumericVector x);
+RcppExport SEXP _geocomplexity_RasterGeocDependenceOne(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeocSpatialDependenceOne(x));
+    rcpp_result_gen = Rcpp::wrap(RasterGeocDependenceOne(x));
     return rcpp_result_gen;
 END_RCPP
 }
-// RasterGeocSpatialDependence
-NumericVector RasterGeocSpatialDependence(NumericVector x, size_t ni, size_t nw);
-RcppExport SEXP _geocomplexity_RasterGeocSpatialDependence(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
+// RasterGeocDependence
+NumericVector RasterGeocDependence(NumericVector x, size_t ni, size_t nw);
+RcppExport SEXP _geocomplexity_RasterGeocDependence(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
     Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeocSpatialDependence(x, ni, nw));
+    rcpp_result_gen = Rcpp::wrap(RasterGeocDependence(x, ni, nw));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_geocomplexity_RasterGeocSpatialDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeocSpatialDependenceOne, 1},
-    {"_geocomplexity_RasterGeocSpatialDependence", (DL_FUNC) &_geocomplexity_RasterGeocSpatialDependence, 3},
+    {"_geocomplexity_RasterGeocDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeocDependenceOne, 1},
+    {"_geocomplexity_RasterGeocDependence", (DL_FUNC) &_geocomplexity_RasterGeocDependence, 3},
     {NULL, NULL, 0}
 };
 
