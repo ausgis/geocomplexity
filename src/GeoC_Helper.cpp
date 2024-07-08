@@ -5,12 +5,20 @@ using namespace Rcpp;
 
 double sum_nona(NumericVector x) {
   NumericVector x1 = x[!is_na(x)];
-  return sum(x1);
+  double xres = sum(x1);
+  // if (NumericVector::is_na(xres)) {
+  //   xres = 0;
+  // }
+  return xres;
 }
 
 double mean_nona(NumericVector x) {
   NumericVector x1 = x[!is_na(x)];
-  return mean(x1);
+  double xres = mean(x1);
+  // if (NumericVector::is_na(xres)) {
+  //   xres = 0;
+  // }
+  return xres;
 }
 
 IntegerVector rcpp_which(LogicalVector x){

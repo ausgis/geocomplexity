@@ -69,7 +69,11 @@ double RasterGeoCDependenceOne(NumericVector x,
     IntegerVector j_index = wt_j[n];
     NumericVector xj = x[j_index];
     double surroundv = mean_nona(xj);
-    surroundf += x_j[n] * surroundv;
+    double x_add = x_j[n] * surroundv;
+    if (NumericVector::is_na(x_add)) {
+      x_add = 0;
+    }
+    surroundf += x_add;
   }
   double res = localf + -1.0 / m * surroundf;
   return res;
