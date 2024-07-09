@@ -8,8 +8,8 @@ using namespace Rcpp;
 NumericVector VectorGeoCSimilarity(NumericMatrix xobs,
                                    NumericMatrix wt,
                                    int method){
-  NumericVector out(xobs.nrow());
   if (method != 1){
+    NumericVector out(xobs.nrow());
     for (int i = 0; i < xobs.nrow(); ++i) {
       NumericVector zi = xobs(i,_);
       NumericVector zs(xobs.nrow());
@@ -18,9 +18,9 @@ NumericVector VectorGeoCSimilarity(NumericMatrix xobs,
       }
       out[i] = spatial_variance(zs,wt);
     }
+    return out;
   } else {
-
+    NumericVector out = GCS_Variance(xobs,wt);
+    return out;
   }
-
-  return out;
 }
