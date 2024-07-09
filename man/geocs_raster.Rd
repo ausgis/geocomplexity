@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocs_raster.R
 \name{geocs_raster}
 \alias{geocs_raster}
-\title{calculates geocomplexity for raster data based on geographical similarity}
+\title{geocomplexity for raster data based on geographical similarity}
 \usage{
 geocs_raster(r, order = 1, normalize = TRUE)
 }

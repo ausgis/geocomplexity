@@ -1,4 +1,4 @@
-#' @title calculates geocomplexity for raster data based on geographical similarity
+#' @title geocomplexity for raster data based on geographical similarity
 #' @description
 #' This function calculates geocomplexity for raster data based on geographical similarity.
 #'

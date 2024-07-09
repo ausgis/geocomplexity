@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocs_vector.R
 \name{geocs_vector}
 \alias{geocs_vector}
-\title{calculates geocomplexity for vector data based on geographical similarity}
+\title{geocomplexity for vector data based on geographical similarity}
 \usage{
 geocs_vector(sfj, wt = NULL, normalize = TRUE)
 }

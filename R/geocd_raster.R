@@ -1,4 +1,4 @@
-#' @title calculates geocomplexity for raster data based on spatial dependence
+#' @title geocomplexity for raster data based on spatial dependence
 #' @description
 #' This function calculates geocomplexity for raster data based on spatial dependence.
 #'

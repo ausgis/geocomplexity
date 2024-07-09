@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocd_vector.R
 \name{geocd_vector}
 \alias{geocd_vector}
-\title{calculates geocomplexity for vector data based on spatial dependence}
+\title{geocomplexity for vector data based on spatial dependence}
 \usage{
 geocd_vector(sfj, wt = NULL, normalize = TRUE)
 }

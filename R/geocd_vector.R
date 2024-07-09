@@ -1,4 +1,4 @@
-#' @title calculates geocomplexity for vector data based on spatial dependence
+#' @title geocomplexity for vector data based on spatial dependence
 #' @description
 #' This function calculates geocomplexity for vector data based on spatial dependence.
 #'

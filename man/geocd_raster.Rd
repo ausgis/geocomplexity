@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocd_raster.R
 \name{geocd_raster}
 \alias{geocd_raster}
-\title{calculates geocomplexity for raster data based on spatial dependence}
+\title{geocomplexity for raster data based on spatial dependence}
 \usage{
 geocd_raster(r, order = 1, normalize = TRUE)
 }
