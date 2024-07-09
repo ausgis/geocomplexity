@@ -29,7 +29,7 @@ jobs:
         publish_dir: ./docs
 home:
   title: |
-    geocomplexity | Geocomplexity mitigates spatial bias
+    geocomplexity | Geocomplexity Mitigates Spatial Bias
 authors:
   Wenbo Lv:
     href: https://spatlyu.github.io/
