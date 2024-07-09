@@ -5,6 +5,7 @@
 
 double sum_nona(Rcpp::NumericVector x);
 double mean_nona(Rcpp::NumericVector x);
+double min_nona(Rcpp::NumericVector x);
 double sd_nona(Rcpp::NumericVector x);
 double matrix_sum(Rcpp::NumericMatrix mat);
 double CosineSimilarity(Rcpp::NumericVector A, Rcpp::NumericVector B);

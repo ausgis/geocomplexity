@@ -21,6 +21,15 @@ double mean_nona(NumericVector x) {
   return xres;
 }
 
+double min_nona(NumericVector x) {
+  NumericVector x1 = x[!is_na(x)];
+  double xres = min(x1);
+  // if (NumericVector::is_na(xres)) {
+  //   xres = 0;
+  // }
+  return xres;
+}
+
 double sd_nona(NumericVector x) {
   NumericVector x1 = x[!is_na(x)];
   double xres = sd(x1);
@@ -148,13 +157,12 @@ NumericVector GCS_Variance(NumericMatrix x, NumericMatrix wt) {
     }
     for (int ni = 0; ni < x.nrow(); ++ni){
       NumericVector zsn = Ej(ni,_);
-      zs[ni] = min(zsn);
+      zs[ni] = min_nona(zsn);
     }
     out[i] = spatial_variance(zs,wt);
   }
   return out;
 }
-
 
 List remove_index(List lst, int idx) {
   int n = lst.size();
