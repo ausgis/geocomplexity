@@ -49,7 +49,7 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
         wt(wi[ni],n) = 1;
       }
     }
-    Rcout << "wt:  "<< wt;
+    // Rcout << "wt:  "<< wt;
     NumericVector out = GCS_Variance(x,wt);
     return out;
   }
