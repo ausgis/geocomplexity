@@ -32,8 +32,6 @@ Full document of the most recent release of **geocomplexity** is online:
 
 ## Installation
 
-Please ensure that **Rcpp** is properly installed and the appropriate **C++** compilation environment is configured in advance.
-
 You can install the development version of **geocomplexity** from [github](https://github.com/SpatLyu/geocomplexity) with:
 
 ``` r
@@ -41,6 +39,8 @@ You can install the development version of **geocomplexity** from [github](https
 devtools::install_github("SpatLyu/geocomplexity",
                          dep = TRUE)
 ```
+
+Please ensure that **Rcpp** is properly installed and the appropriate **C++** compilation environment is configured in advance if you want to install **geocomplexity** from [github](https://github.com/SpatLyu/geocomplexity).
 
 You can also install the binary version of **geocomplexity** from [r-universe](https://spatlyu.r-universe.dev/geocomplexity):
 
