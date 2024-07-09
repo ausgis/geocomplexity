@@ -48,24 +48,6 @@ double CosineSimilarity(NumericVector A, NumericVector B) {
   return dot_product / (norm_A * norm_B);
 }
 
-double GeographicalConfigurationSimilarity(NumericVector A, NumericVector B) {
-  int n = A.size();
-  double dot_product = 0.0;
-  double norm_A = 0.0;
-  double norm_B = 0.0;
-
-  for(int i = 0; i < n; i++) {
-    dot_product += A[i] * B[i];
-    norm_A += A[i] * A[i];
-    norm_B += B[i] * B[i];
-  }
-
-  norm_A = sqrt(norm_A);
-  norm_B = sqrt(norm_B);
-
-  return dot_product / (norm_A * norm_B);
-}
-
 IntegerVector rcpp_which(LogicalVector x){
   IntegerVector v = seq(0,x.size()-1);
   return v[x];
@@ -141,6 +123,38 @@ double spatial_variance(NumericVector x, NumericMatrix wt) {
   out = out / matrix_sum(wt);
   return out;
 }
+
+NumericVector GCS_Variance(NumericMatrix x, NumericMatrix wt) {
+  NumericVector out(x.nrow());
+  NumericVector theta(x.ncol());
+  for (int i = 0; i < x.ncol(); ++i){
+    theta[i] = pow(sd_nona(x(_,i)),2);
+  }
+  for (int i = 0; i < x.nrow(); ++i){
+    NumericVector zs(x.nrow());
+    NumericMatrix Ej(x.nrow(),x.ncol());
+    for (int j = 0; j < x.ncol(); ++j){
+      double zi = x(i,j);
+      NumericVector delta(x.nrow());
+      for (int n = 0; n < x.nrow(); ++n){
+        double zn = x(n,j);
+        delta[n] = pow((zi-zn),2);
+      }
+      double deltav = pow(mean_nona(delta),1/2);
+      for (int nej = 0; nej < x.nrow(); ++nej){
+        double znej = x(nej,j);
+        Ej(nej,j) = exp(-pow((zi-znej),2)/(2*pow(theta[j]/deltav,2)));
+      }
+    }
+    for (int ni = 0; ni < x.nrow(); ++ni){
+      NumericVector zsn = Ej(ni,_);
+      zs[ni] = min(zsn);
+    }
+    out[i] = spatial_variance(zs,wt);
+  }
+  return out;
+}
+
 
 List remove_index(List lst, int idx) {
   int n = lst.size();
