@@ -6,7 +6,8 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector VectorGeoCSimilarity(NumericMatrix xobs,
-                                   NumericMatrix wt){
+                                   NumericMatrix wt,
+                                   int method){
   NumericVector out(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i) {
     NumericVector zi = xobs(i,_);

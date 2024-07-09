@@ -7,7 +7,7 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 NumericVector RasterGeoCSimilarity(NumericMatrix x,
                                    IntegerMatrix iw,
-                                   int w){
+                                   int w, int method){
   NumericVector out(x.nrow());
   IntegerVector w_sp = extract_window(iw,w);
   int ncell = pow(w,2);
