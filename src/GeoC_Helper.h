@@ -7,7 +7,7 @@ double sum_nona(Rcpp::NumericVector x);
 double mean_nona(Rcpp::NumericVector x);
 double sd_nona(Rcpp::NumericVector x);
 double matrix_sum(Rcpp::NumericMatrix mat);
-double cosine_similarity(Rcpp::NumericVector A, Rcpp::NumericVector B);
+double CosineSimilarity(Rcpp::NumericVector A, Rcpp::NumericVector B);
 double spatial_variance(Rcpp::NumericVector x, Rcpp::NumericMatrix wt);
 Rcpp::IntegerVector rcpp_which(Rcpp::LogicalVector x);
 Rcpp::IntegerVector rcpp_seq(int start, int end);

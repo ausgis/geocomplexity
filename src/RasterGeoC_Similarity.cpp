@@ -23,7 +23,7 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
     NumericVector resn(wi.size());
     for (int i = 0 ; i < wi.size(); ++i){
       NumericVector zi = x(wi[i],_);
-      double zs = cosine_similarity(zn,zi);
+      double zs = CosineSimilarity(zn,zi);
       resn[i] = zs;
     }
     double res = 0;

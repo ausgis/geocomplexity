@@ -12,7 +12,7 @@ NumericVector VectorGeoCSimilarity(NumericMatrix xobs,
     NumericVector zi = xobs(i,_);
     NumericVector zs(xobs.nrow());
     for (int n = 0; n < xobs.nrow(); ++n) {
-      zs[n] = cosine_similarity(zi,xobs(n,_));
+      zs[n] = CosineSimilarity(zi,xobs(n,_));
     }
     out[i] = spatial_variance(zs,wt);
   }
