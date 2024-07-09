@@ -11,7 +11,7 @@ Authors@R: c(
              role = c("aut", "rev", "ths"),
              comment = c(ORCID = "0000-0003-3420-9622"))      
       )
-Description: Explain and mitigate spatial bias through geographical complexity.
+Description: Mitigate spatial bias through geographical complexity.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -30,6 +30,7 @@ Suggests:
     ggplot2,
     raster,
     stars,
+    tidyverse,
     viridis
 LinkingTo: 
     Rcpp
