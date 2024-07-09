@@ -1,6 +1,6 @@
-#' @title calculates geocomplexity for raster data based on spatial similarity
+#' @title calculates geocomplexity for raster data based on geographical similarity
 #' @description
-#' This function calculates geocomplexity for raster data based on spatial similarity.
+#' This function calculates geocomplexity for raster data based on geographical similarity.
 #'
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.

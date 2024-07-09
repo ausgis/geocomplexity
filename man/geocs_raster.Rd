@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocs_raster.R
 \name{geocs_raster}
 \alias{geocs_raster}
-\title{calculates geocomplexity for raster data based on spatial similarity}
+\title{calculates geocomplexity for raster data based on geographical similarity}
 \usage{
 geocs_raster(r, order = 1, normalize = TRUE)
 }
@@ -18,7 +18,7 @@ Default is \code{TRUE}.}
 A SpatRaster object
 }
 \description{
-This function calculates geocomplexity for raster data based on spatial similarity.
+This function calculates geocomplexity for raster data based on geographical similarity.
 }
 \examples{
 library(terra)

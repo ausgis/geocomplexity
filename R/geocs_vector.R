@@ -1,6 +1,6 @@
-#' @title calculates geocomplexity for vector data based on spatial similarity
+#' @title calculates geocomplexity for vector data based on geographical similarity
 #' @description
-#' This function calculates geocomplexity for in vector data based on spatial similarity.
+#' This function calculates geocomplexity for in vector data based on geographical similarity.
 #'
 #' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
