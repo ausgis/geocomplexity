@@ -13,15 +13,15 @@ RasterGeoCDependence <- function(x, ni = 9L, nw = 9L) {
     .Call(`_geocomplexity_RasterGeoCDependence`, x, ni, nw)
 }
 
-RasterGeoCSimilarity <- function(x, iw, w) {
-    .Call(`_geocomplexity_RasterGeoCSimilarity`, x, iw, w)
+RasterGeoCSimilarity <- function(x, iw, w, method) {
+    .Call(`_geocomplexity_RasterGeoCSimilarity`, x, iw, w, method)
 }
 
 VectorGeoCDependence <- function(x, wt) {
     .Call(`_geocomplexity_VectorGeoCDependence`, x, wt)
 }
 
-VectorGeoCSimilarity <- function(xobs, wt) {
-    .Call(`_geocomplexity_VectorGeoCSimilarity`, xobs, wt)
+VectorGeoCSimilarity <- function(xobs, wt, method) {
+    .Call(`_geocomplexity_VectorGeoCSimilarity`, xobs, wt, method)
 }
 

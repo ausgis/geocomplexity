@@ -4,7 +4,7 @@
 \alias{geocs_raster}
 \title{geocomplexity for raster data based on geographical similarity}
 \usage{
-geocs_raster(r, order = 1, normalize = TRUE)
+geocs_raster(r, order = 1, normalize = TRUE, method = 1)
 }
 \arguments{
 \item{r}{Raster object that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
@@ -13,6 +13,10 @@ geocs_raster(r, order = 1, normalize = TRUE)
 
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
+
+\item{method}{(optional) When \code{method} is \code{1}, the similarity is calculated using
+geographical configuration similarity, otherwise the cosine similarity is calculated.
+Default is \code{1}.}
 }
 \value{
 A SpatRaster object

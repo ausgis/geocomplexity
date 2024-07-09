@@ -49,15 +49,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // RasterGeoCSimilarity
-NumericVector RasterGeoCSimilarity(NumericMatrix x, IntegerMatrix iw, int w);
-RcppExport SEXP _geocomplexity_RasterGeoCSimilarity(SEXP xSEXP, SEXP iwSEXP, SEXP wSEXP) {
+NumericVector RasterGeoCSimilarity(NumericMatrix x, IntegerMatrix iw, int w, int method);
+RcppExport SEXP _geocomplexity_RasterGeoCSimilarity(SEXP xSEXP, SEXP iwSEXP, SEXP wSEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type iw(iwSEXP);
     Rcpp::traits::input_parameter< int >::type w(wSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCSimilarity(x, iw, w));
+    Rcpp::traits::input_parameter< int >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCSimilarity(x, iw, w, method));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -74,14 +75,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // VectorGeoCSimilarity
-NumericVector VectorGeoCSimilarity(NumericMatrix xobs, NumericMatrix wt);
-RcppExport SEXP _geocomplexity_VectorGeoCSimilarity(SEXP xobsSEXP, SEXP wtSEXP) {
+NumericVector VectorGeoCSimilarity(NumericMatrix xobs, NumericMatrix wt, int method);
+RcppExport SEXP _geocomplexity_VectorGeoCSimilarity(SEXP xobsSEXP, SEXP wtSEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type xobs(xobsSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
-    rcpp_result_gen = Rcpp::wrap(VectorGeoCSimilarity(xobs, wt));
+    Rcpp::traits::input_parameter< int >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(VectorGeoCSimilarity(xobs, wt, method));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -90,9 +92,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 3},
     {"_geocomplexity_RasterGeoCDependence", (DL_FUNC) &_geocomplexity_RasterGeoCDependence, 3},
-    {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 3},
+    {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 4},
     {"_geocomplexity_VectorGeoCDependence", (DL_FUNC) &_geocomplexity_VectorGeoCDependence, 2},
-    {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 2},
+    {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 3},
     {NULL, NULL, 0}
 };
 

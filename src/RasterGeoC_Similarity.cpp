@@ -43,13 +43,13 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
     for (int n = 0; n < x.nrow(); ++n){
       IntegerVector wi = rcpp_seq(n*ncell,(n+1)*ncell-1);
       wi = w_sp[wi];
-      // Rcout << "wi_2: " << wi << "\n";
-      wi[is_na(wi)] = 0;
-      // Rcout << "wi_3: " << wi << "\n";
-      // Rcout << "wi_3.size(): " << wi.size() << "\n";
-      wt(n,_) = wi;
+      wi = wi[!is_na(wi)];
+      for (int ni = 0; ni < wi.size(); ++ni){
+        wt(n,wi[ni]) = 1;
+        wt(wi[ni],n) = 1;
+      }
     }
-
+    Rcout << "wt:  "<< wt;
     NumericVector out = GCS_Variance(x,wt);
     return out;
   }
