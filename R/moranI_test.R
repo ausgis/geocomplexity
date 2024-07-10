@@ -1,6 +1,6 @@
 #' @title global spatial autocorrelation test
 #' @description
-#' Spatial autocorrelation test based on global Moran'I index.
+#' Spatial autocorrelation test based on global Moran'I Index.
 #' @note
 #' This is a `C++` implementation of the `MI.vec` function in `spfilteR` package,
 #' and embellishes the console output.

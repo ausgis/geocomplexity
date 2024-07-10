@@ -25,7 +25,7 @@ Default is \code{FALSE}.}
 A lis with \code{moran_test} class.
 }
 \description{
-Spatial autocorrelation test based on global Moran'I index.
+Spatial autocorrelation test based on global Moran'I Index.
 }
 \note{
 This is a \verb{C++} implementation of the \code{MI.vec} function in \code{spfilteR} package,
