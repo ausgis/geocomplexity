@@ -105,7 +105,7 @@ check_wt = \(wt){
     stop("wt must be of class `matrix`")
   }
   if (any(class(wt) != "matrix")) {
-    wt = as.matrix(Wt)
+    wt = as.matrix(wt)
   }
   return(wt)
 }
