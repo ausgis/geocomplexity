@@ -45,13 +45,14 @@
 
 
 <dl><dt id="arg-sfj">sfj<a class="anchor" aria-label="anchor" href="#arg-sfj"></a></dt>
-<dd><p>Vector object that can be converted to <code>sf</code> by <code><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">sf::st_as_sf()</a></code>.</p></dd>
+<dd><p>An <code>sf</code> object or vector object that can be converted to <code>sf</code> by <code><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">sf::st_as_sf()</a></code>.</p></dd>
 
 
 <dt id="arg-wt">wt<a class="anchor" aria-label="anchor" href="#arg-wt"></a></dt>
 <dd><p>(optional) Spatial weight matrix. Must be a <code>matrix</code> class. You can get a
 spatial weight matrix from <code>spdep</code>,<code>rgeoda</code> or <code>tidyrgeoda</code> package. If <code>wt</code> is not
-provided, <code>geocomplexity</code> will use a first-order queen adjacency binary matrix.</p></dd>
+provided, <code>geocomplexity</code> will use a first-order queen adjacency binary matrix via
+<code>spdep</code> package.</p></dd>
 
 
 <dt id="arg-normalize">normalize<a class="anchor" aria-label="anchor" href="#arg-normalize"></a></dt>
