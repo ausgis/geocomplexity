@@ -47,7 +47,7 @@ void print_global_moranI(DataFrame df) {
 
   for (size_t i = 0; i < variable.size(); ++i) {
     std::string row = "   " + format_value(variable[i], width_var) +
-      format_value(moran_i[i], width_val) + star(pi[i]) +
+      star(pi[i]) + format_value(moran_i[i], width_val) +
       format_value(ei[i], width_val) +
       format_value(vari[i], width_val) +
       format_value(zi[i], width_val) +
