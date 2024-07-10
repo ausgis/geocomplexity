@@ -5,7 +5,7 @@
 // [[Rcpp::export]]
 Rcpp::DataFrame MI_vec(arma::mat x, arma::mat W,
                        std::string alternative = "greater",
-                       bool symmetrize = true) {
+                       bool symmetrize = false) {
   if (symmetrize) {
     W = 0.5 * (W + W.t());
   }
@@ -43,9 +43,12 @@ Rcpp::DataFrame MI_vec(arma::mat x, arma::mat W,
     stars[i] = star(pI[i]);
   }
 
-  out = Rcpp::DataFrame::create(Rcpp::Named("I") = I, Rcpp::Named("EI") = EI,
-                                Rcpp::Named("VarI") = VarI, Rcpp::Named("zI") = zI,
-                                Rcpp::Named("pI") = pI, Rcpp::Named("stars") = stars);
+  out = Rcpp::DataFrame::create(Rcpp::Named("I") = I,
+                                Rcpp::Named("EI") = EI,
+                                Rcpp::Named("VarI") = VarI,
+                                Rcpp::Named("zI") = zI,
+                                Rcpp::Named("pI") = pI,
+                                Rcpp::Named("Significance") = stars);
 
   return out;
 }
