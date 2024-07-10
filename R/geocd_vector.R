@@ -2,10 +2,11 @@
 #' @description
 #' This function calculates geocomplexity for vector data based on spatial dependence.
 #'
-#' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
+#' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
 #' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
-#' provided, `geocomplexity` will use a first-order queen adjacency binary matrix.
+#' provided, `geocomplexity` will use a first-order queen adjacency binary matrix via
+#' `spdep` package.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
 #'

@@ -8,8 +8,11 @@
 #' The return result of this function is actually a `list`, please access the result
 #' tibble using `$result`.
 #'
-#' @param data
-#' @param wt
+#' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
+#' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
+#' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
+#' provided, `geocomplexity` will use a first-order queen adjacency binary matrix via
+#' `spdep` package.
 #' @param alternative
 #' @param symmetrize
 #'
@@ -17,10 +20,10 @@
 #' @export
 #'
 #' @examples
-moran_test = \(data, wt = NULL,
+moran_test = \(sfj, wt = NULL,
                alternative = "greater",
                symmetrize = FALSE){
-  if (!inherits(data,'sf')){
+  if (!inherits(sfj,'sf')){
     sfj = sf::st_as_sf(sfj)
   }
   if (is.null(wt)){
@@ -43,5 +46,6 @@ moran_test = \(data, wt = NULL,
     dplyr::select(dplyr::all_of("Variable"),
                   dplyr::everything())
   res = list(result = mitres)
+  class(res) = 'moran_test'
   return(res)
 }
