@@ -59,6 +59,7 @@ moran_test = \(sfj, wt = NULL,
 }
 
 #' print global spatial autocorrelation test result
+#' @export
 #' @noRd
 print.moran_test = \(x,...){
   cat("\n * global spatial autocorrelation test * \n",
