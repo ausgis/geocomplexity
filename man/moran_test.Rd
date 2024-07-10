@@ -17,9 +17,8 @@ provided, \code{geocomplexity} will use a first-order queen adjacency binary mat
 \item{alternative}{(optional) Specification of alternative hypothesis as 'greater' (default),
 'lower', or 'two.sided'.}
 
-\item{symmetrize}{(optional) Symmetrizes the asymmetrical spatial weight matrix
-\emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}') (TRUE/ FALSE).
-Default is \code{FALSE}.}
+\item{symmetrize}{(optional) Whether or not to symmetrize the asymmetrical spatial weight matrix
+\emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}'). Default is \code{FALSE}.}
 }
 \value{
 A lis with \code{moran_test} class.
