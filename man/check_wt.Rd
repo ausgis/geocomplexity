@@ -19,6 +19,7 @@ check whether wt is a matrix class
 \examples{
 data("income")
 wt = inverse_distance_weight(income)
-check_wt(wt)
+wt = check_wt(wt)
+wt[1:5,1:5]
 
 }

@@ -98,7 +98,8 @@ st_geometry_name = \(sfj){
 #' @examples
 #' data("income")
 #' wt = inverse_distance_weight(income)
-#' check_wt(wt)
+#' wt = check_wt(wt)
+#' wt[1:5,1:5]
 #'
 check_wt = \(wt){
   if (!any(class(wt) %in% c("matrix", "Matrix"))) {
