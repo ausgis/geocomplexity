@@ -33,6 +33,8 @@ and embellishes the console output.
 
 The return result of this function is actually a \code{list}, please access the result
 tibble using \verb{$result}.
+
+The non-numeric columns of the attribute columns in \code{sfj} are ignored.
 }
 \examples{
 data("income")
