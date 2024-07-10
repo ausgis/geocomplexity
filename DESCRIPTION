@@ -20,7 +20,6 @@ Imports:
     dplyr,
     geosphere,
     magrittr,
-    pander,
     purrr,
     sf,
     spdep,
