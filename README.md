@@ -33,8 +33,8 @@ devtools::install_github("SpatLyu/geocomplexity",
 Please ensure that **Rcpp** is properly installed and the appropriate
 **C++** compilation environment is configured in advance if you want to
 install **geocomplexity** from
-[github](https://github.com/SpatLyu/geocomplexity).See the next topic on
-C++ Settings for more information.
+[github](https://github.com/SpatLyu/geocomplexity). See the next topic
+on C++ Settings for more information.
 
 #### From binary
 
