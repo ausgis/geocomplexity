@@ -8,6 +8,8 @@
 #' The return result of this function is actually a `list`, please access the result
 #' tibble using `$result`.
 #'
+#' The non-numeric columns of the attribute columns in `sfj` are ignored.
+#'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
 #' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
