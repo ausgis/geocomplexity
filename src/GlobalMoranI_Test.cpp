@@ -55,7 +55,7 @@ Rcpp::DataFrame MI_vec(arma::mat x, arma::mat W,
                                 Rcpp::Named("EI") = EI,
                                 Rcpp::Named("VarI") = VarI,
                                 Rcpp::Named("zI") = zI,
-                                Rcpp::Named("pI") = pI;
+                                Rcpp::Named("pI") = pI);
 
   return out;
 }
