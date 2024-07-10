@@ -16,6 +16,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/GeoComplexityC.html">Calculate geocomplexity of various spatial data</a></li>
+    <li><a class="dropdown-item" href="../articles/GeoComplexityM.html">Spatial regression model considering geocomplexity</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/SpatLyu/geocomplexity/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -101,14 +106,11 @@ tibble using <code>$result</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  * global spatial autocorrelation test *              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable     I         EI         VarI      zI        pI       Significance </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- -------- ----------- ---------- ------- ----------- --------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Income    0.3857   -0.003012   0.001239   11.04   1.193e-28       ***      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Gini     0.3973   -0.003012   0.001239   11.37   2.879e-30       ***      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | Variable |    I     |    EI     |   VarI   |    zI    | pI | Significance |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:--------:|:---------:|:--------:|:--------:|:--:|:------------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |  Income  | 0.385718 | -0.003012 | 0.001239 | 11.04239 | 0  |     ***      |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   Gini   | 0.397324 | -0.003012 | 0.001239 | 11.37209 | 0  |     ***      |</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
