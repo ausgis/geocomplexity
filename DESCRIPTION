@@ -29,6 +29,7 @@ Imports:
 Suggests: 
     ggplot2,
     knitr,
+    pander,
     raster,
     rmarkdown,
     stars,
