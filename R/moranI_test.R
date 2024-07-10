@@ -44,6 +44,7 @@ moran_test = \(sfj, wt = NULL,
   }
   dmat = sfj %>%
     sf::st_drop_geometry() %>%
+    dplyr::select(dplyr::where(is.numeric)) %>%
     as.matrix()
   mitres = MI_vec(dmat, wt, alternative, symmetrize)
   mitres = tibble::as_tibble(mitres) %>%
