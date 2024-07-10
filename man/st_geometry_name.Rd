@@ -10,7 +10,7 @@ st_geometry_name(sfj)
 \item{sfj}{An \code{sf} object.}
 }
 \value{
-A character
+A character.
 }
 \description{
 get the sf geometry column name of an sf object

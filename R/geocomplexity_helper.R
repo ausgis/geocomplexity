@@ -72,7 +72,7 @@ inverse_distance_weight = \(sfj,power = 1){
 #'
 #' @param sfj An `sf` object.
 #'
-#' @return A character
+#' @return A character.
 #' @export
 #'
 #' @examples
