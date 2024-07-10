@@ -40,14 +40,14 @@ void print_global_moranI(DataFrame df) {
   int width_var = 10;
   int width_val = 12;
 
-  Rcout << " ***               global spatial autocorrelation test                 \n";
-  Rcout << " ----------------------------------------------------------------------\n";
-  Rcout << "   Variable      Moran I       EI         VarI       zI          pI    \n";
-  Rcout << " ------------ ------------ ----------- ---------- --------- -----------\n";
+  Rcout << " ***               global spatial autocorrelation test                  \n";
+  Rcout << " -----------------------------------------------------------------------\n";
+  Rcout << "   Variable      Moran I        EI         VarI       zI          pI    \n";
+  Rcout << " ------------ ------------- ----------- ---------- --------- -----------\n";
 
   for (size_t i = 0; i < variable.size(); ++i) {
-    std::string row = "   " + format_value(variable[i], width_var) +
-      star(pi[i]) + format_value(moran_i[i], width_var) +
+    std::string row = "   " + format_value(variable[i], width_val + 1) +
+      star(pi[i]) + format_value(moran_i[i], width_var + 1) +
       format_value(ei[i], width_val) +
       format_value(vari[i], width_var) +
       format_value(zi[i], width_var) +
@@ -55,5 +55,5 @@ void print_global_moranI(DataFrame df) {
     Rcout << row << "\n";
   }
 
-  Rcout << " ---------------------------------------------------------------------\n";
+  Rcout << " -----------------------------------------------------------------------\n";
 }
