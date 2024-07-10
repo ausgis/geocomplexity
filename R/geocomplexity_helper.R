@@ -86,3 +86,26 @@ st_geometry_name = \(sfj){
   gname = attr(sfj, "sf_column")
   return(gname)
 }
+
+#' @title check whether wt is a matrix class
+#'
+#' @param wt Spatial weight matrix
+#'
+#' @return If `wt` is a `matrix` class, return `wt` itself, otherwise an error is raised
+#' and execution stops.
+#' @export
+#'
+#' @examples
+#' data("income")
+#' wt = inverse_distance_weight(income)
+#' check_wt(wt)
+#'
+check_wt = \(wt){
+  if (!any(class(wt) %in% c("matrix", "Matrix"))) {
+    stop("wt must be of class `matrix`")
+  }
+  if (any(class(wt) != "matrix")) {
+    wt = as.matrix(Wt)
+  }
+  return(wt)
+}

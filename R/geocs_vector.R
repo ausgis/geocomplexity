@@ -36,6 +36,8 @@ geocs_vector = \(sfj,wt = NULL,normalize = TRUE, method = 1){
   }
   if (is.null(wt)){
     wt = inverse_distance_weight(sfj)
+  } else {
+    wt = check_wt(wt)
   }
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),

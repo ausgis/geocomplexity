@@ -34,6 +34,8 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE){
     nb_queen = spdep::poly2nb(sfj, queen=TRUE)
     wt = spdep::nb2mat(nb_queen, style='B',
                        zero.policy = TRUE)
+  } else {
+    wt = check_wt(wt)
   }
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
