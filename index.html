@@ -70,18 +70,57 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<div class="section level4">
+<h4 id="from-source">From source:<a class="anchor" aria-label="anchor" href="#from-source"></a>
+</h4>
 <p>You can install the development version of <strong>geocomplexity</strong> from <a href="https://github.com/SpatLyu/geocomplexity" class="external-link">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SpatLyu/geocomplexity"</span>,</span>
 <span>                         dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Please ensure that <strong>Rcpp</strong> is properly installed and the appropriate <strong>C++</strong> compilation environment is configured in advance if you want to install <strong>geocomplexity</strong> from <a href="https://github.com/SpatLyu/geocomplexity" class="external-link">github</a>.</p>
+<p><strong>Linux</strong></p>
+<p>Debian/Ubuntu:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">apt-get</span> update</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">apt-get</span> install r-base-dev</span></code></pre></div>
+<p>Fedora/RedHat: should be set up already.</p>
+<p><strong>MacOS</strong></p>
+<p>Option 1</p>
+<ul>
+<li>
+<a href="https://developer.apple.com/programs/register/" class="external-link">Register as an Apple developer (for free)</a>
+<ul>
+<li>
+<p>Then, in the terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<p>Option 2</p>
+<ul>
+<li>Install the current release of full <a href="https://itunes.apple.com/ca/app/xcode/id497799835?mt=12" class="external-link">Xcode from the Mac App Store</a>
+</li>
+<li>Within XCode go to Preferences -&gt; Downloads and install the Command Line Tools</li>
+<li>More convenient but installs a lot you don’t need</li>
+</ul>
+<p><strong>Windows</strong>:</p>
+<ul>
+<li>Download the Rtools installer that matches your version of R from <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link uri">https://cran.r-project.org/bin/windows/Rtools/</a>
+</li>
+<li>Run the installer, <code>Rtools.exe</code>, keeping the default settings.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="from-binary">From binary<a class="anchor" aria-label="anchor" href="#from-binary"></a>
+</h4>
 <p>You can also install the binary version of <strong>geocomplexity</strong> from <a href="https://spatlyu.r-universe.dev/geocomplexity" class="external-link">r-universe</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"geocomplexity"</span>, </span>
 <span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://spatlyu.r-universe.dev"</span>,</span>
 <span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
 <span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
