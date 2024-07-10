@@ -33,7 +33,22 @@ devtools::install_github("SpatLyu/geocomplexity",
 Please ensure that **Rcpp** is properly installed and the appropriate
 **C++** compilation environment is configured in advance if you want to
 install **geocomplexity** from
-[github](https://github.com/SpatLyu/geocomplexity).
+[github](https://github.com/SpatLyu/geocomplexity).See the next topic on
+C++ Settings for more information.
+
+#### From binary
+
+You can also install the binary version of **geocomplexity** from
+[r-universe](https://spatlyu.r-universe.dev/geocomplexity):
+
+``` r
+install.packages("geocomplexity", 
+                 repos = c("https://spatlyu.r-universe.dev",
+                           "https://cran.rstudio.com/"),
+                 dep = TRUE)
+```
+
+## Set up to use **C++** compilation environment
 
 **Linux**
 
@@ -71,15 +86,3 @@ Option 2
 - Download the Rtools installer that matches your version of R from
   <https://cran.r-project.org/bin/windows/Rtools/>
 - Run the installer, `Rtools.exe`, keeping the default settings.
-
-#### From binary
-
-You can also install the binary version of **geocomplexity** from
-[r-universe](https://spatlyu.r-universe.dev/geocomplexity):
-
-``` r
-install.packages("geocomplexity", 
-                 repos = c("https://spatlyu.r-universe.dev",
-                           "https://cran.rstudio.com/"),
-                 dep = TRUE)
-```
