@@ -35,6 +35,7 @@ Suggests:
 LinkingTo: 
     Rcpp,
     RcppArmadillo
+VignetteBuilder: knitr
 Depends: 
     R (>= 4.1.0)
 LazyData: true

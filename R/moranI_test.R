@@ -19,10 +19,13 @@
 #' \emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}') (TRUE/ FALSE).
 #' Default is `FALSE`.
 #'
-#' @return
+#' @return A lis with `moran_test` class.
 #' @export
 #'
 #' @examples
+#' data("income")
+#' moran_test(income)
+#'
 moran_test = \(sfj, wt = NULL,
                alternative = "greater",
                symmetrize = FALSE){
@@ -51,4 +54,12 @@ moran_test = \(sfj, wt = NULL,
   res = list(result = mitres)
   class(res) = 'moran_test'
   return(res)
+}
+
+#' print global spatial autocorrelation test result
+#' @noRd
+print.moran_test = \(x,...){
+  cat("\n * global spatial autocorrelation test * \n",
+      "\n ------------------------------------------")
+  print(knitr::kable(x$result,format = "markdown",digits = 6,align = 'c',...))
 }
