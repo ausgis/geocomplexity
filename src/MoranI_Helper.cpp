@@ -29,7 +29,7 @@ std::string format_value(T value, int width, bool scientific = false) {
 
 // Function to print the global spatial autocorrelation test results
 // [[Rcpp::export]]
-void print_global_spatial_autocorr_test(DataFrame df) {
+void print_global_moranI(DataFrame df) {
   std::vector<std::string> variable = df["Variable"];
   NumericVector moran_i = df["I"];
   NumericVector ei = df["EI"];
@@ -40,12 +40,12 @@ void print_global_spatial_autocorr_test(DataFrame df) {
   int width_var = 10;
   int width_val = 13;
 
-  Rcout << " ***            global spatial autocorrelation test               \n";
+  Rcout << " ***             global spatial autocorrelation test               \n";
   Rcout << " ------------------------------------------------------------------\n";
-  Rcout << "  Variable     Moran I       EI         VarI      zI        pI    \n";
+  Rcout << "  Variable     Moran I       EI         VarI      zI         pI    \n";
   Rcout << " ---------- ------------ ----------- ---------- ------- -----------\n";
 
-  for (size_t i = 0; i < variable.size(); i++) {
+  for (size_t i = 0; i < variable.size(); ++i) {
     std::string row = "   " + format_value(variable[i], width_var) +
       format_value(moran_i[i], width_val) + star(pi[i]) +
       format_value(ei[i], width_val) +
