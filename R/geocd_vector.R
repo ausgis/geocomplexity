@@ -14,7 +14,6 @@
 #' @export
 #'
 #' @examples
-#' library(sf)
 #' data("income")
 #' inc = dplyr::select(income,Income)
 #' gc = geocd_vector(inc)

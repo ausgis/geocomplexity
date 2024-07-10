@@ -28,7 +28,6 @@ An sf object
 This function calculates geocomplexity for in vector data based on geographical similarity.
 }
 \examples{
-library(sf)
 data("income")
 income = dplyr::select(income,-SA3_CODE16)
 gc = geocs_vector(income)

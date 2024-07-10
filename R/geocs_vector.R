@@ -17,7 +17,6 @@
 #' @export
 #'
 #' @examples
-#' library(sf)
 #' data("income")
 #' income = dplyr::select(income,-SA3_CODE16)
 #' gc = geocs_vector(income)
