@@ -13,8 +13,11 @@
 #' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
 #' provided, `geocomplexity` will use a first-order queen adjacency binary matrix via
 #' `spdep` package.
-#' @param alternative
-#' @param symmetrize
+#' @param alternative (optional) Specification of alternative hypothesis as 'greater' (default),
+#' 'lower', or 'two.sided'.
+#' @param symmetrize (optional) Symmetrizes the asymmetrical spatial weight matrix
+#' \emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}') (TRUE/ FALSE).
+#' Default is `FALSE`.
 #'
 #' @return
 #' @export
