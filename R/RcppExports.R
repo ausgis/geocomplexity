@@ -5,7 +5,7 @@ spatial_variance <- function(x, wt) {
     .Call(`_geocomplexity_spatial_variance`, x, wt)
 }
 
-MI_vec <- function(x, W, alternative = "greater", symmetrize = TRUE) {
+MI_vec <- function(x, W, alternative = "greater", symmetrize = FALSE) {
     .Call(`_geocomplexity_MI_vec`, x, W, alternative, symmetrize)
 }
 
