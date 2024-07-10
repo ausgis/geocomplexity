@@ -20,6 +20,7 @@ Imports:
     dplyr,
     geosphere,
     magrittr,
+    pander,
     purrr,
     sf,
     spdep,
@@ -29,7 +30,6 @@ Imports:
 Suggests: 
     ggplot2,
     knitr,
-    pander,
     raster,
     rmarkdown,
     stars,

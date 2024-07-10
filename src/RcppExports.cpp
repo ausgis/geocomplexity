@@ -38,13 +38,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // print_global_moranI
-void print_global_moranI(DataFrame df);
+DataFrame print_global_moranI(DataFrame df);
 RcppExport SEXP _geocomplexity_print_global_moranI(SEXP dfSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< DataFrame >::type df(dfSEXP);
-    print_global_moranI(df);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(print_global_moranI(df));
+    return rcpp_result_gen;
 END_RCPP
 }
 // RasterGeoCDependenceOne

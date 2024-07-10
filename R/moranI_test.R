@@ -23,7 +23,7 @@
 #' @return A list with `moran_test` class and result stored on the `result` tibble.
 #' Which contains the following information for each variable:
 #' \describe{
-#' \item{\code{I}}{observed value of the Moran coefficient}
+#' \item{\code{MoranI}}{observed value of the Moran coefficient}
 #' \item{\code{EI}}{expected value of Moran's I}
 #' \item{\code{VarI}}{variance of Moran's I (under normality)}
 #' \item{\code{zI}}{standardized Moran coefficient}
@@ -70,8 +70,7 @@ moran_test = \(sfj, wt = NULL,
 #' @export
 #' @noRd
 print.moran_test = \(x,...){
-  # cat("\n ***               global spatial autocorrelation test               ")
-  # pander::pander(x$result)
-  x = as.data.frame(x$result)
-  print_global_moranI(x)
+  cat("***                 global spatial autocorrelation test                 ")
+  x = print_global_moranI(as.data.frame(x$result))
+  pander::pander(x)
 }

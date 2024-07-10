@@ -14,46 +14,34 @@ std::string star(double p) {
   return " ";
 }
 
-// Helper function to format a value to string with a fixed width
-template <typename T>
-std::string format_value(T value, int width, bool scientific = false) {
-  std::ostringstream ss;
-  if (scientific) {
-    ss << std::scientific << std::setprecision(3);
-  } else {
-    ss << std::fixed << std::setprecision(4);
-  }
-  ss << std::left << std::setw(width) << value;
-  return ss.str();
+// Helper function to concatenate a number and a significance star
+std::string concat_num_with_star(double num, double p) {
+  std::ostringstream oss;
+  oss << num << star(p);
+  return oss.str();
 }
 
 // Function to print the global spatial autocorrelation test results
 // [[Rcpp::export]]
-void print_global_moranI(DataFrame df) {
-  std::vector<std::string> variable = df["Variable"];
-  NumericVector moran_i = df["I"];
+DataFrame print_global_moranI(DataFrame df) {
+  CharacterVector variable = df["Variable"];
+  NumericVector moran_i = df["MoranI"];
   NumericVector ei = df["EI"];
   NumericVector vari = df["VarI"];
   NumericVector zi = df["zI"];
   NumericVector pi = df["pI"];
+  CharacterVector stars(variable.size());
 
-  int width_var = 10;
-  int width_val = 12;
-
-  Rcout << " ***               global spatial autocorrelation test                  \n";
-  Rcout << " -----------------------------------------------------------------------\n";
-  Rcout << "   Variable      Moran I        EI         VarI       zI          pI    \n";
-  Rcout << " ------------ ------------- ----------- ---------- --------- -----------\n";
-
-  for (size_t i = 0; i < variable.size(); ++i) {
-    std::string row = "   " + format_value(variable[i], width_val + 1) +
-      star(pi[i]) + format_value(moran_i[i], width_var + 1) +
-      format_value(ei[i], width_val) +
-      format_value(vari[i], width_var) +
-      format_value(zi[i], width_var) +
-      format_value(pi[i], width_var, true);
-    Rcout << row << "\n";
+  for (int i = 0; i < variable.size(); ++i) {
+    stars[i] = concat_num_with_star(moran_i[i],pi[i]);
   }
 
-  Rcout << " -----------------------------------------------------------------------\n";
+  DataFrame out = Rcpp::DataFrame::create(Rcpp::Named("Variable") = variable,
+                                          Rcpp::Named("MoranI") = stars,
+                                          Rcpp::Named("EI") = ei,
+                                          Rcpp::Named("VarI") = vari,
+                                          Rcpp::Named("zI") = zi,
+                                          Rcpp::Named("pI") = pi);
+
+  return out;
 }

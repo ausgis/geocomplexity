@@ -10,7 +10,7 @@ MI_vec <- function(x, W, alternative = "greater", symmetrize = FALSE) {
 }
 
 print_global_moranI <- function(df) {
-    invisible(.Call(`_geocomplexity_print_global_moranI`, df))
+    .Call(`_geocomplexity_print_global_moranI`, df)
 }
 
 RasterGeoCDependenceOne <- function(x, ni = 9L, nw = 9L) {
