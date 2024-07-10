@@ -28,8 +28,8 @@ DataFrame print_global_moranI(DataFrame df) {
   NumericVector moran_i = df["MoranI"];
   NumericVector ei = df["EI"];
   NumericVector vari = df["VarI"];
-  NumericVector zi = df["zI"];
-  NumericVector pi = df["pI"];
+  NumericVector zi = df["ZI"];
+  NumericVector pi = df["PI"];
   CharacterVector stars(variable.size());
 
   for (int i = 0; i < variable.size(); ++i) {

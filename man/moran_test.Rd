@@ -27,8 +27,8 @@ Which contains the following information for each variable:
 \item{\code{MoranI}}{observed value of the Moran coefficient}
 \item{\code{EI}}{expected value of Moran's I}
 \item{\code{VarI}}{variance of Moran's I (under normality)}
-\item{\code{zI}}{standardized Moran coefficient}
-\item{\code{pI}}{\emph{p}-value of the test statistic}
+\item{\code{ZI}}{standardized Moran coefficient}
+\item{\code{PI}}{\emph{p}-value of the test statistic}
 }
 }
 \description{
