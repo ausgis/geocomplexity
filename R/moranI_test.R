@@ -71,7 +71,6 @@ moran_test = \(sfj, wt = NULL,
 #' @noRd
 print.moran_test = \(x,...){
   # cat("\n ***               global spatial autocorrelation test               ")
-  # cat("\n ---------------------------------------------------------------------")
   # pander::pander(x$result)
   x = as.data.frame(x$result)
   print_global_moranI(x)
