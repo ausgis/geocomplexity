@@ -104,12 +104,15 @@ tibble using <code>$result</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"income"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">moran_test</span><span class="op">(</span><span class="va">income</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  *                  global spatial autocorrelation test               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ***               global spatial autocorrelation test               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable     I         EI         VarI      zI        pI       Significance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- -------- ----------- ---------- ------- ----------- --------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Income    0.3857   -0.003012   0.001239   11.04   1.193e-28       ***      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | Variable |    I     |    EI     |   VarI   |    zI    | pI | Significance |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:--------:|:---------:|:--------:|:--------:|:--:|:------------:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |  Income  | 0.385718 | -0.003012 | 0.001239 | 11.04239 | 0  |     ***      |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   Gini   | 0.397324 | -0.003012 | 0.001239 | 11.37209 | 0  |     ***      |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Gini     0.3973   -0.003012   0.001239   11.37   2.879e-30       ***      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
