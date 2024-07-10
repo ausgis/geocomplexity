@@ -70,8 +70,8 @@ moran_test = \(sfj, wt = NULL,
 #' @export
 #' @noRd
 print.moran_test = \(x,...){
-  cat("\n        * global spatial autocorrelation test *       \n")
-  # cat("\n -----------------------------------------------------")
-  pander::pander(x)
-  # print(knitr::kable(x,format = "markdown",digits = 6,align = 'c',...))
+  cat("\n                 * global spatial autocorrelation test *              \n")
+  # cat("\n ---------------------------------------------------------------------")
+  pander::pander(x$result)
+  # print(knitr::kable(x$result,format = "markdown",digits = 6,align = 'c',...))
 }
