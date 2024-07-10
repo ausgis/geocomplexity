@@ -14,7 +14,7 @@ std::string star(double p) {
 double pfunc(double z, std::string alternative) {
   if (alternative == "greater") {
     return R::pnorm(z, 0.0, 1.0, false, false);
-  } else if (alternative == "lower") {
+  } else if (alternative == "less") {
     return R::pnorm(z, 0.0, 1.0, true, false);
   } else { // "two.sided"
     return 2 * R::pnorm(std::abs(z), 0.0, 1.0, false, false);

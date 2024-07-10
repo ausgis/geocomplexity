@@ -42,9 +42,9 @@ moran_test = \(sfj, wt = NULL,
   dmat = sfj %>%
     sf::st_drop_geometry() %>%
     as.matrix()
-  if (!(alternative %in% c("greater", "lower", "two.sided"))) {
+  if (!(alternative %in% c("greater", "less", "two.sided"))) {
     stop("Invalid input: `alternative` must be either `greater`,
-         `lower`, or `two.sided`")
+         `less`, or `two.sided`")
   }
   mitres = MI_vec(dmat, wt, alternative, symmetrize)
   mitres = tibble::as_tibble(mitres) %>%
