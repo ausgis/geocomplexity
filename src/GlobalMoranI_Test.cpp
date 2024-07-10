@@ -1,6 +1,16 @@
 #include <RcppArmadillo.h>
-#include "MoranI_Helper.h"
 // [[Rcpp::depends(RcppArmadillo)]]
+
+// Function to calculate p-value based on z and alternative hypothesis
+double pfunc(double z, std::string alternative) {
+  if (alternative == "greater") {
+    return R::pnorm(z, 0.0, 1.0, false, false);
+  } else if (alternative == "less") {
+    return R::pnorm(z, 0.0, 1.0, true, false);
+  } else { // "two.sided"
+    return 2 * R::pnorm(std::abs(z), 0.0, 1.0, false, false);
+  }
+}
 
 // [[Rcpp::export]]
 Rcpp::DataFrame MI_vec(arma::mat x, arma::mat W,
@@ -39,16 +49,13 @@ Rcpp::DataFrame MI_vec(arma::mat x, arma::mat W,
     zI[i] = (I[i] - EI[i]) / std::sqrt(VarI[i]);
     // pI
     pI[i] = pfunc(zI[i], alternative);
-    // stars
-    stars[i] = star(pI[i]);
   }
 
   out = Rcpp::DataFrame::create(Rcpp::Named("I") = I,
                                 Rcpp::Named("EI") = EI,
                                 Rcpp::Named("VarI") = VarI,
                                 Rcpp::Named("zI") = zI,
-                                Rcpp::Named("pI") = pI,
-                                Rcpp::Named("Significance") = stars);
+                                Rcpp::Named("pI") = pI;
 
   return out;
 }
