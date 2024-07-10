@@ -29,7 +29,9 @@ Imports:
     tibble
 Suggests: 
     ggplot2,
+    knitr,
     raster,
+    rmarkdown,
     stars,
     tidyverse,
     viridis
@@ -40,3 +42,4 @@ Depends:
     R (>= 4.1.0)
 LazyData: true
 URL: https://spatlyu.github.io/geocomplexity/, https://github.com/SpatLyu/geocomplexity/
+VignetteBuilder: knitr
