@@ -21,7 +21,15 @@ provided, \code{geocomplexity} will use a first-order queen adjacency binary mat
 \emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}'). Default is \code{FALSE}.}
 }
 \value{
-A lis with \code{moran_test} class.
+A list with \code{moran_test} class and result stored on the \code{result} tibble.
+Which contains the following information for each variable:
+\describe{
+\item{\code{I}}{observed value of the Moran coefficient}
+\item{\code{EI}}{expected value of Moran's I}
+\item{\code{VarI}}{variance of Moran's I (under normality)}
+\item{\code{zI}}{standardized Moran coefficient}
+\item{\code{pI}}{\emph{p}-value of the test statistic}
+}
 }
 \description{
 Spatial autocorrelation test based on global Moran'I Index.

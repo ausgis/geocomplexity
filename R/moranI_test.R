@@ -20,7 +20,16 @@
 #' @param symmetrize (optional) Whether or not to symmetrize the asymmetrical spatial weight matrix
 #' \emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}'). Default is `FALSE`.
 #'
-#' @return A lis with `moran_test` class.
+#' @return A list with `moran_test` class and result stored on the `result` tibble.
+#' Which contains the following information for each variable:
+#' \describe{
+#' \item{\code{I}}{observed value of the Moran coefficient}
+#' \item{\code{EI}}{expected value of Moran's I}
+#' \item{\code{VarI}}{variance of Moran's I (under normality)}
+#' \item{\code{zI}}{standardized Moran coefficient}
+#' \item{\code{pI}}{\emph{p}-value of the test statistic}
+#' }
+#'
 #' @export
 #'
 #' @examples
@@ -61,8 +70,8 @@ moran_test = \(sfj, wt = NULL,
 #' @export
 #' @noRd
 print.moran_test = \(x,...){
-  cat("\n  * global spatial autocorrelation test *  \n")
-  # cat("\n --------------------------------------------")
-  pander::pander(x$result)
-  # print(knitr::kable(x$result,format = "markdown",digits = 6,align = 'c',...))
+  cat("\n        * global spatial autocorrelation test *       \n")
+  # cat("\n -----------------------------------------------------")
+  pander::pander(x)
+  # print(knitr::kable(x,format = "markdown",digits = 6,align = 'c',...))
 }

@@ -93,6 +93,7 @@ st_geometry_name = \(sfj){
 #'
 #' @return If `wt` is a `matrix` class, return `wt` itself, otherwise an error is raised
 #' and execution stops.
+#' @export
 #'
 #' @examples
 #' data("income")
