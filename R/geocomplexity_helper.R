@@ -68,7 +68,7 @@ inverse_distance_weight = \(sfj,power = 1){
   return(as.matrix(wij))
 }
 
-#' @title get the sf geometry column name of an sf object
+#' @title get the geometry column name of an sf object
 #'
 #' @param sfj An `sf` object.
 #'

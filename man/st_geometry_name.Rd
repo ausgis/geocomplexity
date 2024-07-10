@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocomplexity_helper.R
 \name{st_geometry_name}
 \alias{st_geometry_name}
-\title{get the sf geometry column name of an sf object}
+\title{get the geometry column name of an sf object}
 \usage{
 st_geometry_name(sfj)
 }
@@ -13,7 +13,7 @@ st_geometry_name(sfj)
 A character.
 }
 \description{
-get the sf geometry column name of an sf object
+get the geometry column name of an sf object
 }
 \examples{
 data("income")
