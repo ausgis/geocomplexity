@@ -37,6 +37,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// print_global_moranI
+void print_global_moranI(DataFrame df);
+RcppExport SEXP _geocomplexity_print_global_moranI(SEXP dfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type df(dfSEXP);
+    print_global_moranI(df);
+    return R_NilValue;
+END_RCPP
+}
 // RasterGeoCDependenceOne
 double RasterGeoCDependenceOne(NumericVector x, size_t ni, size_t nw);
 RcppExport SEXP _geocomplexity_RasterGeoCDependenceOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
@@ -106,6 +116,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
+    {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
     {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 3},
     {"_geocomplexity_RasterGeoCDependence", (DL_FUNC) &_geocomplexity_RasterGeoCDependence, 3},
     {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 4},
