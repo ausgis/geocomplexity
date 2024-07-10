@@ -5,6 +5,10 @@ spatial_variance <- function(x, wt) {
     .Call(`_geocomplexity_spatial_variance`, x, wt)
 }
 
+MI_vec <- function(x, W, alternative = "greater", symmetrize = TRUE) {
+    .Call(`_geocomplexity_MI_vec`, x, W, alternative, symmetrize)
+}
+
 RasterGeoCDependenceOne <- function(x, ni = 9L, nw = 9L) {
     .Call(`_geocomplexity_RasterGeoCDependenceOne`, x, ni, nw)
 }

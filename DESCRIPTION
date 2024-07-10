@@ -33,7 +33,8 @@ Suggests:
     tidyverse,
     viridis
 LinkingTo: 
-    Rcpp
+    Rcpp,
+    RcppArmadillo
 Depends: 
     R (>= 4.1.0)
 LazyData: true
