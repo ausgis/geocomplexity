@@ -27,6 +27,7 @@ You can install the development version of **geocomplexity** from
 ``` r
 # install.packages("devtools")
 devtools::install_github("SpatLyu/geocomplexity",
+                         build_vignettes = TRUE,
                          dep = TRUE)
 ```
 
