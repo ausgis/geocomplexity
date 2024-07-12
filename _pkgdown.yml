@@ -2,6 +2,39 @@ url: https://spatlyu.github.io/geocomplexity/
 template:
   bootstrap: 5
   bootswatch: spacelab
+  math-rendering: mathjax
+  light-switch: true
+
+navbar:
+  components:
+    articles:
+      text: Vignettes
+
+reference:
+
+- title: GeoComplexity Computation
+  contents:
+  - geocd_vector
+  - geocs_vector
+  - geocd_raster
+  - geocs_raster
+
+- title: Global Spatial Autocorrelation Test
+  contents:
+  - moran_test
+
+- title: Utility Functions
+  contents:
+  - normalize_vector
+  - standardize_vector
+  - st_geometry_name
+  - inverse_distance_weight
+  - check_wt
+
+- title: Data
+  contents:
+  - income
+
 on:
   push:
     branches: main
@@ -27,6 +60,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
+
 home:
   title: |
     geocomplexity | Geocomplexity Mitigates Spatial Bias
