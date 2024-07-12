@@ -9,6 +9,11 @@ navbar:
   components:
     articles:
       text: Vignettes
+      menu:
+      - text: GeoComplexity Computation
+        href: articles/GeoComplexityC.html
+      - text: GeoComplexity Application
+        href: articles/GeoComplexityM.html
 
 reference:
 
