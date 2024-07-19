@@ -13,7 +13,9 @@ standardize_vector(x)
 A standardized numeric vector
 }
 \description{
-standardization
+To calculate the Z-score using variance normalization, the formula is as follows:
+
+\eqn{Z = (x - mean(x)) / sd(x)}
 }
 \examples{
 standardize_vector(1:10)
