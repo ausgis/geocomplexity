@@ -10,7 +10,7 @@
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
 #' @param method (optional) When `method` is `spvar`, variation of the attribute vector is
-#' represented using spatial variance, otherwise Shannon information entropy is used. Default
+#' represented using spatial variance, otherwise shannon information entropy is used. Default
 #' is `spvar`.
 #'
 #' @return An sf object

@@ -19,7 +19,7 @@ geographical configuration similarity, otherwise the cosine similarity is calcul
 Default is \code{1}.}
 
 \item{method}{(optional) When \code{method} is \code{spvar}, variation of the similarity vector is
-represented using spatial variance, otherwise Shannon information entropy is used. Default
+represented using spatial variance, otherwise shannon information entropy is used. Default
 is \code{spvar}.}
 }
 \value{

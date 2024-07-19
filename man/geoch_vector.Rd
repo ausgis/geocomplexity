@@ -18,7 +18,7 @@ provided, \code{geocomplexity} will use a first-order queen adjacency binary mat
 Default is \code{TRUE}.}
 
 \item{method}{(optional) When \code{method} is \code{spvar}, variation of the attribute vector is
-represented using spatial variance, otherwise Shannon information entropy is used. Default
+represented using spatial variance, otherwise shannon information entropy is used. Default
 is \code{spvar}.}
 }
 \value{

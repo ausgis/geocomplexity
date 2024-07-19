@@ -10,7 +10,7 @@
 #' geographical configuration similarity, otherwise the cosine similarity is calculated.
 #' Default is `1`.
 #' @param method (optional) When `method` is `spvar`, variation of the similarity vector is
-#' represented using spatial variance, otherwise Shannon information entropy is used. Default
+#' represented using spatial variance, otherwise shannon information entropy is used. Default
 #' is `spvar`.
 #'
 #' @return A SpatRaster object
