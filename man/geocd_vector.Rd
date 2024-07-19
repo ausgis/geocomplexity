@@ -26,7 +26,7 @@ This function calculates geocomplexity for vector data based on spatial dependen
 \details{
 The formula is
 
-\eqn{\rho_{i} = \displaystyle-\frac{1}{m}Z_{i}\sum_{j=1}^{m}W_{i j} Z_{j} \displaystyle-\frac{1}{m}\sum_{j=1}^{m}W_{ij} Z_{j}\frac{1}{V_{k}}\sum_{k=1}^{n}W_{jk} W_{ik} Z_{k}}
+\eqn{\rho_{i} = \displaystyle-\frac{1}{m}Z_{i}\sum\limits_{j=1}^{m}W_{i j} Z_{j} \displaystyle-\frac{1}{m}\sum\limits_{j=1}^{m}W_{ij} Z_{j}\frac{1}{V_{k}}\sum\limits_{k=1}^{n}W_{jk} W_{ik} Z_{k}}
 }
 \examples{
 data("income")
