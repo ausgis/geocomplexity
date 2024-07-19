@@ -48,7 +48,9 @@ geoch_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'spvar'){
                           dplyr::across(dplyr::everything(),
                                         \(.x) VectorGeoCSSH(.x,wt,method)))
   if (normalize) {
-    geocvec = normalize_vector(geocvec)
+    geocvec = dplyr::mutate(geocvec,
+                            dplyr::across(dplyr::everything(),
+                                          normalize_vector))
   }
   geocvec = tibble::as_tibble_col(geocvec)
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
