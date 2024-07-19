@@ -20,6 +20,11 @@ A SpatRaster object
 \description{
 This function calculates geocomplexity for raster data based on spatial dependence.
 }
+\note{
+In contrast to the \code{geocd_vector()} function, the \code{geocd_raster()} performs operations
+internally on raster data based on neighborhood operations(focal) without providing
+additional wt object.
+}
 \examples{
 library(terra)
 m = matrix(c(3,3,3,3,1,3,
@@ -38,4 +43,12 @@ gc2 = geocd_raster(m,2)
 gc1
 gc2
 
+}
+\references{
+Zehua Zhang, Yongze Song, Peng Luo & Peng Wu (2023) Geocomplexity explains spatial errors,
+International Journal of Geographical Information Science, 37:7, 1449-1469,
+DOI: 10.1080/13658816.2023.2203212
+
+Anselin, L. (2019). A local indicator of multivariate spatial association: Extending
+geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/gean.12164
 }

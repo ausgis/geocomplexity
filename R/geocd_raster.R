@@ -1,6 +1,18 @@
 #' @title geocomplexity for raster data based on spatial dependence
 #' @description
 #' This function calculates geocomplexity for raster data based on spatial dependence.
+#' @references
+#' Zehua Zhang, Yongze Song, Peng Luo & Peng Wu (2023) Geocomplexity explains spatial errors,
+#' International Journal of Geographical Information Science, 37:7, 1449-1469,
+#' DOI: 10.1080/13658816.2023.2203212
+#'
+#' Anselin, L. (2019). A local indicator of multivariate spatial association: Extending
+#' geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/gean.12164
+#'
+#' @note
+#' In contrast to the `geocd_vector()` function, the `geocd_raster()` performs operations
+#' internally on raster data based on neighborhood operations(focal) without providing
+#' additional wt object.
 #'
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.

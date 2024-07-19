@@ -14,7 +14,7 @@ NULL
 #' @description
 #' To calculate the Z-score using variance normalization, the formula is as follows:
 #'
-#' \eqn{Z = (x - mean(x)) / sd(x)}
+#' \eqn{Z = \frac{(x - mean(x))}{sd(x)}}
 #'
 #' @param x A numeric vector
 #'

@@ -23,6 +23,11 @@ An sf object
 \description{
 This function calculates geocomplexity for vector data based on spatial dependence.
 }
+\details{
+The formula is
+
+\eqn{\rho_{i} = \displaystyle-\frac{1}{m}Z_{i}\sum_{j=1}^{m}W_{i j} Z_{j} \displaystyle-\frac{1}{m}\sum_{j=1}^{m}W_{ij} Z_{j}\frac{1}{V_{k}}\sum_{k=1}^{n}W_{jk} W_{ik} Z_{k}}
+}
 \examples{
 data("income")
 inc = dplyr::select(income,Income)
@@ -36,4 +41,12 @@ ggplot(gc) +
    scale_fill_viridis(option="mako", direction = -1) +
    theme_bw()
 
+}
+\references{
+Zehua Zhang, Yongze Song, Peng Luo & Peng Wu (2023) Geocomplexity explains spatial errors,
+International Journal of Geographical Information Science, 37:7, 1449-1469,
+DOI: 10.1080/13658816.2023.2203212
+
+Anselin, L. (2019). A local indicator of multivariate spatial association: Extending
+geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/gean.12164
 }
