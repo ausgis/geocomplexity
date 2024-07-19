@@ -12,7 +12,7 @@
 #' @details
 #' The formula is
 #'
-#' \eqn{\rho_{i} = \displaystyle-\frac{1}{m}Z_{i}\sum\limits_{j=1}^{m}W_{i j} Z_{j} \displaystyle-\frac{1}{m}\sum\limits_{j=1}^{m}W_{ij} Z_{j}\frac{1}{V_{k}}\sum\limits_{k=1}^{n}W_{jk} W_{ik} Z_{k}}
+#' \eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
