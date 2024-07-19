@@ -183,6 +183,35 @@ NumericVector GCS_Variance(NumericMatrix x,
   return out;
 }
 
+NumericMatrix subset_matrix(NumericMatrix matrix,
+                            IntegerVector rows,
+                            IntegerVector cols) {
+  NumericMatrix result(rows.size(), cols.size());
+  for (int i = 0; i < rows.size(); ++i) {
+    for (int j = 0; j < cols.size(); ++j) {
+      result(i, j) = matrix(rows[i], cols[j]);
+    }
+  }
+  return result;
+}
+
+NumericVector SSH_Variance(NumericVector x,
+                           NumericMatrix wt,
+                           String method) {
+  NumericVector out(x.size());
+  for (int i = 0; i < x.size(); ++i){
+    IntegerVector wti_indice = rcpp_which(wt(i,_) != 0);
+    NumericMatrix wti = subset_matrix(wt,wti_indice,wti_indice);
+    NumericVector xi = x[wti_indice];
+    if (method == "spvar"){
+      out[i] = spatial_variance(xi,wt);
+    } else {
+      out[i] = InforEntropy(xi);
+    }
+  }
+  return out;
+}
+
 List remove_index(List lst, int idx) {
   int n = lst.size();
   if (idx < 0 || idx >= n) {
