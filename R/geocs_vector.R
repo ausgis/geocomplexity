@@ -1,6 +1,14 @@
 #' @title geocomplexity for vector data based on geographical similarity
 #' @description
 #' This function calculates geocomplexity for in vector data based on geographical similarity.
+#' @details
+#' The geographical configuration similarity is calculated as:
+#'
+#' \eqn{S({\bf u}_{\alpha},{\bf v}_{\beta})=min\{E_{i}(e_{i}({\bf u}_{\alpha}),e_{i}({\bf v}_{\beta}))\}}
+#'
+#' \eqn{E_{i}({\bf u}_{\alpha},{\bf v}_{\beta})=\exp\left(-{\frac{\left(e_{i}({\bf u}_{\alpha})-e_{i}({\bf v}_{\beta})\right)^{2}}{2\left(\sigma^{2}/\delta({\bf v}_{\beta})\right)^{2}}}\right)}
+#'
+#' \eqn{\delta({\bf u}_{\alpha},{\bf v})=\sqrt{\frac{\sum_{\beta=1}^{n}(e({\bf u}_{\alpha})-e({\bf v}_{\beta}))^{2}}{n}}}
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
