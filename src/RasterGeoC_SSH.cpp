@@ -5,13 +5,13 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericVector RasterGeoCSSH(NumericMatrix x,
+NumericVector RasterGeoCSSH(NumericVector x,
                             IntegerMatrix iw,
                             int w,String method){
-  NumericMatrix wt (x.nrow(),x.nrow());
+  NumericMatrix wt (x.size(),x.size());
   IntegerVector w_sp = extract_window(iw,w);
   int ncell = pow(w,2);
-  for (int n = 0; n < x.nrow(); ++n){
+  for (int n = 0; n < x.size(); ++n){
     IntegerVector wi = rcpp_seq(n*ncell,(n+1)*ncell-1);
     wi = w_sp[wi];
     wi = wi[!is_na(wi)];
