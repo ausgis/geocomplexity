@@ -1,6 +1,6 @@
-#' @title geocomplexity for vector data based on spatial stratified heterogeneity
+#' @title geocomplexity for vector data based on spatial heterogeneity
 #' @description
-#' This function calculates geocomplexity for in vector data based on spatial stratified heterogeneity.
+#' This function calculates geocomplexity for in vector data based on spatial heterogeneity.
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geoch_raster.R
 \name{geoch_raster}
 \alias{geoch_raster}
-\title{geocomplexity for raster data based on spatial stratified heterogeneity}
+\title{geocomplexity for raster data based on spatial heterogeneity}
 \usage{
 geoch_raster(r, order = 1, normalize = TRUE, method = "spvar")
 }
@@ -22,7 +22,7 @@ is \code{spvar}.}
 A SpatRaster object
 }
 \description{
-This function calculates geocomplexity for raster data based on spatial stratified heterogeneity.
+This function calculates geocomplexity for raster data based on spatial heterogeneity.
 }
 \examples{
 library(terra)

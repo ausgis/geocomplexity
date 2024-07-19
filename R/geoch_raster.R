@@ -1,6 +1,6 @@
-#' @title geocomplexity for raster data based on spatial stratified heterogeneity
+#' @title geocomplexity for raster data based on spatial heterogeneity
 #' @description
-#' This function calculates geocomplexity for raster data based on spatial stratified heterogeneity.
+#' This function calculates geocomplexity for raster data based on spatial heterogeneity.
 #'
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.

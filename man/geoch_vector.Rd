@@ -2,7 +2,7 @@
 % Please edit documentation in R/geoch_vector.R
 \name{geoch_vector}
 \alias{geoch_vector}
-\title{geocomplexity for vector data based on spatial stratified heterogeneity}
+\title{geocomplexity for vector data based on spatial heterogeneity}
 \usage{
 geoch_vector(sfj, wt = NULL, normalize = TRUE, method = "spvar")
 }
@@ -25,7 +25,7 @@ is \code{spvar}.}
 An sf object
 }
 \description{
-This function calculates geocomplexity for in vector data based on spatial stratified heterogeneity.
+This function calculates geocomplexity for in vector data based on spatial heterogeneity.
 }
 \examples{
 data("income")
