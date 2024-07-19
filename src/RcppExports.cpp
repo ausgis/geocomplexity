@@ -75,12 +75,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // RasterGeoCSSH
-NumericVector RasterGeoCSSH(NumericMatrix x, IntegerMatrix iw, int w, String method);
+NumericVector RasterGeoCSSH(NumericVector x, IntegerMatrix iw, int w, String method);
 RcppExport SEXP _geocomplexity_RasterGeoCSSH(SEXP xSEXP, SEXP iwSEXP, SEXP wSEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type iw(iwSEXP);
     Rcpp::traits::input_parameter< int >::type w(wSEXP);
     Rcpp::traits::input_parameter< String >::type method(methodSEXP);

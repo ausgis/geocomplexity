@@ -45,9 +45,10 @@ geoch_raster = \(r,order = 1,normalize = TRUE,method = 'spvar'){
     matrix(nrow = terra::nrow(r[[1]]), byrow = TRUE)
   geocres = seq(1,terra::nlyr(r)) %>%
     purrr::map(\(.i) r[[.i]] %>%
-                 terra::app(RasterGeoCSSH,iw = imat,
-                            w = as.integer(2*order+1),
-                            method = method)) %>%
+                 terra::values() %>%
+                 RasterGeoCSSH(x = ., iw = imat,
+                               w = as.integer(2*order+1),
+                               method = method)) %>%
     terra::rast()
   if (normalize) {
     seq(1,terra::nlyr(geocres)) %>%
