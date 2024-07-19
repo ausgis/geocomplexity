@@ -52,7 +52,6 @@ geoch_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'spvar'){
                             dplyr::across(dplyr::everything(),
                                           normalize_vector))
   }
-  geocvec = tibble::as_tibble_col(geocvec)
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
   geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
   return(geocvec)
