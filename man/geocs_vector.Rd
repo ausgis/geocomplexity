@@ -4,7 +4,13 @@
 \alias{geocs_vector}
 \title{geocomplexity for vector data based on geographical similarity}
 \usage{
-geocs_vector(sfj, wt = NULL, normalize = TRUE, method = 1)
+geocs_vector(
+  sfj,
+  wt = NULL,
+  normalize = TRUE,
+  similarity = 1,
+  method = "spvar"
+)
 }
 \arguments{
 \item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
@@ -17,9 +23,13 @@ provided, \code{geocomplexity} will use a first-order inverse distance weight ma
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
 
-\item{method}{(optional) When \code{method} is \code{1}, the similarity is calculated using
+\item{similarity}{(optional) When \code{similarity} is \code{1}, the similarity is calculated using
 geographical configuration similarity, otherwise the cosine similarity is calculated.
 Default is \code{1}.}
+
+\item{method}{(optional) When \code{method} is \code{spvar}, variation of the similarity vector is
+represented using spatial variance, otherwise Shannon information entropy is used. Default
+is \code{spvar}.}
 }
 \value{
 An sf object

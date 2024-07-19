@@ -128,9 +128,9 @@ double matrix_sum(NumericMatrix mat) {
 }
 
 double InforEntropy(NumericVector x){
-  double sepd = -1 * Rcpp::sum(x * rcpp_log2(x));
+  double res = -1 * Rcpp::sum(x * rcpp_log2(x));
+  return res;
 }
-
 
 // [[Rcpp::export]]
 double spatial_variance(NumericVector x, NumericMatrix wt) {
@@ -176,7 +176,7 @@ NumericVector GCS_Variance(NumericMatrix x,
     }
     if (method == "spvar"){
       out[i] = spatial_variance(zs,wt);
-    } else{
+    } else {
       out[i] = InforEntropy(zs);
     }
   }

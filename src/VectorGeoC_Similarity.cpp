@@ -19,7 +19,7 @@ NumericVector VectorGeoCSimilarity(NumericMatrix xobs,
       }
       if (method == "spvar"){
         out[i] = spatial_variance(zs,wt);
-      } else{
+      } else {
         out[i] = InforEntropy(zs);
       }
     }

@@ -75,16 +75,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // RasterGeoCSimilarity
-NumericVector RasterGeoCSimilarity(NumericMatrix x, IntegerMatrix iw, int w, int method);
-RcppExport SEXP _geocomplexity_RasterGeoCSimilarity(SEXP xSEXP, SEXP iwSEXP, SEXP wSEXP, SEXP methodSEXP) {
+NumericVector RasterGeoCSimilarity(NumericMatrix x, IntegerMatrix iw, int w, int similarity, String method);
+RcppExport SEXP _geocomplexity_RasterGeoCSimilarity(SEXP xSEXP, SEXP iwSEXP, SEXP wSEXP, SEXP similaritySEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type iw(iwSEXP);
     Rcpp::traits::input_parameter< int >::type w(wSEXP);
-    Rcpp::traits::input_parameter< int >::type method(methodSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCSimilarity(x, iw, w, method));
+    Rcpp::traits::input_parameter< int >::type similarity(similaritySEXP);
+    Rcpp::traits::input_parameter< String >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCSimilarity(x, iw, w, similarity, method));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -101,15 +102,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // VectorGeoCSimilarity
-NumericVector VectorGeoCSimilarity(NumericMatrix xobs, NumericMatrix wt, int method);
-RcppExport SEXP _geocomplexity_VectorGeoCSimilarity(SEXP xobsSEXP, SEXP wtSEXP, SEXP methodSEXP) {
+NumericVector VectorGeoCSimilarity(NumericMatrix xobs, NumericMatrix wt, int similarity, String method);
+RcppExport SEXP _geocomplexity_VectorGeoCSimilarity(SEXP xobsSEXP, SEXP wtSEXP, SEXP similaritySEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type xobs(xobsSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
-    Rcpp::traits::input_parameter< int >::type method(methodSEXP);
-    rcpp_result_gen = Rcpp::wrap(VectorGeoCSimilarity(xobs, wt, method));
+    Rcpp::traits::input_parameter< int >::type similarity(similaritySEXP);
+    Rcpp::traits::input_parameter< String >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(VectorGeoCSimilarity(xobs, wt, similarity, method));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -120,9 +122,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
     {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 3},
     {"_geocomplexity_RasterGeoCDependence", (DL_FUNC) &_geocomplexity_RasterGeoCDependence, 3},
-    {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 4},
+    {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 5},
     {"_geocomplexity_VectorGeoCDependence", (DL_FUNC) &_geocomplexity_VectorGeoCDependence, 2},
-    {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 3},
+    {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 4},
     {NULL, NULL, 0}
 };
 

@@ -6,9 +6,12 @@
 #' @param order (optional) The order of the adjacency object. Default is `1`.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
-#' @param method (optional) When `method` is `1`, the similarity is calculated using
+#' @param similarity (optional) When `similarity` is `1`, the similarity is calculated using
 #' geographical configuration similarity, otherwise the cosine similarity is calculated.
 #' Default is `1`.
+#' @param method (optional) When `method` is `spvar`, variation of the similarity vector is
+#' represented using spatial variance, otherwise Shannon information entropy is used. Default
+#' is `spvar`.
 #'
 #' @return A SpatRaster object
 #' @export
@@ -35,7 +38,8 @@
 #' gc1
 #' gc2
 #'
-geocs_raster = \(r,order = 1,normalize = TRUE, method = 1){
+geocs_raster = \(r, order = 1, normalize = TRUE,
+                 similarity = 1,method = 'spvar'){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
@@ -52,7 +56,7 @@ geocs_raster = \(r,order = 1,normalize = TRUE, method = 1){
     as.integer() %>%
     matrix(nrow = terra::nrow(r[[1]]), byrow = TRUE)
   geocres = r[[1]]
-  geocres = RasterGeoCSimilarity(rmat,imat,as.integer(2*order+1),method)
+  geocres = RasterGeoCSimilarity(rmat,imat,as.integer(2*order+1),similarity,method)
   if (normalize) {
     geocres = normalize_vector(geocres)
   }

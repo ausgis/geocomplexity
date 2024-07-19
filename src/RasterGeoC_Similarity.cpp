@@ -5,10 +5,9 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericVector RasterGeoCSimilarity(NumericMatrix x,
-                                   IntegerMatrix iw,
-                                   int w, int method){
-  if (method != 1){
+NumericVector RasterGeoCSimilarity(NumericMatrix x, IntegerMatrix iw,
+                                   int w,int similarity,String method){
+  if (similarity != 1){
     NumericVector out(x.nrow());
     IntegerVector w_sp = extract_window(iw,w);
     int ncell = pow(w,2);
@@ -27,13 +26,17 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
         double zs = CosineSimilarity(zn,zi);
         resn[i] = zs;
       }
-      double res = 0;
-      for(int i = 0; i < wi.size(); ++i) {
-        for(int j = 0; j < wi.size(); ++j) {
-          res += pow((resn[i]-resn[j]),2) / 2;
+      if (method == "spvar"){
+        double res = 0;
+        for(int i = 0; i < wi.size(); ++i) {
+          for(int j = 0; j < wi.size(); ++j) {
+            res += pow((resn[i]-resn[j]),2) / 2;
+          }
         }
+        out[n] = res / pow(wi.size(),2);
+      } else {
+        out[n] = InforEntropy(resn);
       }
-      out[n] = res / pow(wi.size(),2);
     }
     return out;
   } else {
@@ -50,7 +53,7 @@ NumericVector RasterGeoCSimilarity(NumericMatrix x,
       }
     }
     // Rcout << "wt:  "<< wt;
-    NumericVector out = GCS_Variance(x,wt);
+    NumericVector out = GCS_Variance(x,wt,method);
     return out;
   }
 }
