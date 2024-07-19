@@ -3,8 +3,7 @@
 #' This function calculates geocomplexity for raster data based on geographical similarity.
 #' @note
 #' In contrast to the `geocs_vector()` function, the `geocs_raster()` performs operations
-#' internally on raster data based on neighborhood operations(focal) without providing
-#' additional wt object.
+#' internally on raster data without providing additional wt object.
 #'
 #' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.

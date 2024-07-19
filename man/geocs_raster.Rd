@@ -28,6 +28,10 @@ A SpatRaster object
 \description{
 This function calculates geocomplexity for raster data based on geographical similarity.
 }
+\note{
+In contrast to the \code{geocs_vector()} function, the \code{geocs_raster()} performs operations
+internally on raster data without providing additional wt object.
+}
 \examples{
 library(terra)
 m1 = matrix(c(3,3,3,3,1,3,
