@@ -42,7 +42,7 @@ geocs_raster = \(r,order = 1,normalize = TRUE, method = 1){
   rastlayername = names(r) %>%
     paste0(collapse = '_')
   seq(1,terra::nlyr(r)) %>%
-    purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
+    purrr::map(\(i) terra::app(r[[i]],normalize_vector)) %>%
     terra::rast() -> r
   if (terra::nlyr(r) == 1) {
     stop('To use `geocs_raster`, the number of layers in r must be greater than or equal to 2')

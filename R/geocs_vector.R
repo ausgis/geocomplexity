@@ -40,7 +40,7 @@ geocs_vector = \(sfj,wt = NULL,normalize = TRUE, method = 1){
   }
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
-                                standardize_vector))
+                                normalize_vector))
   if (ncol(sfj_attr) == 1) {
     stop('To use `geocs_vector`, the number of attribute columns in sfj must be greater than or equal to 2')
   }
