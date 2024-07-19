@@ -44,7 +44,7 @@ geoch_raster = \(r,order = 1,normalize = TRUE,method = 'spvar'){
     matrix(nrow = terra::nrow(r[[1]]), byrow = TRUE)
   geocres = r
   for (.i in seq(1,terra::nlyr(r))) {
-    values(geocres[[.i]]) = r[[.i]] %>%
+    terra::values(geocres[[.i]]) = r[[.i]] %>%
       terra::values() %>%
       RasterGeoCSSH(x = ., iw = imat,
                     w = as.integer(2*order+1),
