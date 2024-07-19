@@ -98,6 +98,14 @@ IntegerVector extract_window(IntegerMatrix mat, int window_size) {
   return result;
 }
 
+NumericVector rcpp_log2(NumericVector vec) {
+  NumericVector res(vec.size());
+  for (int i = 0; i < vec.size(); ++i) {
+    res[i] = std::log2(vec[i]);
+  }
+  return res;
+}
+
 NumericVector multiply_vector(NumericVector numvec1, NumericVector numvec2) {
   int n = numvec1.size();
   NumericVector result(n);
@@ -119,6 +127,11 @@ double matrix_sum(NumericMatrix mat) {
   return out;
 }
 
+double InforEntropy(NumericVector x){
+  double sepd = -1 * Rcpp::sum(x * rcpp_log2(x));
+}
+
+
 // [[Rcpp::export]]
 double spatial_variance(NumericVector x, NumericMatrix wt) {
   int n = x.size();
@@ -133,7 +146,9 @@ double spatial_variance(NumericVector x, NumericMatrix wt) {
   return out;
 }
 
-NumericVector GCS_Variance(NumericMatrix x, NumericMatrix wt) {
+NumericVector GCS_Variance(NumericMatrix x,
+                           NumericMatrix wt,
+                           String method) {
   NumericVector out(x.nrow());
   NumericVector theta(x.ncol());
   for (int i = 0; i < x.ncol(); ++i){
@@ -159,7 +174,11 @@ NumericVector GCS_Variance(NumericMatrix x, NumericMatrix wt) {
       NumericVector zsn = Ej(ni,_);
       zs[ni] = min_nona(zsn);
     }
-    out[i] = spatial_variance(zs,wt);
+    if (method == "spvar"){
+      out[i] = spatial_variance(zs,wt);
+    } else{
+      out[i] = InforEntropy(zs);
+    }
   }
   return out;
 }
