@@ -4,7 +4,7 @@
 \alias{geocd_vector}
 \title{geocomplexity for vector data based on spatial dependence}
 \usage{
-geocd_vector(sfj, wt = NULL, normalize = TRUE)
+geocd_vector(sfj, wt = NULL, normalize = TRUE, method = "lisa")
 }
 \arguments{
 \item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
@@ -16,6 +16,13 @@ provided, \code{geocomplexity} will use a first-order queen adjacency binary mat
 
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
+
+\item{method}{(optional) In instances where the method is \code{lisa}, geocomplexity is
+determined using LISA. Conversely, when the method is \code{spvar}, the spatial variance
+of attribute data serves to characterize geocomplexity. For all other methods, the
+shannon information entropy of attribute data is employed to represent geocomplexity.
+The selection of the method can be made from any one of the three options: \code{lisa},
+\code{spvar} or \code{entropy}. Default is \code{lisa}.}
 }
 \value{
 An sf object
@@ -24,7 +31,7 @@ An sf object
 This function calculates geocomplexity for vector data based on spatial dependence.
 }
 \details{
-The formula is
+The formula for geocomplexity which use LISA method is
 
 \eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
 }

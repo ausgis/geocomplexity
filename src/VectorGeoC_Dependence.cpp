@@ -5,8 +5,8 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericVector VectorGeoCDependence(NumericVector x,
-                                   NumericMatrix wt){
+NumericVector VectorGeoCLISA(NumericVector x,
+                             NumericMatrix wt){
   NumericVector out(x.size());
   for (int i = 0; i < x.size(); ++i) {
     double zi = x[i];
@@ -30,5 +30,13 @@ NumericVector VectorGeoCDependence(NumericVector x,
     }
     out[i] = localf + -1.0 / m * surroundf;
   }
+  return out;
+}
+
+// [[Rcpp::export]]
+NumericVector VectorGeoCSSH(NumericVector xobs,
+                            NumericMatrix wt,
+                            String method){
+  NumericVector out = SSH_Variance(xobs,wt,method);
   return out;
 }

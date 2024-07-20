@@ -10,7 +10,7 @@
 #' geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/gean.12164
 #'
 #' @details
-#' The formula is
+#' The formula for geocomplexity which use LISA method is
 #'
 #' \eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
 #'
@@ -21,6 +21,12 @@
 #' `spdep` package.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
+#' @param method (optional) In instances where the method is `lisa`, geocomplexity is
+#' determined using LISA. Conversely, when the method is `spvar`, the spatial variance
+#' of attribute data serves to characterize geocomplexity. For all other methods, the
+#' shannon information entropy of attribute data is employed to represent geocomplexity.
+#' The selection of the method can be made from any one of the three options: `lisa`,
+#' `spvar` or `entropy`. Default is `lisa`.
 #'
 #' @return An sf object
 #' @export
@@ -38,7 +44,7 @@
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
-geocd_vector = \(sfj,wt = NULL,normalize = TRUE){
+geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'lisa'){
   if (!inherits(sfj,'sf')){
     sfj = sf::st_as_sf(sfj)
   }
@@ -53,14 +59,23 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE){
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 standardize_vector))
   vectlayername = names(sfj_attr)
-  geocvec = dplyr::mutate(sfj_attr,
-                          dplyr::across(dplyr::everything(),
-                                        \(.x) VectorGeoCDependence(.x,wt)))
+
+  if (method == 'lisa'){
+    geocvec = dplyr::mutate(sfj_attr,
+                            dplyr::across(dplyr::everything(),
+                                          \(.x) VectorGeoCLISA(.x,wt)))
+  } else {
+    geocvec = dplyr::mutate(sfj_attr,
+                            dplyr::across(dplyr::everything(),
+                                          \(.x) VectorGeoCSSH(.x,wt,method)))
+  }
+
   if (normalize) {
     geocvec = dplyr::mutate(geocvec,
                             dplyr::across(dplyr::everything(),
                                           normalize_vector))
   }
+
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
   geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
   return(geocvec)

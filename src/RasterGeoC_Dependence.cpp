@@ -5,9 +5,9 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-double RasterGeoCDependenceOne(NumericVector x,
-                               size_t ni = 9,
-                               size_t nw = 9){
+double RasterGeoCLISAOne(NumericVector x,
+                         size_t ni = 9,
+                         size_t nw = 9){
   NumericVector x1 = x[!is_na(x)];
   int m = x1.size() - 1;
   if (m <= 0) {
@@ -36,16 +36,37 @@ double RasterGeoCDependenceOne(NumericVector x,
 }
 
 // [[Rcpp::export]]
-NumericVector RasterGeoCDependence(NumericVector x,
-                                   size_t ni = 9,
-                                   size_t nw = 9){
+NumericVector RasterGeoCLISA(NumericVector x,
+                             size_t ni = 9,
+                             size_t nw = 9){
     NumericVector out(ni);
     for (size_t i = 0; i < ni; ++i) {
       NumericVector chunk(nw);
       for (size_t j = 0; j < nw; ++j) {
         chunk[j] = x[i * nw + j];
       }
-      out[i] = RasterGeoCDependenceOne(chunk,ni,nw);
+      out[i] = RasterGeoCLISAOne(chunk,ni,nw);
     }
     return out;
+}
+
+// [[Rcpp::export]]
+NumericVector RasterGeoCSSH(NumericVector x,
+                            IntegerMatrix iw,
+                            int w,String method){
+  NumericMatrix wt (x.size(),x.size());
+  IntegerVector w_sp = extract_window(iw,w);
+  int ncell = pow(w,2);
+  for (int n = 0; n < x.size(); ++n){
+    IntegerVector wi = rcpp_seq(n*ncell,(n+1)*ncell-1);
+    wi = w_sp[wi];
+    wi = wi[!is_na(wi)];
+    for (int ni = 0; ni < wi.size(); ++ni){
+      wt(n,wi[ni]) = 1;
+      wt(wi[ni],n) = 1;
+    }
+  }
+  // Rcout << "wt:  "<< wt;
+  NumericVector out = SSH_Variance(x,wt,method);
+  return out;
 }

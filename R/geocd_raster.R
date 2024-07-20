@@ -18,6 +18,12 @@
 #' @param order (optional) The order of the adjacency object. Default is `1`.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
+#' @param method (optional) In instances where the method is `lisa`, geocomplexity is
+#' determined using LISA. Conversely, when the method is `spvar`, the spatial variance
+#' of attribute data serves to characterize geocomplexity. For all other methods, the
+#' shannon information entropy of attribute data is employed to represent geocomplexity.
+#' The selection of the method can be made from any one of the three options: `lisa`,
+#' `spvar` or `entropy`. Default is `lisa`.
 #'
 #' @return A SpatRaster object
 #' @export
@@ -40,7 +46,7 @@
 #' gc1
 #' gc2
 #'
-geocd_raster = \(r,order = 1,normalize = TRUE){
+geocd_raster = \(r,order = 1,normalize = TRUE,method = 'lisa'){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
@@ -48,14 +54,31 @@ geocd_raster = \(r,order = 1,normalize = TRUE){
   seq(1,terra::nlyr(r)) %>%
     purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
     terra::rast() -> r
-  geocres = terra::focalCpp(r, w = 2*order + 1,
-                            RasterGeoCDependence,
-                            fillvalue = NA)
+
+  if (method == 'lisa'){
+    geocres = terra::focalCpp(r, w = 2*order + 1,
+                              RasterGeoCLISA,
+                              fillvalue = NA)
+  } else {
+    imat = seq(0,terra::ncell(r[[1]])-1) %>%
+      as.integer() %>%
+      matrix(nrow = terra::nrow(r[[1]]), byrow = TRUE)
+    geocres = r
+    for (.i in seq(1,terra::nlyr(r))) {
+      terra::values(geocres[[.i]]) = r[[.i]] %>%
+        terra::values() %>%
+        RasterGeoCSSH(x = ., iw = imat,
+                      w = as.integer(2*order+1),
+                      method = method)
+    }
+  }
+
   if (normalize) {
     seq(1,terra::nlyr(geocres)) %>%
       purrr::map(\(i) terra::app(geocres[[i]],normalize_vector)) %>%
       terra::rast() -> geocres
   }
+
   names(geocres) = paste0('Geocomplexity_',rastlayername)
   return(geocres)
 }

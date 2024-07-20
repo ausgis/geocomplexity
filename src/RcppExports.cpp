@@ -48,29 +48,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// RasterGeoCDependenceOne
-double RasterGeoCDependenceOne(NumericVector x, size_t ni, size_t nw);
-RcppExport SEXP _geocomplexity_RasterGeoCDependenceOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
+// RasterGeoCLISAOne
+double RasterGeoCLISAOne(NumericVector x, size_t ni, size_t nw);
+RcppExport SEXP _geocomplexity_RasterGeoCLISAOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
     Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCDependenceOne(x, ni, nw));
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCLISAOne(x, ni, nw));
     return rcpp_result_gen;
 END_RCPP
 }
-// RasterGeoCDependence
-NumericVector RasterGeoCDependence(NumericVector x, size_t ni, size_t nw);
-RcppExport SEXP _geocomplexity_RasterGeoCDependence(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
+// RasterGeoCLISA
+NumericVector RasterGeoCLISA(NumericVector x, size_t ni, size_t nw);
+RcppExport SEXP _geocomplexity_RasterGeoCLISA(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
     Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCDependence(x, ni, nw));
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCLISA(x, ni, nw));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -103,15 +103,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// VectorGeoCDependence
-NumericVector VectorGeoCDependence(NumericVector x, NumericMatrix wt);
-RcppExport SEXP _geocomplexity_VectorGeoCDependence(SEXP xSEXP, SEXP wtSEXP) {
+// VectorGeoCLISA
+NumericVector VectorGeoCLISA(NumericVector x, NumericMatrix wt);
+RcppExport SEXP _geocomplexity_VectorGeoCLISA(SEXP xSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
-    rcpp_result_gen = Rcpp::wrap(VectorGeoCDependence(x, wt));
+    rcpp_result_gen = Rcpp::wrap(VectorGeoCLISA(x, wt));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -147,11 +147,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
     {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
-    {"_geocomplexity_RasterGeoCDependenceOne", (DL_FUNC) &_geocomplexity_RasterGeoCDependenceOne, 3},
-    {"_geocomplexity_RasterGeoCDependence", (DL_FUNC) &_geocomplexity_RasterGeoCDependence, 3},
+    {"_geocomplexity_RasterGeoCLISAOne", (DL_FUNC) &_geocomplexity_RasterGeoCLISAOne, 3},
+    {"_geocomplexity_RasterGeoCLISA", (DL_FUNC) &_geocomplexity_RasterGeoCLISA, 3},
     {"_geocomplexity_RasterGeoCSSH", (DL_FUNC) &_geocomplexity_RasterGeoCSSH, 4},
     {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 5},
-    {"_geocomplexity_VectorGeoCDependence", (DL_FUNC) &_geocomplexity_VectorGeoCDependence, 2},
+    {"_geocomplexity_VectorGeoCLISA", (DL_FUNC) &_geocomplexity_VectorGeoCLISA, 2},
     {"_geocomplexity_VectorGeoCSSH", (DL_FUNC) &_geocomplexity_VectorGeoCSSH, 3},
     {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 4},
     {NULL, NULL, 0}
