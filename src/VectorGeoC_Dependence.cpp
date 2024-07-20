@@ -5,8 +5,8 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericVector VectorGeoCLISA(NumericVector x,
-                             NumericMatrix wt){
+NumericVector VectorGeoCMoran(NumericVector x,
+                              NumericMatrix wt){
   NumericVector out(x.size());
   for (int i = 0; i < x.size(); ++i) {
     double zi = x[i];

@@ -18,12 +18,12 @@
 #' @param order (optional) The order of the adjacency object. Default is `1`.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
-#' @param method (optional) In instances where the method is `lisa`, geocomplexity is
+#' @param method (optional) In instances where the method is `moran`, geocomplexity is
 #' determined using LISA. Conversely, when the method is `spvar`, the spatial variance
 #' of attribute data serves to characterize geocomplexity. For all other methods, the
 #' shannon information entropy of attribute data is employed to represent geocomplexity.
-#' The selection of the method can be made from any one of the three options: `lisa`,
-#' `spvar` or `entropy`. Default is `lisa`.
+#' The selection of the method can be made from any one of the three options: `moran`,
+#' `spvar` or `entropy`. Default is `moran`.
 #'
 #' @return A SpatRaster object
 #' @export
@@ -46,7 +46,7 @@
 #' gc1
 #' gc2
 #'
-geocd_raster = \(r,order = 1,normalize = TRUE,method = 'lisa'){
+geocd_raster = \(r,order = 1,normalize = TRUE,method = 'moran'){
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
@@ -55,9 +55,9 @@ geocd_raster = \(r,order = 1,normalize = TRUE,method = 'lisa'){
     purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
     terra::rast() -> r
 
-  if (method == 'lisa'){
+  if (method == 'moran'){
     geocres = terra::focalCpp(r, w = 2*order + 1,
-                              RasterGeoCLISA,
+                              RasterGeoCMoran,
                               fillvalue = NA)
   } else {
     imat = seq(0,terra::ncell(r[[1]])-1) %>%

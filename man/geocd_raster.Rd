@@ -4,7 +4,7 @@
 \alias{geocd_raster}
 \title{geocomplexity for raster data based on spatial dependence}
 \usage{
-geocd_raster(r, order = 1, normalize = TRUE, method = "lisa")
+geocd_raster(r, order = 1, normalize = TRUE, method = "moran")
 }
 \arguments{
 \item{r}{Raster object that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
@@ -14,12 +14,12 @@ geocd_raster(r, order = 1, normalize = TRUE, method = "lisa")
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
 
-\item{method}{(optional) In instances where the method is \code{lisa}, geocomplexity is
+\item{method}{(optional) In instances where the method is \code{moran}, geocomplexity is
 determined using LISA. Conversely, when the method is \code{spvar}, the spatial variance
 of attribute data serves to characterize geocomplexity. For all other methods, the
 shannon information entropy of attribute data is employed to represent geocomplexity.
-The selection of the method can be made from any one of the three options: \code{lisa},
-\code{spvar} or \code{entropy}. Default is \code{lisa}.}
+The selection of the method can be made from any one of the three options: \code{moran},
+\code{spvar} or \code{entropy}. Default is \code{moran}.}
 }
 \value{
 A SpatRaster object

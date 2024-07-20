@@ -48,29 +48,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// RasterGeoCLISAOne
-double RasterGeoCLISAOne(NumericVector x, size_t ni, size_t nw);
-RcppExport SEXP _geocomplexity_RasterGeoCLISAOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
+// RasterGeoCMoranOne
+double RasterGeoCMoranOne(NumericVector x, size_t ni, size_t nw);
+RcppExport SEXP _geocomplexity_RasterGeoCMoranOne(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
     Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCLISAOne(x, ni, nw));
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCMoranOne(x, ni, nw));
     return rcpp_result_gen;
 END_RCPP
 }
-// RasterGeoCLISA
-NumericVector RasterGeoCLISA(NumericVector x, size_t ni, size_t nw);
-RcppExport SEXP _geocomplexity_RasterGeoCLISA(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
+// RasterGeoCMoran
+NumericVector RasterGeoCMoran(NumericVector x, size_t ni, size_t nw);
+RcppExport SEXP _geocomplexity_RasterGeoCMoran(SEXP xSEXP, SEXP niSEXP, SEXP nwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< size_t >::type ni(niSEXP);
     Rcpp::traits::input_parameter< size_t >::type nw(nwSEXP);
-    rcpp_result_gen = Rcpp::wrap(RasterGeoCLISA(x, ni, nw));
+    rcpp_result_gen = Rcpp::wrap(RasterGeoCMoran(x, ni, nw));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -103,15 +103,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// VectorGeoCLISA
-NumericVector VectorGeoCLISA(NumericVector x, NumericMatrix wt);
-RcppExport SEXP _geocomplexity_VectorGeoCLISA(SEXP xSEXP, SEXP wtSEXP) {
+// VectorGeoCMoran
+NumericVector VectorGeoCMoran(NumericVector x, NumericMatrix wt);
+RcppExport SEXP _geocomplexity_VectorGeoCMoran(SEXP xSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
-    rcpp_result_gen = Rcpp::wrap(VectorGeoCLISA(x, wt));
+    rcpp_result_gen = Rcpp::wrap(VectorGeoCMoran(x, wt));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -147,11 +147,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
     {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
-    {"_geocomplexity_RasterGeoCLISAOne", (DL_FUNC) &_geocomplexity_RasterGeoCLISAOne, 3},
-    {"_geocomplexity_RasterGeoCLISA", (DL_FUNC) &_geocomplexity_RasterGeoCLISA, 3},
+    {"_geocomplexity_RasterGeoCMoranOne", (DL_FUNC) &_geocomplexity_RasterGeoCMoranOne, 3},
+    {"_geocomplexity_RasterGeoCMoran", (DL_FUNC) &_geocomplexity_RasterGeoCMoran, 3},
     {"_geocomplexity_RasterGeoCSSH", (DL_FUNC) &_geocomplexity_RasterGeoCSSH, 4},
     {"_geocomplexity_RasterGeoCSimilarity", (DL_FUNC) &_geocomplexity_RasterGeoCSimilarity, 5},
-    {"_geocomplexity_VectorGeoCLISA", (DL_FUNC) &_geocomplexity_VectorGeoCLISA, 2},
+    {"_geocomplexity_VectorGeoCMoran", (DL_FUNC) &_geocomplexity_VectorGeoCMoran, 2},
     {"_geocomplexity_VectorGeoCSSH", (DL_FUNC) &_geocomplexity_VectorGeoCSSH, 3},
     {"_geocomplexity_VectorGeoCSimilarity", (DL_FUNC) &_geocomplexity_VectorGeoCSimilarity, 4},
     {NULL, NULL, 0}

@@ -13,12 +13,12 @@ print_global_moranI <- function(df) {
     .Call(`_geocomplexity_print_global_moranI`, df)
 }
 
-RasterGeoCLISAOne <- function(x, ni = 9L, nw = 9L) {
-    .Call(`_geocomplexity_RasterGeoCLISAOne`, x, ni, nw)
+RasterGeoCMoranOne <- function(x, ni = 9L, nw = 9L) {
+    .Call(`_geocomplexity_RasterGeoCMoranOne`, x, ni, nw)
 }
 
-RasterGeoCLISA <- function(x, ni = 9L, nw = 9L) {
-    .Call(`_geocomplexity_RasterGeoCLISA`, x, ni, nw)
+RasterGeoCMoran <- function(x, ni = 9L, nw = 9L) {
+    .Call(`_geocomplexity_RasterGeoCMoran`, x, ni, nw)
 }
 
 RasterGeoCSSH <- function(x, iw, w, method) {
@@ -29,8 +29,8 @@ RasterGeoCSimilarity <- function(x, iw, w, similarity, method) {
     .Call(`_geocomplexity_RasterGeoCSimilarity`, x, iw, w, similarity, method)
 }
 
-VectorGeoCLISA <- function(x, wt) {
-    .Call(`_geocomplexity_VectorGeoCLISA`, x, wt)
+VectorGeoCMoran <- function(x, wt) {
+    .Call(`_geocomplexity_VectorGeoCMoran`, x, wt)
 }
 
 VectorGeoCSSH <- function(xobs, wt, method) {

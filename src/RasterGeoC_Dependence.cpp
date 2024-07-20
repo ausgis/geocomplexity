@@ -5,9 +5,9 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-double RasterGeoCLISAOne(NumericVector x,
-                         size_t ni = 9,
-                         size_t nw = 9){
+double RasterGeoCMoranOne(NumericVector x,
+                          size_t ni = 9,
+                          size_t nw = 9){
   NumericVector x1 = x[!is_na(x)];
   int m = x1.size() - 1;
   if (m <= 0) {
@@ -36,16 +36,16 @@ double RasterGeoCLISAOne(NumericVector x,
 }
 
 // [[Rcpp::export]]
-NumericVector RasterGeoCLISA(NumericVector x,
-                             size_t ni = 9,
-                             size_t nw = 9){
+NumericVector RasterGeoCMoran(NumericVector x,
+                              size_t ni = 9,
+                              size_t nw = 9){
     NumericVector out(ni);
     for (size_t i = 0; i < ni; ++i) {
       NumericVector chunk(nw);
       for (size_t j = 0; j < nw; ++j) {
         chunk[j] = x[i * nw + j];
       }
-      out[i] = RasterGeoCLISAOne(chunk,ni,nw);
+      out[i] = RasterGeoCMoranOne(chunk,ni,nw);
     }
     return out;
 }
