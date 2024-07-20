@@ -18,11 +18,11 @@ provided, \code{geocomplexity} will use a first-order queen adjacency binary mat
 Default is \code{TRUE}.}
 
 \item{method}{(optional) In instances where the method is \code{moran}, geocomplexity is
-determined using LISA. Conversely, when the method is \code{spvar}, the spatial variance
-of attribute data serves to characterize geocomplexity. For all other methods, the
-shannon information entropy of attribute data is employed to represent geocomplexity.
-The selection of the method can be made from any one of the three options: \code{moran},
-\code{spvar} or \code{entropy}. Default is \code{moran}.}
+determined using local moran measure method. Conversely, when the method is \code{spvar},
+the spatial variance of attribute data serves to characterize geocomplexity. For all
+other methods, the shannon information entropy of attribute data is employed to represent
+geocomplexity. The selection of the method can be made from any one of the three options:
+\code{moran}, \code{spvar} or \code{entropy}. Default is \code{moran}.}
 }
 \value{
 An sf object
