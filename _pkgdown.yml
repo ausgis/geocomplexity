@@ -20,10 +20,8 @@ reference:
 - title: GeoComplexity Computation
   contents:
   - geocd_vector
-  - geoch_vector
   - geocs_vector
   - geocd_raster
-  - geoch_raster
   - geocs_raster
 
 - title: Global Spatial Autocorrelation Test
