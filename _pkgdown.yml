@@ -16,7 +16,6 @@ navbar:
         href: articles/GeoComplexityM.html
 
 reference:
-
 - title: GeoComplexity Computation
   contents:
   - geocd_vector
