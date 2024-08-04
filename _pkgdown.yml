@@ -39,6 +39,15 @@ reference:
   contents:
   - income
 
+home:
+  title: |
+    geocomplexity | Geocomplexity Mitigates Spatial Bias
+authors:
+  Wenbo Lv:
+    href: https://spatlyu.github.io/
+  Yongze Song:
+    href: https://yongzesong.com/
+
 # on:
 #   push:
 #     branches: main
@@ -64,13 +73,4 @@ reference:
 #       with:
 #         github_token: ${{ secrets.GITHUB_TOKEN }}
 #         publish_dir: ./docs
-
-home:
-  title: |
-    geocomplexity | Geocomplexity Mitigates Spatial Bias
-authors:
-  Wenbo Lv:
-    href: https://spatlyu.github.io/
-  Yongze Song:
-    href: https://yongzesong.com/
 
