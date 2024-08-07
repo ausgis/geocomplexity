@@ -10,11 +10,11 @@ check_wt(wt)
 \item{wt}{Spatial weight matrix}
 }
 \value{
-If \code{wt} is a \code{matrix} class, return \code{wt} itself, otherwise an error is raised
-and execution stops.
+A \code{matrix}.
 }
 \description{
-check whether wt is a matrix class
+If \code{wt} is a \code{matrix} class, return \code{wt} itself, otherwise an error is raised
+and execution stops.
 }
 \examples{
 data("income")
