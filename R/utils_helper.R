@@ -133,9 +133,9 @@ check_geometry_type = \(sfj){
     stop('Please keep one geometry type in an sf object!')
   }
 
-  if ("POLYGON" %in% sfj_type){
+  if (sfj_type %in% c("POLYGON","MULTIPOLYGON")){
     return("polygon")
-  } else if ("POINT" %in% sfj_type) {
+  } else if (sfj_type %in% c("POINT","MULTIPOINT")) {
     return("point")
   } else {
     return('linestring')

@@ -10,9 +10,7 @@ geocd_vector(sfj, wt = NULL, normalize = TRUE, method = "moran")
 \item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
 \item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. You can get a
-spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not
-provided, \code{geocomplexity} will use a first-order queen adjacency binary matrix via
-\code{spdep} package.}
+spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package.}
 
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}
@@ -34,6 +32,11 @@ This function calculates geocomplexity for vector data based on spatial dependen
 The formula for geocomplexity which uses local moran measure method is
 
 \eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
+}
+\note{
+If \code{wt} is not provided, for polygon vector data,\code{geocomplexity} will use a first-order queen
+adjacency binary matrix; for point vector data, the eight nearest points are used as adjacency
+objects.
 }
 \examples{
 data("income")

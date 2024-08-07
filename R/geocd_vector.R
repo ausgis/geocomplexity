@@ -15,8 +15,9 @@
 #' \eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
 #'
 #' @note
-#' If `wt` is not provided, for polygon vector data,`geocomplexity` will use a first-order queen
-#' adjacency binary matrix via `spdep` package.
+#' If `wt` is not provided, for polygon vector data, `geocomplexity` will use a first-order queen
+#' adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
+#' objects.
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
@@ -55,7 +56,7 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
       nb_wt = spdep::poly2nb(sfj, queen = TRUE)
       }
     else if (check_geometry_type(sfj) == 'point') {
-      nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 4)
+      nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 6)
       nb_wt = spdep::knn2nb(nb_knn)
     } else {
       stop('Only support point or polygon vector data!')
