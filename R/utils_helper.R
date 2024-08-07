@@ -70,6 +70,8 @@ inverse_distance_weight = \(sfj,power = 1){
   }
 
   if (check_geometry_type(sfj) == 'polygon'){
+    sfj = suppressWarnings({sf::st_centroid(sfj)})
+  } else if (check_geometry_type(sfj) %in% c('multipolygon','multipoint')){
     sfj = suppressWarnings({sf::st_point_on_surface(sfj)})
   }
 
@@ -136,11 +138,5 @@ check_geometry_type = \(sfj){
     stop('Please keep one geometry type in an sf object!')
   }
 
-  if (sfj_type %in% c("POLYGON","MULTIPOLYGON")){
-    return("polygon")
-  } else if (sfj_type %in% c("POINT","MULTIPOINT")) {
-    return("point")
-  } else {
-    return('linestring')
-  }
+  return(tolower(sfj_type))
 }

@@ -52,16 +52,18 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
     sfj = sf::st_as_sf(sfj)
   }
   if (is.null(wt)){
-    if (check_geometry_type(sfj) == 'polygon'){
+    if (check_geometry_type(sfj) %in% c('polygon','multipolygon')){
       nb_wt = spdep::poly2nb(sfj, queen = TRUE)
-      } else if (check_geometry_type(sfj) == 'point') {
+    } else if (check_geometry_type(sfj) %in% c('point','multipoint')) {
+      if (check_geometry_type(sfj) == 'multipoint') {
+        sfj = sf::st_point_on_surface(sfj)
+      }
       nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 6)
       nb_wt = spdep::knn2nb(nb_knn)
-      } else {
+    } else {
       stop('Only support point or polygon vector data!')
     }
-    wt = spdep::nb2mat(nb_wt, style='B',
-                       zero.policy = TRUE)
+    wt = spdep::nb2mat(nb_wt, style='B', zero.policy = TRUE)
   } else {
     wt = check_wt(wt)
   }
