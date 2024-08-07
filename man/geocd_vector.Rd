@@ -36,7 +36,7 @@ The formula for geocomplexity which uses local moran measure method is
 \note{
 If \code{wt} is not provided, for polygon vector data, \code{geocomplexity} will use a first-order queen
 adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
-objects.
+objects to generate an adjacency binary matrix.
 }
 \examples{
 data("income")

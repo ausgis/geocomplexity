@@ -17,7 +17,7 @@
 #' @note
 #' If `wt` is not provided, for polygon vector data, `geocomplexity` will use a first-order queen
 #' adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
-#' objects.
+#' objects to generate an adjacency binary matrix.
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
