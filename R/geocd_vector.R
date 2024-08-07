@@ -14,11 +14,13 @@
 #'
 #' \eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
 #'
+#' @note
+#' If `wt` is not provided, for polygon vector data,`geocomplexity` will use a first-order queen
+#' adjacency binary matrix via `spdep` package.
+#'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
-#' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
-#' provided, `geocomplexity` will use a first-order queen adjacency binary matrix via
-#' `spdep` package.
+#' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
 #' @param method (optional) In instances where the method is `moran`, geocomplexity is
@@ -49,8 +51,16 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
     sfj = sf::st_as_sf(sfj)
   }
   if (is.null(wt)){
-    nb_queen = spdep::poly2nb(sfj, queen=TRUE)
-    wt = spdep::nb2mat(nb_queen, style='B',
+    if (check_geometry_type(sfj) == 'polygon'){
+      nb_wt = spdep::poly2nb(sfj, queen = TRUE)
+      }
+    else if (check_geometry_type(sfj) == 'point') {
+      nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 4)
+      nb_wt = spdep::knn2nb(nb_knn)
+    } else {
+      stop('Only support point or polygon vector data!')
+    }
+    wt = spdep::nb2mat(nb_wt, style='B',
                        zero.policy = TRUE)
   } else {
     wt = check_wt(wt)

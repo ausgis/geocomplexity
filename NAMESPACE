@@ -2,6 +2,7 @@
 
 S3method(print,moran_test)
 export("%>%")
+export(check_geometry_type)
 export(check_wt)
 export(geocd_raster)
 export(geocd_vector)

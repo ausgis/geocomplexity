@@ -110,3 +110,34 @@ check_wt = \(wt){
   }
   return(wt)
 }
+
+#' @title check sf geometry type
+#' @keywords internal
+#'
+#' @param sfj
+#'
+#' @return A character
+#' @export
+#'
+#' @examples
+#' data("income")
+#' check_geometry_type(income)
+#'
+check_geometry_type = \(sfj){
+  sfj_type = sfj %>%
+    sf::st_geometry_type() %>%
+    as.character() %>%
+    unique()
+
+  if (length(sfj_type) != 1) {
+    stop('Please keep one geometry type in an sf object!')
+  }
+
+  if ("POLYGON" %in% sfj_type){
+    return("polygon")
+  } else if ("POINT" %in% sfj_type) {
+    return("point")
+  } else {
+    return('linestring')
+  }
+}
