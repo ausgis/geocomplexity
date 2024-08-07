@@ -68,16 +68,19 @@ inverse_distance_weight = \(sfj,power = 1){
   if (!inherits(sfj,'sf')){
     sfj = sf::st_as_sf(sfj)
   }
+
+  if (check_geometry_type(sfj) == 'polygon'){
+    sfj = suppressWarnings({sf::st_point_on_surface(sfj)})
+  }
+
+  coords = sfj %>%
+    sf::st_coordinates() %>%
+    {.[,c('X','Y')]}
+
   is_arc = ifelse(sf::st_is_longlat(sfj),TRUE,FALSE)
   if (is_arc) {
-    coords = suppressWarnings(sf::st_point_on_surface(sfj)) %>%
-      sf::st_coordinates() %>%
-      {.[,c('X','Y')]}
     distij = stats::as.dist(geosphere::distm(coords))
   } else {
-    coords = suppressWarnings(sf::st_centroid(sfj)) %>%
-      sf::st_coordinates() %>%
-      {.[,c('X','Y')]}
     distij = stats::dist(as.data.frame(coords))
   }
   wij = 1 / distij ^ power

@@ -54,11 +54,10 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
   if (is.null(wt)){
     if (check_geometry_type(sfj) == 'polygon'){
       nb_wt = spdep::poly2nb(sfj, queen = TRUE)
-      }
-    else if (check_geometry_type(sfj) == 'point') {
+      } else if (check_geometry_type(sfj) == 'point') {
       nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 6)
       nb_wt = spdep::knn2nb(nb_knn)
-    } else {
+      } else {
       stop('Only support point or polygon vector data!')
     }
     wt = spdep::nb2mat(nb_wt, style='B',
