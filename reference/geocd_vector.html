@@ -61,9 +61,7 @@
 
 <dt id="arg-wt">wt<a class="anchor" aria-label="anchor" href="#arg-wt"></a></dt>
 <dd><p>(optional) Spatial weight matrix. Must be a <code>matrix</code> class. You can get a
-spatial weight matrix from <code>spdep</code>,<code>rgeoda</code> or <code>tidyrgeoda</code> package. If <code>wt</code> is not
-provided, <code>geocomplexity</code> will use a first-order queen adjacency binary matrix via
-<code>spdep</code> package.</p></dd>
+spatial weight matrix from <code>spdep</code>,<code>rgeoda</code> or <code>tidyrgeoda</code> package.</p></dd>
 
 
 <dt id="arg-normalize">normalize<a class="anchor" aria-label="anchor" href="#arg-normalize"></a></dt>
@@ -88,6 +86,12 @@ geocomplexity. The selection of the method can be made from any one of the three
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The formula for geocomplexity which uses local moran measure method is</p>
 <p>\(\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k\)</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>If <code>wt</code> is not provided, for polygon vector data, <code>geocomplexity</code> will use a first-order queen
+adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
+objects.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
