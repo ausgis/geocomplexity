@@ -88,11 +88,11 @@ inverse_distance_weight = \(sfj,power = 1){
 #' @description
 #' If `wt` is a `matrix` class, return `wt` itself, othe rwise an error is raised
 #' and execution stops.
+#' @keywords internal
 #'
 #' @param wt Spatial weight matrix
 #'
 #' @return A `matrix`.
-#' @keywords internal
 #' @export
 #'
 #' @examples
