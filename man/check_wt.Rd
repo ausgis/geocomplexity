@@ -23,3 +23,4 @@ wt = check_wt(wt)
 wt[1:5,1:5]
 
 }
+\keyword{internal}

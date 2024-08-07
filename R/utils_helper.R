@@ -84,31 +84,13 @@ inverse_distance_weight = \(sfj,power = 1){
   return(as.matrix(wij))
 }
 
-#' @title get the geometry column name of an sf object
-#'
-#' @param sfj An `sf` object.
-#'
-#' @return A character.
-#' @export
-#'
-#' @examples
-#' data("income")
-#' st_geometry_name(income)
-#'
-st_geometry_name = \(sfj){
-  if (!inherits(sfj,'sf')){
-    sfj = sf::st_as_sf(sfj)
-  }
-  gname = attr(sfj, "sf_column")
-  return(gname)
-}
-
 #' @title check whether wt is a matrix class
 #'
 #' @param wt Spatial weight matrix
 #'
 #' @return If `wt` is a `matrix` class, return `wt` itself, otherwise an error is raised
 #' and execution stops.
+#' @keywords internal
 #' @export
 #'
 #' @examples
