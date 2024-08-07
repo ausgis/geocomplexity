@@ -31,9 +31,7 @@ reference:
   contents:
   - normalize_vector
   - standardize_vector
-  - st_geometry_name
   - inverse_distance_weight
-  - check_wt
 
 - title: Data
   contents:

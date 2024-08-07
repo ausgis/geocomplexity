@@ -13,7 +13,7 @@ check_wt(wt)
 A \code{matrix}.
 }
 \description{
-If \code{wt} is a \code{matrix} class, return \code{wt} itself, otherwise an error is raised
+If \code{wt} is a \code{matrix} class, return \code{wt} itself, othe rwise an error is raised
 and execution stops.
 }
 \examples{
