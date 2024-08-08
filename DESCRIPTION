@@ -11,7 +11,10 @@ Authors@R: c(
              role = c("aut", "rev", "ths"),
              comment = c(ORCID = "0000-0003-3420-9622"))      
       )
-Description: Mitigate spatial bias through geographical complexity.
+Description: Providing support for calculating univariate geographical complexity based 
+             on spatial dependence, and multivariate geographical complexity based on 
+             geographical configuration similarity. Further supporting spatial regression 
+             models and spatial sampling methods based on geographical complexity.
 License: GPL-3
 Encoding: UTF-8
 URL: https://spatlyu.github.io/geocomplexity, https://github.com/SpatLyu/geocomplexity
