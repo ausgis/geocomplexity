@@ -14,8 +14,12 @@ Authors@R: c(
 Description: Mitigate spatial bias through geographical complexity.
 License: GPL-3
 Encoding: UTF-8
+URL: https://spatlyu.github.io/geocomplexity, https://github.com/SpatLyu/geocomplexity
+BugReports: https://github.com/SpatLyu/geocomplexity/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     dplyr,
     geosphere,
@@ -31,6 +35,8 @@ Suggests:
     ggplot2,
     knitr,
     raster,
+    Rcpp,
+    RcppArmadillo,
     rmarkdown,
     stars,
     tidyverse,
@@ -38,8 +44,5 @@ Suggests:
 LinkingTo: 
     Rcpp,
     RcppArmadillo
-Depends: 
-    R (>= 4.1.0)
 LazyData: true
-URL: https://spatlyu.github.io/geocomplexity/, https://github.com/SpatLyu/geocomplexity/
 VignetteBuilder: knitr
