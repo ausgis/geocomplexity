@@ -69,10 +69,10 @@ moran_test = \(sfj,
 }
 
 #' print global spatial autocorrelation test result
-#' @method print moran_test
 #' @export
+#' @noRd
 print.moran_test = \(x,...){
   cat("***                 global spatial autocorrelation test                 ")
   x = print_global_moranI(as.data.frame(x$result))
-  pander::pander(x)
+  pander::pander(x,...)
 }
