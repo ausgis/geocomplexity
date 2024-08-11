@@ -35,7 +35,8 @@
 #' data("income")
 #' moran_test(income)
 #'
-moran_test = \(sfj, wt = NULL,
+moran_test = \(sfj,
+               wt = NULL,
                alternative = "greater",
                symmetrize = FALSE){
   if (!inherits(sfj,'sf')){
@@ -68,8 +69,8 @@ moran_test = \(sfj, wt = NULL,
 }
 
 #' print global spatial autocorrelation test result
+#' @method print moran_test
 #' @export
-#' @noRd
 print.moran_test = \(x,...){
   cat("***                 global spatial autocorrelation test                 ")
   x = print_global_moranI(as.data.frame(x$result))

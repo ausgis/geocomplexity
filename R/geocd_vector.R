@@ -21,23 +21,24 @@
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class.
-#' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
-#' Default is `TRUE`.
 #' @param method (optional) In instances where the method is `moran`, geocomplexity is
 #' determined using local moran measure method. Conversely, when the method is `spvar`,
 #' the spatial variance of attribute data serves to characterize geocomplexity. For all
 #' other methods, the shannon information entropy of attribute data is employed to represent
 #' geocomplexity. The selection of the method can be made from any one of the three options:
 #' `moran`, `spvar` or `entropy`. Default is `moran`.
+#' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
+#' Default is `TRUE`.
+#' @param returnsf (optional) When `returnsf` is `TRUE`, return an sf object, otherwise a tibble.
+#' Default is `TRUE`.
 #'
-#' @return A tibble
+#' @return A tibble (`returnsf` is `FALSE`) or An sf object (`returnsf` is `TRUE`)
 #' @export
 #'
 #' @examples
 #' data("income")
 #' inc = dplyr::select(income,Income)
 #' gc = geocd_vector(inc)
-#' gc = sf::st_set_geometry(gc,sf::st_geometry(inc))
 #' gc
 #'
 #' library(ggplot2)
@@ -47,7 +48,8 @@
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
-geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
+geocd_vector = \(sfj, wt = NULL, method = 'moran',
+                 normalize = TRUE,returnsf = TRUE){
   if (!inherits(sfj,'sf')) {
     sfj = sf::st_as_sf(sfj)
   }
@@ -92,5 +94,10 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
   }
 
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
+
+  if (returnsf) {
+    geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
+  }
+
   return(geocvec)
 }

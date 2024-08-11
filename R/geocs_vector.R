@@ -18,23 +18,24 @@
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. If `wt` is not
 #' provided, `geocomplexity` will use a first-order inverse distance weight matrix via
 #' `sdsfun::inverse_distance_swm()` function.
-#' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
-#' Default is `TRUE`.
-#' @param similarity (optional) When `similarity` is `1`, the similarity is calculated using
-#' geographical configuration similarity, otherwise the cosine similarity is calculated.
-#' Default is `1`.
 #' @param method (optional) When `method` is `spvar`, variation of the similarity vector is
 #' represented using spatial variance, otherwise shannon information entropy is used. Default
 #' is `spvar`.
+#' @param similarity (optional) When `similarity` is `1`, the similarity is calculated using
+#' geographical configuration similarity, otherwise the cosine similarity is calculated.
+#' Default is `1`.
+#' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
+#' Default is `TRUE`.
+#' @param returnsf (optional) When `returnsf` is `TRUE`, return an sf object, otherwise a tibble.
+#' Default is `TRUE`.
 #'
-#' @return A tibble
+#' @return A tibble (`returnsf` is `FALSE`) or An sf object (`returnsf` is `TRUE`)
 #' @export
 #'
 #' @examples
 #' data("income")
 #' income = dplyr::select(income,-SA3_CODE16)
 #' gc = geocs_vector(income)
-#' gc = sf::st_set_geometry(gc,sf::st_geometry(income))
 #' gc
 #'
 #' library(ggplot2)
@@ -44,8 +45,8 @@
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
-geocs_vector = \(sfj, wt = NULL, normalize = TRUE,
-                 similarity = 1, method = 'spvar'){
+geocs_vector = \(sfj,wt = NULL,method = 'spvar',similarity = 1,
+                 normalize = TRUE, returnsf = TRUE){
   if (!inherits(sfj,'sf')) {
     sfj = sf::st_as_sf(sfj)
   }
@@ -63,10 +64,17 @@ geocs_vector = \(sfj, wt = NULL, normalize = TRUE,
   }
   vectlayername = paste(names(sfj_attr),collapse = '_')
   geocvec = VectorGeoCSimilarity(as.matrix(sfj_attr),wt,similarity,method)
+
   if (normalize) {
     geocvec = sdsfun::normalize_vector(geocvec)
   }
+
   geocvec = tibble::as_tibble_col(geocvec)
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
+
+  if (returnsf) {
+    geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
+  }
+
   return(geocvec)
 }

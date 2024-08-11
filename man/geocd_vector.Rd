@@ -4,15 +4,18 @@
 \alias{geocd_vector}
 \title{geocomplexity for vector data based on spatial dependence}
 \usage{
-geocd_vector(sfj, wt = NULL, normalize = TRUE, method = "moran")
+geocd_vector(
+  sfj,
+  wt = NULL,
+  method = "moran",
+  normalize = TRUE,
+  returnsf = TRUE
+)
 }
 \arguments{
 \item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
 \item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class.}
-
-\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
-Default is \code{TRUE}.}
 
 \item{method}{(optional) In instances where the method is \code{moran}, geocomplexity is
 determined using local moran measure method. Conversely, when the method is \code{spvar},
@@ -20,9 +23,15 @@ the spatial variance of attribute data serves to characterize geocomplexity. For
 other methods, the shannon information entropy of attribute data is employed to represent
 geocomplexity. The selection of the method can be made from any one of the three options:
 \code{moran}, \code{spvar} or \code{entropy}. Default is \code{moran}.}
+
+\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
+Default is \code{TRUE}.}
+
+\item{returnsf}{(optional) When \code{returnsf} is \code{TRUE}, return an sf object, otherwise a tibble.
+Default is \code{TRUE}.}
 }
 \value{
-A tibble
+A tibble (\code{returnsf} is \code{FALSE}) or An sf object (\code{returnsf} is \code{TRUE})
 }
 \description{
 This function calculates geocomplexity for vector data based on spatial dependence.
@@ -41,7 +50,6 @@ objects to generate an adjacency binary matrix.
 data("income")
 inc = dplyr::select(income,Income)
 gc = geocd_vector(inc)
-gc = sf::st_set_geometry(gc,sf::st_geometry(inc))
 gc
 
 library(ggplot2)

@@ -7,9 +7,10 @@
 geocs_vector(
   sfj,
   wt = NULL,
-  normalize = TRUE,
+  method = "spvar",
   similarity = 1,
-  method = "spvar"
+  normalize = TRUE,
+  returnsf = TRUE
 )
 }
 \arguments{
@@ -19,19 +20,22 @@ geocs_vector(
 provided, \code{geocomplexity} will use a first-order inverse distance weight matrix via
 \code{sdsfun::inverse_distance_swm()} function.}
 
-\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
-Default is \code{TRUE}.}
+\item{method}{(optional) When \code{method} is \code{spvar}, variation of the similarity vector is
+represented using spatial variance, otherwise shannon information entropy is used. Default
+is \code{spvar}.}
 
 \item{similarity}{(optional) When \code{similarity} is \code{1}, the similarity is calculated using
 geographical configuration similarity, otherwise the cosine similarity is calculated.
 Default is \code{1}.}
 
-\item{method}{(optional) When \code{method} is \code{spvar}, variation of the similarity vector is
-represented using spatial variance, otherwise shannon information entropy is used. Default
-is \code{spvar}.}
+\item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
+Default is \code{TRUE}.}
+
+\item{returnsf}{(optional) When \code{returnsf} is \code{TRUE}, return an sf object, otherwise a tibble.
+Default is \code{TRUE}.}
 }
 \value{
-A tibble
+A tibble (\code{returnsf} is \code{FALSE}) or An sf object (\code{returnsf} is \code{TRUE})
 }
 \description{
 This function calculates geocomplexity for in vector data based on geographical similarity.
@@ -53,7 +57,6 @@ The spatial variance is calculated as:
 data("income")
 income = dplyr::select(income,-SA3_CODE16)
 gc = geocs_vector(income)
-gc = sf::st_set_geometry(gc,sf::st_geometry(income))
 gc
 
 library(ggplot2)
