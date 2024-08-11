@@ -30,13 +30,14 @@
 #' geocomplexity. The selection of the method can be made from any one of the three options:
 #' `moran`, `spvar` or `entropy`. Default is `moran`.
 #'
-#' @return An sf object
+#' @return A tibble
 #' @export
 #'
 #' @examples
 #' data("income")
 #' inc = dplyr::select(income,Income)
 #' gc = geocd_vector(inc)
+#' gc = sf::st_set_geometry(gc,sf::st_geometry(inc))
 #' gc
 #'
 #' library(ggplot2)
@@ -47,9 +48,10 @@
 #'    theme_bw()
 #'
 geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
-  if (!inherits(sfj,'sf')){
+  if (!inherits(sfj,'sf')) {
     sfj = sf::st_as_sf(sfj)
   }
+
   if (is.null(wt)){
     if (sdsfun::sf_geometry_type(sfj) %in% c('polygon','multipolygon')){
       wt = sdsfun::spdep_contiguity_swm(sfj,
@@ -64,15 +66,16 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
     } else {
       stop('Only support (multi-)point or (multi-)polygon vector data!')
     }
-  } else {
-    wt = check_wt(wt)
   }
-  sfj_attr = sf::st_drop_geometry(sfj) %>%
+
+  sfj_attr = sfj %>%
+    sf::st_drop_geometry() %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 sdsfun::standardize_vector))
   vectlayername = names(sfj_attr)
+  print('yes')
 
-  if (method == 'moran'){
+  if (method == 'moran') {
     geocvec = dplyr::mutate(sfj_attr,
                             dplyr::across(dplyr::everything(),
                                           \(.x) VectorGeoCMoran(.x,wt)))
@@ -89,6 +92,5 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
   }
 
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
-  geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
   return(geocvec)
 }

@@ -31,7 +31,7 @@ represented using spatial variance, otherwise shannon information entropy is use
 is \code{spvar}.}
 }
 \value{
-An sf object
+A tibble
 }
 \description{
 This function calculates geocomplexity for in vector data based on geographical similarity.
@@ -53,6 +53,7 @@ The spatial variance is calculated as:
 data("income")
 income = dplyr::select(income,-SA3_CODE16)
 gc = geocs_vector(income)
+gc = sf::st_set_geometry(gc,sf::st_geometry(income))
 gc
 
 library(ggplot2)

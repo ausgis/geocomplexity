@@ -41,17 +41,18 @@ moran_test = \(sfj, wt = NULL,
   if (!inherits(sfj,'sf')){
     sfj = sf::st_as_sf(sfj)
   }
+
   if (is.null(wt)){
     wt = sdsfun::spdep_contiguity_swm(sfj,
                                       queen = TRUE,
                                       style = 'W',
                                       zero.policy = TRUE)
-  } else {
-    wt = check_wt(wt)
   }
+
   if (!(alternative %in% c("greater", "less", "two.sided"))) {
     stop("Invalid input: `alternative` must be either `greater`, `less`, or `two.sided`")
   }
+
   dmat = sfj %>%
     sf::st_drop_geometry() %>%
     dplyr::select(dplyr::where(is.numeric)) %>%

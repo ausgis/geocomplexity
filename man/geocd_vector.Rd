@@ -22,7 +22,7 @@ geocomplexity. The selection of the method can be made from any one of the three
 \code{moran}, \code{spvar} or \code{entropy}. Default is \code{moran}.}
 }
 \value{
-An sf object
+A tibble
 }
 \description{
 This function calculates geocomplexity for vector data based on spatial dependence.
@@ -41,6 +41,7 @@ objects to generate an adjacency binary matrix.
 data("income")
 inc = dplyr::select(income,Income)
 gc = geocd_vector(inc)
+gc = sf::st_set_geometry(gc,sf::st_geometry(inc))
 gc
 
 library(ggplot2)

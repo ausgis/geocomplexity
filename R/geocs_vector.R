@@ -27,13 +27,14 @@
 #' represented using spatial variance, otherwise shannon information entropy is used. Default
 #' is `spvar`.
 #'
-#' @return An sf object
+#' @return A tibble
 #' @export
 #'
 #' @examples
 #' data("income")
 #' income = dplyr::select(income,-SA3_CODE16)
 #' gc = geocs_vector(income)
+#' gc = sf::st_set_geometry(gc,sf::st_geometry(income))
 #' gc
 #'
 #' library(ggplot2)
@@ -45,15 +46,16 @@
 #'
 geocs_vector = \(sfj, wt = NULL, normalize = TRUE,
                  similarity = 1, method = 'spvar'){
-  if (!inherits(sfj,'sf')){
+  if (!inherits(sfj,'sf')) {
     sfj = sf::st_as_sf(sfj)
   }
-  if (is.null(wt)){
+
+  if (is.null(wt)) {
     wt = sdsfun::inverse_distance_swm(sfj)
-  } else {
-    wt = check_wt(wt)
   }
-  sfj_attr = sf::st_drop_geometry(sfj) %>%
+
+  sfj_attr = sfj %>%
+    sf::st_drop_geometry() %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 sdsfun::normalize_vector))
   if (ncol(sfj_attr) == 1) {
@@ -66,6 +68,5 @@ geocs_vector = \(sfj, wt = NULL, normalize = TRUE,
   }
   geocvec = tibble::as_tibble_col(geocvec)
   names(geocvec) = paste0('Geocomplexity_',vectlayername)
-  geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
   return(geocvec)
 }
