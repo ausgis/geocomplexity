@@ -15,10 +15,9 @@ geocs_vector(
 \arguments{
 \item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
-\item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. You can get a
-spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not
+\item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. If \code{wt} is not
 provided, \code{geocomplexity} will use a first-order inverse distance weight matrix via
-\code{sdsfun::inverse_distance_swm()}.}
+\code{sdsfun::inverse_distance_swm()} function.}
 
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}

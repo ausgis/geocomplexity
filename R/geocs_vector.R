@@ -15,10 +15,9 @@
 #' \eqn{\Gamma = \frac{\sum_i \sum_{j \neq i} \omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}}
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
-#' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
-#' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
+#' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. If `wt` is not
 #' provided, `geocomplexity` will use a first-order inverse distance weight matrix via
-#' `sdsfun::inverse_distance_swm()`.
+#' `sdsfun::inverse_distance_swm()` function.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
 #' @param similarity (optional) When `similarity` is `1`, the similarity is calculated using

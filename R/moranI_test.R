@@ -11,8 +11,7 @@
 #' The non-numeric columns of the attribute columns in `sfj` are ignored.
 #'
 #' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
-#' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
-#' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
+#' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. If `wt` is not
 #' provided, `geocomplexity` will use a first-order queen adjacency binary matrix via
 #' `sdsfun` package.
 #' @param alternative (optional) Specification of alternative hypothesis as 'greater' (default),
