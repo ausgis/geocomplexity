@@ -5,6 +5,15 @@ template:
   math-rendering: mathjax
   light-switch: true
 
+home:
+  title: |
+    geocomplexity | Geocomplexity Mitigates Spatial Bias
+authors:
+  Wenbo Lv:
+    href: https://spatlyu.github.io/
+  Yongze Song:
+    href: https://yongzesong.com/
+
 navbar:
   components:
     articles:
@@ -27,48 +36,6 @@ reference:
   contents:
   - moran_test
 
-- title: Utility Functions
-  contents:
-  - normalize_vector
-  - standardize_vector
-  - inverse_distance_weight
-
 - title: Data
   contents:
   - income
-
-home:
-  title: |
-    geocomplexity | Geocomplexity Mitigates Spatial Bias
-authors:
-  Wenbo Lv:
-    href: https://spatlyu.github.io/
-  Yongze Song:
-    href: https://yongzesong.com/
-
-# on:
-#   push:
-#     branches: main
-# jobs:
-#   build-deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set up R
-#       uses: r-lib/actions/setup-r@v2
-#       with:
-#         r-version: release
-#     - name: Install dependencies
-#       run: |
-#         install.packages('remotes')
-#         remotes::install_deps(dependencies = TRUE)
-#         remotes::install_cran('pkgdown')
-#     - name: Build site
-#       run: |
-#         Rscript -e 'pkgdown::build_site()'
-#     - name: Deploy to GitHub Pages
-#       uses: peaceiris/actions-gh-pages@v3
-#       with:
-#         github_token: ${{ secrets.GITHUB_TOKEN }}
-#         publish_dir: ./docs
-
