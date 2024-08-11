@@ -60,10 +60,9 @@
 
 
 <dt id="arg-wt">wt<a class="anchor" aria-label="anchor" href="#arg-wt"></a></dt>
-<dd><p>(optional) Spatial weight matrix. Must be a <code>matrix</code> class. You can get a
-spatial weight matrix from <code>spdep</code>,<code>rgeoda</code> or <code>tidyrgeoda</code> package. If <code>wt</code> is not
+<dd><p>(optional) Spatial weight matrix. Must be a <code>matrix</code> class. If <code>wt</code> is not
 provided, <code>geocomplexity</code> will use a first-order queen adjacency binary matrix via
-<code>spdep</code> package.</p></dd>
+<code>sdsfun</code> package.</p></dd>
 
 
 <dt id="arg-alternative">alternative<a class="anchor" aria-label="anchor" href="#arg-alternative"></a></dt>
@@ -113,9 +112,9 @@ tibble using <code>$result</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Variable     MoranI         EI         VarI      zI        pI     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---------- ------------- ----------- ---------- ------- -----------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Income    0.385718***   -0.003012   0.001239   11.04   1.193e-28 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Income    0.358268***   -0.003012   0.001409   9.626   3.107e-22 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Gini     0.397324***   -0.003012   0.001239   11.37   2.879e-30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Gini     0.42878***    -0.003012   0.001409   11.5    6.25e-31  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
