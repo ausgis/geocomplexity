@@ -49,7 +49,7 @@ geocs_raster = \(r, order = 1, normalize = TRUE,
   rastlayername = names(r) %>%
     paste0(collapse = '_')
   seq(1,terra::nlyr(r)) %>%
-    purrr::map(\(i) terra::app(r[[i]],normalize_vector)) %>%
+    purrr::map(\(i) terra::app(r[[i]],sdsfun::normalize_vector)) %>%
     terra::rast() -> r
   if (terra::nlyr(r) == 1) {
     stop('To use `geocs_raster`, the number of layers in r must be greater than or equal to 2')
@@ -61,7 +61,7 @@ geocs_raster = \(r, order = 1, normalize = TRUE,
   geocres = r[[1]]
   geocres = RasterGeoCSimilarity(rmat,imat,as.integer(2*order+1),similarity,method)
   if (normalize) {
-    geocres = normalize_vector(geocres)
+    geocres = sdsfun::normalize_vector(geocres)
   }
   r1 = r[[1]]
   terra::values(r1) = geocres

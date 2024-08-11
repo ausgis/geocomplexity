@@ -52,18 +52,12 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
     sfj = sf::st_as_sf(sfj)
   }
   if (is.null(wt)){
-    if (check_geometry_type(sfj) %in% c('polygon','multipolygon')){
-      # nb_wt = spdep::poly2nb(sfj, queen = TRUE)
+    if (sdsfun::sf_geometry_type(sfj) %in% c('polygon','multipolygon')){
       wt = sdsfun::spdep_contiguity_swm(sfj,
                                         queen = TRUE,
                                         style = 'B',
                                         zero.policy = TRUE)
-    } else if (check_geometry_type(sfj) %in% c('point','multipoint')) {
-      # if (check_geometry_type(sfj) == 'multipoint') {
-      #   sfj = sf::st_point_on_surface(sfj)
-      # }
-      # nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 6)
-      # nb_wt = spdep::knn2nb(nb_knn)
+    } else if (sdsfun::sf_geometry_type(sfj) %in% c('point','multipoint')){
       wt = sdsfun::spdep_contiguity_swm(sfj,
                                         k = 6,
                                         style = 'B',
@@ -71,13 +65,12 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
     } else {
       stop('Only support (multi-)point or (multi-)polygon vector data!')
     }
-    # wt = spdep::nb2mat(nb_wt, style='B', zero.policy = TRUE)
   } else {
     wt = check_wt(wt)
   }
   sfj_attr = sf::st_drop_geometry(sfj) %>%
     dplyr::mutate(dplyr::across(dplyr::everything(),
-                                standardize_vector))
+                                sdsfun::standardize_vector))
   vectlayername = names(sfj_attr)
 
   if (method == 'moran'){
@@ -93,7 +86,7 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
   if (normalize) {
     geocvec = dplyr::mutate(geocvec,
                             dplyr::across(dplyr::everything(),
-                                          normalize_vector))
+                                          sdsfun::normalize_vector))
   }
 
   names(geocvec) = paste0('Geocomplexity_',vectlayername)

@@ -52,7 +52,7 @@ geocd_raster = \(r,order = 1,normalize = TRUE,method = 'moran'){
   }
   rastlayername = names(r)
   seq(1,terra::nlyr(r)) %>%
-    purrr::map(\(i) terra::app(r[[i]],standardize_vector)) %>%
+    purrr::map(\(i) terra::app(r[[i]],sdsfun::standardize_vector)) %>%
     terra::rast() -> r
 
   if (method == 'moran'){
@@ -75,7 +75,7 @@ geocd_raster = \(r,order = 1,normalize = TRUE,method = 'moran'){
 
   if (normalize) {
     seq(1,terra::nlyr(geocres)) %>%
-      purrr::map(\(i) terra::app(geocres[[i]],normalize_vector)) %>%
+      purrr::map(\(i) terra::app(geocres[[i]],sdsfun::normalize_vector)) %>%
       terra::rast() -> geocres
   }
 

@@ -51,7 +51,6 @@ geocs_vector = \(sfj, wt = NULL, normalize = TRUE,
   }
   if (is.null(wt)){
     wt = sdsfun::inverse_distance_swm(sfj)
-    # wt = inverse_distance_weight(sfj)
   } else {
     wt = check_wt(wt)
   }

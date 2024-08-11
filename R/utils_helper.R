@@ -45,50 +45,6 @@ normalize_vector = \(x){
   return(xnew)
 }
 
-#' @title calculate inverse distance weight
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for calculate inverse distance weight.
-#' @details
-#' The inverse distance weight formula is
-#' \eqn{w_{ij} = 1 / d_{ij}^\alpha}
-#'
-#' @param sfj Vector object that can be converted to `sf` by `sf::st_as_sf()`.
-#' @param power (optional) Default is 1. Set to 2 for gravity weights.
-#'
-#' @return A inverse distance weight matrices with class of `matrix`.
-#' @export
-#'
-#' @examples
-#' data("income")
-#' wt = inverse_distance_weight(income)
-#' wt[1:5,1:5]
-#'
-inverse_distance_weight = \(sfj,power = 1){
-  if (!inherits(sfj,'sf')){
-    sfj = sf::st_as_sf(sfj)
-  }
-
-  if (check_geometry_type(sfj) == 'polygon'){
-    sfj = suppressWarnings({sf::st_centroid(sfj)})
-  } else if (check_geometry_type(sfj) %in% c('multipolygon','multipoint')){
-    sfj = suppressWarnings({sf::st_point_on_surface(sfj)})
-  }
-
-  coords = sfj %>%
-    sf::st_coordinates() %>%
-    {.[,c('X','Y')]}
-
-  is_arc = ifelse(sf::st_is_longlat(sfj),TRUE,FALSE)
-  if (is_arc) {
-    distij = stats::as.dist(geosphere::distm(coords))
-  } else {
-    distij = stats::dist(as.data.frame(coords))
-  }
-  wij = 1 / distij ^ power
-  return(as.matrix(wij))
-}
-
 #' @title check whether wt is a matrix class
 #' @description
 #' If `wt` is a `matrix` class, return `wt` itself, othe rwise an error is raised
@@ -102,7 +58,7 @@ inverse_distance_weight = \(sfj,power = 1){
 #'
 #' @examples
 #' data("income")
-#' wt = inverse_distance_weight(income)
+#' wt = sdsfun::inverse_distance_swm(income)
 #' wt = check_wt(wt)
 #' wt[1:5,1:5]
 #'
