@@ -31,7 +31,7 @@ Default is \code{TRUE}.}
 Default is \code{TRUE}.}
 }
 \value{
-A tibble (\code{returnsf} is \code{FALSE}) or An sf object (\code{returnsf} is \code{TRUE})
+A tibble (\code{returnsf} is \code{FALSE}) or an sf object (\code{returnsf} is \code{TRUE})
 }
 \description{
 This function calculates geocomplexity for vector data based on spatial dependence.
