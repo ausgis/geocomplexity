@@ -53,17 +53,25 @@ geocd_vector = \(sfj,wt = NULL,normalize = TRUE,method = 'moran'){
   }
   if (is.null(wt)){
     if (check_geometry_type(sfj) %in% c('polygon','multipolygon')){
-      nb_wt = spdep::poly2nb(sfj, queen = TRUE)
+      # nb_wt = spdep::poly2nb(sfj, queen = TRUE)
+      wt = sdsfun::spdep_contiguity_swm(sfj,
+                                        queen = TRUE,
+                                        style = 'B',
+                                        zero.policy = TRUE)
     } else if (check_geometry_type(sfj) %in% c('point','multipoint')) {
-      if (check_geometry_type(sfj) == 'multipoint') {
-        sfj = sf::st_point_on_surface(sfj)
-      }
-      nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 6)
-      nb_wt = spdep::knn2nb(nb_knn)
+      # if (check_geometry_type(sfj) == 'multipoint') {
+      #   sfj = sf::st_point_on_surface(sfj)
+      # }
+      # nb_knn = spdep::knearneigh(sf::st_coordinates(sfj), k = 6)
+      # nb_wt = spdep::knn2nb(nb_knn)
+      wt = sdsfun::spdep_contiguity_swm(sfj,
+                                        k = 6,
+                                        style = 'B',
+                                        zero.policy = TRUE)
     } else {
-      stop('Only support point or polygon vector data!')
+      stop('Only support (multi-)point or (multi-)polygon vector data!')
     }
-    wt = spdep::nb2mat(nb_wt, style='B', zero.policy = TRUE)
+    # wt = spdep::nb2mat(nb_wt, style='B', zero.policy = TRUE)
   } else {
     wt = check_wt(wt)
   }
