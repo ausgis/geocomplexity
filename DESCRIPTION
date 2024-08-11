@@ -29,6 +29,7 @@ Imports:
     magrittr,
     pander,
     purrr,
+    sdsfun,
     sf,
     spdep,
     stats,
@@ -44,6 +45,8 @@ Suggests:
     stars,
     tidyverse,
     viridis
+Remotes:
+    SpatLyu/sdsfun,
 LinkingTo: 
     Rcpp,
     RcppArmadillo
