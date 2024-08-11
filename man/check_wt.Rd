@@ -18,7 +18,7 @@ and execution stops.
 }
 \examples{
 data("income")
-wt = inverse_distance_weight(income)
+wt = sdsfun::inverse_distance_swm(income)
 wt = check_wt(wt)
 wt[1:5,1:5]
 
