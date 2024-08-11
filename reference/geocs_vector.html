@@ -51,9 +51,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geocs_vector</span><span class="op">(</span></span>
 <span>  <span class="va">sfj</span>,</span>
 <span>  wt <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  normalize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"spvar"</span>,</span>
 <span>  similarity <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"spvar"</span></span>
+<span>  normalize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  returnsf <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -71,9 +72,10 @@ provided, <code>geocomplexity</code> will use a first-order inverse distance wei
 <code><a href="https://spatlyu.github.io/sdsfun/reference/inverse_distance_swm.html" class="external-link">sdsfun::inverse_distance_swm()</a></code> function.</p></dd>
 
 
-<dt id="arg-normalize">normalize<a class="anchor" aria-label="anchor" href="#arg-normalize"></a></dt>
-<dd><p>(optional) Whether to further normalizes the calculated geocomplexity.
-Default is <code>TRUE</code>.</p></dd>
+<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
+<dd><p>(optional) When <code>method</code> is <code>spvar</code>, variation of the similarity vector is
+represented using spatial variance, otherwise shannon information entropy is used. Default
+is <code>spvar</code>.</p></dd>
 
 
 <dt id="arg-similarity">similarity<a class="anchor" aria-label="anchor" href="#arg-similarity"></a></dt>
@@ -82,15 +84,19 @@ geographical configuration similarity, otherwise the cosine similarity is calcul
 Default is <code>1</code>.</p></dd>
 
 
-<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p>(optional) When <code>method</code> is <code>spvar</code>, variation of the similarity vector is
-represented using spatial variance, otherwise shannon information entropy is used. Default
-is <code>spvar</code>.</p></dd>
+<dt id="arg-normalize">normalize<a class="anchor" aria-label="anchor" href="#arg-normalize"></a></dt>
+<dd><p>(optional) Whether to further normalizes the calculated geocomplexity.
+Default is <code>TRUE</code>.</p></dd>
+
+
+<dt id="arg-returnsf">returnsf<a class="anchor" aria-label="anchor" href="#arg-returnsf"></a></dt>
+<dd><p>(optional) When <code>returnsf</code> is <code>TRUE</code>, return an sf object, otherwise a tibble.
+Default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An sf object</p>
+    <p>A tibble (<code>returnsf</code> is <code>FALSE</code>) or an sf object (<code>returnsf</code> is <code>TRUE</code>)</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

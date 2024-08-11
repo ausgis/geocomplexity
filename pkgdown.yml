@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   GeoComplexityC: GeoComplexityC.html
   GeoComplexityM: GeoComplexityM.html
-last_built: 2024-08-11T14:54Z
+last_built: 2024-08-11T16:39Z
 urls:
   reference: https://spatlyu.github.io/geocomplexity/reference
   article: https://spatlyu.github.io/geocomplexity/articles

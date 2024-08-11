@@ -48,7 +48,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geocd_vector</span><span class="op">(</span><span class="va">sfj</span>, wt <span class="op">=</span> <span class="cn">NULL</span>, normalize <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"moran"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geocd_vector</span><span class="op">(</span></span>
+<span>  <span class="va">sfj</span>,</span>
+<span>  wt <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"moran"</span>,</span>
+<span>  normalize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  returnsf <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -63,11 +69,6 @@
 <dd><p>(optional) Spatial weight matrix. Must be a <code>matrix</code> class.</p></dd>
 
 
-<dt id="arg-normalize">normalize<a class="anchor" aria-label="anchor" href="#arg-normalize"></a></dt>
-<dd><p>(optional) Whether to further normalizes the calculated geocomplexity.
-Default is <code>TRUE</code>.</p></dd>
-
-
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>(optional) In instances where the method is <code>moran</code>, geocomplexity is
 determined using local moran measure method. Conversely, when the method is <code>spvar</code>,
@@ -76,10 +77,20 @@ other methods, the shannon information entropy of attribute data is employed to 
 geocomplexity. The selection of the method can be made from any one of the three options:
 <code>moran</code>, <code>spvar</code> or <code>entropy</code>. Default is <code>moran</code>.</p></dd>
 
+
+<dt id="arg-normalize">normalize<a class="anchor" aria-label="anchor" href="#arg-normalize"></a></dt>
+<dd><p>(optional) Whether to further normalizes the calculated geocomplexity.
+Default is <code>TRUE</code>.</p></dd>
+
+
+<dt id="arg-returnsf">returnsf<a class="anchor" aria-label="anchor" href="#arg-returnsf"></a></dt>
+<dd><p>(optional) When <code>returnsf</code> is <code>TRUE</code>, return an sf object, otherwise a tibble.
+Default is <code>TRUE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An sf object</p>
+    <p>A tibble (<code>returnsf</code> is <code>FALSE</code>) or an sf object (<code>returnsf</code> is <code>TRUE</code>)</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -106,6 +117,7 @@ geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/ge
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"income"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">inc</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">income</span>,<span class="va">Income</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gc</span> <span class="op">=</span> <span class="fu">geocd_vector</span><span class="op">(</span><span class="va">inc</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "yes"</span>
 <span class="r-in"><span><span class="va">gc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 333 features and 1 field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
