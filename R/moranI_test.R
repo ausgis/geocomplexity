@@ -43,9 +43,10 @@ moran_test = \(sfj, wt = NULL,
     sfj = sf::st_as_sf(sfj)
   }
   if (is.null(wt)){
-    nb_queen = spdep::poly2nb(sfj, queen=TRUE)
-    wt = spdep::nb2mat(nb_queen, style='B',
-                       zero.policy = TRUE)
+    wt = sdsfun::spdep_contiguity_swm(sfj,
+                                      queen = TRUE,
+                                      style = 'W',
+                                      zero.policy = TRUE)
   } else {
     wt = check_wt(wt)
   }
