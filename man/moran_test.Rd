@@ -12,7 +12,7 @@ moran_test(sfj, wt = NULL, alternative = "greater", symmetrize = FALSE)
 \item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. You can get a
 spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not
 provided, \code{geocomplexity} will use a first-order queen adjacency binary matrix via
-\code{spdep} package.}
+\code{sdsfun} package.}
 
 \item{alternative}{(optional) Specification of alternative hypothesis as 'greater' (default),
 'lower', or 'two.sided'.}
