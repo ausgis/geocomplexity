@@ -18,7 +18,7 @@ geocs_vector(
 \item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. You can get a
 spatial weight matrix from \code{spdep},\code{rgeoda} or \code{tidyrgeoda} package. If \code{wt} is not
 provided, \code{geocomplexity} will use a first-order inverse distance weight matrix via
-\code{inverse_distance_weight()}.}
+\code{sdsfun::inverse_distance_swm()}.}
 
 \item{normalize}{(optional) Whether to further normalizes the calculated geocomplexity.
 Default is \code{TRUE}.}

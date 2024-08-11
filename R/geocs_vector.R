@@ -18,7 +18,7 @@
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. You can get a
 #' spatial weight matrix from `spdep`,`rgeoda` or `tidyrgeoda` package. If `wt` is not
 #' provided, `geocomplexity` will use a first-order inverse distance weight matrix via
-#' `inverse_distance_weight()`.
+#' `sdsfun::inverse_distance_swm()`.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
 #' @param similarity (optional) When `similarity` is `1`, the similarity is calculated using
@@ -50,7 +50,8 @@ geocs_vector = \(sfj, wt = NULL, normalize = TRUE,
     sfj = sf::st_as_sf(sfj)
   }
   if (is.null(wt)){
-    wt = inverse_distance_weight(sfj)
+    wt = sdsfun::inverse_distance_swm(sfj)
+    # wt = inverse_distance_weight(sfj)
   } else {
     wt = check_wt(wt)
   }
