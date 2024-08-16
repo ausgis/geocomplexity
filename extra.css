@@ -1,0 +1,19 @@
+.navbar-brand.me-2 {
+    color: #95a6ae;
+}
+
+a, code a {
+  color: #95a6ae;
+}
+
+a:hover, code a:hover {
+  color: #a19586;
+}
+
+a:not([href]) {
+  color: inherit;
+}
+
+a:not([href]):hover {
+  color: inherit;
+}
