@@ -22,7 +22,7 @@
 ">
 <meta name="description" content="Providing support for calculating univariate geographical complexity based on spatial dependence, and multivariate geographical complexity based on geographical configuration similarity. Further supporting spatial regression models and spatial sampling methods based on geographical complexity.">
 <meta property="og:description" content="Providing support for calculating univariate geographical complexity based on spatial dependence, and multivariate geographical complexity based on geographical configuration similarity. Further supporting spatial regression models and spatial sampling methods based on geographical complexity.">
-<meta property="og:image" content="https://spatlyu.github.io/geocomplexity/logo.png">
+<meta property="og:image" content="https://ausgis.github.io/geocomplexity/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -54,7 +54,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/SpatLyu/geocomplexity/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ausgis/geocomplexity/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
@@ -81,7 +81,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>Full document of the most recent release of <strong>geocomplexity</strong> is online: <a href="https://spatlyu.github.io/geocomplexity/" class="uri">https://spatlyu.github.io/geocomplexity/</a></p>
+<p>Full document of the most recent release of <strong>geocomplexity</strong> is online: <a href="https://ausgis.github.io/geocomplexity/" class="uri">https://ausgis.github.io/geocomplexity/</a></p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -89,10 +89,10 @@
 <div class="section level4">
 <h4 id="from-source">From source:<a class="anchor" aria-label="anchor" href="#from-source"></a>
 </h4>
-<p>You can install the development version of <strong>geocomplexity</strong> from <a href="https://github.com/SpatLyu/geocomplexity" class="external-link">github</a> with:</p>
+<p>You can install the development version of <strong>geocomplexity</strong> from <a href="https://github.com/ausgis/geocomplexity" class="external-link">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SpatLyu/geocomplexity"</span>,</span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ausgis/geocomplexity"</span>,</span>
 <span>                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                         dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Please ensure that appropriate <strong>C++</strong> compilation environment is configured and <strong>Rcpp</strong> &amp; <strong>RcppArmadillo</strong> is properly installed in advance if you want to install <strong>geocomplexity</strong> from source. See the next topic on C++ Settings for more information.</p>
@@ -100,10 +100,10 @@
 <div class="section level4">
 <h4 id="from-binary">From binary<a class="anchor" aria-label="anchor" href="#from-binary"></a>
 </h4>
-<p>You can also install the binary version of <strong>geocomplexity</strong> from <a href="https://spatlyu.r-universe.dev/geocomplexity" class="external-link">r-universe</a>:</p>
+<p>You can also install the binary version of <strong>geocomplexity</strong> from <a href="https://ausgis.r-universe.dev/geocomplexity" class="external-link">r-universe</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"geocomplexity"</span>, </span>
-<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://spatlyu.r-universe.dev"</span>,</span>
+<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ausgis.r-universe.dev"</span>,</span>
 <span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
 <span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -147,8 +147,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/SpatLyu/geocomplexity/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/SpatLyu/geocomplexity/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/ausgis/geocomplexity/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ausgis/geocomplexity/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -181,7 +181,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=geocomplexity" class="external-link"><img src="https://www.r-pkg.org/badges/version/geocomplexity" alt="CRAN"></a></li>
-<li><a href="https://spatlyu.r-universe.dev/geocomplexity" class="external-link"><img src="https://spatlyu.r-universe.dev/badges/geocomplexity" alt="r-universe"></a></li>
+<li><a href="https://ausgis.r-universe.dev/geocomplexity" class="external-link"><img src="https://ausgis.r-universe.dev/badges/geocomplexity" alt="r-universe"></a></li>
 </ul>
 </div>
 
