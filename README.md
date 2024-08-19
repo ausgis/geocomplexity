@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN](https://www.r-pkg.org/badges/version/geocomplexity)](https://CRAN.R-project.org/package=geocomplexity)
-[![r-universe](https://spatlyu.r-universe.dev/badges/geocomplexity)](https://spatlyu.r-universe.dev/geocomplexity)
+[![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity)](https://ausgis.r-universe.dev/geocomplexity)
 <!-- badges: end -->
 
 The goal of **geocomplexity** is to *support geocomplexity computation
@@ -15,18 +15,18 @@ and applications*.
 ## Overview
 
 Full document of the most recent release of **geocomplexity** is online:
-<https://spatlyu.github.io/geocomplexity/>
+<https://ausgis.github.io/geocomplexity/>
 
 ## Installation
 
 #### From source:
 
 You can install the development version of **geocomplexity** from
-[github](https://github.com/SpatLyu/geocomplexity) with:
+[github](https://github.com/ausgis/geocomplexity) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("SpatLyu/geocomplexity",
+devtools::install_github("ausgis/geocomplexity",
                          build_vignettes = TRUE,
                          dep = TRUE)
 ```
@@ -39,11 +39,11 @@ next topic on C++ Settings for more information.
 #### From binary
 
 You can also install the binary version of **geocomplexity** from
-[r-universe](https://spatlyu.r-universe.dev/geocomplexity):
+[r-universe](https://ausgis.r-universe.dev/geocomplexity):
 
 ``` r
 install.packages("geocomplexity", 
-                 repos = c("https://spatlyu.r-universe.dev",
+                 repos = c("https://ausgis.r-universe.dev",
                            "https://cran.rstudio.com/"),
                  dep = TRUE)
 ```
