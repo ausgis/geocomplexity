@@ -17,7 +17,7 @@ Description: Providing support for calculating univariate geographical complexit
              models and spatial sampling methods based on geographical complexity.
 License: GPL-3
 Encoding: UTF-8
-URL: https://ausgis.github.io/geocomplexity, https://github.com/ausgis/geocomplexity
+URL: https://ausgis.github.io/geocomplexity/, https://github.com/ausgis/geocomplexity
 BugReports: https://github.com/ausgis/geocomplexity/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
