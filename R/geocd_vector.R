@@ -75,7 +75,6 @@ geocd_vector = \(sfj, wt = NULL, method = 'moran',
     dplyr::mutate(dplyr::across(dplyr::everything(),
                                 sdsfun::standardize_vector))
   vectlayername = names(sfj_attr)
-  print('yes')
 
   if (method == 'moran') {
     geocvec = dplyr::mutate(sfj_attr,
