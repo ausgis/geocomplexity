@@ -41,7 +41,7 @@
 #' library(ggplot2)
 #' library(viridis)
 #' ggplot(gc) +
-#'    geom_sf(aes(fill = Income_Gini_GeoC)) +
+#'    geom_sf(aes(fill = Income_Gini_geoc)) +
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
@@ -70,7 +70,7 @@ geocs_vector = \(sfj,wt = NULL,method = 'spvar',similarity = 1,
   }
 
   geocvec = tibble::as_tibble_col(geocvec)
-  names(geocvec) = paste0(vectlayername,"_GeoC")
+  names(geocvec) = paste0(vectlayername,"_geoc")
 
   if (returnsf) {
     geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))

@@ -67,6 +67,6 @@ geocs_raster = \(r, order = 1, normalize = TRUE,
   }
   r1 = r[[1]]
   terra::values(r1) = geocres
-  names(r1) = paste0(rastlayername,"_GeoC")
+  names(r1) = paste0(rastlayername,"_geoc")
   return(r1)
 }
