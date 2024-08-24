@@ -44,7 +44,9 @@
 #' gc1 = geocd_raster(m,1)
 #' gc2 = geocd_raster(m,2)
 #' gc1
+#' plot(gc1)
 #' gc2
+#' plot(gc2)
 #'
 geocd_raster = \(r,order = 1,normalize = TRUE,method = 'moran'){
   if (!inherits(r,'SpatRaster')){
@@ -79,6 +81,6 @@ geocd_raster = \(r,order = 1,normalize = TRUE,method = 'moran'){
       terra::rast() -> geocres
   }
 
-  names(geocres) = paste0('Geocomplexity_',rastlayername)
+  names(geocres) = paste0(rastlayername,"_GeoC")
   return(geocres)
 }

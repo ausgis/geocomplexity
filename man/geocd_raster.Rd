@@ -48,7 +48,9 @@ plot(m, col = c("#d2eaac", "#a3dae1", "#8cc1e1"))
 gc1 = geocd_raster(m,1)
 gc2 = geocd_raster(m,2)
 gc1
+plot(gc1)
 gc2
+plot(gc2)
 
 }
 \references{

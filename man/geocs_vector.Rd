@@ -62,7 +62,7 @@ gc
 library(ggplot2)
 library(viridis)
 ggplot(gc) +
-   geom_sf(aes(fill = Geocomplexity_Income_Gini)) +
+   geom_sf(aes(fill = Income_Gini_GeoC)) +
    scale_fill_viridis(option="mako", direction = -1) +
    theme_bw()
 

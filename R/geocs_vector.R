@@ -41,7 +41,7 @@
 #' library(ggplot2)
 #' library(viridis)
 #' ggplot(gc) +
-#'    geom_sf(aes(fill = Geocomplexity_Income_Gini)) +
+#'    geom_sf(aes(fill = Income_Gini_GeoC)) +
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
@@ -70,7 +70,7 @@ geocs_vector = \(sfj,wt = NULL,method = 'spvar',similarity = 1,
   }
 
   geocvec = tibble::as_tibble_col(geocvec)
-  names(geocvec) = paste0('Geocomplexity_',vectlayername)
+  names(geocvec) = paste0(vectlayername,"_GeoC")
 
   if (returnsf) {
     geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))

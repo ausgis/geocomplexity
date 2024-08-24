@@ -44,7 +44,7 @@
 #' library(ggplot2)
 #' library(viridis)
 #' ggplot(gc) +
-#'    geom_sf(aes(fill = Geocomplexity_Income)) +
+#'    geom_sf(aes(fill = Income_GeoC)) +
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
@@ -92,7 +92,7 @@ geocd_vector = \(sfj, wt = NULL, method = 'moran',
                                           sdsfun::normalize_vector))
   }
 
-  names(geocvec) = paste0('Geocomplexity_',vectlayername)
+  names(geocvec) = paste0(vectlayername,"_GeoC")
 
   if (returnsf) {
     geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))

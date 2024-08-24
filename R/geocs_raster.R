@@ -39,7 +39,9 @@
 #' gc1 = geocs_raster(m,1)
 #' gc2 = geocs_raster(m,2)
 #' gc1
+#' plot(gc1)
 #' gc2
+#' plot(gc2)
 #'
 geocs_raster = \(r, order = 1, normalize = TRUE,
                  similarity = 1,method = 'spvar'){
@@ -65,6 +67,6 @@ geocs_raster = \(r, order = 1, normalize = TRUE,
   }
   r1 = r[[1]]
   terra::values(r1) = geocres
-  names(r1) = paste0('Geocomplexity_',rastlayername)
+  names(r1) = paste0(rastlayername,"_GeoC")
   return(r1)
 }

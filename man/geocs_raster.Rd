@@ -52,6 +52,8 @@ m = c(m1,m2)
 gc1 = geocs_raster(m,1)
 gc2 = geocs_raster(m,2)
 gc1
+plot(gc1)
 gc2
+plot(gc2)
 
 }
