@@ -81,6 +81,6 @@ geocd_raster = \(r,order = 1,normalize = TRUE,method = 'moran'){
       terra::rast() -> geocres
   }
 
-  names(geocres) = paste0(rastlayername,"_geoc")
+  names(geocres) = paste0("GC_",rastlayername)
   return(geocres)
 }

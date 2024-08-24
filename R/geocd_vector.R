@@ -44,7 +44,7 @@
 #' library(ggplot2)
 #' library(viridis)
 #' ggplot(gc) +
-#'    geom_sf(aes(fill = Income_geoc)) +
+#'    geom_sf(aes(fill = GC_Income)) +
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
@@ -92,7 +92,7 @@ geocd_vector = \(sfj, wt = NULL, method = 'moran',
                                           sdsfun::normalize_vector))
   }
 
-  names(geocvec) = paste0(vectlayername,"_geoc")
+  names(geocvec) = paste0("GC_",vectlayername)
 
   if (returnsf) {
     geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))
