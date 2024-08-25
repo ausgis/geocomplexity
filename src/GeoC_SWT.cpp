@@ -2,9 +2,9 @@
 using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp11)]]
-
 NumericMatrix GeoCSWT(NumericVector x,
-                      NumericMatrix wt){
+                      NumericMatrix wt,
+                      String style){
   NumericMatrix result(x.size(), x.size());
   for (int i = 0; i < x.size(); ++i) {
     for (int j = 0; j < x.size(); ++j) {

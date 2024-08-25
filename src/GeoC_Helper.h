@@ -23,6 +23,8 @@ Rcpp::NumericVector multiply_vector(Rcpp::NumericVector numvec1,
 Rcpp::NumericVector GCS_Variance(Rcpp::NumericMatrix x,
                                  Rcpp::NumericMatrix wt,
                                  Rcpp::String method);
+Rcpp::NumericMatrix MatRowStandardize(Rcpp::NumericMatrix mat);
+Rcpp::NumericMatrix MatGlobalStandardize(Rcpp::NumericMatrix mat);
 Rcpp::NumericMatrix subset_matrix(Rcpp::NumericMatrix matrix,
                                   Rcpp::IntegerVector rows,
                                   Rcpp::IntegerVector cols);

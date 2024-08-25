@@ -6,7 +6,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector VectorGeoCMoran(NumericVector x,
-                              NumericMatrix wt){
+                              NumericMatrix wt) {
   NumericVector out(x.size());
   for (int i = 0; i < x.size(); ++i) {
     double zi = x[i];
@@ -36,7 +36,7 @@ NumericVector VectorGeoCMoran(NumericVector x,
 // [[Rcpp::export]]
 NumericVector VectorGeoCSSH(NumericVector xobs,
                             NumericMatrix wt,
-                            String method){
+                            String method) {
   NumericVector out = SSH_Variance(xobs,wt,method);
   return out;
 }

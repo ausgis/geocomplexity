@@ -57,7 +57,7 @@ double CosineSimilarity(NumericVector A, NumericVector B) {
   return dot_product / (norm_A * norm_B);
 }
 
-IntegerVector rcpp_which(LogicalVector x){
+IntegerVector rcpp_which(LogicalVector x) {
   IntegerVector v = seq(0,x.size()-1);
   return v[x];
 }
@@ -127,9 +127,39 @@ double matrix_sum(NumericMatrix mat) {
   return out;
 }
 
-double InforEntropy(NumericVector x){
+double InforEntropy(NumericVector x) {
   double res = -1 * Rcpp::sum(x * rcpp_log2(x));
   return res;
+}
+
+NumericMatrix MatRowStandardize(NumericMatrix mat) {
+  for (int i = 0; i < mat.nrow(); ++i) {
+    double row_sum = 0.0;
+    for (int j = 0; j < mat.ncol(); ++j) {
+      row_sum += mat(i, j);
+    }
+    if (row_sum != 0) {
+      for (int j = 0; j < mat.ncol(); ++j) {
+        mat(i, j) /= row_sum;
+      }
+    }
+  }
+  return mat;
+}
+
+NumericMatrix MatGlobalStandardize(NumericMatrix mat) {
+  double mat_sum = 0.0;
+  for (int i = 0; i < mat.nrow(); ++i) {
+    for (int j = 0; j < mat.ncol(); ++j) {
+      mat_sum += mat(i, j);
+    }
+  }
+  for (int i = 0; i < mat.nrow(); ++i) {
+    for (int j = 0; j < mat.ncol(); ++j) {
+      mat(i, j) /= mat_sum;
+    }
+  }
+  return mat;
 }
 
 // [[Rcpp::export]]
