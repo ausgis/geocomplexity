@@ -3,6 +3,8 @@
 using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp11)]]
+
+// [[Rcpp::export]]
 NumericMatrix GeoCSWT(NumericVector x,
                       NumericMatrix wt,
                       String style){
