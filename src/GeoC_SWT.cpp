@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include "GeoC_Helper.h"
 using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp11)]]
@@ -16,5 +17,13 @@ NumericMatrix GeoCSWT(NumericVector x,
       }
     }
   }
+
+  if (style == "W"){
+    result = MatRowStandardize(result);
+  }
+  if (style == "C"){
+    result = MatGlobalStandardize(result);
+  }
+
   return result;
 }
