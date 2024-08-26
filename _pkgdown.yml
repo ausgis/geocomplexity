@@ -33,6 +33,10 @@ reference:
   - geocd_raster
   - geocs_raster
 
+- title: GeoComplexity Application
+  contents:
+  - geoc_swm
+
 - title: Global Spatial Autocorrelation Test
   contents:
   - moran_test
