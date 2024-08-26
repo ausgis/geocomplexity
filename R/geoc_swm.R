@@ -15,10 +15,10 @@
 #'   geocd_vector(returnsf = FALSE) %>%
 #'   dplyr::pull(1)
 #' wt = sdsfun::spdep_contiguity_swm(inc,style = 'B')
-#' wt_gc = geoc_swt(gc,wt)
+#' wt_gc = geoc_swm(gc,wt)
 #' wt_gc[1:5,1:5]
 #'
-geoc_swt = \(gc,wt,style = 'B'){
+geoc_swm = \(gc,wt,style = 'B'){
   wt_gc = GeoCSWT(gc,wt,style)
   return(wt_gc)
 }
