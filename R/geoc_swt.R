@@ -11,7 +11,9 @@
 #' @examples
 #' data("income")
 #' inc = dplyr::select(income,Income)
-#' gc = geocd_vector(inc,returnsf = FALSE)
+#' gc = inc %>%
+#'   geocd_vector(returnsf = FALSE) %>%
+#'   dplyr::pull(1)
 #' wt = sdsfun::spdep_contiguity_swm(inc,style = 'B')
 #' wt_gc = geoc_swt(gc,wt)
 #' wt_gc[1:5,1:5]
