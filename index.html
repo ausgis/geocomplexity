@@ -86,27 +86,23 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div class="section level4">
-<h4 id="from-source">From source:<a class="anchor" aria-label="anchor" href="#from-source"></a>
-</h4>
-<p>You can install the development version of <strong>geocomplexity</strong> from <a href="https://github.com/ausgis/geocomplexity" class="external-link">github</a> with:</p>
+<ul>
+<li>Install development binary version from <a href="https://ausgis.r-universe.dev/geocomplexity" class="external-link">r-universe</a> with:</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'geocomplexity'</span>,</span>
+<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ausgis.r-universe.dev"</span>,</span>
+<span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
+<span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Install development source version from <a href="https://github.com/ausgis/geocomplexity" class="external-link">GitHub</a> with:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ausgis/geocomplexity"</span>,</span>
 <span>                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                         dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Please ensure that appropriate <strong>C++</strong> compilation environment is configured and <strong>Rcpp</strong> &amp; <strong>RcppArmadillo</strong> is properly installed in advance if you want to install <strong>geocomplexity</strong> from source. See the next topic on C++ Settings for more information.</p>
-</div>
-<div class="section level4">
-<h4 id="from-binary">From binary<a class="anchor" aria-label="anchor" href="#from-binary"></a>
-</h4>
-<p>You can also install the binary version of <strong>geocomplexity</strong> from <a href="https://ausgis.r-universe.dev/geocomplexity" class="external-link">r-universe</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"geocomplexity"</span>, </span>
-<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ausgis.r-universe.dev"</span>,</span>
-<span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
-<span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-</div>
 </div>
 <div class="section level2">
 <h2 id="set-up-to-use-c-compilation-environment">Set up to use <strong>C++</strong> compilation environment<a class="anchor" aria-label="anchor" href="#set-up-to-use-c-compilation-environment"></a>
