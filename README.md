@@ -19,10 +19,18 @@ Full document of the most recent release of **geocomplexity** is online:
 
 ## Installation
 
-#### From source:
+- Install development binary version from
+  [r-universe](https://ausgis.r-universe.dev/geocomplexity) with:
 
-You can install the development version of **geocomplexity** from
-[github](https://github.com/ausgis/geocomplexity) with:
+``` r
+install.packages('geocomplexity',
+                 repos = c("https://ausgis.r-universe.dev",
+                           "https://cran.rstudio.com/"),
+                 dep = TRUE)
+```
+
+- Install development source version from
+  [GitHub](https://github.com/ausgis/geocomplexity) with:
 
 ``` r
 # install.packages("devtools")
@@ -35,18 +43,6 @@ Please ensure that appropriate **C++** compilation environment is
 configured and **Rcpp** & **RcppArmadillo** is properly installed in
 advance if you want to install **geocomplexity** from source. See the
 next topic on C++ Settings for more information.
-
-#### From binary
-
-You can also install the binary version of **geocomplexity** from
-[r-universe](https://ausgis.r-universe.dev/geocomplexity):
-
-``` r
-install.packages("geocomplexity", 
-                 repos = c("https://ausgis.r-universe.dev",
-                           "https://cran.rstudio.com/"),
-                 dep = TRUE)
-```
 
 ## Set up to use **C++** compilation environment
 
