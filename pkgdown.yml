@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   GeoComplexityC: GeoComplexityC.html
   GeoComplexityM: GeoComplexityM.html
-last_built: 2024-08-29T06:48Z
+last_built: 2024-08-29T06:54Z
 urls:
   reference: https://ausgis.github.io/geocomplexity/reference
   article: https://ausgis.github.io/geocomplexity/articles
