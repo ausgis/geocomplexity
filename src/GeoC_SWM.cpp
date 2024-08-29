@@ -10,6 +10,8 @@ NumericMatrix GeoCSWT(NumericVector x,
                       String style){
   NumericMatrix result(x.size(), x.size());
   for (int i = 0; i < x.size(); ++i) {
+    wt(i, _) = NormalizeVector(wt(i, _),1,10);
+
     for (int j = 0; j < x.size(); ++j) {
       double wij = wt(i,j);
       if (wij != 0) {
