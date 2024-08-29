@@ -1,8 +1,8 @@
 ---
-title: "Calculate geocomplexity of various spatial data"
+title: "GeoComplexity Computation and Application"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Calculate geocomplexity of various spatial data}
+  %\VignetteIndexEntry{GeoComplexity Computation and Application}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
