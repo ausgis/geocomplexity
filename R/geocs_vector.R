@@ -62,7 +62,6 @@ geocs_vector = \(sfj,wt = NULL,method = 'spvar',similarity = 1,
   if (ncol(sfj_attr) == 1) {
     stop('To use `geocs_vector`, the number of attribute columns in sfj must be greater than or equal to 2')
   }
-  vectlayername = paste(names(sfj_attr),collapse = '_')
   geocvec = VectorGeoCSimilarity(as.matrix(sfj_attr),wt,similarity,method)
 
   if (normalize) {
@@ -70,7 +69,7 @@ geocs_vector = \(sfj,wt = NULL,method = 'spvar',similarity = 1,
   }
 
   geocvec = tibble::as_tibble_col(geocvec)
-  names(geocvec) = paste0("GC_",vectlayername)
+  names(geocvec) = "GC"
 
   if (returnsf) {
     geocvec = sf::st_set_geometry(geocvec,sf::st_geometry(sfj))

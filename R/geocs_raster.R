@@ -48,8 +48,6 @@ geocs_raster = \(r, order = 1, normalize = TRUE,
   if (!inherits(r,'SpatRaster')){
     r = terra::rast(r)
   }
-  rastlayername = names(r) %>%
-    paste0(collapse = '_')
   seq(1,terra::nlyr(r)) %>%
     purrr::map(\(i) terra::app(r[[i]],sdsfun::normalize_vector)) %>%
     terra::rast() -> r
@@ -67,6 +65,6 @@ geocs_raster = \(r, order = 1, normalize = TRUE,
   }
   r1 = r[[1]]
   terra::values(r1) = geocres
-  names(r1) = paste0("GC_",rastlayername)
+  names(r1) = "GC"
   return(r1)
 }
