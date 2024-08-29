@@ -137,8 +137,9 @@ double matrix_sum(NumericMatrix mat) {
   return out;
 }
 
+// [[Rcpp::export]]
 double InforEntropy(NumericVector x) {
-  double res = -1 * Rcpp::sum(x * rcpp_log2(x));
+  double res = -1 * sum_nona(x * rcpp_log2(x));
   return res;
 }
 

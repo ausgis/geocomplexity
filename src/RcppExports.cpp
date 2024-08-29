@@ -11,6 +11,17 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// InforEntropy
+double InforEntropy(NumericVector x);
+RcppExport SEXP _geocomplexity_InforEntropy(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(InforEntropy(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // spatial_variance
 double spatial_variance(NumericVector x, NumericMatrix wt);
 RcppExport SEXP _geocomplexity_spatial_variance(SEXP xSEXP, SEXP wtSEXP) {
@@ -157,6 +168,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_GeoCSWT", (DL_FUNC) &_geocomplexity_GeoCSWT, 3},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
