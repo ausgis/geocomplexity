@@ -45,7 +45,8 @@
 #'    scale_fill_viridis(option="mako", direction = -1) +
 #'    theme_bw()
 #'
-geocs_vector = \(sfj,wt = NULL,method = 'spvar',similarity = 1,
+geocs_vector = \(sfj, wt = NULL,
+                 method = 'spvar', similarity = 1,
                  normalize = TRUE, returnsf = TRUE){
   if (!inherits(sfj,'sf')) {
     sfj = sf::st_as_sf(sfj)
