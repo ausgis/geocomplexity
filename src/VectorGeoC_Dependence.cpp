@@ -22,12 +22,16 @@ NumericVector VectorGeoCMoran(NumericVector x,
       NumericVector wtk = wt(kn, _);
       IntegerVector k = rcpp_which(wtk != 0);
       k = intersect(j, k);
-      NumericVector zk = x[k];
-      NumericVector wtk_z = multiply_vector(wtj[k],zk);
-      wtk_z = multiply_vector(wtk[k],wtk_z);
-      double surroundv = mean_nona(wtk_z);
-      surroundf += zj[n] * surroundv;
+      // Rcout << "The length of k : " << k.size() << "\n";
+      if (k.size() != 0) {
+        NumericVector zk = x[k];
+        NumericVector wtk_z = multiply_vector(wtj[k],zk);
+        wtk_z = multiply_vector(wtk[k],wtk_z);
+        double surroundv = mean_nona(wtk_z);
+        surroundf += zj[n] * surroundv;
+      }
     }
+    // Rcout << "The value of surroundf : " << surroundf << "\n";
     out[i] = localf + -1.0 / m * surroundf;
   }
   return out;
