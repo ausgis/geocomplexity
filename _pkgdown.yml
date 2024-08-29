@@ -20,21 +20,16 @@ navbar:
     articles:
       text: Vignettes
       menu:
-      - text: GeoComplexity Computation
-        href: articles/GeoComplexityC.html
-      - text: GeoComplexity Application
-        href: articles/GeoComplexityM.html
+      - text: GeoComplexity Computation & Application
+        href: articles/GeoComplexity.html
 
 reference:
-- title: GeoComplexity Computation
+- title: GeoComplexity Computation & Application
   contents:
   - geocd_vector
   - geocs_vector
   - geocd_raster
   - geocs_raster
-
-- title: GeoComplexity Application
-  contents:
   - geoc_swm
 
 - title: Global Spatial Autocorrelation Test
