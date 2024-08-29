@@ -115,6 +115,16 @@ NumericVector multiply_vector(NumericVector numvec1, NumericVector numvec2) {
   return result;
 }
 
+NumericVector NormalizeVector(NumericVector x, double a, double b) {
+  double min_x = min(x);
+  double max_x = max(x);
+  if (min_x == max_x) {
+    return NumericVector(x.size(), (a + b) / 2.0);
+  }
+  NumericVector res = a + (x - min_x) * (b - a) / (max_x - min_x);
+  return res;
+}
+
 double matrix_sum(NumericMatrix mat) {
   int nrow = mat.nrow();
   int ncol = mat.ncol();
