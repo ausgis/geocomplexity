@@ -4,7 +4,7 @@
 \alias{geoc_swm}
 \title{spatial weight matrix based on geographical complexity}
 \usage{
-geoc_swm(gc, wt, style = "B")
+geoc_swm(gc, wt, style = "W")
 }
 \arguments{
 \item{gc}{Geographical complexity vector.}
@@ -12,7 +12,7 @@ geoc_swm(gc, wt, style = "B")
 \item{wt}{Spatial weight matrix based on spatial adjacency or spatial distance relationships.}
 
 \item{style}{(optional) A character that can be \code{B},\code{W},\code{C}.  More to see \code{spdep::nb2mat()}.
-Default is \code{B}.}
+Default is \code{W}.}
 }
 \value{
 A matrix
