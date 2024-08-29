@@ -49,7 +49,7 @@
 #'    theme_bw()
 #'
 geocd_vector = \(sfj, wt = NULL, method = 'moran',
-                 normalize = TRUE,returnsf = TRUE){
+                 normalize = TRUE, returnsf = TRUE){
   if (!inherits(sfj,'sf')){
     sfj = sf::st_as_sf(sfj)
   }
