@@ -42,8 +42,6 @@ Suggests:
     stars,
     tidyverse,
     viridis
-Remotes:
-    SpatLyu/sdsfun,
 LinkingTo: 
     Rcpp,
     RcppArmadillo
