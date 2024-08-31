@@ -68,7 +68,7 @@ Fedora/RedHat: should be set up already.
 Option 1
 
 - [Register as an Apple developer (for
-  free)](https://developer.apple.com/programs/register/)
+  free)](https://apps.apple.com/cn/app/apple-developer/id640199958/)
   - Then, in the terminal:
 
     ``` sh
@@ -78,7 +78,7 @@ Option 1
 Option 2
 
 - Install the current release of full [Xcode from the Mac App
-  Store](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12)
+  Store](https://apps.apple.com/ca/app/xcode/id497799835?mt=12)
 - Within XCode go to Preferences -\> Downloads and install the Command
   Line Tools
 - More convenient but installs a lot you don’t need
