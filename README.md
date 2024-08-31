@@ -65,20 +65,10 @@ Fedora/RedHat: should be set up already.
 
 **MacOS**
 
-Option 1
+- Install the Xcode command line tool.
 
-- [Register as an Apple developer (for
-  free)](https://apps.apple.com/cn/app/apple-developer/id640199958/)
-  - Then, in the terminal:
+- Then, in the terminal:
 
-    ``` sh
-    xcode-select --install
-    ```
-
-Option 2
-
-- Install the current release of full [Xcode from the Mac App
-  Store](https://apps.apple.com/ca/app/xcode/id497799835?mt=12)
-- Within XCode go to Preferences -\> Downloads and install the Command
-  Line Tools
-- More convenient but installs a lot you don’t need
+  ``` sh
+  xcode-select --install
+  ```
