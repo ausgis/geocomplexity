@@ -25,7 +25,7 @@ Full document of the most recent release of **geocomplexity** is online:
 ``` r
 install.packages('geocomplexity',
                  repos = c("https://ausgis.r-universe.dev",
-                           "https://cran.rstudio.com/"),
+                           "https://cloud.r-project.org"),
                  dep = TRUE)
 ```
 
@@ -45,6 +45,12 @@ advance if you want to install **geocomplexity** from source. See the
 next topic on C++ Settings for more information.
 
 ## Set up to use **C++** compilation environment
+
+**Windows**:
+
+- Download the Rtools installer that matches your version of R from
+  <https://cran.r-project.org/bin/windows/Rtools/>
+- Run the installer, `Rtools.exe`, keeping the default settings.
 
 **Linux**
 
@@ -76,9 +82,3 @@ Option 2
 - Within XCode go to Preferences -\> Downloads and install the Command
   Line Tools
 - More convenient but installs a lot you don’t need
-
-**Windows**:
-
-- Download the Rtools installer that matches your version of R from
-  <https://cran.r-project.org/bin/windows/Rtools/>
-- Run the installer, `Rtools.exe`, keeping the default settings.
