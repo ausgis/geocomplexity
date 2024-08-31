@@ -91,7 +91,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'geocomplexity'</span>,</span>
 <span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ausgis.r-universe.dev"</span>,</span>
-<span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
+<span>                           <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span>,</span>
 <span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>Install development source version from <a href="https://github.com/ausgis/geocomplexity" class="external-link">GitHub</a> with:</li>
@@ -106,6 +106,12 @@
 <div class="section level2">
 <h2 id="set-up-to-use-c-compilation-environment">Set up to use <strong>C++</strong> compilation environment<a class="anchor" aria-label="anchor" href="#set-up-to-use-c-compilation-environment"></a>
 </h2>
+<p><strong>Windows</strong>:</p>
+<ul>
+<li>Download the Rtools installer that matches your version of R from <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link uri">https://cran.r-project.org/bin/windows/Rtools/</a>
+</li>
+<li>Run the installer, <code>Rtools.exe</code>, keeping the default settings.</li>
+</ul>
 <p><strong>Linux</strong></p>
 <p>Debian/Ubuntu:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">apt-get</span> update</span>
@@ -130,12 +136,6 @@
 </li>
 <li>Within XCode go to Preferences -&gt; Downloads and install the Command Line Tools</li>
 <li>More convenient but installs a lot you don’t need</li>
-</ul>
-<p><strong>Windows</strong>:</p>
-<ul>
-<li>Download the Rtools installer that matches your version of R from <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link uri">https://cran.r-project.org/bin/windows/Rtools/</a>
-</li>
-<li>Run the installer, <code>Rtools.exe</code>, keeping the default settings.</li>
 </ul>
 </div>
 </div>
