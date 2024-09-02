@@ -9,8 +9,7 @@
 [![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity)](https://ausgis.r-universe.dev/geocomplexity)
 <!-- badges: end -->
 
-The goal of **geocomplexity** is to *support geocomplexity computation
-and applications*.
+**Geocomplexity Mitigates Spatial Bias**
 
 ## Overview
 
