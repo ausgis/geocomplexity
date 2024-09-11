@@ -11,11 +11,6 @@
 
 **Geocomplexity Mitigates Spatial Bias**
 
-## Overview
-
-Full document of the most recent release of **geocomplexity** is online:
-<https://ausgis.github.io/geocomplexity/>
-
 ## Installation
 
 - Install development binary version from
