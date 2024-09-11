@@ -18,7 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-vignettes" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Vignettes</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/GeoComplexity.html">GeoComplexity Computation &amp; Application</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/gcc.html">Geographic Complexity Calculation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -109,28 +109,27 @@ Default is <code>TRUE</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"income"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">income</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">income</span>,<span class="op">-</span><span class="va">SA3_CODE16</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">gc</span> <span class="op">=</span> <span class="fu">geocs_vector</span><span class="op">(</span><span class="va">income</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gc</span> <span class="op">=</span> <span class="fu">geocs_vector</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">econineq</span>,<span class="op">-</span><span class="va">Gini</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 333 features and 1 field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 112.9211 ymin: -43.63305 xmax: 153.6299 ymax: -9.223927</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 112.9211 ymin: -43.63311 xmax: 153.6299 ymax: -9.223927</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  GDA94</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 333 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        GC                                                               geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                                                     <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON [°]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0.075<span style="text-decoration: underline;">5</span> (((149.979 -35.50246, 149.964 -35.50079, 149.9494 -35.55322, 149.9299…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0.407  (((148.8041 -35.71402, 148.8279 -35.72615, 148.8347 -35.74051, 148.86…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0.337  (((150.3754 -35.56524, 150.3647 -35.57078, 150.3226 -35.61388, 150.32…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0.662  (((149.0114 -33.93276, 149.0251 -33.93214, 149.0335 -33.91124, 149.05…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0.368  (((147.7137 -34.16162, 147.7441 -34.14091, 147.7769 -34.14261, 147.85…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0.544  (((151.485 -33.39868, 151.4689 -33.40979, 151.4439 -33.43783, 151.436…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0.858  (((151.485 -33.39868, 151.4623 -33.39893, 151.4539 -33.37713, 151.441…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0.834  (((149.323 -33.05916, 149.3436 -33.06254, 149.3543 -33.04798, 149.384…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0.500  (((149.1264 -33.86642, 149.1198 -33.88783, 149.1048 -33.89427, 149.09…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0.349  (((150.5587 -32.75774, 150.5493 -32.77053, 150.557 -32.7857, 150.5739…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       GC                                                                geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON [°]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0.210 (((149.979 -35.50246, 149.9774 -35.49025, 149.9987 -35.47874, 150.0059…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0.155 (((148.8041 -35.71402, 148.782 -35.73665, 148.7666 -35.70281, 148.7535…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0.147 (((150.3754 -35.56524, 150.3725 -35.55018, 150.36 -35.53485, 150.2819 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0.213 (((149.0114 -33.93276, 149.0057 -33.94396, 149.013 -33.96863, 149.0114…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0.184 (((147.7137 -34.16162, 147.7126 -34.17681, 147.728 -34.18633, 147.7443…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0.353 (((151.485 -33.39868, 151.4645 -33.39985, 151.4539 -33.37713, 151.4415…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0.307 (((151.485 -33.39868, 151.4839 -33.38366, 151.5049 -33.35415, 151.499 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0.214 (((149.323 -33.05916, 149.3147 -33.10072, 149.3226 -33.1168, 149.3171 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0.133 (((149.1264 -33.86642, 149.1349 -33.85089, 149.1314 -33.83058, 149.115…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0.180 (((150.5587 -32.75774, 150.5411 -32.75426, 150.527 -32.75969, 150.5182…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 323 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>

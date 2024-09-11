@@ -18,7 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-vignettes" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Vignettes</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/GeoComplexity.html">GeoComplexity Computation &amp; Application</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/gcc.html">Geographic Complexity Calculation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -105,16 +105,30 @@ tibble using <code>$result</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"income"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">moran_test</span><span class="op">(</span><span class="va">income</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">moran_test</span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ***                 global spatial autocorrelation test                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable     MoranI         EI         VarI      zI        pI     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- ------------- ----------- ---------- ------- -----------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Income    0.358268***   -0.003012   0.001409   9.626   3.107e-22 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable      MoranI         EI         VarI      zI        pI     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------- ------------- ----------- ---------- ------- -----------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Gini      0.42878***    -0.003012   0.001409   11.5    6.25e-31  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Gini     0.42878***    -0.003012   0.001409   11.5    6.25e-31  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Induscale   0.290457***   -0.003012   0.001409   7.819   2.658e-15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     IT       0.633565***   -0.003012   0.001409   16.96   7.987e-65 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Income     0.554989***   -0.003012   0.001409   14.87   2.684e-50 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Sexrat      0.3819***    -0.003012   0.001409   10.26   5.585e-25 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Houseown    0.456893***   -0.003012   0.001409   12.25   8.026e-35 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Indemp     0.436889***   -0.003012   0.001409   11.72   4.992e-32 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Indcom     0.360323***   -0.003012   0.001409   9.681   1.821e-22 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Hiedu     0.735328***   -0.003012   0.001409   19.67   1.863e-86 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

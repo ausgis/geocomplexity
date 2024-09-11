@@ -18,7 +18,7 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-vignettes" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Vignettes</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/GeoComplexity.html">GeoComplexity Computation &amp; Application</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/gcc.html">Geographic Complexity Calculation</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -74,20 +74,20 @@ Default is <code>W</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"income"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">inc</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">income</span>,<span class="va">Income</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">gc</span> <span class="op">=</span> <span class="va">inc</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gc</span> <span class="op">=</span> <span class="va">econineq</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Gini</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="geocd_vector.html">geocd_vector</a></span><span class="op">(</span>returnsf <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">wt</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">inc</span>,style <span class="op">=</span> <span class="st">'B'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">wt</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">econineq</span>,style <span class="op">=</span> <span class="st">'B'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">wt_gc</span> <span class="op">=</span> <span class="fu">geoc_swm</span><span class="op">(</span><span class="va">gc</span>,<span class="va">wt</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">wt_gc</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]      [,2]      [,3]      [,4]      [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.0000000 0.1061609 0.1069900 0.1026238 0.1067187</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.1868673 0.0000000 0.1930704 0.0000000 0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.2426637 0.2487761 0.0000000 0.0000000 0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.1651124 0.0000000 0.0000000 0.0000000 0.1701608</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.1167124 0.0000000 0.0000000 0.1156657 0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.0000000 0.1078564 0.1050683 0.1051201 0.1129214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.1926769 0.0000000 0.1883360 0.0000000 0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.2540007 0.2548663 0.0000000 0.0000000 0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.1698465 0.0000000 0.0000000 0.0000000 0.1784286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.1183268 0.0000000 0.0000000 0.1157179 0.0000000</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

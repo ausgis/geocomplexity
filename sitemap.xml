@@ -1,6 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://ausgis.github.io/geocomplexity/404.html</loc></url>
-<url><loc>https://ausgis.github.io/geocomplexity/articles/GeoComplexity.html</loc></url>
+<url><loc>https://ausgis.github.io/geocomplexity/articles/gcc.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/articles/index.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/authors.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/index.html</loc></url>
@@ -9,7 +9,6 @@
 <url><loc>https://ausgis.github.io/geocomplexity/reference/geocd_vector.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/reference/geocs_raster.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/reference/geocs_vector.html</loc></url>
-<url><loc>https://ausgis.github.io/geocomplexity/reference/income.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/reference/index.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/reference/moran_test.html</loc></url>
 <url><loc>https://ausgis.github.io/geocomplexity/reference/pipe.html</loc></url>
