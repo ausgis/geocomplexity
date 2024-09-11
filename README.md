@@ -1,7 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# geocomplexity <img src="man/figures/logo.png" align="right" height="120"/>
+# geocomplexity <img src="man/figures/logo.png" align="right" height="120px"/>
+
+**Geocomplexity Mitigates Spatial Bias**
 
 <!-- badges: start -->
 
