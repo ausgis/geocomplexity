@@ -32,7 +32,6 @@ reference:
   - geocs_vector
   - geocd_raster
   - geocs_raster
-  - geoc_swm
 
 - title: GeoComplexity Application
   contents:
