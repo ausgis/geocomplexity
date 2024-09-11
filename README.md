@@ -9,8 +9,6 @@
 [![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity)](https://ausgis.r-universe.dev/geocomplexity)
 <!-- badges: end -->
 
-**Geocomplexity Mitigates Spatial Bias**
-
 ## Overview
 
 Full document of the most recent release of **geocomplexity** is online:
