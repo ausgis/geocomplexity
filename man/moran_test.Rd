@@ -43,7 +43,7 @@ tibble using \verb{$result}.
 The non-numeric columns of the attribute columns in \code{sfj} are ignored.
 }
 \examples{
-data("income")
-moran_test(income)
+econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+moran_test(econineq)
 
 }
