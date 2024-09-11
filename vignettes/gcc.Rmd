@@ -1,8 +1,8 @@
 ---
-title: "Geographic Complexity Calculation"
+title: "GeoComplexity Calculation"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Geographic Complexity Calculation}
+  %\VignetteIndexEntry{GeoComplexity Calculation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
