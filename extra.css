@@ -1,13 +1,13 @@
 .navbar-brand.me-2 {
-    color: #95a6ae;
+    color: #172a38;
 }
 
 a, code a {
-  color: #95a6ae;
+  color: #172a38;
 }
 
 a:hover, code a:hover {
-  color: #a19586;
+  color: #99805c;
 }
 
 a:not([href]) {
