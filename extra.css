@@ -1,10 +1,26 @@
 .navbar-brand.me-2 {
-    color: #cc774c !important;
+    color: #efd298 !important;
 }
 
 .nav-text.text-muted.me-auto {
   --bs-text-opacity: 1;
-    color: #efd298 !important;
+    color: #cc774c !important;
+}
+
+.nav-item input[type="search"] {
+    border-color: #6c757d;
+    background-color: #ffffff;
+    color: #edd29b;
+}
+
+.navbar-nav .nav-item>.nav-link {
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.navbar-brand {
+    color:white;
 }
 
 a, code a {
