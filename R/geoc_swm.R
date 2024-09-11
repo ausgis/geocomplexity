@@ -14,7 +14,7 @@
 #'   dplyr::select(Gini) %>%
 #'   geocd_vector(returnsf = FALSE) %>%
 #'   dplyr::pull(1)
-#' wt = sdsfun::spdep_contiguity_swm(inc,style = 'B')
+#' wt = sdsfun::spdep_contiguity_swm(econineq,style = 'B')
 #' wt_gc = geoc_swm(gc,wt)
 #' wt_gc[1:5,1:5]
 #'
