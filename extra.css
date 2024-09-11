@@ -1,10 +1,10 @@
 .navbar-brand.me-2 {
-    color: #cc774c !important;
+    color: #efd298 !important;
 }
 
 .nav-text.text-muted.me-auto {
   --bs-text-opacity: 1;
-    color: #99805c !important;
+    color: #cc774c !important;
 }
 
 h1,h2,h3 {
