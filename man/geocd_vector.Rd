@@ -47,9 +47,8 @@ adjacency binary matrix; for point vector data, the six nearest points are used 
 objects to generate an adjacency binary matrix.
 }
 \examples{
-data("income")
-inc = dplyr::select(income,Income)
-gc = geocd_vector(inc)
+econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+gc = geocd_vector(econineq)
 gc
 
 library(ggplot2)

@@ -21,9 +21,9 @@ A matrix
 spatial weight matrix based on geographical complexity
 }
 \examples{
-data("income")
-inc = dplyr::select(income,Income)
-gc = inc \%>\%
+econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+gc = econineq \%>\%
+  dplyr::select(Gini) \%>\%
   geocd_vector(returnsf = FALSE) \%>\%
   dplyr::pull(1)
 wt = sdsfun::spdep_contiguity_swm(inc,style = 'B')

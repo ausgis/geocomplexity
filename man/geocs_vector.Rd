@@ -54,9 +54,8 @@ The spatial variance is calculated as:
 \eqn{\Gamma = \frac{\sum_i \sum_{j \neq i} \omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}}
 }
 \examples{
-data("income")
-income = dplyr::select(income,-SA3_CODE16)
-gc = geocs_vector(income)
+econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+gc = geocs_vector(dplyr::select(econineq,-Gini))
 gc
 
 library(ggplot2)
