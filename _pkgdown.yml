@@ -22,8 +22,8 @@ navbar:
     articles:
       text: Vignettes
       menu:
-      - text: GeoComplexity Computation & Application
-        href: articles/GeoComplexity.html
+      - text: Geographic Complexity Calculation
+        href: articles/gcc.html
 
 reference:
 - title: GeoComplexity Computation & Application
