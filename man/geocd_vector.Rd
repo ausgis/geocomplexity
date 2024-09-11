@@ -54,7 +54,7 @@ gc
 library(ggplot2)
 library(viridis)
 ggplot(gc) +
-   geom_sf(aes(fill = GC_Income)) +
+   geom_sf(aes(fill = GC_Gini)) +
    scale_fill_viridis(option="mako", direction = -1) +
    theme_bw()
 
