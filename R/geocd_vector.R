@@ -36,9 +36,9 @@
 #' @export
 #'
 #' @examples
-#' data("income")
-#' inc = dplyr::select(income,Income)
-#' gc = geocd_vector(inc)
+#' library(sf)
+#' econineq = read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+#' gc = geocd_vector(econineq)
 #' gc
 #'
 #' library(ggplot2)
