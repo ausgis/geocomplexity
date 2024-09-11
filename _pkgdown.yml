@@ -26,12 +26,16 @@ navbar:
         href: articles/gcc.html
 
 reference:
-- title: GeoComplexity Computation & Application
+- title: GeoComplexity Computation
   contents:
   - geocd_vector
   - geocs_vector
   - geocd_raster
   - geocs_raster
+  - geoc_swm
+
+- title: GeoComplexity Application
+  contents:
   - geoc_swm
 
 - title: Global Spatial Autocorrelation Test
