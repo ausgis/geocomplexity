@@ -1,5 +1,5 @@
 .navbar-brand.me-2 {
-    color: #cc774c;
+    color: #cc774c !important;
 }
 
 .nav-text.text-muted.me-auto {
@@ -12,7 +12,7 @@ h1,h2,h3 {
 }
 
 h1 {
-  color: #efd298;
+  color: #efd298 !important;
 }
 
 .nav-item input[type="search"] {
