@@ -36,8 +36,7 @@
 #' @export
 #'
 #' @examples
-#' library(sf)
-#' econineq = read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+#' econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
 #' gc = geocd_vector(econineq)
 #' gc
 #'
