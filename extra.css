@@ -2,6 +2,11 @@
     color: #172a38;
 }
 
+.nav-text.text-muted.me-auto {
+  --bs-text-opacity: 1;
+    color: #99805c !important;
+}
+
 a, code a {
   color: #172a38;
 }
