@@ -3,7 +3,7 @@
 
 # geocomplexity
 
-<img src="man/figures/logo.png" align="right" height="120px"/>
+<img src="man/figures/logo.png" align="right" height="120" hspace="30" vspace="0"/>
 
 <!-- badges: start -->
 

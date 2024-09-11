@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # geocomplexity 
 
-<img src="man/figures/logo.png" align="right" height="120px"/>
+<img src="man/figures/logo.png" align="right" height="120" hspace="30" vspace="0"/>
 
 <!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/geocomplexity)](https://CRAN.R-project.org/package=geocomplexity)
