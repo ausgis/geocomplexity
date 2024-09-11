@@ -32,8 +32,8 @@
 #' @export
 #'
 #' @examples
-#' data("income")
-#' moran_test(income)
+#' econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+#' moran_test(econineq)
 #'
 moran_test = \(sfj,
                wt = NULL,
