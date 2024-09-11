@@ -22,7 +22,7 @@ navbar:
     articles:
       text: Vignettes
       menu:
-      - text: Geographic Complexity Calculation
+      - text: Geographical Complexity Calculation
         href: articles/gcc.html
 
 reference:
