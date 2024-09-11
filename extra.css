@@ -18,7 +18,7 @@ h1 {
 .nav-item input[type="search"] {
     border-color: #6c757d;
     background-color: #ffffff;
-    color: #344028;
+    color: #cc774c;
 }
 
 .navbar-nav .nav-item>.nav-link {
@@ -32,7 +32,7 @@ h1 {
 }
 
 a, code a {
-  color: #172a38;
+  color: #95a6ae;
 }
 
 a:hover, code a:hover {
