@@ -37,7 +37,3 @@ reference:
 - title: Global Spatial Autocorrelation Test
   contents:
   - moran_test
-
-- title: Data
-  contents:
-  - income
