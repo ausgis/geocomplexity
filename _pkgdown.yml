@@ -5,7 +5,7 @@ template:
   math-rendering: mathjax
   light-switch: true
   bslib:
-    pkgdown-navbar-bg: "#172a38"
+    pkgdown-navbar-bg: "#6c757d"
 
 home:
   title: |
