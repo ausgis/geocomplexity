@@ -5,8 +5,6 @@ using namespace arma;
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
-
-
 // [[Rcpp::export]]
 arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
                      double bw, std::string kernel = "boxcar", double alpha = 0.5) {
@@ -47,6 +45,7 @@ arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
     // Solve local regression coefficient
     betas.row(i) = arma::solve(XtWX, XtWy).t();
   }
+
   return betas;
 }
 
