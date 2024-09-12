@@ -48,18 +48,18 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     arma::vec XtWy = X_with_intercept.t() * W * y;
 
     // Solve Local Regression Coefficient
-    arma::vec beta_i = arma::solve(XtWX, XtWy).t();
-    betas.row(i) = beta_i;
+    arma::vec beta_i = arma::solve(XtWX, XtWy);
+    betas.row(i) = beta_i.t();
 
     // Calculate Residuals: y_i - X_i * beta_i
-    double y_hat_i = arma::sum(X_with_intercept.row(i) * beta_i);
+    double y_hat_i = arma::as_scalar(X_with_intercept.row(i) * beta_i);
     residuals(i) = y(i) - y_hat_i;
     yhat(i) = y_hat_i;
 
     // Calculate the Diagonal Elements of the Cap Hat Matrix
     arma::mat XtWX_inv = arma::inv(XtWX);
     arma::vec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
-    hat_matrix.row(i) = hat_row;
+    hat_matrix.row(i) = hat_row.t();
 
     // Standard Error of Calculated Coefficient
     double sigma2_i = sum(pow(residuals(i), 2)) / (n - k - 1);
@@ -68,14 +68,14 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   }
 
   arma::mat t_values = betas / se_betas;
-  vec rss = arma::sum(arma::pow(residuals, 2));
+  arma::vec rss = arma::sum(arma::pow(residuals, 2));
   double tss = arma::sum(arma::pow(y - arma::mean(y), 2));
-  vec r2 = 1 - (rss / tss);
-  vec adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
-  vec rmse = sqrt(rss / n);
-  vec aic = n * log(rss / n) + 2 * k;
-  vec sigma_hat = rss / (n - (2*arma::trace(hat_matrix)-arma::trace(hat_matrix.t()*hat_matrix)));
-  vec aicc = 2*n*log(sigma_hat) + n*log(2*M_PI) + n*(n+arma::trace(hat_matrix)/(n-2-arma::trace(hat_matrix)));
+  arma::vec r2 = 1 - (rss / tss);
+  arma::vec adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
+  arma::vec rmse = sqrt(rss / n);
+  arma::vec aic = n * log(rss / n) + 2 * k;
+  arma::vec sigma_hat = rss / (n - (2*arma::trace(hat_matrix)-arma::trace(hat_matrix.t()*hat_matrix)));
+  arma::vec aicc = 2*n*log(sigma_hat) + n*log(2*M_PI) + n*(n+arma::trace(hat_matrix)/(n-2-arma::trace(hat_matrix)));
 
   return Rcpp::List::create(
     Named("Coefficient") = betas,
