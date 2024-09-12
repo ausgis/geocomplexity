@@ -6,23 +6,28 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-                     double bw, std::string kernel = "boxcar", double alpha = 0.5) {
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
+                      arma::vec gcs, arma::mat Cdist,
+                      double bw, std::string kernel = "boxcar") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
+  arma::mat se_betas = zeros(n, k + 1);
+  arma::mat hat_matrix = zeros(n,n);
+  arma::vec residuals = zeros(n);
+  arma::vec yhat = zeros(n);
 
   for (int i = 0; i < n; ++i) {
-    arma::mat gc_wt = arma::zeros(n);
+    arma::vec gc_wt = arma::zeros(n);
     arma::vec dist_wt = arma::zeros(n);
 
-    // Calculate weight matrix
+    // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double dist = Cdist(i,j);
       double gc = gcs(j) / gcs(i);
       gc_wt(j) = gc;
 
+      double dist = Cdist(i,j);
       if (kernel == "gaussian") {
         dist_wt(j) = gaussian_kernel(dist, bw);
       } else if (kernel == "exponential") {
@@ -36,16 +41,50 @@ arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
       }
 
     }
-    arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
+    arma::vec wt = gc_wt * dist_wt;
     arma::mat W = arma::diagmat(wt);
     // Weighted Least Squares
     arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
     arma::vec XtWy = X_with_intercept.t() * W * y;
 
-    // Solve local regression coefficient
-    betas.row(i) = arma::solve(XtWX, XtWy).t();
+    // Solve Local Regression Coefficient
+    arma::vec beta_i = arma::solve(XtWX, XtWy).t();
+    betas.row(i) = beta_i;
+
+    // Calculate Residuals: y_i - X_i * beta_i
+    double y_hat_i = sum(X_with_intercept.row(i) * beta_i);
+    residuals(i) = y(i) - y_hat_i;
+    yhat(i) = y_hat_i;
+
+    // Calculate the Diagonal Elements of the Cap Hat Matrix
+    arma::mat XtWX_inv = arma::inv(XtWX);
+    arma::vec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
+    hat_matrix.row(i) = hat_row;
+
+    // Standard Error of Calculated Coefficient
+    double sigma2_i = sum(pow(residuals(i), 2)) / (n - k - 1);
+    arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
+    se_betas.row(i) = se_beta_i.t();
   }
 
-  return betas;
+  arma::mat t_values = betas / se_betas;
+  vec rss = sum(pow(residuals, 2));
+  double tss = sum(pow(y - mean(y), 2));
+  vec r2 = 1 - (rss / tss);
+  vec adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
+  vec rmse = sqrt(rss / n);
+
+  return Rcpp::List::create(
+    Named("betas") = betas,
+    Named("t_values") = t_values,
+    Named("se_betas") = se_betas,
+    Named("yhat") = yhat,
+    Named("residuals") = residuals,
+    Named("rss") = rss,
+    Named("r2") = r2,
+    Named("adjr2") = adjr2,
+    Named("rmse") = rmse
+  );
 }
+
 
