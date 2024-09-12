@@ -95,8 +95,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   double adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
   double rmse = sqrt(rss / n);
   double aic = n * log(rss / n) + 2 * k;
-  double sigma_hat = rss / (n - (2*arma::trace(hat_matrix)-arma::trace(hat_matrix.t()*hat_matrix)));
-  double aicc = 2*n*log(sigma_hat) + n*log(2*M_PI) + n*(n+arma::trace(hat_matrix)/(n-2-arma::trace(hat_matrix)));
+  double aicc = aic + (2 * k * (k + 1)) / (n - k - 1);
 
   return Rcpp::List::create(
     Named("Coefficient") = betas,
