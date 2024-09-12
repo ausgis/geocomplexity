@@ -4,13 +4,46 @@ using namespace arma;
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
+// Gaussian Kernel
 double gaussian_kernel(double dist, double bw) {
-  return (1.0 / (sqrt(2.0 * M_PI) * bw)) * exp(-0.5 * pow(dist / bw, 2));
+  return exp(-0.5 * pow(dist / bw, 2));
+}
+
+// Exponential Kernel
+double exponential_kernel(double dist, double bw) {
+  return exp(-dist / bw);
+}
+
+// Bisquare Kernel
+double bisquare_kernel(double dist, double bw) {
+  if (dist < bw) {
+    return pow(1 - pow(dist / bw, 2), 2);
+  } else {
+    return 0.0;
+  }
+}
+
+// Triangular Kernel
+double triangular_kernel(double dist, double bw) {
+  if (dist < bw) {
+    return pow(1 - pow(dist / bw, 3), 3);
+  } else {
+    return 0.0;
+  }
+}
+
+// Boxcar Kernel
+double boxcar_kernel(double dist, double bw) {
+  if (dist < bw) {
+    return 1.0;
+  } else {
+    return 0.0;
+  }
 }
 
 // [[Rcpp::export]]
-mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-               double bw, String kernel = "gaussian", double alpha = 0.5) {
+arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
+                     double bw, std::string kernel = "boxcar", double alpha = 0.5) {
   int n = X.n_rows;
   int k = X.n_cols;
   mat X_with_intercept = join_horiz(ones<mat>(n, 1), X);
@@ -25,7 +58,19 @@ mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
       double dist = Cdist(i,j);
       double gc = gcs(j) / gcs(i);
       gc_wt(j) = gc;
-      dist_wt(j) = gaussian_kernel(dist, bw);
+
+      if (kernel == "gaussian") {
+        dist_wt(j) = gaussian_kernel(dist, bw);
+      } else if (kernel == "exponential") {
+        dist_wt(j) = exponential_kernel(dist, bw);
+      } else if (kernel == "bisquare") {
+        dist_wt(j) = bisquare_kernel(dist, bw);
+      } else if (kernel == "triangular") {
+        dist_wt(j) = triangular_kernel(dist, bw);
+      }  else if (kernel == "boxcar") {
+        dist_wt(j) = boxcar_kernel(dist, bw);
+      }
+
     }
     vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
     mat W = diagmat(wt);
