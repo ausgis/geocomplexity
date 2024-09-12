@@ -46,12 +46,12 @@ arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
                      double bw, std::string kernel = "boxcar", double alpha = 0.5) {
   int n = X.n_rows;
   int k = X.n_cols;
-  mat X_with_intercept = join_horiz(ones<mat>(n, 1), X);
-  mat betas = zeros(n, k + 1);
+  arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
+  arma::mat betas = arma::zeros(n, k + 1);
 
   for (int i = 0; i < n; ++i) {
-    mat gc_wt = zeros(n);
-    vec dist_wt = zeros(n);
+    arma::mat gc_wt = arma::zeros(n);
+    arma::vec dist_wt = arma::zeros(n);
 
     // Calculate weight matrix
     for (int j = 0; j < n; ++j) {
@@ -72,14 +72,14 @@ arma::mat GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
       }
 
     }
-    vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
-    mat W = diagmat(wt);
+    arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
+    arma::mat W = arma::diagmat(wt);
     // Weighted Least Squares
-    mat XtWX = X_with_intercept.t() * W * X_with_intercept;
-    vec XtWy = X_with_intercept.t() * W * y;
+    arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
+    arma::vec XtWy = X_with_intercept.t() * W * y;
 
     // Solve local regression coefficient
-    betas.row(i) = solve(XtWX, XtWy).t();
+    betas.row(i) = arma::solve(XtWX, XtWy).t();
   }
   return betas;
 }
