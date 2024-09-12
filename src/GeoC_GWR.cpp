@@ -49,6 +49,8 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
 
     // Solve Local Regression Coefficient
     arma::vec beta_i = arma::solve(XtWX, XtWy);
+    Rcpp::Rcout << "betas.row(i): " << betas.row(i).n_cols << " columns" << std::endl;
+    Rcpp::Rcout << "beta_i: " << beta_i.n_rows << " rows, " << beta_i.n_cols << " columns" << std::endl;
     betas.row(i) = beta_i.t();
 
     // Calculate Residuals: y_i - X_i * beta_i
@@ -58,12 +60,17 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
 
     // Calculate the Diagonal Elements of the Cap Hat Matrix
     arma::mat XtWX_inv = arma::inv(XtWX);
-    arma::vec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
-    hat_matrix.row(i) = hat_row.t();
+    Rcpp::Rcout << "X_with_intercept.row(i): " << X_with_intercept.row(i).n_cols << std::endl;
+    Rcpp::Rcout << "XtWX_inv: " << XtWX_inv.n_rows << " x " << XtWX_inv.n_cols << std::endl;
+    arma::rowvec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
+    Rcpp::Rcout << "hat_row: " << hat_row.n_rows << " x " << hat_row.n_cols << std::endl;
+    hat_matrix.row(i) = hat_row;
 
     // Standard Error of Calculated Coefficient
     double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
     arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
+    Rcpp::Rcout << "se_betas.row(i): " << se_betas.row(i).n_cols << " columns" << std::endl;
+    Rcpp::Rcout << "se_beta_i: " << se_beta_i.n_rows << " rows, " << se_beta_i.n_cols << " columns" << std::endl;
     se_betas.row(i) = se_beta_i.t();
   }
 
