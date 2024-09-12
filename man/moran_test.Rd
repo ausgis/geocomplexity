@@ -13,8 +13,8 @@ moran_test(sfj, wt = NULL, alternative = "greater", symmetrize = FALSE)
 provided, \code{geocomplexity} will use a first-order queen adjacency binary matrix via
 \code{sdsfun} package.}
 
-\item{alternative}{(optional) Specification of alternative hypothesis as 'greater' (default),
-'lower', or 'two.sided'.}
+\item{alternative}{(optional) Specification of alternative hypothesis as \code{greater} (default),
+\code{lower}, or \code{two.sided}.}
 
 \item{symmetrize}{(optional) Whether or not to symmetrize the asymmetrical spatial weight matrix
 \emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}'). Default is \code{FALSE}.}
