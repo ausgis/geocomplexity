@@ -113,8 +113,8 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   double edf = n - 2*v1 + v2;
   arma::mat B1 = (DiagMatrix(n) - hat_matrix).t() * (DiagMatrix(n) - hat_matrix);
   double delta1 = arma::trace(B1);
-  double sigma2 = rss / delta1;
-  double odelta2 = sum(arma::pow(arma::diagvec(B1), 2));
+  // double sigma2 = rss / delta1;
+  // double odelta2 = sum(arma::pow(arma::diagvec(B1), 2));
   double delta2 = sum(arma::diagvec(B1*B1));
   double nu1 = arma::trace(B2);
   double sigma2_b = rss / n;
