@@ -1,5 +1,8 @@
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
 using namespace Rcpp;
+using namespace arma;
+
+// [[Rcpp::depends(RcppArmadillo)]]
 
 // Gaussian Kernel
 double gaussian_kernel(double dist, double bw) {
@@ -36,4 +39,32 @@ double boxcar_kernel(double dist, double bw) {
   } else {
     return 0.0;
   }
+}
+
+arma::vec Normalize4Interval(const arma::vec& v, double a, double b) {
+  double min_v = arma::min(v);
+  double max_v = arma::max(v);
+
+  // Prevent division by zero
+  if (max_v == min_v) {
+    return arma::vec(v.n_elem, arma::fill::ones) * (a + b) / 2;
+  }
+
+  // Normalize to [0, 1]
+  arma::vec v_normalized = (v - min_v) / (max_v - min_v);
+
+  // Normalize to [a, b]
+  arma::vec v_scaled = a + v_normalized * (b - a);
+
+  return v_scaled;
+}
+
+arma::mat DiagMatrix(int n) {
+  // Create a vector of ones with length n
+  arma::vec diag_elements = arma::ones<arma::vec>(n);
+
+  // Create a diagonal matrix using the vector
+  arma::mat diag_mat = arma::diagmat(diag_elements);
+
+  return diag_mat;
 }
