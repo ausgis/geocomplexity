@@ -62,20 +62,20 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     hat_matrix.row(i) = hat_row.t();
 
     // Standard Error of Calculated Coefficient
-    double sigma2_i = sum(pow(residuals(i), 2)) / (n - k - 1);
+    double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
     arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
     se_betas.row(i) = se_beta_i.t();
   }
 
   arma::mat t_values = betas / se_betas;
-  arma::vec rss = arma::sum(arma::pow(residuals, 2));
-  double tss = arma::sum(arma::pow(y - arma::mean(y), 2));
-  arma::vec r2 = 1 - (rss / tss);
-  arma::vec adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
-  arma::vec rmse = sqrt(rss / n);
-  arma::vec aic = n * log(rss / n) + 2 * k;
-  arma::vec sigma_hat = rss / (n - (2*arma::trace(hat_matrix)-arma::trace(hat_matrix.t()*hat_matrix)));
-  arma::vec aicc = 2*n*log(sigma_hat) + n*log(2*M_PI) + n*(n+arma::trace(hat_matrix)/(n-2-arma::trace(hat_matrix)));
+  double rss = arma::as_scalar(arma::sum(arma::pow(residuals, 2)));
+  double tss = arma::as_scalar(arma::sum(arma::pow(y - arma::mean(y), 2)));
+  double r2 = 1 - (rss / tss);
+  double adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
+  double rmse = sqrt(rss / n);
+  double aic = n * log(rss / n) + 2 * k;
+  double sigma_hat = rss / (n - (2*arma::trace(hat_matrix)-arma::trace(hat_matrix.t()*hat_matrix)));
+  double aicc = 2*n*log(sigma_hat) + n*log(2*M_PI) + n*(n+arma::trace(hat_matrix)/(n-2-arma::trace(hat_matrix)));
 
   return Rcpp::List::create(
     Named("Coefficient") = betas,
