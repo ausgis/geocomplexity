@@ -5,12 +5,31 @@ using namespace arma;
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
+arma::vec Normalize4Interval(const arma::vec& v, double a, double b) {
+  double min_v = arma::min(v);
+  double max_v = arma::max(v);
+
+  // Prevent division by zero
+  if (max_v == min_v) {
+    return arma::vec(v.n_elem, arma::fill::ones) * (a + b) / 2;
+  }
+
+  // Normalize to [0, 1]
+  arma::vec v_normalized = (v - min_v) / (max_v - min_v);
+
+  // Normalize to [a, b]
+  arma::vec v_scaled = a + v_normalized * (b - a);
+
+  return v_scaled;
+}
+
 // [[Rcpp::export]]
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
                       arma::vec gcs, arma::mat Cdist,
                       double bw, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
+  arma::vec gcs_new = Normalize4Interval(gcs,1,10);
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
@@ -24,7 +43,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double gc = gcs(j) / gcs(i);
+      double gc = gcs_new(j) / gcs_new(i);
       gc_wt(j) = gc;
 
       double dist = Cdist(i,j);
@@ -94,5 +113,3 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     Named("AICc") = aicc
   );
 }
-
-
