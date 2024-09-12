@@ -14,8 +14,8 @@
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. If `wt` is not
 #' provided, `geocomplexity` will use a first-order queen adjacency binary matrix via
 #' `sdsfun` package.
-#' @param alternative (optional) Specification of alternative hypothesis as 'greater' (default),
-#' 'lower', or 'two.sided'.
+#' @param alternative (optional) Specification of alternative hypothesis as `greater` (default),
+#' `lower`, or `two.sided`.
 #' @param symmetrize (optional) Whether or not to symmetrize the asymmetrical spatial weight matrix
 #' \emph{\strong{wt}} by: 1/2 * (\emph{\strong{wt}} + \emph{\strong{wt}}'). Default is `FALSE`.
 #'
