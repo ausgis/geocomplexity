@@ -8,7 +8,7 @@ using namespace arma;
 // [[Rcpp::export]]
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
                       arma::vec gcs, arma::mat Cdist,
-                      double bw, std::string kernel = "boxcar") {
+                      double bw, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
@@ -47,8 +47,11 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
     arma::vec XtWy = X_with_intercept.t() * W * y;
 
+    // Regularization to avoid singular matrix
+    arma::mat XtWX_reg = XtWX + 1e-5 * arma::eye(XtWX.n_rows, XtWX.n_cols);
+
     // Solve Local Regression Coefficient
-    arma::vec beta_i = arma::solve(XtWX, XtWy);
+    arma::vec beta_i = arma::solve(XtWX_reg, XtWy);
     Rcpp::Rcout << "betas.row(i): " << betas.row(i).n_cols << " columns" << std::endl;
     Rcpp::Rcout << "beta_i: " << beta_i.n_rows << " rows, " << beta_i.n_cols << " columns" << std::endl;
     betas.row(i) = beta_i.t();
