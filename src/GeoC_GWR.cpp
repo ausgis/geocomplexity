@@ -52,7 +52,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     betas.row(i) = beta_i;
 
     // Calculate Residuals: y_i - X_i * beta_i
-    double y_hat_i = sum(X_with_intercept.row(i) * beta_i);
+    double y_hat_i = arma::sum(X_with_intercept.row(i) * beta_i);
     residuals(i) = y(i) - y_hat_i;
     yhat(i) = y_hat_i;
 
@@ -68,22 +68,27 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   }
 
   arma::mat t_values = betas / se_betas;
-  vec rss = sum(pow(residuals, 2));
-  double tss = sum(pow(y - mean(y), 2));
+  vec rss = arma::sum(arma::pow(residuals, 2));
+  double tss = arma::sum(arma::pow(y - arma::mean(y), 2));
   vec r2 = 1 - (rss / tss);
   vec adjr2 = 1 - (1 - r2) * (n - 1) / (n - k - 1);
   vec rmse = sqrt(rss / n);
+  vec aic = n * log(rss / n) + 2 * k;
+  vec sigma_hat = rss / (n - (2*arma::trace(hat_matrix)-arma::trace(hat_matrix.t()*hat_matrix)));
+  vec aicc = 2*n*log(sigma_hat) + n*log(2*M_PI) + n*(n+arma::trace(hat_matrix)/(n-2-arma::trace(hat_matrix)));
 
   return Rcpp::List::create(
-    Named("betas") = betas,
+    Named("Coefficient") = betas,
     Named("t_values") = t_values,
-    Named("se_betas") = se_betas,
+    Named("SE_Coefficient") = se_betas,
     Named("yhat") = yhat,
-    Named("residuals") = residuals,
-    Named("rss") = rss,
-    Named("r2") = r2,
-    Named("adjr2") = adjr2,
-    Named("rmse") = rmse
+    Named("Residuals") = residuals,
+    Named("RSS") = rss,
+    Named("R2") = r2,
+    Named("R2_Adj") = adjr2,
+    Named("RMSE") = rmse,
+    Named("AIC") = aic,
+    Named("AICc") = aicc
   );
 }
 
