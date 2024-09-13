@@ -50,5 +50,4 @@ Suggests:
 LinkingTo: 
     Rcpp,
     RcppArmadillo
-LazyData: true
 VignetteBuilder: knitr
