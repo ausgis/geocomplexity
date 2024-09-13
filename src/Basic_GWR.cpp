@@ -6,12 +6,10 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
-                      arma::vec gcs, arma::mat Cdist,
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
                       double bw, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
-  arma::vec gcs_new = Normalize4Interval(gcs,1,10);
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
@@ -20,14 +18,10 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   arma::vec yhat = zeros(n);
 
   for (int i = 0; i < n; ++i) {
-    arma::vec gc_wt = arma::zeros(n);
     arma::vec dist_wt = arma::zeros(n);
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double gc = gcs_new(j) / gcs_new(i);
-      gc_wt(j) = gc;
-
       double dist = Cdist(i,j);
       if (kernel == "gaussian") {
         dist_wt(j) = gaussian_kernel(dist, bw);
@@ -42,8 +36,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
       }
 
     }
-    arma::vec wt = gc_wt % dist_wt;
-    arma::mat W = arma::diagmat(wt);
+    arma::mat W = arma::diagmat(dist_wt);
     // Weighted Least Squares
     arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
     arma::vec XtWy = X_with_intercept.t() * W * y;
@@ -113,5 +106,3 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     Named("AICc") = aiccb
   );
 }
-
-
