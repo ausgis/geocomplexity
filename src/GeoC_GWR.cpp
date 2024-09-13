@@ -20,7 +20,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
   arma::mat hat_matrix = zeros(n,n);
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
-  for (int i = 0; i < n; ++i){
+  for (int i = 0; i < k; ++i){
     gcs.col(i) = Normalize4Interval(gcs.col(i),1,100000);
   }
   arma::mat Cdist = EucdistM(gcs);
@@ -43,7 +43,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
 
       // Calculate Weight Matrix
       for (int j = 0; j < n; ++j) {
-        double dist1 = Gdist(i,j);
+        double dist1 = Cdist(i,j);
         double dist2 = Gdist(i,j);
         if (kernel == "gaussian") {
           gc_wt(j) = gaussian_kernel(dist1, current_bw1);
