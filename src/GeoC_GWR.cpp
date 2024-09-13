@@ -20,6 +20,9 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
   arma::mat hat_matrix = zeros(n,n);
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
+  for (int i = 0; i < n; ++i){
+    gcs.col(i) = Normalize4Interval(gcs.col(i),1,100000);
+  }
   arma::mat Cdist = EucdistM(gcs);
 
   if (adaptive) {
