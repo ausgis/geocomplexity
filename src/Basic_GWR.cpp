@@ -118,6 +118,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
   );
 }
 
+// [[Rcpp::export]]
 Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
                        arma::vec y, arma::mat X, arma::mat Cdist,
                        bool adaptive = true, std::string kernel = "gaussian") {

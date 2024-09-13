@@ -128,11 +128,10 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
   );
 }
 
-Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
-                      arma::vec y, arma::mat X,
-                      arma::vec gcs, arma::mat Cdist,
-                      bool adaptive = true, std::string kernel = "gaussian",
-                      const arma::vec& alpha = arma::vec{0.25,0.5,0.75}) {
+// [[Rcpp::export]]
+Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec alpha,
+                      arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
+                      bool adaptive = true, std::string kernel = "gaussian") {
   if (adaptive) {
     int n = knns.n_elem;
     int k = alpha.n_elem;
@@ -147,6 +146,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
         List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,0,knn,true,alpha_sel,kernel);
         double AICSel = GeoCGWRResult["AICc"];
         if (AICSel < AIC) {
+          AIC = AICSel;
           opt_knn = knn;
           opt_alpha = alpha_sel;
         }
@@ -171,6 +171,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
         List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,0,false,alpha_sel,kernel);
         double AICSel = GeoCGWRResult["AIC"];
         if (AICSel < AIC) {
+          AIC = AICSel;
           opt_bw = bw;
           opt_alpha = alpha_sel;
         }
@@ -185,10 +186,8 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
 }
 
 // [[Rcpp::export]]
-
-Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
-                   arma::mat Cdist, SEXP bw, bool adaptive = true,
-                   const arma::vec& alpha = arma::vec{0.25,0.5,0.75},
+Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
+                   SEXP bw, arma::vec alpha, bool adaptive = true,
                    std::string kernel = "gaussian") {
   arma::vec knns;
   arma::vec bws;
@@ -213,7 +212,7 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
     stop("Unsupported input type.");
   }
 
-  Rcpp::List res = GeoCGWRSel(bws,knns,y,X,gcs,Cdist,adaptive,kernel,alpha);
+  Rcpp::List res = GeoCGWRSel(bws,knns,alpha,y,X,gcs,Cdist,adaptive,kernel);
   double optbw = res[0];
   double optknn = res[1];
   double optalpha = res[2];

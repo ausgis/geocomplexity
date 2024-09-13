@@ -5,12 +5,24 @@ BasicGWRFit <- function(y, X, Cdist, bw = 0, knn = 0, adaptive = TRUE, kernel = 
     .Call(`_geocomplexity_BasicGWRFit`, y, X, Cdist, bw, knn, adaptive, kernel)
 }
 
+BasicGWRSel <- function(bandwidth, knns, y, X, Cdist, adaptive = TRUE, kernel = "gaussian") {
+    .Call(`_geocomplexity_BasicGWRSel`, bandwidth, knns, y, X, Cdist, adaptive, kernel)
+}
+
 BasicGWR <- function(y, X, Cdist, bw, adaptive = TRUE, kernel = "gaussian") {
     .Call(`_geocomplexity_BasicGWR`, y, X, Cdist, bw, adaptive, kernel)
 }
 
 GeoCGWRFit <- function(y, X, gcs, Cdist, bw = 0, knn = 0, adaptive = TRUE, alpha = 0.5, kernel = "gaussian") {
     .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Cdist, bw, knn, adaptive, alpha, kernel)
+}
+
+GeoCGWRSel <- function(bandwidth, knns, alpha, y, X, gcs, Cdist, adaptive = TRUE, kernel = "gaussian") {
+    .Call(`_geocomplexity_GeoCGWRSel`, bandwidth, knns, alpha, y, X, gcs, Cdist, adaptive, kernel)
+}
+
+GeoCGWR <- function(y, X, gcs, Cdist, bw, alpha, adaptive = TRUE, kernel = "gaussian") {
+    .Call(`_geocomplexity_GeoCGWR`, y, X, gcs, Cdist, bw, alpha, adaptive, kernel)
 }
 
 InforEntropy <- function(x) {
