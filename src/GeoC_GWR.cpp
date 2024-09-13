@@ -92,7 +92,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   double delta2 = sum(arma::diagvec(B1*B1));
   double nu1 = arma::trace(B2);
   double sigma2_b = rss / n;
-  double aicbb = 2*n*log(sqrt(sigma2_b)) + n*log(2*datum::pi) + (n * ((n + v1) / (n - 2 - v1)));
+  // double aicbb = 2*n*log(sqrt(sigma2_b)) + n*log(2*datum::pi) + (n * ((n + v1) / (n - 2 - v1)));
   double aichb = 2*n*log(sqrt(sigma2_b)) + n*log(2*datum::pi) + n + v1;
   double aiccb = 2*n*log(sqrt(sigma2_b)) + n*log(2*datum::pi) + n * ((delta1/delta2)*(n + nu1))/((pow(delta1,2)/delta2)-2);
 
@@ -108,8 +108,8 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     Named("R2") = r2,
     Named("R2_Adj") = adjr2,
     Named("RMSE") = rmse,
-    Named("AICb") = aicbb,
-    Named("AICh") = aichb,
+    // Named("AICb") = aicbb,
+    Named("AIC") = aichb,
     Named("AICc") = aiccb
   );
 }
