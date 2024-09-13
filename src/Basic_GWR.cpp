@@ -118,9 +118,9 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
   );
 }
 
-double BasicGWRSel(arma::vec bandwidth, arma::vec knns,
-                   arma::vec y, arma::mat X, arma::mat Cdist,
-                   bool adaptive = true, std::string kernel = "gaussian") {
+Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
+                       arma::vec y, arma::mat X, arma::mat Cdist,
+                       bool adaptive = true, std::string kernel = "gaussian") {
   if (adaptive) {
     int n = knns.n_elem;
     arma::vec AIC = zeros(n);
@@ -131,7 +131,10 @@ double BasicGWRSel(arma::vec bandwidth, arma::vec knns,
       AIC(i) = GWRResult["AIC"];
     }
 
-    return bandwidth(AIC.index_min());
+    return Rcpp::List::create(
+      Named("bw") = 0,
+      Named("knn") = knns(AIC.index_min())
+    );
 
   } else {
     int n = bandwidth.n_elem;
@@ -143,7 +146,11 @@ double BasicGWRSel(arma::vec bandwidth, arma::vec knns,
       AIC(i) = GWRResult["AIC"];
     }
 
-    return bandwidth(AIC.index_min());
+    return Rcpp::List::create(
+      Named("bw") = bandwidth(AIC.index_min()),
+      Named("knn") = 0
+    );
+
   }
 }
 
