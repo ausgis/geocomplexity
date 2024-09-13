@@ -7,7 +7,7 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
-                       double bw, double knn, bool adaptive = true,
+                       double bw = 0, double knn = 0, bool adaptive = true,
                        std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;

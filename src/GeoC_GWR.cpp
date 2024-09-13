@@ -6,8 +6,8 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs,
-                      arma::mat Cdist, double bw, double knn, bool adaptive = true,
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
+                      double bw = 0, double knn = 0, bool adaptive = true,
                       double alpha = 0.5, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
