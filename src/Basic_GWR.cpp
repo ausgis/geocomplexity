@@ -121,7 +121,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
 
 // [[Rcpp::export]]
 Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec y, arma::mat X, arma::mat Cdist,
-                       bool adaptive = false, std::string criterion = "RMSE",std::string kernel = "gaussian") {
+                       bool adaptive = false, std::string criterion = "RMSE", std::string kernel = "gaussian") {
   if (adaptive) {
     int n = knns.n_elem;
     arma::vec measures = zeros(n);
@@ -165,7 +165,9 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
   arma::vec bws;
   double MaxD = MaxInMatrix(Cdist);
   double MinD = MinInMatrix(Cdist);
+  std::string criterion = "RMSE";
   if (TYPEOF(bw) == STRSXP) {
+    std::string criterion = Rcpp::as<std::string>(bw);
     if (adaptive) {
       knns = ArmaSeq(3,15,1);
       bws = Double4Vec(0);
@@ -174,17 +176,13 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
       bws = ArmaSeq(MinD,MaxD/3,13);
     }
   } else if (TYPEOF(bw) == REALSXP) {
-    NumericVector numericInput(bw);
-    arma::vec v(numericInput.size());
-    for (int i = 0; i < numericInput.size(); ++i) {
-      v[i] = numericInput[i];
-    }
-    bws = v;
+    double v = Rcpp::as<double>(bw);
+    bws = Double4Vec(v);
   } else {
     stop("Unsupported input type.");
   }
 
-  Rcpp::List res = BasicGWRSel(bws,knns,y,X,Cdist,adaptive,kernel);
+  Rcpp::List res = BasicGWRSel(bws,knns,y,X,Cdist,adaptive,criterion,kernel);
   double optbw = res[0];
   double optknn = res[1];
   res = BasicGWRFit(y,X,Cdist,optbw,optknn,adaptive,kernel);
