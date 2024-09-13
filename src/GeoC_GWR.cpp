@@ -159,26 +159,30 @@ Rcpp::List GeoCGWRSel(arma::vec bwcs, arma::vec bwgs, arma::vec knns, arma::vec 
         }
       }
       return Rcpp::List::create(
-        Named("bw") = 0,
+        Named("bwc") = 0,
+        Named("bwg") = 0,
         Named("knn") = opt_knn,
         Named("alpha") = opt_alpha
       );
     } else {
-      int n = bandwidth.n_elem;
+      int n = bwcs.n_elem;
       int k = alpha.n_elem;
       double AIC = std::numeric_limits<double>::max();
-      double opt_bw = 0;
+      double opt_bwc = 0;
+      double opt_bwg = 0;
       double opt_alpha = 0;
 
       for (int i = 0; i < n; ++i) {
-        double bw = bandwidth(i);
+        double bwc = bwcs(i);
+        double bwg = bwgs(i);
         for (int j = 0; j < k; ++j) {
           double alpha_sel = alpha(j);
-          List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,0,false,alpha_sel,kernel);
-          double AICSel = GeoCGWRResult["AIC"];
+          List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Gdist,bwc,bwg,0,false,alpha_sel,kernel);
+          double AICSel = GeoCGWRResult["AICc"];
           if (AICSel < AIC) {
             AIC = AICSel;
-            opt_bw = bw;
+            opt_bwc = bwc;
+            opt_bwg = bwg;
             opt_alpha = alpha_sel;
           }
         }
@@ -194,36 +198,61 @@ Rcpp::List GeoCGWRSel(arma::vec bwcs, arma::vec bwgs, arma::vec knns, arma::vec 
 
 // [[Rcpp::export]]
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
-                   SEXP bw, bool adaptive = false,
+                   arma::mat Gdist, SEXP bwc, SEXP bwg,
+                   arma::vec alpha, bool adaptive = false,
                    std::string kernel = "gaussian") {
   arma::vec knns;
-  arma::vec bws;
+  arma::vec bwcs;
+  arma::vec bwgs;
   arma::mat Cdist = EucdistM(gcs);
-  double MaxD = MaxInMatrix(Cdist);
-  double MinD = MinInMatrix(Cdist);
-  if (TYPEOF(bw) == STRSXP) {
+  double MaxCD = MaxInMatrix(Cdist);
+  double MinCD = MinInMatrix(Cdist);
+  double MaxGD = MaxInMatrix(Gdist);
+  double MinGD = MinInMatrix(Gdist);
+  if (TYPEOF(bwc) == STRSXP) {
     if (adaptive) {
       knns = ArmaSeq(3,15,1);
-      bws = Double4Vec(0);
+      bwcs = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bws = ArmaSeq(MinD,MaxD/3,13);
+      bwcs = ArmaSeq(MinCD,MaxCD/3,13);
     }
-  } else if (TYPEOF(bw) == REALSXP) {
-    NumericVector numericInput(bw);
+  } else if (TYPEOF(bwc) == REALSXP) {
+    NumericVector numericInput(bwc);
     arma::vec v(numericInput.size());
     for (int i = 0; i < numericInput.size(); ++i) {
       v[i] = numericInput[i];
     }
-    bws = v;
+    bwcs = v;
   } else {
     stop("Unsupported input type.");
   }
 
-  Rcpp::List res = GeoCGWRSel(bws,knns,y,X,gcs,adaptive,kernel);
-  double optbw = res[0];
-  double optknn = res[1];
-  res = GeoCGWRFit(y,X,gcs,optbw,optknn,adaptive,kernel);
+  if (TYPEOF(bwg) == STRSXP) {
+    if (adaptive) {
+      knns = ArmaSeq(3,15,1);
+      bwgs = Double4Vec(0);
+    } else {
+      knns = Double4Vec(0);
+      bwgs = ArmaSeq(MinGD,MaxGD/3,13);
+    }
+  } else if (TYPEOF(bwg) == REALSXP) {
+    NumericVector numericInput(bwc);
+    arma::vec v(numericInput.size());
+    for (int i = 0; i < numericInput.size(); ++i) {
+      v[i] = numericInput[i];
+    }
+    bwgs = v;
+  } else {
+    stop("Unsupported input type.");
+  }
+
+  Rcpp::List res = GeoCGWRSel(bwcs,bwgs,knns,alpha,y,X,gcs,Gdist,adaptive,kernel);
+  double optbwc = res[0];
+  double optbwg = res[1];
+  double optknn = res[2];
+  double optalpha = res[3];
+  res = GeoCGWRFit(y,X,gcs,Gdist,optbwc,optbwg,optknn,adaptive,optalpha,kernel);
   return res;
 }
 
@@ -392,7 +421,7 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
 //       for (int j = 0; j < k; ++j) {
 //         double alpha_sel = alpha(j);
 //         List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,0,false,alpha_sel,kernel);
-//         double AICSel = GeoCGWRResult["AIC"];
+//         double AICSel = GeoCGWRResult["AICc"];
 //         if (AICSel < AIC) {
 //           AIC = AICSel;
 //           opt_bw = bw;
