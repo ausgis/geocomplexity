@@ -5,8 +5,8 @@ BasicGWRFit <- function(y, X, Cdist, bw = 0, knn = 0, adaptive = FALSE, kernel =
     .Call(`_geocomplexity_BasicGWRFit`, y, X, Cdist, bw, knn, adaptive, kernel)
 }
 
-BasicGWRSel <- function(bandwidth, knns, y, X, Cdist, adaptive = FALSE, kernel = "gaussian") {
-    .Call(`_geocomplexity_BasicGWRSel`, bandwidth, knns, y, X, Cdist, adaptive, kernel)
+BasicGWRSel <- function(bandwidth, knns, y, X, Cdist, adaptive = FALSE, criterion = "RMSE", kernel = "gaussian") {
+    .Call(`_geocomplexity_BasicGWRSel`, bandwidth, knns, y, X, Cdist, adaptive, criterion, kernel)
 }
 
 BasicGWR <- function(y, X, Cdist, bw, adaptive = FALSE, kernel = "gaussian") {
