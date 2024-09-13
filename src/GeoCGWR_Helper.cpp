@@ -99,3 +99,13 @@ arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k) {
 
   return bandwidths;
 }
+
+double MaxInMatrix(const arma::mat& mat) {
+  double maxVal = arma::max(arma::max(mat));
+  return maxVal;
+}
+
+double MinInMatrix(const arma::mat& mat) {
+  double maxVal = arma::min(arma::min(mat));
+  return maxVal;
+}

@@ -13,7 +13,7 @@ arma::mat DiagMatrix(int n);
 arma::vec ArmaSeq(double start, double end, double step);
 arma::vec Double4Vec(double x);
 arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k);
-double maxInMatrix(const arma::mat& mat);
-double minInMatrix(const arma::mat& mat);
+double MaxInMatrix(const arma::mat& mat);
+double MinInMatrix(const arma::mat& mat);
 
 #endif // GEOCGWR_HELPER_H
