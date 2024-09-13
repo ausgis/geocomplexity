@@ -187,7 +187,8 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
 // [[Rcpp::export]]
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
                    arma::mat Cdist, SEXP bw, bool adaptive = true,
-                   arma::vec alpha, std::string kernel = "gaussian"){
+                   const arma::vec& v = arma::vec{0.25,0.5,0.75},
+                   std::string kernel = "gaussian"){
   arma::vec knns;
   arma::vec bws;
   double MaxD = MaxInMatrix(Cdist);
