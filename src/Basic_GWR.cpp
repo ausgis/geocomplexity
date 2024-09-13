@@ -6,8 +6,8 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
-                      double bw, std::string kernel = "gaussian") {
+Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
+                       double bw, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
