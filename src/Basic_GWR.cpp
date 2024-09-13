@@ -145,6 +145,5 @@ double BasicGWRSel(arma::vec bandwidth, arma::vec knns,
 
     return bandwidth(AIC.index_min());
   }
-
 }
 

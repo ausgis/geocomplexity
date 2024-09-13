@@ -7,10 +7,11 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs,
-                      arma::mat Cdist, double bw, double knn,
+                      arma::mat Cdist, double bw, double knn, bool adaptive = true,
                       double alpha = 0.5, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
+  arma::vec bw_vec;
   arma::vec gcs_new = Normalize4Interval(gcs,1,10);
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
@@ -19,9 +20,18 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs,
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
 
+  if (adaptive) {
+    bw_vec = GenAdaptiveKNNBW(Cdist,knn);
+  } else {
+    bw_vec = Double4Vec(bw);
+  }
+
   for (int i = 0; i < n; ++i) {
     arma::vec gc_wt = arma::zeros(n);
     arma::vec dist_wt = arma::zeros(n);
+
+    // Determine bandwidth for the current point
+    double current_bw = adaptive ? bw_vec(i) : bw_vec(0);
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
@@ -30,15 +40,15 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs,
 
       double dist = Cdist(i,j);
       if (kernel == "gaussian") {
-        dist_wt(j) = gaussian_kernel(dist, bw);
+        dist_wt(j) = gaussian_kernel(dist, current_bw);
       } else if (kernel == "exponential") {
-        dist_wt(j) = exponential_kernel(dist, bw);
+        dist_wt(j) = exponential_kernel(dist, current_bw);
       } else if (kernel == "bisquare") {
-        dist_wt(j) = bisquare_kernel(dist, bw);
+        dist_wt(j) = bisquare_kernel(dist, current_bw);
       } else if (kernel == "triangular") {
-        dist_wt(j) = triangular_kernel(dist, bw);
+        dist_wt(j) = triangular_kernel(dist, current_bw);
       }  else if (kernel == "boxcar") {
-        dist_wt(j) = boxcar_kernel(dist, bw);
+        dist_wt(j) = boxcar_kernel(dist, current_bw);
       }
 
     }
@@ -118,30 +128,56 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs,
   );
 }
 
-Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec y, arma::mat X,
+Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
+                      arma::vec y, arma::mat X,
                       arma::vec gcs, arma::mat Cdist,
-                      std::string kernel = "gaussian",
+                      bool adaptive = true, std::string kernel = "gaussian",
                       arma::vec alpha = ArmaSeq(0.1,1,0.1)) {
-  int n = bandwidth.n_elem;
-  int k = alpha.n_elem;
-  double AIC = std::numeric_limits<double>::max();
-  double opt_bw = 0;
-  double opt_alpha = 0;
+  if (adaptive) {
+    int n = knns.n_elem;
+    int k = alpha.n_elem;
+    double AIC = std::numeric_limits<double>::max();
+    double opt_knn = 0;
+    double opt_alpha = 0;
 
-  for (int i = 0; i < n; ++i) {
-    double bw = bandwidth(i);
-    for (int j = 0; j < k; ++j) {
-      double alpha_sel = alpha(j);
-      List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,alpha_sel,kernel);
-      double AICSel = GeoCGWRResult["AIC"];
-      if (AICSel < AIC) {
-        opt_bw = bw;
-        opt_alpha = alpha_sel;
+    for (int i = 0; i < n; ++i) {
+      double knn = knns(i);
+      for (int j = 0; j < k; ++j) {
+        double alpha_sel = alpha(j);
+        List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,0,knn,true,alpha_sel,kernel);
+        double AICSel = GeoCGWRResult["AIC"];
+        if (AICSel < AIC) {
+          opt_knn = knn;
+          opt_alpha = alpha_sel;
+        }
       }
     }
+    return Rcpp::List::create(
+      Named("knn") = opt_knn,
+      Named("alpha") = opt_alpha
+    );
+  } else {
+    int n = bandwidth.n_elem;
+    int k = alpha.n_elem;
+    double AIC = std::numeric_limits<double>::max();
+    double opt_bw = 0;
+    double opt_alpha = 0;
+
+    for (int i = 0; i < n; ++i) {
+      double bw = bandwidth(i);
+      for (int j = 0; j < k; ++j) {
+        double alpha_sel = alpha(j);
+        List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,0,false,alpha_sel,kernel);
+        double AICSel = GeoCGWRResult["AIC"];
+        if (AICSel < AIC) {
+          opt_bw = bw;
+          opt_alpha = alpha_sel;
+        }
+      }
+    }
+    return Rcpp::List::create(
+      Named("bandwidth") = opt_bw,
+      Named("alpha") = opt_alpha
+    );
   }
-  return Rcpp::List::create(
-    Named("bandwidth") = opt_bw,
-    Named("alpha") = opt_alpha
-  );
 }
