@@ -28,6 +28,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// BasicGWR
+Rcpp::List BasicGWR(arma::vec y, arma::mat X, arma::mat Cdist, SEXP bw, bool adaptive, std::string kernel);
+RcppExport SEXP _geocomplexity_BasicGWR(SEXP ySEXP, SEXP XSEXP, SEXP CdistSEXP, SEXP bwSEXP, SEXP adaptiveSEXP, SEXP kernelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Cdist(CdistSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type bw(bwSEXP);
+    Rcpp::traits::input_parameter< bool >::type adaptive(adaptiveSEXP);
+    Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
+    rcpp_result_gen = Rcpp::wrap(BasicGWR(y, X, Cdist, bw, adaptive, kernel));
+    return rcpp_result_gen;
+END_RCPP
+}
 // GeoCGWRFit
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist, double bw, double knn, bool adaptive, double alpha, std::string kernel);
 RcppExport SEXP _geocomplexity_GeoCGWRFit(SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP CdistSEXP, SEXP bwSEXP, SEXP knnSEXP, SEXP adaptiveSEXP, SEXP alphaSEXP, SEXP kernelSEXP) {
@@ -44,6 +60,24 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
     rcpp_result_gen = Rcpp::wrap(GeoCGWRFit(y, X, gcs, Cdist, bw, knn, adaptive, alpha, kernel));
+    return rcpp_result_gen;
+END_RCPP
+}
+// GeoCGWR
+Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist, SEXP bw, bool adaptive, arma::vec alpha, std::string kernel);
+RcppExport SEXP _geocomplexity_GeoCGWR(SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP CdistSEXP, SEXP bwSEXP, SEXP adaptiveSEXP, SEXP alphaSEXP, SEXP kernelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type gcs(gcsSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Cdist(CdistSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type bw(bwSEXP);
+    Rcpp::traits::input_parameter< bool >::type adaptive(adaptiveSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
+    rcpp_result_gen = Rcpp::wrap(GeoCGWR(y, X, gcs, Cdist, bw, adaptive, alpha, kernel));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -205,7 +239,9 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_BasicGWRFit", (DL_FUNC) &_geocomplexity_BasicGWRFit, 7},
+    {"_geocomplexity_BasicGWR", (DL_FUNC) &_geocomplexity_BasicGWR, 6},
     {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 9},
+    {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 8},
     {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_GeoCSWT", (DL_FUNC) &_geocomplexity_GeoCSWT, 3},
