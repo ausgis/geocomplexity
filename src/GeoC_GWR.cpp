@@ -42,7 +42,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
       }
 
     }
-    arma::vec wt = gc_wt % dist_wt;
+    arma::vec wt = Normalize4Interval(gc_wt % dist_wt,0,1);
     arma::mat W = arma::diagmat(wt);
     // Weighted Least Squares
     arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
