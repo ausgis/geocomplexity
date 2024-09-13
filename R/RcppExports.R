@@ -13,10 +13,6 @@ GeoCGWRFit <- function(y, X, gcs, Cdist, bw = 0, knn = 0, adaptive = TRUE, alpha
     .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Cdist, bw, knn, adaptive, alpha, kernel)
 }
 
-GeoCGWR <- function(y, X, gcs, Cdist, bw, adaptive = TRUE, alpha, kernel = "gaussian") {
-    .Call(`_geocomplexity_GeoCGWR`, y, X, gcs, Cdist, bw, adaptive, alpha, kernel)
-}
-
 InforEntropy <- function(x) {
     .Call(`_geocomplexity_InforEntropy`, x)
 }
