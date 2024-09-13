@@ -128,7 +128,7 @@ Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
     for (int i = 0; i < n; ++i) {
       double knn = knns(i);
       List GWRResult = BasicGWRFit(y,X,Cdist,0,knn,true,kernel);
-      AIC(i) = GWRResult["AIC"];
+      AIC(i) = GWRResult["AICc"];
     }
 
     return Rcpp::List::create(
@@ -163,7 +163,7 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
   arma::vec knns;
   arma::vec bws;
   double MaxD = MaxInMatrix(Cdist);
-  double MinD = MaxInMatrix(Cdist);
+  double MinD = MinInMatrix(Cdist);
   if (TYPEOF(bw) == STRSXP) {
     if (adaptive) {
       knns = ArmaSeq(3,15,1);

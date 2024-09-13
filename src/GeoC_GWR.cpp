@@ -132,7 +132,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
                       arma::vec y, arma::mat X,
                       arma::vec gcs, arma::mat Cdist,
                       bool adaptive = true, std::string kernel = "gaussian",
-                      arma::vec alpha = ArmaSeq(0.1,1,0.1)) {
+                      const arma::vec& alpha = arma::vec{0.25,0.5,0.75}) {
   if (adaptive) {
     int n = knns.n_elem;
     int k = alpha.n_elem;
@@ -145,7 +145,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
       for (int j = 0; j < k; ++j) {
         double alpha_sel = alpha(j);
         List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,0,knn,true,alpha_sel,kernel);
-        double AICSel = GeoCGWRResult["AIC"];
+        double AICSel = GeoCGWRResult["AICc"];
         if (AICSel < AIC) {
           opt_knn = knn;
           opt_alpha = alpha_sel;
@@ -193,7 +193,7 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
   arma::vec knns;
   arma::vec bws;
   double MaxD = MaxInMatrix(Cdist);
-  double MinD = MaxInMatrix(Cdist);
+  double MinD = MinInMatrix(Cdist);
   if (TYPEOF(bw) == STRSXP) {
     if (adaptive) {
       knns = ArmaSeq(3,15,1);
