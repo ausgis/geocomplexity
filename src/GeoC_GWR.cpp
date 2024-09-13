@@ -81,6 +81,8 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   double v1 = arma::trace(hat_matrix);
   arma::mat B2 = hat_matrix.t() * hat_matrix;
   double v2 = arma::trace(B2);
+  // effective n.p. is 2*v1 - v2
+  double enp = 2*v1 - v2;
   // effective d.f. is n - 2*v1 + v2
   double edf = n - 2*v1 + v2;
   arma::mat B1 = (DiagMatrix(n) - hat_matrix).t() * (DiagMatrix(n) - hat_matrix);
@@ -101,6 +103,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     Named("yhat") = yhat,
     Named("Residuals") = residuals,
     Named("RSS") = rss,
+    Named("ENP") = enp,
     Named("EDF") = edf,
     Named("R2") = r2,
     Named("R2_Adj") = adjr2,
@@ -110,3 +113,5 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     Named("AICc") = aiccb
   );
 }
+
+
