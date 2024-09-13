@@ -186,4 +186,5 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
   double optbw = res[0];
   double optknn = res[1];
   res = BasicGWRFit(y,X,Cdist,optbw,optknn,adaptive,kernel);
+  return res;
 }
