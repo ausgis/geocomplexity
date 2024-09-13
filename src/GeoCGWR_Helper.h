@@ -15,5 +15,6 @@ arma::vec Double4Vec(double x);
 arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k);
 double MaxInMatrix(const arma::mat& mat);
 double MinInMatrix(const arma::mat& mat);
+arma::mat EucdistM(const arma::mat& X);
 
 #endif // GEOCGWR_HELPER_H

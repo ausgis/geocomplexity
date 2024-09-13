@@ -145,7 +145,7 @@ Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
     for (int i = 0; i < n; ++i) {
       double bw = bandwidth(i);
       List GWRResult = BasicGWRFit(y,X,Cdist,bw,0,false,kernel);
-      AIC(i) = GWRResult["AIC"];
+      AIC(i) = GWRResult["AICc"];
     }
 
     return Rcpp::List::create(

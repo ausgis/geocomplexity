@@ -109,3 +109,17 @@ double MinInMatrix(const arma::mat& mat) {
   double maxVal = arma::min(arma::min(mat));
   return maxVal;
 }
+
+arma::mat EucdistM(const arma::mat& X) {
+  int n = X.n_rows;
+  arma::mat dist_matrix(n, n, arma::fill::zeros);
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = i + 1; j < n; ++j) {
+      double dist = arma::norm(X.row(i) - X.row(j), 2);
+      dist_matrix(i, j) = dist;
+      dist_matrix(j, i) = dist;
+    }
+  }
+  return dist_matrix;
+}
