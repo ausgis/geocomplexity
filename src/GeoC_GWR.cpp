@@ -181,3 +181,26 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
     );
   }
 }
+
+// [[Rcpp::export]]
+Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
+                   arma::mat Cdist, SEXP bw, bool adaptive = true,
+                   std::string kernel = "gaussian"){
+  if (TYPEOF(bw) == STRSXP) {
+    std::string str = as<std::string>(input);
+    double value = std::stod(str);
+    arma::vec v(1);
+    v[0] = value;
+    return v;
+  } else if (TYPEOF(input) == REALSXP) {
+    // 处理浮点数输入
+    NumericVector numericInput(input);
+    arma::vec v(numericInput.size());
+    for (size_t i = 0; i < numericInput.size(); ++i) {
+      v[i] = numericInput[i];
+    }
+    return v;
+  } else {
+    stop("Unsupported input type.");
+  }
+}
