@@ -68,3 +68,14 @@ arma::mat DiagMatrix(int n) {
 
   return diag_mat;
 }
+
+arma::vec ArmaSeq(double start, double end, double step) {
+  int num_elements = static_cast<int>(std::floor((end - start) / step)) + 1;
+  arma::vec sequence(num_elements);
+
+  for (int i = 0; i < num_elements; ++i) {
+    sequence(i) = start + i * step;
+  }
+
+  return sequence;
+}

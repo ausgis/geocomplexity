@@ -10,5 +10,6 @@ double triangular_kernel(double dist, double bw);
 double boxcar_kernel(double dist, double bw);
 arma::vec Normalize4Interval(const arma::vec& v, double a, double b);
 arma::mat DiagMatrix(int n);
+arma::vec ArmaSeq(double start, double end, double step);
 
 #endif // GEOCGWR_HELPER_H

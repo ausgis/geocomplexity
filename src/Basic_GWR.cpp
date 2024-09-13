@@ -106,3 +106,18 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
     Named("AICc") = aiccb
   );
 }
+
+double BasicGWRSel(arma::vec bandwidth, arma::vec y, arma::mat X,
+                   arma::mat Cdist, std::string kernel = "gaussian") {
+  int n = bandwidth.n_elem;
+  arma::vec AIC = zeros(n);
+
+  for (int i = 0; i < n; ++i) {
+    double bw = bandwidth(i);
+    List GWRResult = BasicGWRFit(y,X,Cdist,bw,kernel);
+    AIC(i) = GWRResult["AIC"];
+  }
+
+  return AIC.index_min();
+}
+
