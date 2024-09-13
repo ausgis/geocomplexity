@@ -118,4 +118,30 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
   );
 }
 
+Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec y, arma::mat X,
+                      arma::vec gcs, arma::mat Cdist,
+                      std::string kernel = "gaussian",
+                      arma::vec alpha = ArmaSeq(0.1,1,0.1)) {
+  int n = bandwidth.n_elem;
+  int k = alpha.n_elem;
+  double AIC = std::numeric_limits<double>::max();
+  double opt_bw = 0;
+  double opt_alpha = 0;
 
+  for (int i = 0; i < n; ++i) {
+    double bw = bandwidth(i);
+    for (int j = 0; j < k; ++j) {
+      double alpha_sel = alpha(j);
+      List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,alpha_sel,kernel);
+      double AICSel = GeoCGWRResult["AIC"];
+      if (AICSel < AIC) {
+        opt_bw = bw;
+        opt_alpha = alpha_sel;
+      }
+    }
+  }
+  return Rcpp::List::create(
+    Named("bandwidth") = opt_bw,
+    Named("alpha") = opt_alpha
+  );
+}
