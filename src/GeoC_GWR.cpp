@@ -6,13 +6,14 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs,
-                      double bw = 0, double knn = 0,
-                      bool adaptive = false,
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
+                      double bwc = 0, double bwg = 0, double knn = 0,
+                      bool adaptive = false, double alpha = 0.5,
                       std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
-  arma::vec bw_vec;
+  arma::vec bwc_vec;
+  arma::vec bwg_vec;
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
@@ -22,61 +23,71 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs,
   arma::mat Cdist = EucdistM(gcs);
 
   if (adaptive) {
-    bw_vec = GenAdaptiveKNNBW(Cdist,knn);
+    bwc_vec = GenAdaptiveKNNBW(Cdist,knn);
+    bwg_vec = GenAdaptiveKNNBW(Gdist,knn);
   } else {
-    bw_vec = Double4Vec(bw);
+    bwc_vec = Double4Vec(bwc);
+    bwg_vec = Double4Vec(bwg);
   }
 
-  for (int i = 0; i < n; ++i) {
-    arma::vec dist_wt = arma::zeros(n);
+    for (int i = 0; i < n; ++i) {
+      arma::vec gc_wt = arma::zeros(n);
+      arma::vec dist_wt = arma::zeros(n);
 
-    // Determine bandwidth for the current point
-    double current_bw = adaptive ? bw_vec(i) : bw_vec(0);
+      // Determine bandwidth for the current point
+      double current_bw1 = adaptive ? bwc_vec(i) : bwc_vec(0);
+      double current_bw2 = adaptive ? bwg_vec(i) : bwg_vec(0);
 
-    // Calculate Weight Matrix
-    for (int j = 0; j < n; ++j) {
-      double dist = Cdist(i,j);
-      if (kernel == "gaussian") {
-        dist_wt(j) = gaussian_kernel(dist, current_bw);
-      } else if (kernel == "exponential") {
-        dist_wt(j) = exponential_kernel(dist, current_bw);
-      } else if (kernel == "bisquare") {
-        dist_wt(j) = bisquare_kernel(dist, current_bw);
-      } else if (kernel == "triangular") {
-        dist_wt(j) = triangular_kernel(dist, current_bw);
-      }  else if (kernel == "boxcar") {
-        dist_wt(j) = boxcar_kernel(dist, current_bw);
+      // Calculate Weight Matrix
+      for (int j = 0; j < n; ++j) {
+        double dist1 = Gdist(i,j);
+        double dist2 = Gdist(i,j);
+        if (kernel == "gaussian") {
+          gc_wt(j) = gaussian_kernel(dist1, current_bw1);
+          dist_wt(j) = gaussian_kernel(dist2, current_bw2);
+        } else if (kernel == "exponential") {
+          gc_wt(j) = exponential_kernel(dist1, current_bw1);
+          dist_wt(j) = exponential_kernel(dist2, current_bw2);
+        } else if (kernel == "bisquare") {
+          gc_wt(j) = bisquare_kernel(dist1, current_bw1);
+          dist_wt(j) = bisquare_kernel(dist2, current_bw2);
+        } else if (kernel == "triangular") {
+          gc_wt(j) = triangular_kernel(dist1, current_bw1);
+          dist_wt(j) = triangular_kernel(dist2, current_bw2);
+        }  else if (kernel == "boxcar") {
+          gc_wt(j) = boxcar_kernel(dist2, current_bw1);
+          dist_wt(j) = boxcar_kernel(dist2, current_bw2);
+        }
+
       }
+      arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
+      arma::mat W = arma::diagmat(wt);
 
-    }
-    dist_wt = Normalize4Interval(dist_wt,0,0.5);
+      // Weighted Least Squares
+      arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
+      arma::vec XtWy = X_with_intercept.t() * W * y;
 
-    arma::mat W = arma::diagmat(dist_wt);
-    // Weighted Least Squares
-    arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
-    arma::vec XtWy = X_with_intercept.t() * W * y;
+      // Regularization to avoid singular matrix
+      arma::mat XtWX_reg = XtWX + 1e-5 * arma::eye(XtWX.n_rows, XtWX.n_cols);
 
-    // Regularization to avoid singular matrix
-    arma::mat XtWX_reg = XtWX + 1e-5 * arma::eye(XtWX.n_rows, XtWX.n_cols);
+      // Solve Local Regression Coefficient
+      arma::vec beta_i = arma::solve(XtWX_reg, XtWy);
+      betas.row(i) = beta_i.t();
 
-    // Solve Local Regression Coefficient
-    arma::vec beta_i = arma::solve(XtWX_reg, XtWy);
-    betas.row(i) = beta_i.t();
+      // Calculate Residuals: y_i - X_i * beta_i
+      double y_hat_i = arma::as_scalar(X_with_intercept.row(i) * beta_i);
+      residuals(i) = y(i) - y_hat_i;
+      yhat(i) = y_hat_i;
 
-    // Calculate Residuals: y_i - X_i * beta_i
-    double y_hat_i = arma::as_scalar(X_with_intercept.row(i) * beta_i);
-    residuals(i) = y(i) - y_hat_i;
-    yhat(i) = y_hat_i;
+      // Calculate the Diagonal Elements of the Cap Hat Matrix
+      arma::mat XtWX_inv = arma::inv(XtWX);
+      arma::rowvec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
+      hat_matrix.row(i) = hat_row;
 
-    // Calculate the Diagonal Elements of the Cap Hat Matrix
-    arma::mat XtWX_inv = arma::inv(XtWX);
-    arma::rowvec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
-    hat_matrix.row(i) = hat_row;
-
-    // Standard Error of Calculated Coefficient
-    double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
-    arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
-    se_betas.row(i) = se_beta_i.t();
+      // Standard Error of Calculated Coefficient
+      double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
+      arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
+      se_betas.row(i) = se_beta_i.t();
   }
 
   // Compute additional metrics
@@ -124,41 +135,62 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs,
 }
 
 // [[Rcpp::export]]
-Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
-                      arma::vec y, arma::mat X, arma::mat gcs,
+Rcpp::List GeoCGWRSel(arma::vec bwcs, arma::vec bwgs, arma::vec knns, arma::vec alpha,
+                      arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
                       bool adaptive = false, std::string kernel = "gaussian") {
-  if (adaptive) {
-    int n = knns.n_elem;
-    arma::vec AIC = zeros(n);
+    if (adaptive) {
+      int n = knns.n_elem;
+      int k = alpha.n_elem;
+      double AIC = std::numeric_limits<double>::max();
+      double opt_knn = 0;
+      double opt_alpha = 0;
 
-    for (int i = 0; i < n; ++i) {
-      double knn = knns(i);
-      List GWRResult = GeoCGWRFit(y,X,gcs,0,knn,true,kernel);
-      AIC(i) = GWRResult["AICc"];
+      for (int i = 0; i < n; ++i) {
+        double knn = knns(i);
+        for (int j = 0; j < k; ++j) {
+          double alpha_sel = alpha(j);
+          List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Gdist,0,0,knn,true,alpha_sel,kernel);
+          double AICSel = GeoCGWRResult["AICc"];
+          if (AICSel < AIC) {
+            AIC = AICSel;
+            opt_knn = knn;
+            opt_alpha = alpha_sel;
+          }
+        }
+      }
+      return Rcpp::List::create(
+        Named("bw") = 0,
+        Named("knn") = opt_knn,
+        Named("alpha") = opt_alpha
+      );
+    } else {
+      int n = bandwidth.n_elem;
+      int k = alpha.n_elem;
+      double AIC = std::numeric_limits<double>::max();
+      double opt_bw = 0;
+      double opt_alpha = 0;
+
+      for (int i = 0; i < n; ++i) {
+        double bw = bandwidth(i);
+        for (int j = 0; j < k; ++j) {
+          double alpha_sel = alpha(j);
+          List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,0,false,alpha_sel,kernel);
+          double AICSel = GeoCGWRResult["AIC"];
+          if (AICSel < AIC) {
+            AIC = AICSel;
+            opt_bw = bw;
+            opt_alpha = alpha_sel;
+          }
+        }
+      }
+      return Rcpp::List::create(
+        Named("bwc") = opt_bwc,
+        Named("bwg") = opt_bwg,
+        Named("knn") = 0,
+        Named("alpha") = opt_alpha
+      );
     }
-
-    return Rcpp::List::create(
-      Named("bw") = 0,
-      Named("knn") = knns(AIC.index_min())
-    );
-
-  } else {
-    int n = bandwidth.n_elem;
-    arma::vec AIC = zeros(n);
-
-    for (int i = 0; i < n; ++i) {
-      double bw = bandwidth(i);
-      List GWRResult = GeoCGWRFit(y,X,gcs,bw,0,false,kernel);
-      AIC(i) = GWRResult["AICc"];
-    }
-
-    return Rcpp::List::create(
-      Named("bw") = bandwidth(AIC.index_min()),
-      Named("knn") = 0
-    );
-
   }
-}
 
 // [[Rcpp::export]]
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
@@ -246,8 +278,8 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
 //     gc_wt = Normalize4Interval(gc_wt,0,0.5);
 //     dist_wt = Normalize4Interval(dist_wt,0,0.5);
 //     arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
-//
 //     arma::mat W = arma::diagmat(wt);
+//
 //     // Weighted Least Squares
 //     arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
 //     arma::vec XtWy = X_with_intercept.t() * W * y;
