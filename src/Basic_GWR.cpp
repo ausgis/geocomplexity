@@ -154,3 +154,36 @@ Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
   }
 }
 
+// [[Rcpp::export]]
+Rcpp::List BasicGWR(arma::vec y, arma::mat X,
+                    arma::mat Cdist, SEXP bw,
+                    bool adaptive = true,
+                    std::string kernel = "gaussian"){
+  arma::vec knns;
+  arma::vec bws;
+  double MaxD = MaxInMatrix(Cdist);
+  double MinD = MaxInMatrix(Cdist);
+  if (TYPEOF(bw) == STRSXP) {
+    if (adaptive) {
+      knns = ArmaSeq(3,15,1);
+      bws = Double4Vec(0);
+    } else {
+      knns = Double4Vec(0);
+      bws = ArmaSeq(MinD,MaxD,13);
+    }
+  } else if (TYPEOF(bw) == REALSXP) {
+    NumericVector numericInput(bw);
+    arma::vec v(numericInput.size());
+    for (size_t i = 0; i < numericInput.size(); ++i) {
+      v[i] = numericInput[i];
+    }
+    bws = v;
+  } else {
+    stop("Unsupported input type.");
+  }
+
+  Rcpp::List res = BasicGWRSel(bws,knns,y,X,Cdist,adaptive,kernel);
+  double optbw = res[0];
+  double optknn = res[1];
+  res = BasicGWRFit(y,X,Cdist,optbw,optknn,adaptive,kernel);
+}
