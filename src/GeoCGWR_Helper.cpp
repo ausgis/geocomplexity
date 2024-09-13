@@ -79,3 +79,17 @@ arma::vec ArmaSeq(double start, double end, double step) {
 
   return sequence;
 }
+
+arma::vec GenAdaptiveBW(const arma::mat& D, int k) {
+  int n = D.n_rows;
+  arma::vec bandwidths(n);
+
+  for (int i = 0; i < n; ++i) {
+    arma::rowvec distances = D.row(i);
+    arma::uvec sorted_indices = sort_index(distances);
+    double bandwidth = distances(sorted_indices(k));
+    bandwidths(i) = bandwidth;
+  }
+
+  return bandwidths;
+}
