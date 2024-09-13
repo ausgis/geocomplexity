@@ -17,8 +17,8 @@ GeoCGWRFit <- function(y, X, gcs, Gdist, bwc = 0, bwg = 0, knn = 0, adaptive = F
     .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Gdist, bwc, bwg, knn, adaptive, alpha, kernel)
 }
 
-GeoCGWRSel <- function(bwcs, bwgs, knns, alpha, y, X, gcs, Gdist, adaptive = FALSE, kernel = "gaussian") {
-    .Call(`_geocomplexity_GeoCGWRSel`, bwcs, bwgs, knns, alpha, y, X, gcs, Gdist, adaptive, kernel)
+GeoCGWRSel <- function(bwcs, bwgs, knns, alpha, y, X, gcs, Gdist, adaptive = FALSE, criterion = "RMSE", kernel = "gaussian") {
+    .Call(`_geocomplexity_GeoCGWRSel`, bwcs, bwgs, knns, alpha, y, X, gcs, Gdist, adaptive, criterion, kernel)
 }
 
 GeoCGWR <- function(y, X, gcs, Gdist, bwc, bwg, alpha, adaptive = FALSE, kernel = "gaussian") {

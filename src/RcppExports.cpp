@@ -82,8 +82,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // GeoCGWRSel
-Rcpp::List GeoCGWRSel(arma::vec bwcs, arma::vec bwgs, arma::vec knns, arma::vec alpha, arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist, bool adaptive, std::string kernel);
-RcppExport SEXP _geocomplexity_GeoCGWRSel(SEXP bwcsSEXP, SEXP bwgsSEXP, SEXP knnsSEXP, SEXP alphaSEXP, SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP GdistSEXP, SEXP adaptiveSEXP, SEXP kernelSEXP) {
+Rcpp::List GeoCGWRSel(arma::vec bwcs, arma::vec bwgs, arma::vec knns, arma::vec alpha, arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist, bool adaptive, std::string criterion, std::string kernel);
+RcppExport SEXP _geocomplexity_GeoCGWRSel(SEXP bwcsSEXP, SEXP bwgsSEXP, SEXP knnsSEXP, SEXP alphaSEXP, SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP GdistSEXP, SEXP adaptiveSEXP, SEXP criterionSEXP, SEXP kernelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -96,8 +96,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type gcs(gcsSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type Gdist(GdistSEXP);
     Rcpp::traits::input_parameter< bool >::type adaptive(adaptiveSEXP);
+    Rcpp::traits::input_parameter< std::string >::type criterion(criterionSEXP);
     Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
-    rcpp_result_gen = Rcpp::wrap(GeoCGWRSel(bwcs, bwgs, knns, alpha, y, X, gcs, Gdist, adaptive, kernel));
+    rcpp_result_gen = Rcpp::wrap(GeoCGWRSel(bwcs, bwgs, knns, alpha, y, X, gcs, Gdist, adaptive, criterion, kernel));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -281,7 +282,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_BasicGWRSel", (DL_FUNC) &_geocomplexity_BasicGWRSel, 7},
     {"_geocomplexity_BasicGWR", (DL_FUNC) &_geocomplexity_BasicGWR, 6},
     {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 10},
-    {"_geocomplexity_GeoCGWRSel", (DL_FUNC) &_geocomplexity_GeoCGWRSel, 10},
+    {"_geocomplexity_GeoCGWRSel", (DL_FUNC) &_geocomplexity_GeoCGWRSel, 11},
     {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 9},
     {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
