@@ -153,6 +153,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
       }
     }
     return Rcpp::List::create(
+      Named("bw") = 0,
       Named("knn") = opt_knn,
       Named("alpha") = opt_alpha
     );
@@ -176,7 +177,8 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
       }
     }
     return Rcpp::List::create(
-      Named("bandwidth") = opt_bw,
+      Named("bw") = opt_bw,
+      Named("knn") = 0,
       Named("alpha") = opt_alpha
     );
   }
@@ -185,21 +187,31 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
 // [[Rcpp::export]]
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
                    arma::mat Cdist, SEXP bw, bool adaptive = true,
+                   arma::vec alpha = ArmaSeq(0.1,1,0.1),
                    std::string kernel = "gaussian"){
   arma::vec knns;
   arma::vec bws;
+  double MaxD = MaxInMatrix(Cdist);
+  double MinD = MaxInMatrix(Cdist);
   if (TYPEOF(bw) == STRSXP) {
     if (adaptive) {
-      knns = ArmaSeq(3,16,1);
-      knns = Double4Vec(0);
+      knns = ArmaSeq(3,15,1);
+      bws = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bws
+      bws = ArmaSeq(MinD,MaxD,13);
     }
-
   } else if (TYPEOF(bw) == REALSXP) {
-
+    NumericVector numericInput(bw);
+    arma::vec v(numericInput.size());
+    for (size_t i = 0; i < numericInput.size(); ++i) {
+      v[i] = numericInput[i];
+    }
+    bws = v;
   } else {
     stop("Unsupported input type.");
   }
+
+  Rcpp::List res = GeoCGWRSel(bws,knns,y,X,gcs,Cdist,adaptive,kernel,alpha);
+
 }
