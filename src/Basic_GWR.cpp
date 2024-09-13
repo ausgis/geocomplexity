@@ -7,9 +7,11 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
-                       double bw, std::string kernel = "gaussian") {
+                       double bw, double knn, bool adaptive = true,
+                       std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
+  arma::vec bw_vec;
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
@@ -17,24 +19,32 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
 
+  if (adaptive) {
+    bw_vec = GenAdaptiveKNNBW(Cdist,knn);
+  } else {
+    bw_vec = Double4Vec(bw);
+  }
+
   for (int i = 0; i < n; ++i) {
     arma::vec dist_wt = arma::zeros(n);
+
+    // Determine bandwidth for the current point
+    double current_bw = adaptive ? bw_vec(i) : bw_vec(0);
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
       double dist = Cdist(i,j);
       if (kernel == "gaussian") {
-        dist_wt(j) = gaussian_kernel(dist, bw);
+        dist_wt(j) = gaussian_kernel(dist, current_bw);
       } else if (kernel == "exponential") {
-        dist_wt(j) = exponential_kernel(dist, bw);
+        dist_wt(j) = exponential_kernel(dist, current_bw);
       } else if (kernel == "bisquare") {
-        dist_wt(j) = bisquare_kernel(dist, bw);
+        dist_wt(j) = bisquare_kernel(dist, current_bw);
       } else if (kernel == "triangular") {
-        dist_wt(j) = triangular_kernel(dist, bw);
+        dist_wt(j) = triangular_kernel(dist, current_bw);
       }  else if (kernel == "boxcar") {
-        dist_wt(j) = boxcar_kernel(dist, bw);
+        dist_wt(j) = boxcar_kernel(dist, current_bw);
       }
-
     }
     arma::mat W = arma::diagmat(dist_wt);
     // Weighted Least Squares
@@ -64,6 +74,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
     se_betas.row(i) = se_beta_i.t();
   }
 
+  // Compute additional metrics
   // refer to https://github.com/rsbivand/spgwr/blob/main/R/gwr.R
   arma::mat t_values = betas / se_betas;
   double rss = arma::as_scalar(arma::sum(arma::pow(residuals, 2)));
@@ -107,17 +118,33 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
   );
 }
 
-double BasicGWRSel(arma::vec bandwidth, arma::vec y, arma::mat X,
-                   arma::mat Cdist, std::string kernel = "gaussian") {
-  int n = bandwidth.n_elem;
-  arma::vec AIC = zeros(n);
+double BasicGWRSel(arma::vec bandwidth, arma::vec knns,
+                   arma::vec y, arma::mat X, arma::mat Cdist,
+                   bool adaptive = true, std::string kernel = "gaussian") {
+  if (adaptive) {
+    int n = knns.n_elem;
+    arma::vec AIC = zeros(n);
 
-  for (int i = 0; i < n; ++i) {
-    double bw = bandwidth(i);
-    List GWRResult = BasicGWRFit(y,X,Cdist,bw,kernel);
-    AIC(i) = GWRResult["AIC"];
+    for (int i = 0; i < n; ++i) {
+      double knn = knns(i);
+      List GWRResult = BasicGWRFit(y,X,Cdist,0,knn,true,kernel);
+      AIC(i) = GWRResult["AIC"];
+    }
+
+    return bandwidth(AIC.index_min());
+
+  } else {
+    int n = bandwidth.n_elem;
+    arma::vec AIC = zeros(n);
+
+    for (int i = 0; i < n; ++i) {
+      double bw = bandwidth(i);
+      List GWRResult = BasicGWRFit(y,X,Cdist,bw,0,false,kernel);
+      AIC(i) = GWRResult["AIC"];
+    }
+
+    return bandwidth(AIC.index_min());
   }
 
-  return AIC.index_min();
 }
 

@@ -11,5 +11,7 @@ double boxcar_kernel(double dist, double bw);
 arma::vec Normalize4Interval(const arma::vec& v, double a, double b);
 arma::mat DiagMatrix(int n);
 arma::vec ArmaSeq(double start, double end, double step);
+arma::vec Double4Vec(double x);
+arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k);
 
 #endif // GEOCGWR_HELPER_H

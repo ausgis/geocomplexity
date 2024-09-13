@@ -80,7 +80,13 @@ arma::vec ArmaSeq(double start, double end, double step) {
   return sequence;
 }
 
-arma::vec GenAdaptiveBW(const arma::mat& D, int k) {
+arma::vec Double4Vec(double x) {
+  arma::vec v(1);
+  v[0] = x;
+  return v;
+}
+
+arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k) {
   int n = D.n_rows;
   arma::vec bandwidths(n);
 

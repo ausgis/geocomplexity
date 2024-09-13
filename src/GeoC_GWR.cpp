@@ -6,10 +6,9 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
-                      arma::vec gcs, arma::mat Cdist,
-                      double bw, double alpha = 0.5,
-                      std::string kernel = "gaussian") {
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs,
+                      arma::mat Cdist, double bw, double knn,
+                      double alpha = 0.5, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::vec gcs_new = Normalize4Interval(gcs,1,10);
@@ -75,6 +74,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
     se_betas.row(i) = se_beta_i.t();
   }
 
+  // Compute additional metrics
   // refer to https://github.com/rsbivand/spgwr/blob/main/R/gwr.R
   arma::mat t_values = betas / se_betas;
   double rss = arma::as_scalar(arma::sum(arma::pow(residuals, 2)));
