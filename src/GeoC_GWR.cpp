@@ -8,7 +8,8 @@ using namespace arma;
 // [[Rcpp::export]]
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
                       arma::vec gcs, arma::mat Cdist,
-                      double bw, std::string kernel = "gaussian") {
+                      double bw, double alpha = 0.5,
+                      std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::vec gcs_new = Normalize4Interval(gcs,1,10);
@@ -42,7 +43,10 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X,
       }
 
     }
-    arma::vec wt = Normalize4Interval(gc_wt % dist_wt,0,1);
+    gc_wt = Normalize4Interval(gc_wt,0,0.5);
+    dist_wt = Normalize4Interval(dist_wt,0,0.5);
+    arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
+
     arma::mat W = arma::diagmat(wt);
     // Weighted Least Squares
     arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;

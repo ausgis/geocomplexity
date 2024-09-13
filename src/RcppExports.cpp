@@ -27,8 +27,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // GeoCGWRFit
-Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist, double bw, std::string kernel);
-RcppExport SEXP _geocomplexity_GeoCGWRFit(SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP CdistSEXP, SEXP bwSEXP, SEXP kernelSEXP) {
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist, double bw, double alpha, std::string kernel);
+RcppExport SEXP _geocomplexity_GeoCGWRFit(SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP CdistSEXP, SEXP bwSEXP, SEXP alphaSEXP, SEXP kernelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -37,8 +37,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type gcs(gcsSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type Cdist(CdistSEXP);
     Rcpp::traits::input_parameter< double >::type bw(bwSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
-    rcpp_result_gen = Rcpp::wrap(GeoCGWRFit(y, X, gcs, Cdist, bw, kernel));
+    rcpp_result_gen = Rcpp::wrap(GeoCGWRFit(y, X, gcs, Cdist, bw, alpha, kernel));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -200,7 +201,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_BasicGWRFit", (DL_FUNC) &_geocomplexity_BasicGWRFit, 5},
-    {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 6},
+    {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 7},
     {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_GeoCSWT", (DL_FUNC) &_geocomplexity_GeoCSWT, 3},

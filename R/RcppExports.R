@@ -5,8 +5,8 @@ BasicGWRFit <- function(y, X, Cdist, bw, kernel = "gaussian") {
     .Call(`_geocomplexity_BasicGWRFit`, y, X, Cdist, bw, kernel)
 }
 
-GeoCGWRFit <- function(y, X, gcs, Cdist, bw, kernel = "gaussian") {
-    .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Cdist, bw, kernel)
+GeoCGWRFit <- function(y, X, gcs, Cdist, bw, alpha = 0.5, kernel = "gaussian") {
+    .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Cdist, bw, alpha, kernel)
 }
 
 InforEntropy <- function(x) {
