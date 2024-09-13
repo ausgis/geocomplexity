@@ -213,5 +213,8 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
   }
 
   Rcpp::List res = GeoCGWRSel(bws,knns,y,X,gcs,Cdist,adaptive,kernel,alpha);
-
+  double optbw = res[0];
+  double optknn = res[1];
+  double optalpha = res[2];
+  res = GeoCGWRFit(y,X,gcs,Cdist,optbw,optknn,adaptive,optalpha,kernel);
 }
