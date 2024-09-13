@@ -187,8 +187,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
 // [[Rcpp::export]]
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
                    arma::mat Cdist, SEXP bw, bool adaptive = true,
-                   arma::vec alpha = ArmaSeq(0.1,1,0.1),
-                   std::string kernel = "gaussian"){
+                   arma::vec alpha, std::string kernel = "gaussian"){
   arma::vec knns;
   arma::vec bws;
   double MaxD = MaxInMatrix(Cdist);
@@ -204,7 +203,7 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
   } else if (TYPEOF(bw) == REALSXP) {
     NumericVector numericInput(bw);
     arma::vec v(numericInput.size());
-    for (size_t i = 0; i < numericInput.size(); ++i) {
+    for (int i = 0; i < numericInput.size(); ++i) {
       v[i] = numericInput[i];
     }
     bws = v;

@@ -174,7 +174,7 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
   } else if (TYPEOF(bw) == REALSXP) {
     NumericVector numericInput(bw);
     arma::vec v(numericInput.size());
-    for (size_t i = 0; i < numericInput.size(); ++i) {
+    for (int i = 0; i < numericInput.size(); ++i) {
       v[i] = numericInput[i];
     }
     bws = v;
