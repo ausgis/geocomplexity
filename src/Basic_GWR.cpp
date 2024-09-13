@@ -155,6 +155,7 @@ Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
 }
 
 // [[Rcpp::export]]
+
 Rcpp::List BasicGWR(arma::vec y, arma::mat X,
                     arma::mat Cdist, SEXP bw,
                     bool adaptive = true,
@@ -169,7 +170,7 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
       bws = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bws = ArmaSeq(MinD,MaxD,13);
+      bws = ArmaSeq(MinD,MaxD/3,13);
     }
   } else if (TYPEOF(bw) == REALSXP) {
     NumericVector numericInput(bw);

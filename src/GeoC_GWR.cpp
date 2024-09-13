@@ -185,6 +185,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns,
 }
 
 // [[Rcpp::export]]
+
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs,
                    arma::mat Cdist, SEXP bw, bool adaptive = true,
                    const arma::vec& alpha = arma::vec{0.25,0.5,0.75},
