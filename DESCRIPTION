@@ -40,11 +40,9 @@ Imports:
 Suggests: 
     ggplot2,
     knitr,
-    raster,
     Rcpp,
     RcppArmadillo,
     rmarkdown,
-    stars,
     tidyverse,
     viridis
 LinkingTo: 
