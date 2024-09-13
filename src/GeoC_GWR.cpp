@@ -209,12 +209,12 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
   arma::vec bwcs;
   arma::vec bwgs;
   arma::mat Cdist = EucdistM(gcs);
+  std::string criterion = "RMSE";
   double MaxCD = MaxInMatrix(Cdist);
   double MinCD = MinInMatrix(Cdist);
   double MaxGD = MaxInMatrix(Gdist);
   double MinGD = MinInMatrix(Gdist);
   if (TYPEOF(bwc) == STRSXP) {
-    std::string criterion = Rcpp::as<std::string>(bwc);
     if (adaptive) {
       knns = ArmaSeq(3,15,1);
       bwcs = Double4Vec(0);
@@ -245,7 +245,7 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
     stop("Unsupported input type.");
   }
 
-  Rcpp::List res = GeoCGWRSel(bwcs,bwgs,knns,alpha,y,X,gcs,Gdist,adaptive,kernel);
+  Rcpp::List res = GeoCGWRSel(bwcs,bwgs,knns,alpha,y,X,gcs,Gdist,adaptive,criterion,kernel);
   double optbwc = res[0];
   double optbwg = res[1];
   double optknn = res[2];
