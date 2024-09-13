@@ -7,7 +7,7 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-                      double bw = 0, double knn = 0, bool adaptive = true,
+                      double bw = 0, double knn = 0, bool adaptive = false,
                       double alpha = 0.5, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
@@ -131,7 +131,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
 // [[Rcpp::export]]
 Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec alpha,
                       arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-                      bool adaptive = true, std::string kernel = "gaussian") {
+                      bool adaptive = false, std::string kernel = "gaussian") {
   if (adaptive) {
     int n = knns.n_elem;
     int k = alpha.n_elem;
@@ -187,7 +187,7 @@ Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec alpha,
 
 // [[Rcpp::export]]
 Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-                   SEXP bw, arma::vec alpha, bool adaptive = true,
+                   SEXP bw, arma::vec alpha, bool adaptive = false,
                    std::string kernel = "gaussian") {
   arma::vec knns;
   arma::vec bws;

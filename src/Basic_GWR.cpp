@@ -6,8 +6,9 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
-                       double bw = 0, double knn = 0, bool adaptive = true,
+Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
+                       arma::mat Cdist, double bw = 0,
+                       double knn = 0, bool adaptive = false,
                        std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
@@ -121,7 +122,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X, arma::mat Cdist,
 // [[Rcpp::export]]
 Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
                        arma::vec y, arma::mat X, arma::mat Cdist,
-                       bool adaptive = true, std::string kernel = "gaussian") {
+                       bool adaptive = false, std::string kernel = "gaussian") {
   if (adaptive) {
     int n = knns.n_elem;
     arma::vec AIC = zeros(n);
@@ -159,7 +160,7 @@ Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
 
 Rcpp::List BasicGWR(arma::vec y, arma::mat X,
                     arma::mat Cdist, SEXP bw,
-                    bool adaptive = true,
+                    bool adaptive = false,
                     std::string kernel = "gaussian"){
   arma::vec knns;
   arma::vec bws;
