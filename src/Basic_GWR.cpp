@@ -120,36 +120,35 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
 }
 
 // [[Rcpp::export]]
-Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns,
-                       arma::vec y, arma::mat X, arma::mat Cdist,
-                       bool adaptive = false, std::string kernel = "gaussian") {
+Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec y, arma::mat X, arma::mat Cdist,
+                       bool adaptive = false, std::string criterion = "RMSE",std::string kernel = "gaussian") {
   if (adaptive) {
     int n = knns.n_elem;
-    arma::vec AIC = zeros(n);
+    arma::vec measures = zeros(n);
 
     for (int i = 0; i < n; ++i) {
       double knn = knns(i);
       List GWRResult = BasicGWRFit(y,X,Cdist,0,knn,true,kernel);
-      AIC(i) = GWRResult["AICc"];
+      measures(i) = GWRResult[criterion];
     }
 
     return Rcpp::List::create(
       Named("bw") = 0,
-      Named("knn") = knns(AIC.index_min())
+      Named("knn") = knns(measures.index_min())
     );
 
   } else {
     int n = bandwidth.n_elem;
-    arma::vec AIC = zeros(n);
+    arma::vec measures = zeros(n);
 
     for (int i = 0; i < n; ++i) {
       double bw = bandwidth(i);
       List GWRResult = BasicGWRFit(y,X,Cdist,bw,0,false,kernel);
-      AIC(i) = GWRResult["AICc"];
+      measures(i) = GWRResult[criterion];
     }
 
     return Rcpp::List::create(
-      Named("bw") = bandwidth(AIC.index_min()),
+      Named("bw") = bandwidth(measures.index_min()),
       Named("knn") = 0
     );
 
