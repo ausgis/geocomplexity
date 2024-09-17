@@ -20,7 +20,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
   arma::mat hat_matrix = zeros(n,n);
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
-  for (int i = 0; i < k; ++i){
+  for (int i = 0; i < k; ++i) {
     gcs.col(i) = Normalize4Interval(gcs.col(i),1,100000);
   }
   arma::mat Cdist = EucdistM(gcs);
@@ -57,7 +57,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
         } else if (kernel == "triangular") {
           gc_wt(j) = triangular_kernel(dist1, current_bw1);
           dist_wt(j) = triangular_kernel(dist2, current_bw2);
-        }  else if (kernel == "boxcar") {
+        } else if (kernel == "boxcar") {
           gc_wt(j) = boxcar_kernel(dist2, current_bw1);
           dist_wt(j) = boxcar_kernel(dist2, current_bw2);
         }

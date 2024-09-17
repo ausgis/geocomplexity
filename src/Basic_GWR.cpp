@@ -43,7 +43,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
         dist_wt(j) = bisquare_kernel(dist, current_bw);
       } else if (kernel == "triangular") {
         dist_wt(j) = triangular_kernel(dist, current_bw);
-      }  else if (kernel == "boxcar") {
+      } else if (kernel == "boxcar") {
         dist_wt(j) = boxcar_kernel(dist, current_bw);
       }
     }
