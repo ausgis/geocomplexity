@@ -115,6 +115,8 @@ geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/ge
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gc</span> <span class="op">=</span> <span class="fu">geocd_vector</span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>neighbour object has 2 sub-graphs;</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> if this sub-graph count seems unexpected, try increasing the snap argument.</span>
 <span class="r-in"><span><span class="va">gc</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 333 features and 9 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
