@@ -166,14 +166,15 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
   double MaxD = MaxInMatrix(Cdist);
   double MinD = MinInMatrix(Cdist);
   std::string criterion = "RMSE";
+  int sample_n = static_cast<int>(y.n_elem / 10);
   if (TYPEOF(bw) == STRSXP) {
     std::string criterion = Rcpp::as<std::string>(bw);
     if (adaptive) {
-      knns = ArmaSeq(3,15,1);
+      knns = ArmaSeq(3,sample_n,1);
       bws = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bws = arma::linspace(MinD,MaxD/3,13);
+      bws = arma::linspace(MinD,MaxD/3,sample_n);
     }
   } else if (TYPEOF(bw) == REALSXP) {
     double v = Rcpp::as<double>(bw);

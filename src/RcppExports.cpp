@@ -62,6 +62,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// GenAdaptiveKNNBW
+arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k);
+RcppExport SEXP _geocomplexity_GenAdaptiveKNNBW(SEXP DSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type D(DSEXP);
+    Rcpp::traits::input_parameter< double >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(GenAdaptiveKNNBW(D, k));
+    return rcpp_result_gen;
+END_RCPP
+}
 // GeoCGWRFit
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist, double bwc, double bwg, double knn, bool adaptive, double alpha, std::string kernel);
 RcppExport SEXP _geocomplexity_GeoCGWRFit(SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP GdistSEXP, SEXP bwcSEXP, SEXP bwgSEXP, SEXP knnSEXP, SEXP adaptiveSEXP, SEXP alphaSEXP, SEXP kernelSEXP) {
@@ -282,6 +294,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_BasicGWRFit", (DL_FUNC) &_geocomplexity_BasicGWRFit, 7},
     {"_geocomplexity_BasicGWRSel", (DL_FUNC) &_geocomplexity_BasicGWRSel, 8},
     {"_geocomplexity_BasicGWR", (DL_FUNC) &_geocomplexity_BasicGWR, 6},
+    {"_geocomplexity_GenAdaptiveKNNBW", (DL_FUNC) &_geocomplexity_GenAdaptiveKNNBW, 2},
     {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 10},
     {"_geocomplexity_GeoCGWRSel", (DL_FUNC) &_geocomplexity_GeoCGWRSel, 11},
     {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 9},

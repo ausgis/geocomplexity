@@ -92,6 +92,7 @@ arma::vec Double4Vec(double x) {
   return v;
 }
 
+// [[Rcpp::export]]
 arma::vec GenAdaptiveKNNBW(const arma::mat& D, double k) {
   int n = D.n_rows;
   arma::vec bandwidths(n);

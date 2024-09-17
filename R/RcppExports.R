@@ -13,6 +13,10 @@ BasicGWR <- function(y, X, Cdist, bw, adaptive = FALSE, kernel = "gaussian") {
     .Call(`_geocomplexity_BasicGWR`, y, X, Cdist, bw, adaptive, kernel)
 }
 
+GenAdaptiveKNNBW <- function(D, k) {
+    .Call(`_geocomplexity_GenAdaptiveKNNBW`, D, k)
+}
+
 GeoCGWRFit <- function(y, X, gcs, Gdist, bwc = 0, bwg = 0, knn = 0, adaptive = FALSE, alpha = 0.5, kernel = "gaussian") {
     .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Gdist, bwc, bwg, knn, adaptive, alpha, kernel)
 }
