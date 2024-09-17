@@ -173,7 +173,7 @@ Rcpp::List BasicGWR(arma::vec y, arma::mat X,
       bws = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bws = ArmaSeq(MinD,MaxD/3,13);
+      bws = arma::linspace(MinD,MaxD/3,13);
     }
   } else if (TYPEOF(bw) == REALSXP) {
     double v = Rcpp::as<double>(bw);

@@ -69,15 +69,21 @@ arma::mat DiagMatrix(int n) {
   return diag_mat;
 }
 
-arma::vec ArmaSeq(double start, double end, double step) {
-  int num_elements = static_cast<int>(std::floor((end - start) / step)) + 1;
-  arma::vec sequence(num_elements);
+arma::vec ArmaSeq(double from, double to, double by = 1, int length_out = -1) {
+  if (length_out > 0) {
+    return arma::linspace(from, to, length_out);
+  } else {
+    if (by == 0) {
+      Rcpp::stop("The `by` parameter cannot be 0.");
+    }
 
-  for (int i = 0; i < num_elements; ++i) {
-    sequence(i) = start + i * step;
+    int n = static_cast<int>((to - from) / by) + 1;
+    arma::vec result(n);
+    for (int i = 0; i < n; i++) {
+      result[i] = from + i * by;
+    }
+    return result;
   }
-
-  return sequence;
 }
 
 arma::vec Double4Vec(double x) {
