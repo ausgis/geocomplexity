@@ -210,17 +210,18 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
   arma::vec bwgs;
   arma::mat Cdist = EucdistM(gcs);
   std::string criterion = "RMSE";
+  int sample_n = static_cast<int>(y.n_elem / 10);
   double MaxCD = MaxInMatrix(Cdist);
   double MinCD = MinInMatrix(Cdist);
   double MaxGD = MaxInMatrix(Gdist);
   double MinGD = MinInMatrix(Gdist);
   if (TYPEOF(bwc) == STRSXP) {
     if (adaptive) {
-      knns = ArmaSeq(3,15,1);
+      knns = ArmaSeq(3,sample_n,1);
       bwcs = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bwcs = ArmaSeq(MinCD,MaxCD/3,13);
+      bwcs = arma::linspace(MinCD,MaxCD/3,sample_n);
     }
   } else if (TYPEOF(bwc) == REALSXP) {
     double v = Rcpp::as<double>(bwc);
@@ -232,11 +233,11 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs,
   if (TYPEOF(bwg) == STRSXP) {
     std::string criterion = Rcpp::as<std::string>(bwc);
     if (adaptive) {
-      knns = ArmaSeq(3,15,1);
+      knns = ArmaSeq(3,sample_n,1);
       bwgs = Double4Vec(0);
     } else {
       knns = Double4Vec(0);
-      bwgs = ArmaSeq(MinGD,MaxGD/3,13);
+      bwgs = arma::linspace(MinGD,MaxGD/3,sample_n);
     }
   } else if (TYPEOF(bwg) == REALSXP) {
     double v = Rcpp::as<double>(bwg);
