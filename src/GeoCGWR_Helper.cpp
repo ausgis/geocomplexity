@@ -6,8 +6,12 @@ using namespace arma;
 
 // Gaussian Kernel
 double gaussian_kernel(double dist, double bw) {
-  return exp(-0.5 * pow(dist / bw, 2));
+  return exp(-pow(dist / bw, 2));
 }
+
+// double gaussian_kernel(double dist, double bw) {
+//   return exp(-0.5 * pow(dist / bw, 2));
+// }
 
 // Exponential Kernel
 double exponential_kernel(double dist, double bw) {

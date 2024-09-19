@@ -52,7 +52,7 @@ Rcpp::List GeoCSGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
 
     }
     arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
-    wt = Normalize4Interval(wt,0,1);
+    // wt = Normalize4Interval(wt,0,1);
     arma::mat W = arma::diagmat(wt);
 
     // Weighted Least Squares
