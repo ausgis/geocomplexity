@@ -18,5 +18,6 @@ double MinInMatrix(const arma::mat& mat);
 arma::mat EucdistM(const arma::mat& X);
 double RowDiffAbsMean(const arma::mat& X, int i, int j);
 double MeanWeight(const arma::vec& x, const arma::vec& w);
+arma::mat StandardizeMatColumns(const arma::mat& X);
 
 #endif // GEOCGWR_HELPER_H

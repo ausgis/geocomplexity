@@ -146,3 +146,19 @@ double MeanWeight(const arma::vec& x, const arma::vec& w) {
   double sum_weights = arma::sum(w);
   return weighted_sum / sum_weights;
 }
+
+arma::mat StandardizeMatColumns(const arma::mat& X) {
+  arma::mat X_std = X;
+  for (arma::uword i = 0; i < X.n_cols; ++i) {
+    double mean_col = arma::mean(X.col(i));
+    double std_col = arma::stddev(X.col(i));
+
+    if (std_col != 0) {
+      X_std.col(i) = (X.col(i) - mean_col) / std_col;
+    } else {
+      X_std.col(i).fill(0);
+    }
+  }
+
+  return X_std;
+}
