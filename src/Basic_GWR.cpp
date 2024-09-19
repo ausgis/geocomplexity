@@ -7,7 +7,7 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
-                       arma::mat Cdist, double bw = 0,
+                       arma::mat Gdist, double bw = 0,
                        double knn = 0, bool adaptive = false,
                        std::string kernel = "gaussian") {
   int n = X.n_rows;
@@ -21,7 +21,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
   arma::vec yhat = zeros(n);
 
   if (adaptive) {
-    bw_vec = GenAdaptiveKNNBW(Cdist,knn);
+    bw_vec = GenAdaptiveKNNBW(Gdist,knn);
   } else {
     bw_vec = Double4Vec(bw);
   }
@@ -34,7 +34,7 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double dist = Cdist(i,j);
+      double dist = Gdist(i,j);
       if (kernel == "gaussian") {
         dist_wt(j) = gaussian_kernel(dist, current_bw);
       } else if (kernel == "exponential") {
@@ -119,73 +119,73 @@ Rcpp::List BasicGWRFit(arma::vec y, arma::mat X,
   );
 }
 
-// [[Rcpp::export]]
-Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec y, arma::mat X, arma::mat Cdist,
-                       bool adaptive = false, std::string criterion = "RMSE", std::string kernel = "gaussian") {
-  if (adaptive) {
-    int n = knns.n_elem;
-    arma::vec measures = zeros(n);
-
-    for (int i = 0; i < n; ++i) {
-      double knn = knns(i);
-      List GWRResult = BasicGWRFit(y,X,Cdist,0,knn,true,kernel);
-      measures(i) = GWRResult[criterion];
-    }
-
-    return Rcpp::List::create(
-      Named("bw") = 0,
-      Named("knn") = knns(measures.index_min())
-    );
-
-  } else {
-    int n = bandwidth.n_elem;
-    arma::vec measures = zeros(n);
-
-    for (int i = 0; i < n; ++i) {
-      double bw = bandwidth(i);
-      List GWRResult = BasicGWRFit(y,X,Cdist,bw,0,false,kernel);
-      measures(i) = GWRResult[criterion];
-    }
-
-    return Rcpp::List::create(
-      Named("bw") = bandwidth(measures.index_min()),
-      Named("knn") = 0
-    );
-
-  }
-}
-
-// [[Rcpp::export]]
-
-Rcpp::List BasicGWR(arma::vec y, arma::mat X,
-                    arma::mat Cdist, SEXP bw,
-                    bool adaptive = false,
-                    std::string kernel = "gaussian"){
-  arma::vec knns;
-  arma::vec bws;
-  double MaxD = MaxInMatrix(Cdist);
-  double MinD = MinInMatrix(Cdist);
-  std::string criterion = "RMSE";
-  int sample_n = static_cast<int>(y.n_elem / 10);
-  if (TYPEOF(bw) == STRSXP) {
-    std::string criterion = Rcpp::as<std::string>(bw);
-    if (adaptive) {
-      knns = ArmaSeq(3,sample_n,1);
-      bws = Double4Vec(0);
-    } else {
-      knns = Double4Vec(0);
-      bws = arma::linspace(MinD,MaxD/3,sample_n);
-    }
-  } else if (TYPEOF(bw) == REALSXP) {
-    double v = Rcpp::as<double>(bw);
-    bws = Double4Vec(v);
-  } else {
-    stop("Unsupported input type.");
-  }
-
-  Rcpp::List res = BasicGWRSel(bws,knns,y,X,Cdist,adaptive,criterion,kernel);
-  double optbw = res[0];
-  double optknn = res[1];
-  res = BasicGWRFit(y,X,Cdist,optbw,optknn,adaptive,kernel);
-  return res;
-}
+// // [[Rcpp::export]]
+// Rcpp::List BasicGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec y, arma::mat X, arma::mat Cdist,
+//                        bool adaptive = false, std::string criterion = "RMSE", std::string kernel = "gaussian") {
+//   if (adaptive) {
+//     int n = knns.n_elem;
+//     arma::vec measures = zeros(n);
+//
+//     for (int i = 0; i < n; ++i) {
+//       double knn = knns(i);
+//       List GWRResult = BasicGWRFit(y,X,Cdist,0,knn,true,kernel);
+//       measures(i) = GWRResult[criterion];
+//     }
+//
+//     return Rcpp::List::create(
+//       Named("bw") = 0,
+//       Named("knn") = knns(measures.index_min())
+//     );
+//
+//   } else {
+//     int n = bandwidth.n_elem;
+//     arma::vec measures = zeros(n);
+//
+//     for (int i = 0; i < n; ++i) {
+//       double bw = bandwidth(i);
+//       List GWRResult = BasicGWRFit(y,X,Cdist,bw,0,false,kernel);
+//       measures(i) = GWRResult[criterion];
+//     }
+//
+//     return Rcpp::List::create(
+//       Named("bw") = bandwidth(measures.index_min()),
+//       Named("knn") = 0
+//     );
+//
+//   }
+// }
+//
+// // [[Rcpp::export]]
+//
+// Rcpp::List BasicGWR(arma::vec y, arma::mat X,
+//                     arma::mat Cdist, SEXP bw,
+//                     bool adaptive = false,
+//                     std::string kernel = "gaussian"){
+//   arma::vec knns;
+//   arma::vec bws;
+//   double MaxD = MaxInMatrix(Cdist);
+//   double MinD = MinInMatrix(Cdist);
+//   std::string criterion = "RMSE";
+//   int sample_n = static_cast<int>(y.n_elem / 10);
+//   if (TYPEOF(bw) == STRSXP) {
+//     std::string criterion = Rcpp::as<std::string>(bw);
+//     if (adaptive) {
+//       knns = ArmaSeq(3,sample_n,1);
+//       bws = Double4Vec(0);
+//     } else {
+//       knns = Double4Vec(0);
+//       bws = arma::linspace(MinD,MaxD/3,sample_n);
+//     }
+//   } else if (TYPEOF(bw) == REALSXP) {
+//     double v = Rcpp::as<double>(bw);
+//     bws = Double4Vec(v);
+//   } else {
+//     stop("Unsupported input type.");
+//   }
+//
+//   Rcpp::List res = BasicGWRSel(bws,knns,y,X,Cdist,adaptive,criterion,kernel);
+//   double optbw = res[0];
+//   double optknn = res[1];
+//   res = BasicGWRFit(y,X,Cdist,optbw,optknn,adaptive,kernel);
+//   return res;
+// }
