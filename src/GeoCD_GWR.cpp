@@ -8,7 +8,7 @@ using namespace arma;
 // [[Rcpp::export]]
 Rcpp::List GeoCDGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
                        double bw = 0, double knn = 0, bool adaptive = false,
-                       double alpha = 0.5, std::string kernel = "gaussian") {
+                       double alpha = 0.05, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::vec bw_vec;

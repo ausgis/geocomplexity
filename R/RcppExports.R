@@ -5,11 +5,11 @@ BasicGWRFit <- function(y, X, Gdist, bw = 0, knn = 0, adaptive = FALSE, kernel =
     .Call(`_geocomplexity_BasicGWRFit`, y, X, Gdist, bw, knn, adaptive, kernel)
 }
 
-GeoCDGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.5, kernel = "gaussian") {
+GeoCDGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
     .Call(`_geocomplexity_GeoCDGWRFit`, y, X, gcs, Gdist, bw, knn, adaptive, alpha, kernel)
 }
 
-GeoCSGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.5, kernel = "gaussian") {
+GeoCSGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
     .Call(`_geocomplexity_GeoCSGWRFit`, y, X, gcs, Gdist, bw, knn, adaptive, alpha, kernel)
 }
 
