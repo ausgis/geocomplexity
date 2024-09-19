@@ -19,6 +19,7 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
       as.matrix()
   }
   distm = sdsfun::sf_distance_matrix(data)
+  geom = sf::st_geometry(data)
   data = sf::st_drop_geometry(data)
   xname = colnames(data)[-which(colnames(data) == yname)]
   y = data[,yname,drop = TRUE]
@@ -48,5 +49,15 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
   optarg = SGWRSel(bws, knns, alpha, y, xs, distm,
                    adaptive, criterion, kernel)
   res = GeoCGWR(y,xs,gcs,distm,optarg[[1]],optarg[[2]],adaptive,optarg[[3]],kernel)
+  res$SDF = purrr::map2_dfc(res$SDF,
+                       list(c("Intercept",xname),
+                            paste0(c("Intercept",xname),"_SE"),
+                            paste0(c("Intercept",xname),"_TV"),
+                            c("Pred"),c("Residuals")),
+                       \(.mat,.name) {
+                         colnames(.mat) = .name
+                         return(tibble::as_tibble(.mat))
+                       }) %>%
+    sf::st_set_geometry(geom)
   return(res)
 }
