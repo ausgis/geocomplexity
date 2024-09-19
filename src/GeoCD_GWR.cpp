@@ -7,90 +7,79 @@ using namespace arma;
 
 // [[Rcpp::export]]
 Rcpp::List GeoCDGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
-                       double bwc = 0, double bwg = 0, double knn = 0,
-                       bool adaptive = false, double alpha = 0.5,
-                       std::string kernel = "gaussian") {
+                       double bw = 0, double knn = 0, bool adaptive = false,
+                       double alpha = 0.5, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
-  arma::vec bwc_vec;
-  arma::vec bwg_vec;
+  arma::vec bw_vec;
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
   arma::mat hat_matrix = zeros(n,n);
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
-  for (int i = 0; i < k; ++i) {
-    gcs.col(i) = Normalize4Interval(gcs.col(i),1,100000);
-  }
-  arma::mat Cdist = EucdistM(gcs);
 
   if (adaptive) {
-    bwc_vec = GenAdaptiveKNNBW(Cdist,knn);
-    bwg_vec = GenAdaptiveKNNBW(Gdist,knn);
+    bw_vec = GenAdaptiveKNNBW(Gdist,knn);
   } else {
-    bwc_vec = Double4Vec(bwc);
-    bwg_vec = Double4Vec(bwg);
+    bw_vec = Double4Vec(bw);
   }
 
-    for (int i = 0; i < n; ++i) {
-      arma::vec gc_wt = arma::zeros(n);
-      arma::vec dist_wt = arma::zeros(n);
+  for (int i = 0; i < n; ++i) {
+    arma::vec gc_wt = arma::zeros(n);
+    arma::vec dist_wt = arma::zeros(n);
 
-      // Determine bandwidth for the current point
-      double current_bw1 = adaptive ? bwc_vec(i) : bwc_vec(0);
-      double current_bw2 = adaptive ? bwg_vec(i) : bwg_vec(0);
+    // Determine bandwidth for the current point
+    double current_bw = adaptive ? bw_vec(i) : bw_vec(0);
 
-      // Calculate Weight Matrix
-      for (int j = 0; j < n; ++j) {
-        double dist1 = Cdist(i,j);
-        double dist2 = Gdist(i,j);
-        if (kernel == "gaussian") {
-          gc_wt(j) = gaussian_kernel(dist1, current_bw1);
-          dist_wt(j) = gaussian_kernel(dist2, current_bw2);
-        } else if (kernel == "exponential") {
-          gc_wt(j) = exponential_kernel(dist1, current_bw1);
-          dist_wt(j) = exponential_kernel(dist2, current_bw2);
-        } else if (kernel == "bisquare") {
-          gc_wt(j) = bisquare_kernel(dist1, current_bw1);
-          dist_wt(j) = bisquare_kernel(dist2, current_bw2);
-        } else if (kernel == "triangular") {
-          gc_wt(j) = triangular_kernel(dist1, current_bw1);
-          dist_wt(j) = triangular_kernel(dist2, current_bw2);
-        } else if (kernel == "boxcar") {
-          gc_wt(j) = boxcar_kernel(dist2, current_bw1);
-          dist_wt(j) = boxcar_kernel(dist2, current_bw2);
-        }
+    // Calculate Weight Matrix
+    for (int j = 0; j < n; ++j) {
+      double gc = gcs[i] - gcs[j];
+      gc_wt(j) = exp(-pow(gc,2));
 
+      double dist = Gdist(i,j);
+      if (kernel == "gaussian") {
+        dist_wt(j) = gaussian_kernel(dist, current_bw);
+      } else if (kernel == "exponential") {
+        dist_wt(j) = exponential_kernel(dist, current_bw);
+      } else if (kernel == "bisquare") {
+        dist_wt(j) = bisquare_kernel(dist, current_bw);
+      } else if (kernel == "triangular") {
+        dist_wt(j) = triangular_kernel(dist, current_bw);
+      }  else if (kernel == "boxcar") {
+        dist_wt(j) = boxcar_kernel(dist, current_bw);
       }
-      arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
-      arma::mat W = arma::diagmat(wt);
 
-      // Weighted Least Squares
-      arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
-      arma::vec XtWy = X_with_intercept.t() * W * y;
+    }
+    arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
+    wt = Normalize4Interval(wt,0,1);
+    arma::mat W = arma::diagmat(wt);
 
-      // Regularization to avoid singular matrix
-      arma::mat XtWX_reg = XtWX + 1e-5 * arma::eye(XtWX.n_rows, XtWX.n_cols);
+    // Weighted Least Squares
+    arma::mat XtWX = X_with_intercept.t() * W * X_with_intercept;
+    arma::vec XtWy = X_with_intercept.t() * W * y;
 
-      // Solve Local Regression Coefficient
-      arma::vec beta_i = arma::solve(XtWX_reg, XtWy);
-      betas.row(i) = beta_i.t();
+    // Regularization to avoid singular matrix
+    arma::mat XtWX_reg = XtWX + 1e-5 * arma::eye(XtWX.n_rows, XtWX.n_cols);
 
-      // Calculate Residuals: y_i - X_i * beta_i
-      double y_hat_i = arma::as_scalar(X_with_intercept.row(i) * beta_i);
-      residuals(i) = y(i) - y_hat_i;
-      yhat(i) = y_hat_i;
+    // Solve Local Regression Coefficient
+    arma::vec beta_i = arma::solve(XtWX_reg, XtWy);
+    betas.row(i) = beta_i.t();
 
-      // Calculate the Diagonal Elements of the Cap Hat Matrix
-      arma::mat XtWX_inv = arma::inv(XtWX);
-      arma::rowvec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
-      hat_matrix.row(i) = hat_row;
+    // Calculate Residuals: y_i - X_i * beta_i
+    double y_hat_i = arma::as_scalar(X_with_intercept.row(i) * beta_i);
+    residuals(i) = y(i) - y_hat_i;
+    yhat(i) = y_hat_i;
 
-      // Standard Error of Calculated Coefficient
-      double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
-      arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
-      se_betas.row(i) = se_beta_i.t();
+    // Calculate the Diagonal Elements of the Cap Hat Matrix
+    arma::mat XtWX_inv = arma::inv(XtWX);
+    arma::rowvec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
+    hat_matrix.row(i) = hat_row;
+
+    // Standard Error of Calculated Coefficient
+    double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
+    arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
+    se_betas.row(i) = se_beta_i.t();
   }
 
   // Compute additional metrics
