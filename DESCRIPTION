@@ -35,6 +35,7 @@ Imports:
     purrr,
     sdsfun,
     sf,
+    stats,
     terra,
     tibble
 Suggests: 
