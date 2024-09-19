@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![CRAN](https://www.r-pkg.org/badges/version/geocomplexity)](https://CRAN.R-project.org/package=geocomplexity)
-[![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity)](https://ausgis.r-universe.dev/geocomplexity)
+[![cran](https://www.r-pkg.org/badges/version/geocomplexity)](https://CRAN.R-project.org/package=geocomplexity)
+[![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity?color=yellow)](https://ausgis.r-universe.dev/geocomplexity)
 <!-- badges: end -->
 
 **Geocomplexity Mitigates Spatial Bias**
