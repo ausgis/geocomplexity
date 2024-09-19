@@ -276,7 +276,7 @@ Rcpp::List SGWRSel(arma::vec bws, arma::vec knns, arma::vec alpha,
 
   for (int i = 0; i < na; ++i) {
     double alpha_sel = alpha(i);
-    List GWRResult = SGWRFit(y,X,Gdist,opt_bw,opt_knn,false,alpha_sel,kernel);
+    List GWRResult = SGWRFit(y,X,Gdist,opt_bw,opt_knn,adaptive,alpha_sel,kernel);
     measuresa(i) = GWRResult[criterion];
   }
   opt_alpha = alpha(measuresa.index_min());
