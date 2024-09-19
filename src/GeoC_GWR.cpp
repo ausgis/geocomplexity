@@ -126,3 +126,32 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
     Named("AICc") = aiccb
   );
 }
+
+// [[Rcpp::export]]
+Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
+                   double bw = 0, double knn = 0, bool adaptive = false,
+                   double alpha = 0.01, std::string kernel = "gaussian") {
+  Rcpp::List g = GeoCGWRFit(y,X,gcs,Gdist,bw,knn,adaptive,alpha,kernel);
+  return Rcpp::List::create(
+    Rcpp::Named("SDF") = Rcpp::List::create(
+      Rcpp::Named("Coefficient") = g["Coefficient"],
+      Rcpp::Named("SE_Coefficient") = g["SE_Coefficient"],
+      Rcpp::Named("t_values") = g["t_values"],
+      Rcpp::Named("Pred") = g["Pred"],
+      Rcpp::Named("Residuals") = g["Residuals"]),
+    Rcpp::Named("diagnostic") = Rcpp::List::create(
+          Rcpp::Named("RSS") = g["RSS"],
+          Rcpp::Named("ENP") = g["ENP"],
+          Rcpp::Named("EDF") = g["EDF"],
+          Rcpp::Named("R2") = g["R2"],
+          Rcpp::Named("R2_Adj") = g["R2_Adj"],
+          Rcpp::Named("RMSE") = g["RMSE"],
+          Rcpp::Named("AIC") = g["AIC"],
+          Rcpp::Named("AICc") = g["AICc"]),
+     Rcpp::Named("arg") = Rcpp::List::create(
+       Rcpp::Named("adaptive") = adaptive,
+       Rcpp::Named("bw") = bw,
+       Rcpp::Named("knn") = knn,
+       Rcpp::Named("alpha") = alpha)
+  );
+}
