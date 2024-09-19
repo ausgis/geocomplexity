@@ -147,6 +147,16 @@ double MeanWeight(const arma::vec& x, const arma::vec& w) {
   return weighted_sum / sum_weights;
 }
 
+double RowDiffAbsMeanWeight(const arma::mat& X,
+                            const arma::vec& W,
+                            int i, int j) {
+  arma::rowvec row_i = X.row(i);
+  arma::rowvec row_j = X.row(j);
+  arma::rowvec abs_diff = arma::abs(row_i - row_j);
+  double weighted_mean = arma::dot(abs_diff, W) / arma::sum(W);
+  return weighted_mean;
+}
+
 arma::mat StandardizeMatColumns(const arma::mat& X) {
   arma::mat X_std = X;
   for (arma::uword i = 0; i < X.n_cols; ++i) {

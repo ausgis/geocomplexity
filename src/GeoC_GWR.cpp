@@ -6,12 +6,13 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List GeoCSGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
-                       double bw = 0, double knn = 0, bool adaptive = false,
-                       double alpha = 0.05, std::string kernel = "gaussian") {
+Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
+                      double bw = 0, double knn = 0, bool adaptive = false,
+                      double alpha = 0.05, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::vec bw_vec;
+  arma::mat X_sd = StandardizeMatColumns(X);
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
@@ -34,7 +35,7 @@ Rcpp::List GeoCSGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double gc = gcs[i] - gcs[j];
+      double gc = RowDiffAbsMean(gcs,i,j);
       gc_wt(j) = exp(-pow(gc,2));
 
       double dist = Gdist(i,j);
@@ -125,95 +126,3 @@ Rcpp::List GeoCSGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
     Named("AICc") = aiccb
   );
 }
-
-// // [[Rcpp::export]]
-// Rcpp::List GeoCGWRSel(arma::vec bandwidth, arma::vec knns, arma::vec alpha,
-//                       arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-//                       bool adaptive = false, std::string kernel = "gaussian") {
-//   if (adaptive) {
-//     int n = knns.n_elem;
-//     int k = alpha.n_elem;
-//     double AIC = std::numeric_limits<double>::max();
-//     double opt_knn = 0;
-//     double opt_alpha = 0;
-//
-//     for (int i = 0; i < n; ++i) {
-//       double knn = knns(i);
-//       for (int j = 0; j < k; ++j) {
-//         double alpha_sel = alpha(j);
-//         List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,0,knn,true,alpha_sel,kernel);
-//         double AICSel = GeoCGWRResult["AICc"];
-//         if (AICSel < AIC) {
-//           AIC = AICSel;
-//           opt_knn = knn;
-//           opt_alpha = alpha_sel;
-//         }
-//       }
-//     }
-//     return Rcpp::List::create(
-//       Named("bw") = 0,
-//       Named("knn") = opt_knn,
-//       Named("alpha") = opt_alpha
-//     );
-//   } else {
-//     int n = bandwidth.n_elem;
-//     int k = alpha.n_elem;
-//     double AIC = std::numeric_limits<double>::max();
-//     double opt_bw = 0;
-//     double opt_alpha = 0;
-//
-//     for (int i = 0; i < n; ++i) {
-//       double bw = bandwidth(i);
-//       for (int j = 0; j < k; ++j) {
-//         double alpha_sel = alpha(j);
-//         List GeoCGWRResult = GeoCGWRFit(y,X,gcs,Cdist,bw,0,false,alpha_sel,kernel);
-//         double AICSel = GeoCGWRResult["AICc"];
-//         if (AICSel < AIC) {
-//           AIC = AICSel;
-//           opt_bw = bw;
-//           opt_alpha = alpha_sel;
-//         }
-//       }
-//     }
-//     return Rcpp::List::create(
-//       Named("bw") = opt_bw,
-//       Named("knn") = 0,
-//       Named("alpha") = opt_alpha
-//     );
-//   }
-// }
-//
-// // [[Rcpp::export]]
-// Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Cdist,
-//                    SEXP bw, arma::vec alpha, bool adaptive = false,
-//                    std::string kernel = "gaussian") {
-//   arma::vec knns;
-//   arma::vec bws;
-//   double MaxD = MaxInMatrix(Cdist);
-//   double MinD = MinInMatrix(Cdist);
-//   if (TYPEOF(bw) == STRSXP) {
-//     if (adaptive) {
-//       knns = ArmaSeq(3,15,1);
-//       bws = Double4Vec(0);
-//     } else {
-//       knns = Double4Vec(0);
-//       bws = ArmaSeq(MinD,MaxD,13);
-//     }
-//   } else if (TYPEOF(bw) == REALSXP) {
-//     NumericVector numericInput(bw);
-//     arma::vec v(numericInput.size());
-//     for (int i = 0; i < numericInput.size(); ++i) {
-//       v[i] = numericInput[i];
-//     }
-//     bws = v;
-//   } else {
-//     stop("Unsupported input type.");
-//   }
-//
-//   Rcpp::List res = GeoCGWRSel(bws,knns,alpha,y,X,gcs,Cdist,adaptive,kernel);
-//   double optbw = res[0];
-//   double optknn = res[1];
-//   double optalpha = res[2];
-//   res = GeoCGWRFit(y,X,gcs,Cdist,optbw,optknn,adaptive,optalpha,kernel);
-//   return res;
-// }
