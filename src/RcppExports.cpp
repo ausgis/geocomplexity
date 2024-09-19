@@ -12,7 +12,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // SelectSortedBW
-arma::vec SelectSortedBW(const arma::mat& dist_mat, double start_idx, double end_idx);
+Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat, double start_idx, double end_idx);
 RcppExport SEXP _geocomplexity_SelectSortedBW(SEXP dist_matSEXP, SEXP start_idxSEXP, SEXP end_idxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

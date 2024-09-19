@@ -173,9 +173,16 @@ arma::mat StandardizeMatColumns(const arma::mat& X) {
   return X_std;
 }
 
+Rcpp::NumericVector ArmaVec4RcppNumericVector(const arma::vec& arma_vec) {
+  Rcpp::NumericVector numeric_vec(arma_vec.n_elem);
+  std::copy(arma_vec.begin(), arma_vec.end(), numeric_vec.begin());
+
+  return numeric_vec;
+}
+
 // [[Rcpp::export]]
-arma::vec SelectSortedBW(const arma::mat& dist_mat,
-                         double start_idx, double end_idx) {
+Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
+                                   double start_idx, double end_idx) {
     int n_rows = dist_mat.n_rows;
     int n_cols = dist_mat.n_cols;
     int total_elements = n_rows * n_cols;
@@ -187,5 +194,5 @@ arma::vec SelectSortedBW(const arma::mat& dist_mat,
     selected = flat_dist_mat.subvec(start_idx, end_idx - 1);
     selected = arma::sort(selected);
 
-    return selected;
-  }
+    return ArmaVec4RcppNumericVector(selected);
+}

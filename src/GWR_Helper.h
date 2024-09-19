@@ -20,5 +20,8 @@ double RowDiffAbsMean(const arma::mat& X, int i, int j);
 double MeanWeight(const arma::vec& x, const arma::vec& w);
 double RowDiffAbsMeanWeight(const arma::mat& X,const arma::vec& W,int i, int j);
 arma::mat StandardizeMatColumns(const arma::mat& X);
+Rcpp::NumericVector ArmaVec4RcppNumericVector(const arma::vec& arma_vec);
+Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
+                                   double start_idx, double end_idx);
 
 #endif // GEOCGWR_HELPER_H
