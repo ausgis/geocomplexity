@@ -140,3 +140,9 @@ double RowDiffAbsMean(const arma::mat& X, int i, int j) {
   arma::rowvec diff = arma::abs(row_i - row_j);
   return arma::mean(diff);
 }
+
+double MeanWeight(const arma::vec& x, const arma::vec& w) {
+  double weighted_sum = arma::dot(x, w);
+  double sum_weights = arma::sum(w);
+  return weighted_sum / sum_weights;
+}
