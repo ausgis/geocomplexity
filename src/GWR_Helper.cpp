@@ -175,10 +175,12 @@ arma::mat StandardizeMatColumns(const arma::mat& X) {
 
 // [[Rcpp::export]]
 arma::vec SelectSortedBW(const arma::mat& dist_mat,
-                                 int start_idx, int end_idx) {
+                         double start_idx, double end_idx) {
     int n_rows = dist_mat.n_rows;
     int n_cols = dist_mat.n_cols;
     int total_elements = n_rows * n_cols;
+    start_idx = total_elements * start_idx;
+    end_idx = total_elements * end_idx;
 
     arma::vec selected(end_idx - start_idx);
     arma::vec flat_dist_mat = arma::vectorise(dist_mat);
