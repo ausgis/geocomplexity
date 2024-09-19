@@ -1,5 +1,5 @@
 #include <RcppArmadillo.h>
-#include "GeoCGWR_Helper.h"
+#include "GWR_Helper.h"
 using namespace Rcpp;
 using namespace arma;
 
