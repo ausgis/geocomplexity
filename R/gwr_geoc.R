@@ -1,3 +1,30 @@
+#' Geographical Complexity-Geographically Weighted Regression
+#'
+#' @param formula A formula of `GCGWR` model.
+#' @param data An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
+#' @param gcs (optional) The geocomplexity matrix corresponding to each variable, which is calculated
+#' by default using `geocd_vector()`.
+#' @param alpha (optional) Balancing the weights of attribute similarity matrix and geographic distance matrix.
+#' @param bw (optional) The bandwidth used in selecting models. The optimal bandwidth will be
+#' selected based on `RMSE` by default.
+#' @param adaptive (optional) Whether the bandwidth value is adaptive or not. Default is `TRUE`.
+#' @param kernel (optional) Kernel function. Default is `gaussian`.
+#'
+#' @return A list with GCGWR results.
+#' \describe{
+#' \item{\code{SDF}}{a tibble about coefficients, standard errors, and T-values}
+#' \item{\code{diagnostic}}{goodness of fit indicators}
+#' \item{\code{arg}}{some key parameters}
+#' }
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' ## The following code takes a long time to run:
+#' econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+#' gwr_geoc(formula = Gini ~ ., data = econineq,
+#'          bw = "AIC", adaptive = TRUE)
+#' }
 gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
              bw = "RMSE", adaptive = TRUE, kernel = "gaussian"){
   formula = stats::as.formula(formula)
