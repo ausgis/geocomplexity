@@ -39,7 +39,7 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
   } else {
     if (is.character(bw)){
       criterion = bw
-      bws = seq(floor(0.05*length(y)),ceiling(0.95*length(y)),by = 1)
+      bws = SelectSortedBW(distm,0.1,0.5)
     } else {
       bws = bw
     }

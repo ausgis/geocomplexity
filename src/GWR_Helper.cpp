@@ -193,6 +193,6 @@ Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
     arma::vec flat_dist_mat = arma::vectorise(dist_mat);
     selected = flat_dist_mat.subvec(start_idx, end_idx - 1);
     selected = arma::sort(selected);
-
+    selected = arma::unique(selected);
     return ArmaVec4RcppNumericVector(selected);
 }
