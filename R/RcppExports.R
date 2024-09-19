@@ -5,12 +5,8 @@ BasicGWRFit <- function(y, X, Gdist, bw = 0, knn = 0, adaptive = FALSE, kernel =
     .Call(`_geocomplexity_BasicGWRFit`, y, X, Gdist, bw, knn, adaptive, kernel)
 }
 
-GeoCDGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
-    .Call(`_geocomplexity_GeoCDGWRFit`, y, X, gcs, Gdist, bw, knn, adaptive, alpha, kernel)
-}
-
-GeoCSGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
-    .Call(`_geocomplexity_GeoCSGWRFit`, y, X, gcs, Gdist, bw, knn, adaptive, alpha, kernel)
+GeoCGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
+    .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Gdist, bw, knn, adaptive, alpha, kernel)
 }
 
 InforEntropy <- function(x) {
@@ -47,6 +43,10 @@ RasterGeoCSSH <- function(x, iw, w, method) {
 
 RasterGeoCSimilarity <- function(x, iw, w, similarity, method) {
     .Call(`_geocomplexity_RasterGeoCSimilarity`, x, iw, w, similarity, method)
+}
+
+SGWRFit <- function(y, X, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
+    .Call(`_geocomplexity_SGWRFit`, y, X, Gdist, bw, knn, adaptive, alpha, kernel)
 }
 
 VectorGeoCMoran <- function(x, wt) {

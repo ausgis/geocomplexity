@@ -6,12 +6,13 @@ using namespace arma;
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-Rcpp::List SGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
+Rcpp::List SGWRFit(arma::vec y, arma::mat X, arma::mat Gdist,
                    double bw = 0, double knn = 0, bool adaptive = false,
                    double alpha = 0.05, std::string kernel = "gaussian") {
   int n = X.n_rows;
   int k = X.n_cols;
   arma::vec bw_vec;
+  arma::mat X_sd = StandardizeMatColumns(X);
   arma::mat X_with_intercept = arma::join_horiz(ones<mat>(n, 1), X);
   arma::mat betas = arma::zeros(n, k + 1);
   arma::mat se_betas = zeros(n, k + 1);
@@ -26,7 +27,7 @@ Rcpp::List SGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
   }
 
   for (int i = 0; i < n; ++i) {
-    arma::vec gc_wt = arma::zeros(n);
+    arma::vec sc_wt = arma::zeros(n);
     arma::vec dist_wt = arma::zeros(n);
 
     // Determine bandwidth for the current point
@@ -34,8 +35,8 @@ Rcpp::List SGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double gc = gcs[i] - gcs[j];
-      gc_wt(j) = exp(-pow(gc,2));
+      double sc = RowDiffAbsMean(X_sd,i,j);
+      sc_wt(j) = exp(-pow(sc,2));
 
       double dist = Gdist(i,j);
       if (kernel == "gaussian") {
@@ -51,7 +52,7 @@ Rcpp::List SGWRFit(arma::vec y, arma::mat X, arma::vec gcs, arma::mat Gdist,
       }
 
     }
-    arma::vec wt = alpha * gc_wt + (1 - alpha) * dist_wt;
+    arma::vec wt = alpha * sc_wt + (1 - alpha) * dist_wt;
     // wt = Normalize4Interval(wt,0,1);
     arma::mat W = arma::diagmat(wt);
 
