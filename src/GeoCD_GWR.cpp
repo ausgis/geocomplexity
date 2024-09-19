@@ -34,7 +34,7 @@ Rcpp::List GeoCDGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
 
     // Calculate Weight Matrix
     for (int j = 0; j < n; ++j) {
-      double gc = gcs[i] - gcs[j];
+      double gc = RowDiffAbsMean(gcs,i,j);
       gc_wt(j) = exp(-pow(gc,2));
 
       double dist = Gdist(i,j);
