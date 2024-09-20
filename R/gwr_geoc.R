@@ -95,6 +95,7 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
 
 #' @title print GCGWR result
 #' @export
+#' @noRd
 print.gcgwrm = \(x,...){
   PrintGCGWRM(x)
   coefdf = sf::st_drop_geometry(x$SDF) %>%

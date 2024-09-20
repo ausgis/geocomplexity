@@ -44,6 +44,6 @@ reference:
   contents:
   - moran_test
 
-- title: S3 Methods
-  contents:
-  - starts_with("print")
+# - title: S3 Methods
+#   contents:
+#   - starts_with("print")
