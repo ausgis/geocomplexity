@@ -2,7 +2,7 @@
 % Please edit documentation in R/gwr_geoc.R
 \name{gwr_geoc}
 \alias{gwr_geoc}
-\title{Geographical Complexity-Geographically Weighted Regression}
+\title{geographical complexity-geographically weighted regression}
 \usage{
 gwr_geoc(
   formula,
@@ -40,7 +40,7 @@ A list with GCGWR results.
 }
 }
 \description{
-Geographical Complexity-Geographically Weighted Regression
+geographical complexity-geographically weighted regression
 }
 \examples{
 \dontrun{

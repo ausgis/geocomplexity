@@ -1,4 +1,4 @@
-#' Geographical Complexity-Geographically Weighted Regression
+#' geographical complexity-geographically weighted regression
 #'
 #' @param formula A formula of `GCGWR` model.
 #' @param data An `sf` object or spatial vector object that can be converted to `sf` by `sf::st_as_sf()`.
