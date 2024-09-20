@@ -2,7 +2,7 @@
 % Please edit documentation in R/geoc_swm.R
 \name{geocs_swm}
 \alias{geocs_swm}
-\title{spatial weight matrix based on geographical complexity}
+\title{constructing spatial weight matrix based on geocomplexity with similar geographical configurations}
 \usage{
 geocs_swm(sfj, wt = NULL, style = "B", ...)
 }
@@ -20,7 +20,7 @@ Default is \code{B}.}
 A matrix
 }
 \description{
-spatial weight matrix based on geographical complexity
+constructing spatial weight matrix based on geocomplexity with similar geographical configurations
 }
 \examples{
 econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
