@@ -5,6 +5,14 @@ SelectSortedBW <- function(dist_mat, start_idx, end_idx) {
     .Call(`_geocomplexity_SelectSortedBW`, dist_mat, start_idx, end_idx)
 }
 
+timesTwo <- function(x) {
+    .Call(`_geocomplexity_timesTwo`, x)
+}
+
+GeoCS_SWM <- function(x, wt, style) {
+    .Call(`_geocomplexity_GeoCS_SWM`, x, wt, style)
+}
+
 GeoCGWRFit <- function(y, X, gcs, Gdist, bw = 0, knn = 0, adaptive = FALSE, alpha = 0.05, kernel = "gaussian") {
     .Call(`_geocomplexity_GeoCGWRFit`, y, X, gcs, Gdist, bw, knn, adaptive, alpha, kernel)
 }
@@ -19,10 +27,6 @@ InforEntropy <- function(x) {
 
 spatial_variance <- function(x, wt) {
     .Call(`_geocomplexity_spatial_variance`, x, wt)
-}
-
-GeoCSWM <- function(x, wt, style) {
-    .Call(`_geocomplexity_GeoCSWM`, x, wt, style)
 }
 
 MI_vec <- function(x, W, alternative = "greater", symmetrize = FALSE) {

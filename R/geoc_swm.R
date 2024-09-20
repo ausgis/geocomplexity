@@ -20,7 +20,7 @@ geocs_swm = \(sfj, wt = NULL, style = 'W', ...){
   }
 
   gc = dplyr::pull(geocomplexity::geocs_vector(sfj,wt,...),1)
-  wt_gc = GeoCSWM(gc,wt,style)
+  wt_gc = GeoCS_SWM(gc,wt,style)
 
   return(wt_gc)
 }

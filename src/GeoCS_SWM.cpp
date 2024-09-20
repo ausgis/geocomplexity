@@ -5,11 +5,11 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericMatrix GeoCSWM(NumericVector x,
-                      NumericMatrix wt,
-                      String style){
+NumericMatrix GeoCS_SWM(NumericVector x,
+                        NumericMatrix wt,
+                        String style){
   NumericMatrix result(x.size(), x.size());
-  x = NormalizeVector(x,1,10);
+  x = NormalizeVector(x,1,std::exp(1.0));
   for (int i = 0; i < x.size(); ++i) {
     for (int j = 0; j < x.size(); ++j) {
       double wij = wt(i,j);

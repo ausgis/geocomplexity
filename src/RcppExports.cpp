@@ -24,6 +24,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// timesTwo
+NumericVector timesTwo(NumericVector x);
+RcppExport SEXP _geocomplexity_timesTwo(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(timesTwo(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// GeoCS_SWM
+NumericMatrix GeoCS_SWM(NumericVector x, NumericMatrix wt, String style);
+RcppExport SEXP _geocomplexity_GeoCS_SWM(SEXP xSEXP, SEXP wtSEXP, SEXP styleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
+    Rcpp::traits::input_parameter< String >::type style(styleSEXP);
+    rcpp_result_gen = Rcpp::wrap(GeoCS_SWM(x, wt, style));
+    return rcpp_result_gen;
+END_RCPP
+}
 // GeoCGWRFit
 Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist, double bw, double knn, bool adaptive, double alpha, std::string kernel);
 RcppExport SEXP _geocomplexity_GeoCGWRFit(SEXP ySEXP, SEXP XSEXP, SEXP gcsSEXP, SEXP GdistSEXP, SEXP bwSEXP, SEXP knnSEXP, SEXP adaptiveSEXP, SEXP alphaSEXP, SEXP kernelSEXP) {
@@ -82,19 +106,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
     rcpp_result_gen = Rcpp::wrap(spatial_variance(x, wt));
-    return rcpp_result_gen;
-END_RCPP
-}
-// GeoCSWM
-NumericMatrix GeoCSWM(NumericVector x, NumericMatrix wt, String style);
-RcppExport SEXP _geocomplexity_GeoCSWM(SEXP xSEXP, SEXP wtSEXP, SEXP styleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
-    Rcpp::traits::input_parameter< String >::type style(styleSEXP);
-    rcpp_result_gen = Rcpp::wrap(GeoCSWM(x, wt, style));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -274,11 +285,12 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_SelectSortedBW", (DL_FUNC) &_geocomplexity_SelectSortedBW, 3},
+    {"_geocomplexity_timesTwo", (DL_FUNC) &_geocomplexity_timesTwo, 1},
+    {"_geocomplexity_GeoCS_SWM", (DL_FUNC) &_geocomplexity_GeoCS_SWM, 3},
     {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 9},
     {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 9},
     {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
-    {"_geocomplexity_GeoCSWM", (DL_FUNC) &_geocomplexity_GeoCSWM, 3},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
     {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
     {"_geocomplexity_RasterGeoCMoranOne", (DL_FUNC) &_geocomplexity_RasterGeoCMoranOne, 3},
