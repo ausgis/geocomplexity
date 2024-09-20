@@ -18,12 +18,12 @@ void PrintGCGWRM(Rcpp::List x) {
   double alpha = args["alpha"];
   std::string kernel = args["kernel"];
   std::string criterion = args["criterion"];
-  std::string bw = as<std::string>(args["bw"]);
-  if (adaptive) {
-    bw = FormatBW(knn,criterion);
-  }
+  std::string bwstr = FormatBW(knn,criterion);
+  double bw1 = args["bw"];
+  std::string bw = std::to_string(bw1);
+
   Rcpp::Rcout << "     Kernel:  " <<  kernel << std::endl;
-  Rcpp::Rcout << "  Bandwidth:  " <<  bw     << std::endl;
+  Rcpp::Rcout << "  Bandwidth:  " <<  (adaptive ? bwstr : bw)  << std::endl;
   Rcpp::Rcout << "      Alpha:  " <<  alpha  << std::endl;
   Rcpp::Rcout << std::endl;
 
