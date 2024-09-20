@@ -1,27 +1,24 @@
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
+#include "GWR_Helper.h"
 using namespace Rcpp;
+using namespace arma;
 
-// This is a simple example of exporting a C++ function to R. You can
-// source this function into an R session using the Rcpp::sourceCpp
-// function (or via the Source button on the editor toolbar). Learn
-// more about Rcpp at:
-//
-//   http://www.rcpp.org/
-//   http://adv-r.had.co.nz/Rcpp.html
-//   http://gallery.rcpp.org/
-//
+// [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-NumericVector timesTwo(NumericVector x) {
-  return x * 2;
+arma::mat GeoCD_SWM(arma::mat gcs,
+                    arma::mat wt,
+                    std::string style){
+  int n = wt.n_rows;
+  arma::mat gc_wt = zeros(n,n);
+
+  for (int i = 0; i < n; ++i) {
+    arma::rowvec gcw =  zeros(n);
+    for (int j = 0; j < n; ++j) {
+      double gc = RowDiffAbsMean(gcs,i,j);
+      gc = exp(-pow(gc,2));
+      gc_wt(i,j) = gc;
+    }
+  }
+  return gc_wt;
 }
-
-
-// You can include R code blocks in C++ files processed with sourceCpp
-// (useful for testing and development). The R code will be automatically
-// run after the compilation.
-//
-
-/*** R
-timesTwo(42)
-*/
