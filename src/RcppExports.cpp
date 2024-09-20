@@ -138,13 +138,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // PrintGCGWRM
-void PrintGCGWRM(Rcpp::List x, Rcpp::DataFrame coefs);
-RcppExport SEXP _geocomplexity_PrintGCGWRM(SEXP xSEXP, SEXP coefsSEXP) {
+void PrintGCGWRM(Rcpp::List x);
+RcppExport SEXP _geocomplexity_PrintGCGWRM(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Rcpp::DataFrame >::type coefs(coefsSEXP);
-    PrintGCGWRM(x, coefs);
+    PrintGCGWRM(x);
     return R_NilValue;
 END_RCPP
 }
@@ -307,7 +306,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
     {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
-    {"_geocomplexity_PrintGCGWRM", (DL_FUNC) &_geocomplexity_PrintGCGWRM, 2},
+    {"_geocomplexity_PrintGCGWRM", (DL_FUNC) &_geocomplexity_PrintGCGWRM, 1},
     {"_geocomplexity_RasterGeoCMoranOne", (DL_FUNC) &_geocomplexity_RasterGeoCMoranOne, 3},
     {"_geocomplexity_RasterGeoCMoran", (DL_FUNC) &_geocomplexity_RasterGeoCMoran, 3},
     {"_geocomplexity_RasterGeoCSSH", (DL_FUNC) &_geocomplexity_RasterGeoCSSH, 4},
