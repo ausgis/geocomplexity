@@ -1,6 +1,6 @@
-#' @title geocomplexity for vector data based on spatial dependence
+#' @title geocomplexity for spatial vector data based on spatial dependence
 #' @description
-#' This function calculates geocomplexity for vector data based on spatial dependence.
+#' This function calculates geocomplexity for spatial vector data based on spatial dependence.
 #' @references
 #' Zehua Zhang, Yongze Song, Peng Luo & Peng Wu (2023) Geocomplexity explains spatial errors,
 #' International Journal of Geographical Information Science, 37:7, 1449-1469,
@@ -19,7 +19,7 @@
 #' adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
 #' objects to generate an adjacency binary matrix.
 #'
-#' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
+#' @param sfj An `sf` object or spatial vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class.
 #' @param method (optional) In instances where the method is `moran`, geocomplexity is
 #' determined using local moran measure method. Conversely, when the method is `spvar`,

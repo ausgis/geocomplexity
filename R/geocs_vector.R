@@ -1,6 +1,6 @@
-#' @title geocomplexity for vector data based on geographical similarity
+#' @title geocomplexity for spatial vector data based on geographical similarity
 #' @description
-#' This function calculates geocomplexity for in vector data based on geographical similarity.
+#' This function calculates geocomplexity for in spatial vector data based on geographical similarity.
 #' @details
 #' The geographical configuration similarity is calculated as:
 #'
@@ -14,7 +14,7 @@
 #'
 #' \eqn{\Gamma = \frac{\sum_i \sum_{j \neq i} \omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}}
 #'
-#' @param sfj An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
+#' @param sfj An `sf` object or spatial vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix. Must be a `matrix` class. If `wt` is not
 #' provided, `geocomplexity` will use a first-order inverse distance weight matrix via
 #' `sdsfun::inverse_distance_swm()` function.

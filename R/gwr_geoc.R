@@ -1,7 +1,7 @@
 #' Geographical Complexity-Geographically Weighted Regression
 #'
 #' @param formula A formula of `GCGWR` model.
-#' @param data An `sf` object or vector object that can be converted to `sf` by `sf::st_as_sf()`.
+#' @param data An `sf` object or spatial vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param gcs (optional) The geocomplexity matrix corresponding to each variable, which is calculated
 #' by default using `geocd_vector()`.
 #' @param alpha (optional) Balancing the weights of attribute similarity matrix and geographic distance matrix.

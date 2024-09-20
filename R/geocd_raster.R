@@ -1,6 +1,6 @@
-#' @title geocomplexity for raster data based on spatial dependence
+#' @title geocomplexity for spatial raster data based on spatial dependence
 #' @description
-#' This function calculates geocomplexity for raster data based on spatial dependence.
+#' This function calculates geocomplexity for spatial raster data based on spatial dependence.
 #' @references
 #' Zehua Zhang, Yongze Song, Peng Luo & Peng Wu (2023) Geocomplexity explains spatial errors,
 #' International Journal of Geographical Information Science, 37:7, 1449-1469,
@@ -14,7 +14,7 @@
 #' internally on raster data based on neighborhood operations(focal) without providing
 #' additional wt object.
 #'
-#' @param r Raster object that can be converted to `SpatRaster` by `terra::rast()`.
+#' @param r `SpatRaster` object or can be converted to `SpatRaster` by `terra::rast()`.
 #' @param order (optional) The order of the adjacency object. Default is `1`.
 #' @param normalize (optional) Whether to further normalizes the calculated geocomplexity.
 #' Default is `TRUE`.
