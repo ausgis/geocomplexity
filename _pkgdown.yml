@@ -44,6 +44,6 @@ reference:
   contents:
   - moran_test
 
-- title: S3 Methods for Geographical Complexity
+- title: S3 Methods
   contents:
   - starts_with("print")

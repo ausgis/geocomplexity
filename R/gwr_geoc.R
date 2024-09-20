@@ -94,11 +94,6 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
 }
 
 #' @title print GCGWR result
-#'
-#' @param x Return by `gwr_geoc()`.
-#' @param ... (optional) Other arguments.
-#'
-#' @return Formatted string output
 #' @export
 print.gcgwrm = \(x,...){
   PrintGCGWRM(x)
