@@ -12,19 +12,22 @@ void PrintCoefMat(Rcpp::NumericMatrix mat, Rcpp::CharacterVector rownames) {
   // Set up the width for columns, similar to the R print table format
   int colWidth = 10;
   Rcpp::CharacterVector colnames = Rcpp::CharacterVector::create("Min.", "1st Qu.", "Median", "3rd Qu.", "Max.");
-  Rcpp::Rcout << std::left << std::setw(colWidth) << "Coefficient";
 
-  // Print column headers
+  Rcpp::Rcout << std::left << std::setw(colWidth) << "Coefficient";
   for (int j = 0; j < colnames.size(); ++j) {
-    Rcpp::Rcout << std::setw(colWidth) << colnames[j];
+    Rcpp::Rcout << std::right << std::setw(colWidth) << colnames[j];  // Right-align the column headers too
   }
   Rcpp::Rcout << std::endl;
 
-  // Print the matrix with row names
+  // Print the matrix with row names and aligned numeric columns
   for (int i = 0; i < mat.nrow(); ++i) {
+    // Print the row name with left alignment
     Rcpp::Rcout << std::left << std::setw(colWidth) << rownames[i];
+
+    // Print the numeric values with right alignment and 3 decimal places
     for (int j = 0; j < mat.ncol(); ++j) {
-      Rcpp::Rcout << std::setw(colWidth) << std::setprecision(3) << std::fixed << mat(i, j);
+      Rcpp::Rcout << std::right << std::setw(colWidth)
+                  << std::setprecision(3) << std::fixed << mat(i, j);
     }
     Rcpp::Rcout << std::endl;
   }
