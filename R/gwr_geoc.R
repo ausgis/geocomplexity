@@ -87,5 +87,41 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
                          return(tibble::as_tibble(.mat))
                        }) %>%
     sf::st_set_geometry(geom)
+  class(res) = 'gcgwrm'
   return(res)
+}
+
+#' @title print GCGWR result
+#'
+#' @param x Return by `gwr_geoc()`.
+#' @param ... (optional) Other arguments.
+#'
+#' @return Formatted string output
+#' @export
+print.gcgwrm = \(x,...){
+  cat("Geographical Complexity-Geographically Weighted Regression Model", fill = T)
+  cat("================================================================", fill = T)
+  cat("  Formula:", deparse(x$call$formula), fill = T)
+  cat("     Data:", deparse(x$call$data), fill = T)
+  cat("   Kernel:", x$args$kernel, fill = T)
+  cat("Bandwidth:", x$args$knn,
+      ifelse(x$args$adaptive, "(Nearest Neighbours)", "(Meters)"),
+      ifelse(x$args$bw, paste0(
+        "(Optimized accroding to ",
+        x$args$criterion,
+        ")"
+      ), ""), fill = T)
+  cat("\n", fill = T)
+
+  cat("Diagnostic Information", fill = T)
+  cat("----------------------", fill = T)
+  cat("  RSS:", x$diagnostic$RSS, fill = T)
+  cat("  ENP:", x$diagnostic$ENP, fill = T)
+  cat("  EDF:", x$diagnostic$EDF, fill = T)
+  cat("   R2:", x$diagnostic$R2, fill = T)
+  cat("R2adj:", x$diagnostic$R2_Adj, fill = T)
+  cat("  AIC:", x$diagnostic$AIC, fill = T)
+  cat(" AICc:", x$diagnostic$AICc, fill = T)
+  cat(" RMSE:", x$diagnostic$RMSE, fill = T)
+  cat("\n", fill = T)
 }
