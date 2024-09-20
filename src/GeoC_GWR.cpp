@@ -62,7 +62,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
     arma::vec XtWy = X_with_intercept.t() * W * y;
 
     // Regularization to avoid singular matrix
-    arma::mat XtWX_reg = XtWX + 1e-5 * arma::eye(XtWX.n_rows, XtWX.n_cols);
+    arma::mat XtWX_reg = XtWX + 1e-6 * arma::eye(XtWX.n_rows, XtWX.n_cols);
 
     // Solve Local Regression Coefficient
     arma::vec beta_i = arma::solve(XtWX_reg, XtWy);
