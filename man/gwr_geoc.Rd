@@ -34,7 +34,7 @@ selected based on \code{RMSE} by default.}
 \value{
 A list with GCGWR results.
 \describe{
-\item{\code{SDF}}{a tibble about coefficients, standard errors, and T-values}
+\item{\code{SDF}}{an sf tibble with coefficients, standard errors and t values}
 \item{\code{diagnostic}}{goodness of fit indicators}
 \item{\code{arg}}{some key parameters}
 }
