@@ -46,7 +46,8 @@ Geographical Complexity-Geographically Weighted Regression
 \dontrun{
 ## The following code takes a long time to run:
 econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
-gwr_geoc(formula = Gini ~ ., data = econineq,
-         bw = "AIC", adaptive = TRUE)
+g = gwr_geoc(formula = Gini ~ ., data = econineq,
+             bw = "AIC", adaptive = TRUE)
+g
 }
 }
