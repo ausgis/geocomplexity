@@ -37,7 +37,7 @@ reference:
   contents:
   - gwr_geoc
   - geocs_swm
-
+  - geocd_swm
 
 
 - title: Global Spatial Autocorrelation Test
