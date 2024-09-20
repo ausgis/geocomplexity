@@ -21,8 +21,8 @@ spatial_variance <- function(x, wt) {
     .Call(`_geocomplexity_spatial_variance`, x, wt)
 }
 
-GeoCSWT <- function(x, wt, style) {
-    .Call(`_geocomplexity_GeoCSWT`, x, wt, style)
+GeoCSWM <- function(x, wt, style) {
+    .Call(`_geocomplexity_GeoCSWM`, x, wt, style)
 }
 
 MI_vec <- function(x, W, alternative = "greater", symmetrize = FALSE) {

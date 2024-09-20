@@ -85,16 +85,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// GeoCSWT
-NumericMatrix GeoCSWT(NumericVector x, NumericMatrix wt, String style);
-RcppExport SEXP _geocomplexity_GeoCSWT(SEXP xSEXP, SEXP wtSEXP, SEXP styleSEXP) {
+// GeoCSWM
+NumericMatrix GeoCSWM(NumericVector x, NumericMatrix wt, String style);
+RcppExport SEXP _geocomplexity_GeoCSWM(SEXP xSEXP, SEXP wtSEXP, SEXP styleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type wt(wtSEXP);
     Rcpp::traits::input_parameter< String >::type style(styleSEXP);
-    rcpp_result_gen = Rcpp::wrap(GeoCSWT(x, wt, style));
+    rcpp_result_gen = Rcpp::wrap(GeoCSWM(x, wt, style));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -278,7 +278,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 9},
     {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
-    {"_geocomplexity_GeoCSWT", (DL_FUNC) &_geocomplexity_GeoCSWT, 3},
+    {"_geocomplexity_GeoCSWM", (DL_FUNC) &_geocomplexity_GeoCSWM, 3},
     {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
     {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
     {"_geocomplexity_RasterGeoCMoranOne", (DL_FUNC) &_geocomplexity_RasterGeoCMoranOne, 3},

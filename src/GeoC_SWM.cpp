@@ -5,7 +5,7 @@ using namespace Rcpp;
 // [[Rcpp::plugins(cpp11)]]
 
 // [[Rcpp::export]]
-NumericMatrix GeoCSWT(NumericVector x,
+NumericMatrix GeoCSWM(NumericVector x,
                       NumericMatrix wt,
                       String style){
   NumericMatrix result(x.size(), x.size());

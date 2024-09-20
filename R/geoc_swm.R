@@ -19,6 +19,6 @@
 #' wt_gc[1:5,1:5]
 #'
 geoc_swm = \(gc,wt,style = 'W'){
-  wt_gc = GeoCSWT(gc,wt,style)
+  wt_gc = GeoCSWM(gc,wt,style)
   return(wt_gc)
 }
