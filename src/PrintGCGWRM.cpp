@@ -28,17 +28,10 @@ Rcpp::CharacterMatrix Matrix2Char(NumericMatrix mat, std::string fmt = "%.3f") {
 
 
 // [[Rcpp::export]]
-void PrintGCGWRM(Rcpp::List x, Rcpp::DataFrame coefs) {
+void PrintGCGWRM(Rcpp::List x) {
   // Basic Information
   Rcpp::Rcout << "Geographical Complexity-Geographically Weighted Regression Model" << std::endl;
   Rcpp::Rcout << "================================================================" << std::endl;
-  Rcpp::Rcout << std::endl;
-
-  // Summary of Coefficient Estimates
-  Rcpp::Rcout << "Summary of Coefficient Estimates" << std::endl;
-  Rcpp::Rcout << "--------------------------------" << std::endl;
-  Rcpp::Function Rsummary("summary.data.frame");
-  Rcpp::Rcout << Rsummary(coefs) << std::endl;
   Rcpp::Rcout << std::endl;
 
   // Diagnostic Information
@@ -54,4 +47,8 @@ void PrintGCGWRM(Rcpp::List x, Rcpp::DataFrame coefs) {
   Rcpp::Rcout << " AICc: " << as<double>(diagnostic["AICc"]) << std::endl;
   Rcpp::Rcout << " RMSE: " << as<double>(diagnostic["RMSE"]) << std::endl;
   Rcpp::Rcout << std::endl;
+
+  // Summary of Coefficient Estimates
+  Rcpp::Rcout << "Summary of Coefficient Estimates" << std::endl;
+  Rcpp::Rcout << "--------------------------------" << std::endl;
 }
