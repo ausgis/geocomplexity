@@ -199,7 +199,8 @@ Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
 
 arma::mat MatRowStandardize(const arma::mat& mat) {
   arma::mat result = mat;
-  for (int i = 0; i < result.n_rows; ++i) {
+  int n = result.n_rows;
+  for (int i = 0; i < n; ++i) {
     double row_sum = arma::sum(result.row(i));
     if (row_sum != 0) {
       result.row(i) /= row_sum;
