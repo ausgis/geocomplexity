@@ -24,6 +24,8 @@ navbar:
       menu:
       - text: Geographical Complexity Calculation
         href: articles/gcc.html
+      - text: Geographical Complexity Application
+        href: articles/gca.html
 
 reference:
 - title: GeoComplexity Computation
