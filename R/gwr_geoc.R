@@ -98,7 +98,6 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
 #' @export
 #' @noRd
 print.gcgwrm = \(x,...){
-  PrintGCGWRM(x)
   coefdf = sf::st_drop_geometry(x$SDF) %>%
     dplyr::select(Intercept:Intercept_SE) %>%
     dplyr::select(-Intercept_SE)
@@ -106,6 +105,5 @@ print.gcgwrm = \(x,...){
   coefdf = coefdf %>%
     purrr::map_dfr(\(.x) stats::quantile(.x)) %>%
     as.matrix()
-  rownames(coefdf) = coefname
-  print(summary(coefdf))
+  PrintGCGWRM(x,coefdf,coefname)
 }
