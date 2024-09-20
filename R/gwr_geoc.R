@@ -87,6 +87,7 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
                          return(tibble::as_tibble(.mat))
                        }) %>%
     sf::st_set_geometry(geom)
+  res$arg = append(res$arg,list("criterion" = criterion))
   class(res) = 'gcgwrm'
   return(res)
 }
@@ -99,5 +100,6 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
 #' @return Formatted string output
 #' @export
 print.gcgwrm = \(x,...){
-  PrintGCGWRM(x)
+  sdf = sf::st_drop_geometry(x$SDF)
+  PrintGCGWRM(x,sdf)
 }
