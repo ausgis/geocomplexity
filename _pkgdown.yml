@@ -43,3 +43,7 @@ reference:
 - title: Global Spatial Autocorrelation Test
   contents:
   - moran_test
+
+- title: S3 Methods for Geographical Complexity
+  contents:
+  - starts_with("print")
