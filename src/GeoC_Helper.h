@@ -22,6 +22,8 @@ Rcpp::NumericVector multiply_vector(Rcpp::NumericVector numvec1,
                                     Rcpp::NumericVector numvec2);
 Rcpp::NumericVector NormalizeVector(Rcpp::NumericVector x,
                                     double a, double b);
+Rcpp::NumericMatrix NormalizeMatRow(Rcpp::NumericMatrix mat,
+                                    double a, double b);
 Rcpp::NumericVector GCS_Variance(Rcpp::NumericMatrix x,
                                  Rcpp::NumericMatrix wt,
                                  Rcpp::String method);

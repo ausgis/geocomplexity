@@ -125,6 +125,33 @@ NumericVector NormalizeVector(NumericVector x, double a, double b) {
   return res;
 }
 
+NumericMatrix NormalizeMatRow(NumericMatrix mat, double a, double b) {
+  int nrow = mat.nrow();
+  int ncol = mat.ncol();
+
+  for (int i = 0; i < nrow; ++i) {
+    double row_min = mat(i, 0);
+    double row_max = mat(i, 0);
+
+    for (int j = 1; j < ncol; ++j) {
+      if (mat(i, j) < row_min) row_min = mat(i, j);
+      if (mat(i, j) > row_max) row_max = mat(i, j);
+    }
+
+    if (row_max == row_min) {
+      for (int j = 0; j < ncol; ++j) {
+        mat(i, j) = a;
+      }
+    } else {
+      for (int j = 0; j < ncol; ++j) {
+        mat(i, j) = a + (b - a) * (mat(i, j) - row_min) / (row_max - row_min);
+      }
+    }
+  }
+
+  return mat;
+}
+
 double matrix_sum(NumericMatrix mat) {
   int nrow = mat.nrow();
   int ncol = mat.ncol();

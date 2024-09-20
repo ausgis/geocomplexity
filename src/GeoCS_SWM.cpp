@@ -14,7 +14,8 @@ NumericMatrix GeoCS_SWM(NumericVector x,
     for (int j = 0; j < x.size(); ++j) {
       double wij = wt(i,j);
       if (wij != 0) {
-        result(i,j) = x[i] / x[j];
+        double z = x[i] / x[j];
+        result(i,j) = std::log(z);
       } else {
         result(i,j) = 0;
       }
