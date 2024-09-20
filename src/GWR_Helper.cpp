@@ -196,3 +196,23 @@ Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
     selected = arma::unique(selected);
     return ArmaVec4RcppNumericVector(selected);
 }
+
+arma::mat MatRowStandardize(const arma::mat& mat) {
+  arma::mat result = mat;
+  for (int i = 0; i < result.n_rows; ++i) {
+    double row_sum = arma::sum(result.row(i));
+    if (row_sum != 0) {
+      result.row(i) /= row_sum;
+    }
+  }
+  return result;
+}
+
+arma::mat MatGlobalStandardize(const arma::mat& mat) {
+  arma::mat result = mat;
+  double mat_sum = arma::accu(result);
+  if (mat_sum != 0) {
+    result /= mat_sum;
+  }
+  return result;
+}

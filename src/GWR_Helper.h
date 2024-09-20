@@ -23,5 +23,7 @@ arma::mat StandardizeMatColumns(const arma::mat& X);
 Rcpp::NumericVector ArmaVec4RcppNumericVector(const arma::vec& arma_vec);
 Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
                                    double start_idx, double end_idx);
+arma::mat MatRowStandardize(const arma::mat& mat);
+arma::mat MatGlobalStandardize(const arma::mat& mat);
 
 #endif // GEOCGWR_HELPER_H

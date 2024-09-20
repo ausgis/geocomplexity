@@ -48,11 +48,11 @@ geocd_swm = \(sfj, wt = NULL, style = 'B', ...){
                                       style = 'B',
                                       zero.policy = TRUE)
   }
-
+  xs = as.matrix(sf::st_drop_geometry(sfj))
   gc = geocomplexity::geocd_vector(sfj,wt,...) %>%
     sf::st_drop_geometry() %>%
     as.matrix()
-  wt_gc = GeoCD_SWM(gc,wt,style)
+  wt_gc = GeoCD_SWM(xs,gc,wt,style)
 
   return(wt_gc)
 }
