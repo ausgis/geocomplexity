@@ -42,7 +42,7 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
   if (is.null(gcs)) {
     gcs = data %>%
       dplyr::select(-dplyr::any_of(yname)) %>%
-      geocd_vector(returnsf = FALSE) %>%
+      geocomplexity::geocd_vector(returnsf = FALSE) %>%
       as.matrix()
   }
   distm = sdsfun::sf_distance_matrix(data)
