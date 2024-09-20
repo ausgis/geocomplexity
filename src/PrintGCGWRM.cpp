@@ -1,32 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-void PrintTableMd(CharacterMatrix table, std::string indent = "  ") {
-  for (int i = 0; i < table.nrow(); i++) {
-    for (int j = 0; j < table.ncol(); j++) {
-      Rcpp::Rcout << indent << as<std::string>(table(i, j));
-      if (j < table.ncol() - 1) Rcpp::Rcout << " ";
-    }
-    Rcpp::Rcout << std::endl;
-  }
-}
-
-Rcpp::CharacterMatrix Matrix2Char(NumericMatrix mat, std::string fmt = "%.3f") {
-  int nrow = mat.nrow();
-  int ncol = mat.ncol();
-  CharacterMatrix result(nrow, ncol);
-
-  char buffer[100];
-  for (int i = 0; i < nrow; i++) {
-    for (int j = 0; j < ncol; j++) {
-      std::sprintf(buffer, fmt.c_str(), mat(i, j));
-      result(i, j) = std::string(buffer);
-    }
-  }
-  return result;
-}
-
-
 // [[Rcpp::export]]
 void PrintGCGWRM(Rcpp::List x) {
   // Basic Information
