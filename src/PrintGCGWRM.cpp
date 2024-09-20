@@ -28,7 +28,7 @@ Rcpp::CharacterMatrix Matrix2Char(NumericMatrix mat, std::string fmt = "%.3f") {
 
 
 // [[Rcpp::export]]
-void PrintGCGWRM(Rcpp::List x) {
+void PrintGCGWRM(Rcpp::List x, Rcpp::DataFrame coefs) {
   // Basic Information
   Rcpp::Rcout << "Geographical Complexity-Geographically Weighted Regression Model" << std::endl;
   Rcpp::Rcout << "================================================================" << std::endl;

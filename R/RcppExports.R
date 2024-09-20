@@ -37,8 +37,8 @@ print_global_moranI <- function(df) {
     .Call(`_geocomplexity_print_global_moranI`, df)
 }
 
-PrintGCGWRM <- function(x) {
-    invisible(.Call(`_geocomplexity_PrintGCGWRM`, x))
+PrintGCGWRM <- function(x, coefs) {
+    invisible(.Call(`_geocomplexity_PrintGCGWRM`, x, coefs))
 }
 
 RasterGeoCMoranOne <- function(x, ni = 9L, nw = 9L) {
