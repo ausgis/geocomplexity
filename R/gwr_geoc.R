@@ -76,11 +76,12 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
   optarg = SGWRSel(bws, knns, alpha, y, xs, distm,
                    adaptive, criterion, kernel)
   res = GeoCGWR(y,xs,gcs,distm,optarg[[1]],optarg[[2]],adaptive,optarg[[3]],kernel)
-  res$SDF = purrr::map2_dfc(res$SDF,
+  res$SDF = purrr::map2_dfc(
+                       res$SDF,
                        list(c("Intercept",xname),
                             paste0(c("Intercept",xname),"_SE"),
                             paste0(c("Intercept",xname),"_TV"),
-                            c("Pred"),c("Residuals")),
+                            c("Pred"),c("Residuals"),c("LocalR2")),
                        \(.mat,.name) {
                          colnames(.mat) = .name
                          return(tibble::as_tibble(.mat))
