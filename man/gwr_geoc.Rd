@@ -17,7 +17,7 @@ gwr_geoc(
 \arguments{
 \item{formula}{A formula of \code{GCGWR} model.}
 
-\item{data}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
+\item{data}{An \code{sf} object or spatial vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
 \item{gcs}{(optional) The geocomplexity matrix corresponding to each variable, which is calculated
 by default using \code{geocd_vector()}.}

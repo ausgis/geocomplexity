@@ -2,12 +2,12 @@
 % Please edit documentation in R/geocs_raster.R
 \name{geocs_raster}
 \alias{geocs_raster}
-\title{geocomplexity for raster data based on geographical similarity}
+\title{geocomplexity for spatial raster data based on geographical similarity}
 \usage{
 geocs_raster(r, order = 1, normalize = TRUE, similarity = 1, method = "spvar")
 }
 \arguments{
-\item{r}{Raster object that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
+\item{r}{\code{SpatRaster} object or can be converted to \code{SpatRaster} by \code{terra::rast()}.}
 
 \item{order}{(optional) The order of the adjacency object. Default is \code{1}.}
 
@@ -26,7 +26,7 @@ is \code{spvar}.}
 A SpatRaster object
 }
 \description{
-This function calculates geocomplexity for raster data based on geographical similarity.
+This function calculates geocomplexity for spatial raster data based on geographical similarity.
 }
 \note{
 In contrast to the \code{geocs_vector()} function, the \code{geocs_raster()} performs operations

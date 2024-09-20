@@ -2,12 +2,12 @@
 % Please edit documentation in R/geocd_raster.R
 \name{geocd_raster}
 \alias{geocd_raster}
-\title{geocomplexity for raster data based on spatial dependence}
+\title{geocomplexity for spatial raster data based on spatial dependence}
 \usage{
 geocd_raster(r, order = 1, normalize = TRUE, method = "moran")
 }
 \arguments{
-\item{r}{Raster object that can be converted to \code{SpatRaster} by \code{terra::rast()}.}
+\item{r}{\code{SpatRaster} object or can be converted to \code{SpatRaster} by \code{terra::rast()}.}
 
 \item{order}{(optional) The order of the adjacency object. Default is \code{1}.}
 
@@ -25,7 +25,7 @@ geocomplexity. The selection of the method can be made from any one of the three
 A SpatRaster object
 }
 \description{
-This function calculates geocomplexity for raster data based on spatial dependence.
+This function calculates geocomplexity for spatial raster data based on spatial dependence.
 }
 \note{
 In contrast to the \code{geocd_vector()} function, the \code{geocd_raster()} performs operations

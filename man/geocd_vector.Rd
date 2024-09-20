@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocd_vector.R
 \name{geocd_vector}
 \alias{geocd_vector}
-\title{geocomplexity for vector data based on spatial dependence}
+\title{geocomplexity for spatial vector data based on spatial dependence}
 \usage{
 geocd_vector(
   sfj,
@@ -13,7 +13,7 @@ geocd_vector(
 )
 }
 \arguments{
-\item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
+\item{sfj}{An \code{sf} object or spatial vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
 \item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class.}
 
@@ -34,7 +34,7 @@ Default is \code{TRUE}.}
 A tibble (\code{returnsf} is \code{FALSE}) or an sf object (\code{returnsf} is \code{TRUE})
 }
 \description{
-This function calculates geocomplexity for vector data based on spatial dependence.
+This function calculates geocomplexity for spatial vector data based on spatial dependence.
 }
 \details{
 The formula for geocomplexity which uses local moran measure method is

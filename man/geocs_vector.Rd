@@ -2,7 +2,7 @@
 % Please edit documentation in R/geocs_vector.R
 \name{geocs_vector}
 \alias{geocs_vector}
-\title{geocomplexity for vector data based on geographical similarity}
+\title{geocomplexity for spatial vector data based on geographical similarity}
 \usage{
 geocs_vector(
   sfj,
@@ -14,7 +14,7 @@ geocs_vector(
 )
 }
 \arguments{
-\item{sfj}{An \code{sf} object or vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
+\item{sfj}{An \code{sf} object or spatial vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
 
 \item{wt}{(optional) Spatial weight matrix. Must be a \code{matrix} class. If \code{wt} is not
 provided, \code{geocomplexity} will use a first-order inverse distance weight matrix via
@@ -38,7 +38,7 @@ Default is \code{TRUE}.}
 A tibble (\code{returnsf} is \code{FALSE}) or an sf object (\code{returnsf} is \code{TRUE})
 }
 \description{
-This function calculates geocomplexity for in vector data based on geographical similarity.
+This function calculates geocomplexity for in spatial vector data based on geographical similarity.
 }
 \details{
 The geographical configuration similarity is calculated as:
