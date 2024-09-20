@@ -21,6 +21,7 @@ NumericMatrix GeoCS_SWM(NumericVector x,
       }
     }
   }
+  result = NormalizeMatRow(result,0,1);
 
   if (style == "W"){
     result = MatRowStandardize(result);
