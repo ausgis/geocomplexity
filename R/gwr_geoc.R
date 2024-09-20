@@ -102,5 +102,10 @@ print.gcgwrm = \(x,...){
   coefdf = sf::st_drop_geometry(x$SDF) %>%
     dplyr::select(Intercept:Intercept_SE) %>%
     dplyr::select(-Intercept_SE)
+  coefname = colnames(coefdf)
+  coefdf = coefdf %>%
+    purrr::map_dfr(\(.x) stats::quantile(.x)) %>%
+    as.matrix()
+  rownames(coefdf) = coefname
   print(summary(coefdf))
 }
