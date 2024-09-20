@@ -35,9 +35,9 @@ reference:
 
 - title: GeoComplexity Application
   contents:
-  - gwr_geoc
   - geocs_swm
   - geocd_swm
+  - gwr_geoc
 
 
 - title: Global Spatial Autocorrelation Test

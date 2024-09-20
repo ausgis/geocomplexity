@@ -1,8 +1,8 @@
 ---
-title: "gca"
+title: "GeoComplexity Application"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{gca}
+  %\VignetteIndexEntry{GeoComplexity Application}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
