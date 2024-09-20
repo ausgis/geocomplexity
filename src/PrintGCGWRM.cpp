@@ -28,6 +28,7 @@ void PrintCoefMat(Rcpp::NumericMatrix mat, Rcpp::CharacterVector rownames) {
     }
     Rcpp::Rcout << std::endl;
   }
+  Rcpp::Rcout << std::endl;
 }
 
 // [[Rcpp::export]]
