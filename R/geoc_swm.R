@@ -1,4 +1,4 @@
-#' @title spatial weight matrix based on geographical complexity
+#' @title constructing spatial weight matrix based on geocomplexity with similar geographical configurations
 #'
 #' @param sfj An `sf` object or spatial vector object that can be converted to `sf` by `sf::st_as_sf()`.
 #' @param wt (optional) Spatial weight matrix based on spatial adjacency or spatial distance relationships.
