@@ -5,8 +5,8 @@ SelectSortedBW <- function(dist_mat, start_idx, end_idx) {
     .Call(`_geocomplexity_SelectSortedBW`, dist_mat, start_idx, end_idx)
 }
 
-timesTwo <- function(x) {
-    .Call(`_geocomplexity_timesTwo`, x)
+GeoCD_SWM <- function(gcs, wt, style) {
+    .Call(`_geocomplexity_GeoCD_SWM`, gcs, wt, style)
 }
 
 GeoCS_SWM <- function(x, wt, style) {

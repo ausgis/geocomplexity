@@ -24,14 +24,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// timesTwo
-NumericVector timesTwo(NumericVector x);
-RcppExport SEXP _geocomplexity_timesTwo(SEXP xSEXP) {
+// GeoCD_SWM
+arma::mat GeoCD_SWM(arma::mat gcs, arma::mat wt, std::string style);
+RcppExport SEXP _geocomplexity_GeoCD_SWM(SEXP gcsSEXP, SEXP wtSEXP, SEXP styleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(timesTwo(x));
+    Rcpp::traits::input_parameter< arma::mat >::type gcs(gcsSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type wt(wtSEXP);
+    Rcpp::traits::input_parameter< std::string >::type style(styleSEXP);
+    rcpp_result_gen = Rcpp::wrap(GeoCD_SWM(gcs, wt, style));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -285,7 +287,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_SelectSortedBW", (DL_FUNC) &_geocomplexity_SelectSortedBW, 3},
-    {"_geocomplexity_timesTwo", (DL_FUNC) &_geocomplexity_timesTwo, 1},
+    {"_geocomplexity_GeoCD_SWM", (DL_FUNC) &_geocomplexity_GeoCD_SWM, 3},
     {"_geocomplexity_GeoCS_SWM", (DL_FUNC) &_geocomplexity_GeoCS_SWM, 3},
     {"_geocomplexity_GeoCGWRFit", (DL_FUNC) &_geocomplexity_GeoCGWRFit, 9},
     {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 9},
