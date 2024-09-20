@@ -154,7 +154,7 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
           Rcpp::Named("RMSE") = g["RMSE"],
           Rcpp::Named("AIC") = g["AIC"],
           Rcpp::Named("AICc") = g["AICc"]),
-     Rcpp::Named("arg") = Rcpp::List::create(
+     Rcpp::Named("args") = Rcpp::List::create(
        Rcpp::Named("adaptive") = adaptive,
        Rcpp::Named("bw") = bw,
        Rcpp::Named("knn") = knn,

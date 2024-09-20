@@ -13,7 +13,7 @@ void PrintGCGWRM(Rcpp::List x) {
   Rcpp::Rcout << "Geographical Complexity-Geographically Weighted Regression Model" << std::endl;
   Rcpp::Rcout << "================================================================" << std::endl;
   Rcpp::List args = x["args"];
-  bool adaptive = x["adaptive"];
+  bool adaptive = args["adaptive"];
   int knn = args["knn"];
   double alpha = args["alpha"];
   std::string kernel = args["kernel"];

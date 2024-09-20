@@ -14,7 +14,7 @@
 #' \describe{
 #' \item{\code{SDF}}{an sf tibble with coefficients, standard errors and t values}
 #' \item{\code{diagnostic}}{goodness of fit indicators}
-#' \item{\code{arg}}{some key parameters}
+#' \item{\code{args}}{some key parameters}
 #' }
 #' @export
 #'
@@ -87,9 +87,9 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
                          return(tibble::as_tibble(.mat))
                        }) %>%
     sf::st_set_geometry(geom)
-  res$arg = append(res$arg,
-                   list("criterion" = criterion,
-                        "kernel" = kernel))
+  res$args = append(res$args,
+                    list("criterion" = criterion,
+                         "kernel" = kernel))
   class(res) = 'gcgwrm'
   return(res)
 }
