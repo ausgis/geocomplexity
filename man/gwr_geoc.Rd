@@ -36,7 +36,7 @@ A list with GCGWR results.
 \describe{
 \item{\code{SDF}}{an sf tibble with coefficients, standard errors and t values}
 \item{\code{diagnostic}}{goodness of fit indicators}
-\item{\code{arg}}{some key parameters}
+\item{\code{args}}{some key parameters}
 }
 }
 \description{
