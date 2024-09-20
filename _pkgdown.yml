@@ -39,6 +39,7 @@ reference:
   - geocs_swm
 
 
+
 - title: Global Spatial Autocorrelation Test
   contents:
   - moran_test
