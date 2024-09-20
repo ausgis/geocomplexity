@@ -74,8 +74,7 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
     }
   }
 
-  optarg = SGWRSel(bws, knns, alpha, y, xs, distm,
-                   adaptive, criterion, kernel)
+  optarg = SGWRSel(bws, knns, alpha, y, xs, distm, adaptive, criterion, kernel)
   res = GeoCGWR(y,xs,gcs,distm,optarg[[1]],optarg[[2]],adaptive,optarg[[3]],kernel)
   res$SDF = purrr::map2_dfc(
                        res$SDF,
@@ -88,7 +87,9 @@ gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
                          return(tibble::as_tibble(.mat))
                        }) %>%
     sf::st_set_geometry(geom)
-  res$arg = append(res$arg,list("criterion" = criterion))
+  res$arg = append(res$arg,
+                   list("criterion" = criterion,
+                        "kernel" = kernel))
   class(res) = 'gcgwrm'
   return(res)
 }
