@@ -4,7 +4,7 @@
 \alias{geocs_swm}
 \title{spatial weight matrix based on geographical complexity}
 \usage{
-geocs_swm(sfj, wt = NULL, style = "W", ...)
+geocs_swm(sfj, wt = NULL, style = "B", ...)
 }
 \arguments{
 \item{sfj}{An \code{sf} object or spatial vector object that can be converted to \code{sf} by \code{sf::st_as_sf()}.}
@@ -12,7 +12,7 @@ geocs_swm(sfj, wt = NULL, style = "W", ...)
 \item{wt}{(optional) Spatial weight matrix based on spatial adjacency or spatial distance relationships.}
 
 \item{style}{(optional) A character that can be \code{B},\code{W},\code{C}.  More to see \code{spdep::nb2mat()}.
-Default is \code{W}.}
+Default is \code{B}.}
 
 \item{...}{(optional) Other parameters passed to \code{geocomplexity::geocs_vector()}.}
 }
