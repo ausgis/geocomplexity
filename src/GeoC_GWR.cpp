@@ -19,6 +19,7 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
   arma::mat hat_matrix = zeros(n,n);
   arma::vec residuals = zeros(n);
   arma::vec yhat = zeros(n);
+  arma::vec local_r2_vec = arma::zeros(n);
 
   if (adaptive) {
     bw_vec = GenAdaptiveKNNBW(Gdist,knn);
@@ -77,6 +78,9 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
     arma::rowvec hat_row = X_with_intercept.row(i) * XtWX_inv * X_with_intercept.t() * W;
     hat_matrix.row(i) = hat_row;
 
+    // Local R-square calculation
+    local_r2_vec(i) = LocalR2(y, X_with_intercept * beta_i, wt);
+
     // Standard Error of Calculated Coefficient
     double sigma2_i = arma::as_scalar(sum(pow(residuals(i), 2)) / (n - k - 1));
     arma::vec se_beta_i = sqrt(sigma2_i * arma::diagvec(XtWX_inv));
@@ -123,7 +127,8 @@ Rcpp::List GeoCGWRFit(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
     Named("RMSE") = rmse,
     // Named("AICb") = aicbb,
     Named("AIC") = aichb,
-    Named("AICc") = aiccb
+    Named("AICc") = aiccb,
+    Rcpp::Named("LocalR2") = local_r2_vec
   );
 }
 
@@ -138,7 +143,8 @@ Rcpp::List GeoCGWR(arma::vec y, arma::mat X, arma::mat gcs, arma::mat Gdist,
       Rcpp::Named("SE_Coefficient") = g["SE_Coefficient"],
       Rcpp::Named("t_values") = g["t_values"],
       Rcpp::Named("Pred") = g["Pred"],
-      Rcpp::Named("Residuals") = g["Residuals"]),
+      Rcpp::Named("Residuals") = g["Residuals"],
+      Rcpp::Named("LocalR2") = g["LocalR2"]),
     Rcpp::Named("diagnostic") = Rcpp::List::create(
           Rcpp::Named("RSS") = g["RSS"],
           Rcpp::Named("ENP") = g["ENP"],

@@ -180,6 +180,12 @@ Rcpp::NumericVector ArmaVec4RcppNumericVector(const arma::vec& arma_vec) {
   return numeric_vec;
 }
 
+double LocalR2(const arma::vec& y, const arma::vec& yhat, const arma::vec& W) {
+  double rss_local = arma::sum(W % arma::pow(y - yhat, 2));
+  double tss_local = arma::sum(W % arma::pow(y - arma::mean(y), 2));
+  return 1 - (rss_local / tss_local);
+}
+
 // [[Rcpp::export]]
 Rcpp::NumericVector SelectSortedBW(const arma::mat& dist_mat,
                                    double start_idx, double end_idx) {
