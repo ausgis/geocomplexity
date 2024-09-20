@@ -32,40 +32,13 @@ void PrintGCGWRM(Rcpp::List x, Rcpp::DataFrame coefs) {
   // Basic Information
   Rcpp::Rcout << "Geographical Complexity-Geographically Weighted Regression Model" << std::endl;
   Rcpp::Rcout << "================================================================" << std::endl;
+  Rcpp::Rcout << std::endl;
 
   // Summary of Coefficient Estimates
   Rcpp::Rcout << "Summary of Coefficient Estimates" << std::endl;
   Rcpp::Rcout << "--------------------------------" << std::endl;
-  NumericMatrix betas = as<NumericMatrix>(coefs);
-  int p = betas.ncol();
-  NumericMatrix beta_fivenum(p, 5);
-
-  // Call base R function 'fivenum' for each column of betas
-  Rcpp::Function fivenum("fivenum");
-  for (int i = 0; i < p; i++) {
-    NumericVector col = betas(_, i);
-    NumericVector fivenum_res = fivenum(col);
-    beta_fivenum(i, _) = fivenum_res;
-  }
-
-  CharacterMatrix beta_str(p + 1, 6);
-  beta_str(0, 0) = "Coefficient";
-  beta_str(0, 1) = "Min.";
-  beta_str(0, 2) = "1st Qu.";
-  beta_str(0, 3) = "Median";
-  beta_str(0, 4) = "3rd Qu.";
-  beta_str(0, 5) = "Max.";
-
-  Rcpp::CharacterVector xname = colnames(betas);
-  CharacterMatrix beta_fivenum_str = Matrix2Char(beta_fivenum, "%.5f");
-  for (int i = 0; i < p; ++i) {
-    beta_str(i + 1, 0) = xname[i];
-    for (int j = 0; j < 5; ++j) {
-      beta_str(i + 1, j + 1) = beta_fivenum_str(i, j);
-    }
-  }
-
-  PrintTableMd(beta_str);
+  Rcpp::Function Rsummary("summary.data.frame");
+  Rcpp::Rcout << Rsummary(coefs) << std::endl;
   Rcpp::Rcout << std::endl;
 
   // Diagnostic Information
