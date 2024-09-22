@@ -76,5 +76,32 @@ $$
 
 ## Considering the geographical complexity with geographical configurations similarities
 
+### Firstly, calculate global similarity:
+
+$$
+S = CosineSimilarity(z_i,z_j)
+$$
+
+or 
+
+$$
+S = GeographicalConfigurationsSimilarity(z_i,z_j)
+$$
+
+### The geographic complexity is then calculated:
+
+The formula for geocomplexity which uses spatial fluctuation measure
+method is
+
+$$
+\rho_i = spatial\_variance(S_i,S_j)
+$$ 
+
+The formula for geocomplexity which uses shannon entropy measure
+method is
+
+$$
+\rho_i = shannon\_entropy(S_i,S_j)
+$$ 
 
 # Cases for computing geographical complexity
