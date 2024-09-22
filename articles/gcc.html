@@ -83,29 +83,23 @@
 <div class="section level2">
 <h2 id="calculation-methods-of-geographical-complexity">Calculation methods of geographical complexity<a class="anchor" aria-label="anchor" href="#calculation-methods-of-geographical-complexity"></a>
 </h2>
-<div class="section level3">
-<h3 id="considering-the-geographical-complexity-with-spatial-local-dependencies">Considering the geographical complexity with spatial local
-dependencies<a class="anchor" aria-label="anchor" href="#considering-the-geographical-complexity-with-spatial-local-dependencies"></a>
-</h3>
-<p>The formula for geocomplexity which uses local moran measure method
-is <span class="math display">\[
-\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m}
-\sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk}
-W_{ik} Z_k
+<p>The formula for <em>shannon entropy</em> is as follows:</p>
+<p><span class="math display">\[
+H(X) = - \sum_{i=1}^{n} p(x_i) \log_b p(x_i)
 \]</span></p>
-<p>The spatial variance is calculated as: <span class="math display">\[
+<p>Where <span class="math inline">\(H(X)\)</span> is entropy of the
+random variable <span class="math inline">\(X\)</span>, <span class="math inline">\(p(x_i)\)</span> is probability of the random
+variable <span class="math inline">\(X\)</span> taking the value <span class="math inline">\(x_i\)</span>, <span class="math inline">\(n\)</span>is number of possible values that <span class="math inline">\(X\)</span> can take, <span class="math inline">\(b\)</span> is the base of the logarithm, which can
+be 2 (for bits), <span class="math inline">\(e\)</span> (natural
+logarithm, for nats), or 10 (for dits).</p>
+<p>The <em>spatial variance</em> is calculated as:</p>
+<p><span class="math display">\[
 \Gamma = \frac{\sum_i \sum_{j \neq i}
 \omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}
 \]</span></p>
-<p>The formula for geocomplexity which uses spatial fluctuation measure
-method is <span class="math display">\[
-\rho_i = spvar(z_i,z_j)
-\]</span></p>
-</div>
-<div class="section level3">
-<h3 id="considering-the-geographical-complexity-with-geographical-configurations-similarities">Considering the geographical complexity with geographical
-configurations similarities<a class="anchor" aria-label="anchor" href="#considering-the-geographical-complexity-with-geographical-configurations-similarities"></a>
-</h3>
+<p>where <span class="math inline">\(\omega_{ij}\)</span> is the weight
+between <span class="math inline">\(i\)</span>-th location and <span class="math inline">\(j\)</span>-th location; <span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are the dependent variable values at
+the <span class="math inline">\(i\)</span>-th and <span class="math inline">\(j\)</span>-th locations respectively.</p>
 <p>The geographical configuration similarity is calculated as:</p>
 <p><span class="math display">\[
 S({\bf u}_{\alpha},{\bf v}_{\beta})=min\{E_{i}(e_{i}({\bf
@@ -121,6 +115,27 @@ v}_{\beta})\right)^{2}}}\right)
 \delta({\bf u}_{\alpha},{\bf v})=\sqrt{\frac{\sum_{\beta=1}^{n}(e({\bf
 u}_{\alpha})-e({\bf v}_{\beta}))^{2}}{n}}
 \]</span></p>
+<div class="section level3">
+<h3 id="considering-the-geographical-complexity-with-spatial-local-dependencies">Considering the geographical complexity with spatial local
+dependencies<a class="anchor" aria-label="anchor" href="#considering-the-geographical-complexity-with-spatial-local-dependencies"></a>
+</h3>
+<p>The formula for geocomplexity which uses local moran measure method
+is</p>
+<p><span class="math display">\[
+\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m}
+\sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk}
+W_{ik} Z_k
+\]</span></p>
+<p>The formula for geocomplexity which uses spatial fluctuation measure
+method is</p>
+<p><span class="math display">\[
+\rho_i = spvar(z_i,z_j)
+\]</span></p>
+</div>
+<div class="section level3">
+<h3 id="considering-the-geographical-complexity-with-geographical-configurations-similarities">Considering the geographical complexity with geographical
+configurations similarities<a class="anchor" aria-label="anchor" href="#considering-the-geographical-complexity-with-geographical-configurations-similarities"></a>
+</h3>
 </div>
 </div>
 <div class="section level2">
