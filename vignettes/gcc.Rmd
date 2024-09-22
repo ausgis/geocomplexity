@@ -20,24 +20,23 @@ knitr::opts_chunk$set(
 
 # Calculation methods of geographical complexity
 
-## Considering the geographical complexity with spatial local dependencies
+The formula for *shannon entropy* is as follows:
 
-The formula for geocomplexity which uses local moran measure method is
 $$
-\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k
+H(X) = - \sum_{i=1}^{n} p(x_i) \log_b p(x_i)
 $$
 
-The spatial variance is calculated as:
+Where $H(X)$ is entropy of the random variable $X$, $p(x_i)$ is probability of the random variable $X$ taking the value $x_i$, $n$is number of possible values that $X$ can take, $b$ is the base of the logarithm, which can be 2 (for bits), $e$ (natural logarithm, for nats), or 10 (for dits).
+
+The *spatial variance* is calculated as:
+
 $$
 \Gamma = \frac{\sum_i \sum_{j \neq i} \omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}
 $$
 
-The formula for geocomplexity which uses spatial fluctuation measure method is
-$$
-\rho_i = spvar(z_i,z_j)
-$$
-
-## Considering the geographical complexity with geographical configurations similarities
+where $\omega_{ij}$ is the weight between $i$-th location and
+$j$-th location; $y_i$ and $y_j$ are the dependent variable values
+at the $i$-th and $j$-th locations respectively.
 
 The geographical configuration similarity is calculated as:
 
@@ -47,11 +46,28 @@ $$
 
 $$
 E_{i}({\bf u}_{\alpha},{\bf v}_{\beta})=\exp\left(-{\frac{\left(e_{i}({\bf u}_{\alpha})-e_{i}({\bf v}_{\beta})\right)^{2}}{2\left(\sigma^{2}/\delta({\bf v}_{\beta})\right)^{2}}}\right)
-$$ 
+$$
 
 $$
 \delta({\bf u}_{\alpha},{\bf v})=\sqrt{\frac{\sum_{\beta=1}^{n}(e({\bf u}_{\alpha})-e({\bf v}_{\beta}))^{2}}{n}}
 $$
+
+## Considering the geographical complexity with spatial local dependencies
+
+The formula for geocomplexity which uses local moran measure method is
+
+$$
+\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k
+$$
+
+The formula for geocomplexity which uses spatial fluctuation measure
+method is
+
+$$
+\rho_i = spvar(z_i,z_j)
+$$ 
+
+## Considering the geographical complexity with geographical configurations similarities
 
 
 # Cases for computing geographical complexity
