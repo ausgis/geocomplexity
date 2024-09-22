@@ -23,7 +23,9 @@ knitr::opts_chunk$set(
 ## Considering the geographical complexity with spatial local dependencies
 
 The formula for geocomplexity which uses local moran measure method is
-\eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
+$$
+\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k
+$$
 
 ## Considering the geographical complexity with geographical configurations similarities
 
