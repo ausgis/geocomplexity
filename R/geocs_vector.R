@@ -29,7 +29,7 @@
 #' library(viridis)
 #' ggplot(gc) +
 #'    geom_sf(aes(fill = GC)) +
-#'    scale_fill_viridis(option="mako", direction = -1) +
+#'    scale_fill_viridis(option = "mako", direction = -1) +
 #'    theme_bw()
 #'
 geocs_vector = \(sfj, wt = NULL,
