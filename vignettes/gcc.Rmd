@@ -64,7 +64,14 @@ The formula for geocomplexity which uses spatial fluctuation measure
 method is
 
 $$
-\rho_i = spvar(z_i,z_j)
+\rho_i = spatial\_variance(z_i,z_j)
+$$ 
+
+The formula for geocomplexity which uses shannon entropy measure
+method is
+
+$$
+\rho_i = shannon\_entropy(z_i,z_j)
 $$ 
 
 ## Considering the geographical complexity with geographical configurations similarities
