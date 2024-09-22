@@ -105,3 +105,53 @@ $$
 $$ 
 
 # Cases for computing geographical complexity
+
+## Geographical Complexity of Individual Variables
+
+```{r calcul_geocd}
+library(sf)
+library(geocomplexity)
+library(ggplot2)
+library(viridis)
+library(patchwork)
+econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+gc = geocd_vector(econineq)
+gc
+```
+
+```{r plot_geocd,fig.width=9.5,fig.height=8.5,fig.cap=knitr::asis_output("**Figure 1**. (a) through (i) represent the computed geographical complexity for variable Gini,Induscale,IT,Income,Sexrat,Houseown,Indemp,Indcom and Hiedu.")}
+plot_geocd = \(.x){
+  ggplot(gc) +
+   geom_sf(aes(fill = gc[,.x,drop = TRUE])) +
+   scale_fill_viridis(option = "mako", direction = -1,name = "") +
+   theme_bw()
+}
+
+fig1 = names(gc)[1:9] %>% 
+  purrr::map(plot_geocd) %>% 
+  wrap_plots(ncol = 3, byrow = TRUE,
+             guides = "collect") + 
+  plot_annotation(tag_levels = 'a',
+                  tag_prefix = '(',
+                  tag_suffix = ')',
+                  tag_sep = '',
+                  theme = theme(plot.tag = element_text(family = "serif"),
+                                plot.tag.position = "topleft"))
+fig1
+```
+
+## Geographical Complexity of Multiple Variables
+
+```{r calcul_geocs}
+gc_multi = geocs_vector(dplyr::select(econineq,-Gini))
+gc_multi
+```
+
+```{r plot_geocs,fig.width=6.5,fig.height=4.5,fig.cap=knitr::asis_output("**Figure 2**. The comprehensive geographical complexity of variables Gini, Induscale, IT, Income, Sexrat, Houseown, Indemp, Indcom and Hiedu.)}
+fig2 = ggplot(gc_multi) +
+   geom_sf(aes(fill = GC)) +
+   scale_fill_viridis(option = "mako", direction = -1) +
+   theme_bw()
+fig2
+```
+
