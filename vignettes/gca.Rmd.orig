@@ -34,11 +34,11 @@ mlr1 = lm(Gini ~ ., data = st_drop_geometry(econineq))
 
 gc1 = geocd_vector(dplyr::select(econineq,-Gini),
                    wt = wt1, returnsf = FALSE)
-mlr2 = lm(Gini ~ ., data = st_drop_geometry(econineq) %>% 
+mlr2 = lm(Gini ~ ., data = st_drop_geometry(econineq) %>%
             dplyr::bind_cols(gc1))
 
 eval_mlr = \(models,mnames){
-  R2 = purrr::map_dbl(models,\(m) summary(m)$r.squared) 
+  R2 = purrr::map_dbl(models,\(m) summary(m)$r.squared)
   AdjR2 = purrr::map_dbl(models,\(m) summary(m)$adj.r.squared)
   t_eval = tibble::tibble(Model = mnames,
                           R2,AdjR2)
@@ -46,7 +46,7 @@ eval_mlr = \(models,mnames){
 }
 
 eval_mlr(list(mlr1,mlr2),
-         c("MLR","GCMLR")) |> 
+         c("MLR","GCMLR")) |>
   pander::pander()
 ```
 
@@ -57,9 +57,6 @@ library(spatialreg)
 
 
 wtl1 = spdep::mat2listw(wt1)
-gc2 = geocs_vector(dplyr::select(econineq,-Gini),
-                   wt = wt_mat, returnsf = FALSE)
-
 wt2 = geocs_swm(econineq,wt1)
 wtl2 = spdep::mat2listw(wt2,zero.policy = TRUE)
 
@@ -81,7 +78,7 @@ eval_slm = \(models,mnames){
 }
 
 eval_slmmodel(list(slm1,slm2,sem1,sem2),
-             c("SLM","GCSLM","SEM","GCSEM")) |> 
+             c("SLM","GCSLM","SEM","GCSEM")) |>
   pander::pander()
 ```
 
