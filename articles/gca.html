@@ -150,7 +150,7 @@ complexity in spatial regression<a class="anchor" aria-label="anchor" href="#usi
 <span><span class="va">wtl1</span> <span class="op">=</span> <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/mat2listw.html" class="external-link">mat2listw</a></span><span class="op">(</span><span class="va">wt1</span><span class="op">)</span></span>
 <span><span class="co">## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value</span></span>
 <span><span class="co">## Warning in spdep::mat2listw(wt1): neighbour object has 2 sub-graphs</span></span>
-<span><span class="va">wt2</span> <span class="op">=</span> <span class="fu"><a href="../reference/geocs_swm.html">geocs_swm</a></span><span class="op">(</span><span class="va">econineq</span>,<span class="va">wt1</span><span class="op">)</span></span>
+<span><span class="va">wt2</span> <span class="op">=</span> <span class="fu"><a href="../reference/geocs_swm.html">geocs_swm</a></span><span class="op">(</span><span class="va">econineq</span>,<span class="va">wt1</span>,style <span class="op">=</span> <span class="st">"W"</span><span class="op">)</span></span>
 <span><span class="va">wtl2</span> <span class="op">=</span> <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/mat2listw.html" class="external-link">mat2listw</a></span><span class="op">(</span><span class="va">wt2</span>,zero.policy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## Warning in spdep::mat2listw(wt2, zero.policy = TRUE): style is M (missing); style should be</span></span>
 <span><span class="co">## set to a valid value</span></span>
@@ -197,9 +197,9 @@ complexity in spatial regression<a class="anchor" aria-label="anchor" href="#usi
 </tr>
 <tr class="even">
 <td align="center">GCSLM</td>
-<td align="center">-1355</td>
-<td align="center">-1314</td>
-<td align="center">688.7</td>
+<td align="center">-1363</td>
+<td align="center">-1321</td>
+<td align="center">692.6</td>
 </tr>
 <tr class="odd">
 <td align="center">SEM</td>
@@ -209,9 +209,9 @@ complexity in spatial regression<a class="anchor" aria-label="anchor" href="#usi
 </tr>
 <tr class="even">
 <td align="center">GCSEM</td>
-<td align="center">-1362</td>
-<td align="center">-1320</td>
-<td align="center">692.1</td>
+<td align="center">-1364</td>
+<td align="center">-1322</td>
+<td align="center">693.1</td>
 </tr>
 </tbody>
 </table>
