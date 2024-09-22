@@ -57,7 +57,7 @@ library(spatialreg)
 
 
 wtl1 = spdep::mat2listw(wt1)
-wt2 = geocs_swm(econineq,wt1)
+wt2 = geocs_swm(econineq,wt1,style = "W")
 wtl2 = spdep::mat2listw(wt2,zero.policy = TRUE)
 
 slm1 = lagsarlm(Gini ~ ., data = st_drop_geometry(econineq),

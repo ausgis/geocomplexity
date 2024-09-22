@@ -67,7 +67,7 @@ library(spatialreg)
 wtl1 = spdep::mat2listw(wt1)
 ## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value
 ## Warning in spdep::mat2listw(wt1): neighbour object has 2 sub-graphs
-wt2 = geocs_swm(econineq,wt1)
+wt2 = geocs_swm(econineq,wt1,style = "W")
 wtl2 = spdep::mat2listw(wt2,zero.policy = TRUE)
 ## Warning in spdep::mat2listw(wt2, zero.policy = TRUE): style is M (missing); style should be
 ## set to a valid value
@@ -100,11 +100,11 @@ eval_slm(list(slm1,slm2,sem1,sem2),
 ------- ------- ------- --------
   SLM    -1355   -1313   688.6  
 
- GCSLM   -1355   -1314   688.7  
+ GCSLM   -1363   -1321   692.6  
 
   SEM    -1468   -1426    745   
 
- GCSEM   -1362   -1320   692.1  
+ GCSEM   -1364   -1322   693.1  
 --------------------------------
 
 
