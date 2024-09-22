@@ -14,7 +14,3 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/gca/"
 )
 ```
-
-```{r setup}
-library(geocomplexity)
-```
