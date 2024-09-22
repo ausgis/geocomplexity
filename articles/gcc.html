@@ -93,6 +93,14 @@ is <span class="math display">\[
 \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk}
 W_{ik} Z_k
 \]</span></p>
+<p>The spatial variance is calculated as: <span class="math display">\[
+\Gamma = \frac{\sum_i \sum_{j \neq i}
+\omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}
+\]</span></p>
+<p>The formula for geocomplexity which uses spatial fluctuation measure
+method is <span class="math display">\[
+\rho_i = spvar(z_i,z_j)
+\]</span></p>
 </div>
 <div class="section level3">
 <h3 id="considering-the-geographical-complexity-with-geographical-configurations-similarities">Considering the geographical complexity with geographical
@@ -112,10 +120,6 @@ v}_{\beta})\right)^{2}}}\right)
 <p><span class="math display">\[
 \delta({\bf u}_{\alpha},{\bf v})=\sqrt{\frac{\sum_{\beta=1}^{n}(e({\bf
 u}_{\alpha})-e({\bf v}_{\beta}))^{2}}{n}}
-\]</span></p>
-<p>The spatial variance is calculated as: <span class="math display">\[
-\Gamma = \frac{\sum_i \sum_{j \neq i}
-\omega_{ij}\frac{(y_i-y_j)^2}{2}}{\sum_i \sum_{j \neq i} \omega_{ij}}
 \]</span></p>
 </div>
 </div>
