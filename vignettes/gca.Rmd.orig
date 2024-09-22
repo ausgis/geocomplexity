@@ -99,7 +99,7 @@ g2
 
 tibble::tibble(
   Model = c("GWR","GeoCGWR"),
-  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2,),
+  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2),
   AdjR2 = c(g1$diagnostic$RSquareAdjust,g2$diagnostic$R2_Adj),
   AICc = c(g1$diagnostic$AICc,g2$diagnostic$AICc),
   RMSE = c(sqrt(g1$diagnostic$RSS / nrow(econineq)),g2$diagnostic$RMSE)

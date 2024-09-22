@@ -188,12 +188,21 @@ g2
 
 tibble::tibble(
   Model = c("GWR","GeoCGWR"),
-  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2,),
+  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2),
   AdjR2 = c(g1$diagnostic$RSquareAdjust,g2$diagnostic$R2_Adj),
   AICc = c(g1$diagnostic$AICc,g2$diagnostic$AICc),
   RMSE = c(sqrt(g1$diagnostic$RSS / nrow(econineq)),g2$diagnostic$RMSE)
 )|>
   pander::pander()
-## Error in c(g1$diagnostic$RSquare, g2$diagnostic$R2, ): argument 3 is empty
-## Error in if (tail(stdout, 1) == "") {: argument is of length zero
 ```
+
+
+---------------------------------------------
+  Model      R2     AdjR2    AICc     RMSE   
+--------- -------- -------- ------- ---------
+   GWR     0.8025   0.7409   -1460   0.0211  
+
+ GeoCGWR   0.836    0.8319   -1445   0.01923 
+---------------------------------------------
+
+
