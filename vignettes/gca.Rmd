@@ -63,7 +63,6 @@ eval_mlr(list(mlr1,mlr2),
 ``` r
 library(spatialreg)
 
-
 wtl1 = spdep::mat2listw(wt1)
 ## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value
 ## Warning in spdep::mat2listw(wt1): neighbour object has 2 sub-graphs
