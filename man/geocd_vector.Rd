@@ -36,11 +36,6 @@ A tibble (\code{returnsf} is \code{FALSE}) or an sf object (\code{returnsf} is \
 \description{
 This function calculates geocomplexity for spatial vector data based on spatial dependence.
 }
-\details{
-The formula for geocomplexity which uses local moran measure method is
-
-\eqn{\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k}
-}
 \note{
 If \code{wt} is not provided, for polygon vector data, \code{geocomplexity} will use a first-order queen
 adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
@@ -58,12 +53,4 @@ ggplot(gc) +
    scale_fill_viridis(option="mako", direction = -1) +
    theme_bw()
 
-}
-\references{
-Zehua Zhang, Yongze Song, Peng Luo & Peng Wu (2023) Geocomplexity explains spatial errors,
-International Journal of Geographical Information Science, 37:7, 1449-1469,
-DOI: 10.1080/13658816.2023.2203212
-
-Anselin, L. (2019). A local indicator of multivariate spatial association: Extending
-geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/gean.12164
 }
