@@ -141,6 +141,31 @@ method is</p>
 <h3 id="considering-the-geographical-complexity-with-geographical-configurations-similarities">Considering the geographical complexity with geographical
 configurations similarities<a class="anchor" aria-label="anchor" href="#considering-the-geographical-complexity-with-geographical-configurations-similarities"></a>
 </h3>
+<div class="section level4">
+<h4 id="firstly-calculate-global-similarity">Firstly, calculate global similarity:<a class="anchor" aria-label="anchor" href="#firstly-calculate-global-similarity"></a>
+</h4>
+<p><span class="math display">\[
+S = CosineSimilarity(z_i,z_j)
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+S = GeographicalConfigurationsSimilarity(z_i,z_j)
+\]</span></p>
+</div>
+<div class="section level4">
+<h4 id="the-geographic-complexity-is-then-calculated">The geographic complexity is then calculated:<a class="anchor" aria-label="anchor" href="#the-geographic-complexity-is-then-calculated"></a>
+</h4>
+<p>The formula for geocomplexity which uses spatial fluctuation measure
+method is</p>
+<p><span class="math display">\[
+\rho_i = spatial\_variance(S_i,S_j)
+\]</span></p>
+<p>The formula for geocomplexity which uses shannon entropy measure
+method is</p>
+<p><span class="math display">\[
+\rho_i = shannon\_entropy(S_i,S_j)
+\]</span></p>
+</div>
 </div>
 </div>
 <div class="section level2">
