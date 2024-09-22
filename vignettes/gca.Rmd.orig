@@ -7,23 +7,19 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  fig.path = "man/figures/gca/"
+)
+```
 
 # Improving Model Fitting Utilizing Geographical Complexity in Spatial Regression Tasks
 
-
-``` r
+```{r}
 library(sf)
 library(tidyverse)
-## ── Attaching core tidyverse packages ────────────────────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
-## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
-## ── Conflicts ──────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(geocomplexity)
 
 econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
@@ -33,8 +29,7 @@ wt1 = sdsfun::spdep_contiguity_swm(econineq,queen = TRUE,style = 'B')
 
 ### Incorporating the geographical complexity of each independent variable into the model's explanatory variables
 
-
-``` r
+```{r mlr}
 mlr1 = lm(Gini ~ ., data = st_drop_geometry(econineq))
 
 gc1 = geocd_vector(dplyr::select(econineq,-Gini),
@@ -55,42 +50,18 @@ eval_mlr(list(mlr1,mlr2),
   pander::pander()
 ```
 
-
--------------------------
- Model     R2     AdjR2  
-------- -------- --------
-  MLR    0.5846   0.5743 
-
- GCMLR   0.6215   0.6024 
--------------------------
-
-
-
 ### Using spatial weight matrices that account for geographical complexity in spatial regression
 
-
-``` r
+```{r slm}
 library(spatialreg)
-## Loading required package: spData
-## Loading required package: Matrix
-## 
-## Attaching package: 'Matrix'
-## The following objects are masked from 'package:tidyr':
-## 
-##     expand, pack, unpack
 
 
 wtl1 = spdep::mat2listw(wt1)
-## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value
-## Warning in spdep::mat2listw(wt1): neighbour object has 2 sub-graphs
 gc2 = geocs_vector(dplyr::select(econineq,-Gini),
                    wt = wt_mat, returnsf = FALSE)
-## Error: object 'wt_mat' not found
 
 wt2 = geocs_swm(econineq,wt1)
 wtl2 = spdep::mat2listw(wt2,zero.policy = TRUE)
-## Warning in spdep::mat2listw(wt2, zero.policy = TRUE): style is M (missing); style should be
-## set to a valid value
 
 slm1 = lagsarlm(Gini ~ ., data = st_drop_geometry(econineq),
                 listw = wtl1, Durbin = FALSE)
@@ -112,7 +83,5 @@ eval_slm = \(models,mnames){
 eval_slmmodel(list(slm1,slm2,sem1,sem2),
              c("SLM","GCSLM","SEM","GCSEM")) |> 
   pander::pander()
-## Error in eval_slmmodel(list(slm1, slm2, sem1, sem2), c("SLM", "GCSLM", : could not find function "eval_slmmodel"
-## Error in if (tail(stdout, 1) == "") {: argument is of length zero
 ```
 
