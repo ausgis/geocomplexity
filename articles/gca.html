@@ -215,6 +215,125 @@ complexity in spatial regression<a class="anchor" aria-label="anchor" href="#usi
 </tbody>
 </table>
 </div>
+<div class="section level4">
+<h4 id="geographical-complexity-geographically-weighted-regression">geographical complexity-geographically weighted regression<a class="anchor" aria-label="anchor" href="#geographical-complexity-geographically-weighted-regression"></a>
+</h4>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g1</span> <span class="op">=</span> <span class="fu">GWmodel3</span><span class="fu">::</span><span class="fu">gwr_basic</span><span class="op">(</span></span>
+<span>  formula <span class="op">=</span> <span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">econineq</span>,</span>
+<span>  bw <span class="op">=</span> <span class="st">"AIC"</span>,</span>
+<span>  adaptive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">## Warning: st_centroid assumes attributes are constant over geometries</span></span>
+<span><span class="va">g1</span></span>
+<span><span class="co">## Geographically Weighted Regression Model</span></span>
+<span><span class="co">## ========================================</span></span>
+<span><span class="co">##   Formula: Gini ~ .</span></span>
+<span><span class="co">##      Data: econineq</span></span>
+<span><span class="co">##    Kernel: gaussian</span></span>
+<span><span class="co">## Bandwidth: 28 (Nearest Neighbours) (Optimized accroding to AIC)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Summary of Coefficient Estimates</span></span>
+<span><span class="co">## --------------------------------</span></span>
+<span><span class="co">##  Coefficient    Min.  1st Qu.  Median  3rd Qu.    Max. </span></span>
+<span><span class="co">##    Intercept  -0.373    0.209   0.347    0.424   0.565 </span></span>
+<span><span class="co">##    Induscale  -0.342   -0.239  -0.193   -0.147  -0.006 </span></span>
+<span><span class="co">##           IT  -0.004   -0.003  -0.002   -0.002   0.004 </span></span>
+<span><span class="co">##       Income  -0.000    0.000   0.000    0.000   0.000 </span></span>
+<span><span class="co">##       Sexrat  -0.056    0.012   0.052    0.100   0.200 </span></span>
+<span><span class="co">##     Houseown   0.001    0.002   0.003    0.004   0.005 </span></span>
+<span><span class="co">##       Indemp  -0.000   -0.000  -0.000   -0.000  -0.000 </span></span>
+<span><span class="co">##       Indcom   0.000    0.000   0.000    0.000   0.000 </span></span>
+<span><span class="co">##        Hiedu   0.000    0.002   0.002    0.002   0.004 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Diagnostic Information</span></span>
+<span><span class="co">## ----------------------</span></span>
+<span><span class="co">##   RSS: 0.1482732</span></span>
+<span><span class="co">##   ENP: 79.00112</span></span>
+<span><span class="co">##   EDF: 253.9989</span></span>
+<span><span class="co">##    R2: 0.8025199</span></span>
+<span><span class="co">## R2adj: 0.740855</span></span>
+<span><span class="co">##   AIC: -1559.969</span></span>
+<span><span class="co">##  AICc: -1460.302</span></span>
+<span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="../reference/gwr_geoc.html">gwr_geoc</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>,</span>
+<span>              data <span class="op">=</span> <span class="va">econineq</span>,</span>
+<span>              bw <span class="op">=</span> <span class="st">"AIC"</span>,</span>
+<span>              adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">g2</span></span>
+<span><span class="co">## Geographical Complexity-Geographically Weighted Regression Model</span></span>
+<span><span class="co">## ================================================================</span></span>
+<span><span class="co">##      Kernel:  gaussian</span></span>
+<span><span class="co">##   Bandwidth:  16 (Nearest Neighbours) (Optimized according to AIC)</span></span>
+<span><span class="co">##       Alpha:  0.05</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Summary of Coefficient Estimates</span></span>
+<span><span class="co">## --------------------------------</span></span>
+<span><span class="co">## Coefficient      Min.   1st Qu.    Median   3rd Qu.      Max.</span></span>
+<span><span class="co">## Intercept     -0.356     0.254     0.328     0.391     0.519</span></span>
+<span><span class="co">## Induscale     -0.396    -0.267    -0.218    -0.178     0.028</span></span>
+<span><span class="co">## IT            -0.004    -0.003    -0.002    -0.002     0.004</span></span>
+<span><span class="co">## Income         0.000     0.000     0.000     0.000     0.000</span></span>
+<span><span class="co">## Sexrat        -0.045     0.036     0.052     0.093     0.271</span></span>
+<span><span class="co">## Houseown       0.001     0.002     0.003     0.003     0.004</span></span>
+<span><span class="co">## Indemp        -0.000    -0.000    -0.000    -0.000     0.000</span></span>
+<span><span class="co">## Indcom         0.000     0.000     0.000     0.000     0.000</span></span>
+<span><span class="co">## Hiedu          0.000     0.001     0.002     0.002     0.004</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Diagnostic Information</span></span>
+<span><span class="co">## ----------------------</span></span>
+<span><span class="co">##   RSS: 0.123</span></span>
+<span><span class="co">##   ENP: 112.902</span></span>
+<span><span class="co">##   EDF: 220.098</span></span>
+<span><span class="co">##    R2: 0.836</span></span>
+<span><span class="co">## R2adj: 0.832</span></span>
+<span><span class="co">##   AIC: -1607.940</span></span>
+<span><span class="co">##  AICc: -1444.543</span></span>
+<span><span class="co">##  RMSE: 0.019</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  Model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GWR"</span>,<span class="st">"GeoCGWR"</span><span class="op">)</span>,</span>
+<span>  R2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">g1</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">RSquare</span>,<span class="va">g2</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">R2</span><span class="op">)</span>,</span>
+<span>  AdjR2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">g1</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">RSquareAdjust</span>,<span class="va">g2</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">R2_Adj</span><span class="op">)</span>,</span>
+<span>  AICc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">g1</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">AICc</span>,<span class="va">g2</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">AICc</span><span class="op">)</span>,</span>
+<span>  RMSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">g1</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">RSS</span> <span class="op">/</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span><span class="op">)</span>,<span class="va">g2</span><span class="op">$</span><span class="va">diagnostic</span><span class="op">$</span><span class="va">RMSE</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html" class="external-link">pander</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:64%;" class="table">
+<colgroup>
+<col width="13%">
+<col width="12%">
+<col width="12%">
+<col width="11%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Model</th>
+<th align="center">R2</th>
+<th align="center">AdjR2</th>
+<th align="center">AICc</th>
+<th align="center">RMSE</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">GWR</td>
+<td align="center">0.8025</td>
+<td align="center">0.7409</td>
+<td align="center">-1460</td>
+<td align="center">0.0211</td>
+</tr>
+<tr class="even">
+<td align="center">GeoCGWR</td>
+<td align="center">0.836</td>
+<td align="center">0.8319</td>
+<td align="center">-1445</td>
+<td align="center">0.01923</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
