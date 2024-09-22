@@ -77,8 +77,8 @@ eval_slm = \(models,mnames){
   return(evt)
 }
 
-eval_slmmodel(list(slm1,slm2,sem1,sem2),
-             c("SLM","GCSLM","SEM","GCSEM")) |>
+eval_slm(list(slm1,slm2,sem1,sem2),
+         c("SLM","GCSLM","SEM","GCSEM")) |>
   pander::pander()
 ```
 
