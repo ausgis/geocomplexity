@@ -80,9 +80,145 @@
 
     
     
+<div class="section level2">
+<h2 id="improving-model-fitting-utilizing-geographical-complexity-in-spatial-regression-tasks">Improving Model Fitting Utilizing Geographical Complexity in Spatial
+Regression Tasks<a class="anchor" aria-label="anchor" href="#improving-model-fitting-utilizing-geographical-complexity-in-spatial-regression-tasks"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/geocomplexity/">geocomplexity</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/geocomplexity/">geocomplexity</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">wt1</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">econineq</span>,queen <span class="op">=</span> <span class="cn">TRUE</span>,style <span class="op">=</span> <span class="st">'B'</span><span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="incorporating-the-geographical-complexity-of-each-independent-variable-into-the-models-explanatory-variables">Incorporating the geographical complexity of each independent
+variable into the model’s explanatory variables<a class="anchor" aria-label="anchor" href="#incorporating-the-geographical-complexity-of-each-independent-variable-into-the-models-explanatory-variables"></a>
+</h4>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mlr1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gc1</span> <span class="op">=</span> <span class="fu"><a href="../reference/geocd_vector.html">geocd_vector</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">econineq</span>,<span class="op">-</span><span class="va">Gini</span><span class="op">)</span>,</span>
+<span>                   wt <span class="op">=</span> <span class="va">wt1</span>, returnsf <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">mlr2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">gc1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">eval_mlr</span> <span class="op">=</span> \<span class="op">(</span><span class="va">models</span>,<span class="va">mnames</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">R2</span> <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">models</span>,\<span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">$</span><span class="va">r.squared</span><span class="op">)</span></span>
+<span>  <span class="va">AdjR2</span> <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">models</span>,\<span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">$</span><span class="va">adj.r.squared</span><span class="op">)</span></span>
+<span>  <span class="va">t_eval</span> <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>Model <span class="op">=</span> <span class="va">mnames</span>,</span>
+<span>                          <span class="va">R2</span>,<span class="va">AdjR2</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">t_eval</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">eval_mlr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mlr1</span>,<span class="va">mlr2</span><span class="op">)</span>,</span>
+<span>         <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MLR"</span>,<span class="st">"GCMLR"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html" class="external-link">pander</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:36%;" class="table">
+<colgroup>
+<col width="11%">
+<col width="12%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Model</th>
+<th align="center">R2</th>
+<th align="center">AdjR2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">MLR</td>
+<td align="center">0.5846</td>
+<td align="center">0.5743</td>
+</tr>
+<tr class="even">
+<td align="center">GCMLR</td>
+<td align="center">0.6215</td>
+<td align="center">0.6024</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="using-spatial-weight-matrices-that-account-for-geographical-complexity-in-spatial-regression">Using spatial weight matrices that account for geographical
+complexity in spatial regression<a class="anchor" aria-label="anchor" href="#using-spatial-weight-matrices-that-account-for-geographical-complexity-in-spatial-regression"></a>
+</h4>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/spatialreg/" class="external-link">spatialreg</a></span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">wtl1</span> <span class="op">=</span> <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/mat2listw.html" class="external-link">mat2listw</a></span><span class="op">(</span><span class="va">wt1</span><span class="op">)</span></span>
+<span><span class="co">## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value</span></span>
+<span><span class="co">## Warning in spdep::mat2listw(wt1): neighbour object has 2 sub-graphs</span></span>
+<span><span class="va">wt2</span> <span class="op">=</span> <span class="fu"><a href="../reference/geocs_swm.html">geocs_swm</a></span><span class="op">(</span><span class="va">econineq</span>,<span class="va">wt1</span><span class="op">)</span></span>
+<span><span class="va">wtl2</span> <span class="op">=</span> <span class="fu">spdep</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/spdep/reference/mat2listw.html" class="external-link">mat2listw</a></span><span class="op">(</span><span class="va">wt2</span>,zero.policy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">## Warning in spdep::mat2listw(wt2, zero.policy = TRUE): style is M (missing); style should be</span></span>
+<span><span class="co">## set to a valid value</span></span>
+<span></span>
+<span><span class="va">slm1</span> <span class="op">=</span> <span class="fu">lagsarlm</span><span class="op">(</span><span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span>,</span>
+<span>                listw <span class="op">=</span> <span class="va">wtl1</span>, Durbin <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">slm2</span> <span class="op">=</span> <span class="fu">lagsarlm</span><span class="op">(</span><span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span>,</span>
+<span>                listw <span class="op">=</span> <span class="va">wtl2</span>, Durbin <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">sem1</span> <span class="op">=</span> <span class="fu">errorsarlm</span><span class="op">(</span><span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span>,</span>
+<span>                  listw <span class="op">=</span> <span class="va">wtl1</span>, Durbin <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">sem2</span> <span class="op">=</span> <span class="fu">errorsarlm</span><span class="op">(</span><span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">econineq</span><span class="op">)</span>,</span>
+<span>                  listw <span class="op">=</span> <span class="va">wtl2</span>, Durbin <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">eval_slm</span> <span class="op">=</span> \<span class="op">(</span><span class="va">models</span>,<span class="va">mnames</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">evt</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>Model <span class="op">=</span> <span class="va">mnames</span>,</span>
+<span>               AIC <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">models</span>,<span class="va">AIC</span><span class="op">)</span>,</span>
+<span>               BIC <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">models</span>,<span class="va">BIC</span><span class="op">)</span>,</span>
+<span>               logLik <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">models</span>,<span class="va">logLik</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">evt</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">eval_slm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">slm1</span>,<span class="va">slm2</span>,<span class="va">sem1</span>,<span class="va">sem2</span><span class="op">)</span>,</span>
+<span>         <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SLM"</span>,<span class="st">"GCSLM"</span>,<span class="st">"SEM"</span>,<span class="st">"GCSEM"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html" class="external-link">pander</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:46%;" class="table">
+<colgroup>
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Model</th>
+<th align="center">AIC</th>
+<th align="center">BIC</th>
+<th align="center">logLik</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">SLM</td>
+<td align="center">-1355</td>
+<td align="center">-1313</td>
+<td align="center">688.6</td>
+</tr>
+<tr class="even">
+<td align="center">GCSLM</td>
+<td align="center">-1355</td>
+<td align="center">-1314</td>
+<td align="center">688.7</td>
+</tr>
+<tr class="odd">
+<td align="center">SEM</td>
+<td align="center">-1468</td>
+<td align="center">-1426</td>
+<td align="center">745</td>
+</tr>
+<tr class="even">
+<td align="center">GCSEM</td>
+<td align="center">-1362</td>
+<td align="center">-1320</td>
+<td align="center">692.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
