@@ -84,25 +84,25 @@ eval_slm(list(slm1,slm2,sem1,sem2),
 ### geographical complexity-geographically weighted regression
 
 ```{r gcgwr}
-g1 = gwr_geoc(formula = Gini ~ .,
-              data = econineq,
-              bw = "AIC",
-              adaptive = TRUE)
-g1
-g2 = GWmodel3::gwr_basic(
+g1 = GWmodel3::gwr_basic(
   formula = Gini ~ .,
   data = econineq,
   bw = "AIC",
   adaptive = TRUE
 )
+g1
+g2 = gwr_geoc(formula = Gini ~ .,
+              data = econineq,
+              bw = "AIC",
+              adaptive = TRUE)
 g2
 
 tibble::tibble(
-  Model = c("GeoCGWR","GWR"),
-  R2 = c(g1$diagnostic$R2,g2$diagnostic$RSquare),
-  AdjR2 = c(g1$diagnostic$R2_Adj,g2$diagnostic$RSquareAdjust),
-  AICc = c(g1$diagnostic$AICc,g4$diagnostic$AICc),
-  RMSE = c(g1$diagnostic$RMSE,sqrt(g4$diagnostic$RSS / 333))
+  Model = c("GWR","GeoCGWR"),
+  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2,),
+  AdjR2 = c(g1$diagnostic$RSquareAdjust,g2$diagnostic$R2_Adj),
+  AICc = c(g1$diagnostic$AICc,g2$diagnostic$AICc),
+  RMSE = c(sqrt(g1$diagnostic$RSS / nrow(econineq)),g2$diagnostic$RMSE)
 )|>
   pander::pander()
 ```
