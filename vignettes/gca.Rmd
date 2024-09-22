@@ -108,3 +108,92 @@ eval_slm(list(slm1,slm2,sem1,sem2),
 
 
 
+### geographical complexity-geographically weighted regression
+
+
+``` r
+g1 = GWmodel3::gwr_basic(
+  formula = Gini ~ .,
+  data = econineq,
+  bw = "AIC",
+  adaptive = TRUE
+)
+## Warning: st_centroid assumes attributes are constant over geometries
+g1
+## Geographically Weighted Regression Model
+## ========================================
+##   Formula: Gini ~ .
+##      Data: econineq
+##    Kernel: gaussian
+## Bandwidth: 28 (Nearest Neighbours) (Optimized accroding to AIC)
+## 
+## 
+## Summary of Coefficient Estimates
+## --------------------------------
+##  Coefficient    Min.  1st Qu.  Median  3rd Qu.    Max. 
+##    Intercept  -0.373    0.209   0.347    0.424   0.565 
+##    Induscale  -0.342   -0.239  -0.193   -0.147  -0.006 
+##           IT  -0.004   -0.003  -0.002   -0.002   0.004 
+##       Income  -0.000    0.000   0.000    0.000   0.000 
+##       Sexrat  -0.056    0.012   0.052    0.100   0.200 
+##     Houseown   0.001    0.002   0.003    0.004   0.005 
+##       Indemp  -0.000   -0.000  -0.000   -0.000  -0.000 
+##       Indcom   0.000    0.000   0.000    0.000   0.000 
+##        Hiedu   0.000    0.002   0.002    0.002   0.004 
+## 
+## 
+## Diagnostic Information
+## ----------------------
+##   RSS: 0.1482732
+##   ENP: 79.00112
+##   EDF: 253.9989
+##    R2: 0.8025199
+## R2adj: 0.740855
+##   AIC: -1559.969
+##  AICc: -1460.302
+g2 = gwr_geoc(formula = Gini ~ .,
+              data = econineq,
+              bw = "AIC",
+              adaptive = TRUE)
+g2
+## Geographical Complexity-Geographically Weighted Regression Model
+## ================================================================
+##      Kernel:  gaussian
+##   Bandwidth:  16 (Nearest Neighbours) (Optimized according to AIC)
+##       Alpha:  0.05
+## 
+## Summary of Coefficient Estimates
+## --------------------------------
+## Coefficient      Min.   1st Qu.    Median   3rd Qu.      Max.
+## Intercept     -0.356     0.254     0.328     0.391     0.519
+## Induscale     -0.396    -0.267    -0.218    -0.178     0.028
+## IT            -0.004    -0.003    -0.002    -0.002     0.004
+## Income         0.000     0.000     0.000     0.000     0.000
+## Sexrat        -0.045     0.036     0.052     0.093     0.271
+## Houseown       0.001     0.002     0.003     0.003     0.004
+## Indemp        -0.000    -0.000    -0.000    -0.000     0.000
+## Indcom         0.000     0.000     0.000     0.000     0.000
+## Hiedu          0.000     0.001     0.002     0.002     0.004
+## 
+## Diagnostic Information
+## ----------------------
+##   RSS: 0.123
+##   ENP: 112.902
+##   EDF: 220.098
+##    R2: 0.836
+## R2adj: 0.832
+##   AIC: -1607.940
+##  AICc: -1444.543
+##  RMSE: 0.019
+
+tibble::tibble(
+  Model = c("GWR","GeoCGWR"),
+  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2,),
+  AdjR2 = c(g1$diagnostic$RSquareAdjust,g2$diagnostic$R2_Adj),
+  AICc = c(g1$diagnostic$AICc,g2$diagnostic$AICc),
+  RMSE = c(sqrt(g1$diagnostic$RSS / nrow(econineq)),g2$diagnostic$RMSE)
+)|>
+  pander::pander()
+## Error in c(g1$diagnostic$RSquare, g2$diagnostic$R2, ): argument 3 is empty
+## Error in if (tail(stdout, 1) == "") {: argument is of length zero
+```
