@@ -94,23 +94,10 @@ Default is <code>TRUE</code>.</p></dd>
     <p>A tibble (<code>returnsf</code> is <code>FALSE</code>) or an sf object (<code>returnsf</code> is <code>TRUE</code>)</p>
     </div>
     <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The formula for geocomplexity which uses local moran measure method is</p>
-<p>\(\rho_i = -\frac{1}{m} Z_i \sum\limits_{j=1}^m W_{ij} Z_j -\frac{1}{m} \sum\limits_{j=1}^m W_{ij} Z_j \frac{1}{V_{k}}\sum\limits_{k=1}^n W_{jk} W_{ik} Z_k\)</p>
-    </div>
-    <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>If <code>wt</code> is not provided, for polygon vector data, <code>geocomplexity</code> will use a first-order queen
 adjacency binary matrix; for point vector data, the six nearest points are used as adjacency
 objects to generate an adjacency binary matrix.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Zehua Zhang, Yongze Song, Peng Luo &amp; Peng Wu (2023) Geocomplexity explains spatial errors,
-International Journal of Geographical Information Science, 37:7, 1449-1469,
-DOI: 10.1080/13658816.2023.2203212</p>
-<p>Anselin, L. (2019). A local indicator of multivariate spatial association: Extending
-geary’s c. Geographical Analysis, 51(2), 133–150. https://doi.org/10.1111/gean.12164</p>
     </div>
 
     <div class="section level2">
