@@ -15,6 +15,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(geocomplexity)
-```
+# Calculation methods of geographical complexity
+
+## Considering the geographical complexity with spatial local dependencies
+
+## Considering the geographical complexity with geographical configurations similarities
+
+# Cases for computing geographical complexity
