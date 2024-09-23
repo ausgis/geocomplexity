@@ -13,6 +13,13 @@
 
 ## Installation
 
+- Install from [CRAN](https://CRAN.R-project.org/package=geocomplexity)
+  with:
+
+``` r
+install.packages("geocomplexity", dep = TRUE)
+```
+
 - Install development binary version from
   [r-universe](https://ausgis.r-universe.dev/geocomplexity) with:
 
