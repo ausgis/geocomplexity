@@ -9,7 +9,7 @@ template:
 
 home:
   title: |
-    geocomplexity | Geocomplexity Mitigates Spatial Bias
+    geocomplexity | Mitigating Spatial Bias Through Geographical Complexity
 authors:
   Wenbo Lv:
     href: https://spatlyu.github.io/
