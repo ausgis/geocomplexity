@@ -14,7 +14,18 @@ vignette: >
 
 ``` r
 library(sf)
+## Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE
 library(tidyverse)
+## ── Attaching core tidyverse packages ───────────────────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2
+## ── Conflicts ─────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(geocomplexity)
 
 econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
@@ -62,6 +73,13 @@ eval_mlr(list(mlr1,mlr2),
 
 ``` r
 library(spatialreg)
+## Loading required package: spData
+## Loading required package: Matrix
+## 
+## Attaching package: 'Matrix'
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
 
 wtl1 = spdep::mat2listw(wt1)
 ## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value

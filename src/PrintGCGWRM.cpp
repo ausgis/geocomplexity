@@ -3,7 +3,6 @@
 #include <sstream>
 using namespace Rcpp;
 
-
 std::string FormatBW(int knn, const std::string& criterion) {
   std::stringstream ss;
   ss << knn << " (Nearest Neighbours) (Optimized according to " << criterion << ")";
