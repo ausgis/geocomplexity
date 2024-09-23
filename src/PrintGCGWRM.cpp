@@ -1,11 +1,13 @@
 #include <Rcpp.h>
 #include <iomanip>
+#include <sstream>
 using namespace Rcpp;
 
+
 std::string FormatBW(int knn, const std::string& criterion) {
-  char buffer[100];
-  std::sprintf(buffer, "%d (Nearest Neighbours) (Optimized according to %s)", knn, criterion.c_str());
-  return std::string(buffer);
+  std::stringstream ss;
+  ss << knn << " (Nearest Neighbours) (Optimized according to " << criterion << ")";
+  return ss.str();
 }
 
 void PrintCoefMat(Rcpp::NumericMatrix mat, Rcpp::CharacterVector rownames) {
