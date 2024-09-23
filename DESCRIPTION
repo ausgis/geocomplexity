@@ -11,15 +11,7 @@ Authors@R: c(
              role = c("aut", "ths"),
              comment = c(ORCID = "0000-0003-3420-9622"))      
       )
-Description: The geographical complexity of individual variables can be characterized using the differences in 
-             local attribute variables, while the common geographical complexity of multiple variables can be 
-             represented by the fluctuations in similarity of vectors composed of multiple variables. In spatial 
-             regression tasks, the goodness of fit can be improved by incorporating a geographical complexity 
-             representation vector during modeling, using a geographical complexity-weighted spatial weight matrix,
-             or employing local geographical complexity kernel density. Similarly, in spatial sampling tasks, samples 
-             can be selected more effectively using a method that weights based on geographical complexity. By 
-             optimizing performance in spatial regression and spatial sampling tasks, the spatial bias of the model 
-             can be effectively reduced.
+Description: The geographical complexity of individual variables can be characterized by the differences in local attribute variables, while the common geographical complexity of multiple variables can be represented by fluctuations in the similarity of vectors composed of multiple variables. In spatial regression tasks, the goodness of fit can be improved by incorporating a geographical complexity representation vector during modeling, using a geographical complexity-weighted spatial weight matrix, or employing local geographical complexity kernel density. Similarly, in spatial sampling tasks, samples can be selected more effectively by using a method that weights based on geographical complexity. By optimizing performance in spatial regression and spatial sampling tasks, the spatial bias of the model can be effectively reduced.
 License: GPL-3
 Encoding: UTF-8
 URL: https://ausgis.github.io/geocomplexity/, https://github.com/ausgis/geocomplexity
