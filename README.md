@@ -9,7 +9,7 @@
 [![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity?color=yellow)](https://ausgis.r-universe.dev/geocomplexity)
 <!-- badges: end -->
 
-**Geocomplexity Mitigates Spatial Bias**
+**Geographical Complexity Mitigates Spatial Bias**
 
 ## Installation
 
