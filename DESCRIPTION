@@ -1,5 +1,5 @@
 Package: geocomplexity
-Title: Geographical Complexity Mitigates Spatial Bias
+Title: Mitigating Spatial Bias Through Geographical Complexity
 Version: 0.1.0
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
