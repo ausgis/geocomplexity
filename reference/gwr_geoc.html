@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">geocomplexity</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>geographical complexity-geographically weighted regression</h1>
-      <small class="dont-index">Source: <a href="https://github.com/ausgis/geocomplexity/blob/v0.1.0/R/gwr_geoc.R" class="external-link"><code>R/gwr_geoc.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ausgis/geocomplexity/blob/main/R/gwr_geoc.R" class="external-link"><code>R/gwr_geoc.R</code></a></small>
       <div class="d-none name"><code>gwr_geoc.Rd</code></div>
     </div>
 
@@ -110,43 +110,13 @@ selected based on <code>RMSE</code> by default.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co">## The following code takes a long time to run:</span></span></span>
 <span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">gwr_geoc</span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">econineq</span>,</span></span>
-<span class="r-in"><span>             bw <span class="op">=</span> <span class="st">"AIC"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>             alpha <span class="op">=</span> <span class="fl">0.5</span>, bw <span class="op">=</span> <span class="st">"AIC"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geographical Complexity-Geographically Weighted Regression Model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ================================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Kernel:  gaussian</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Bandwidth:  16 (Nearest Neighbours) (Optimized according to AIC)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Alpha:  0.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Summary of Coefficient Estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficient      Min.   1st Qu.    Median   3rd Qu.      Max.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Intercept     -0.356     0.254     0.328     0.391     0.519</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Induscale     -0.396    -0.267    -0.218    -0.178     0.028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IT            -0.004    -0.003    -0.002    -0.002     0.004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Income         0.000     0.000     0.000     0.000     0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sexrat        -0.045     0.036     0.052     0.093     0.271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Houseown       0.001     0.002     0.003     0.003     0.004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Indemp        -0.000    -0.000    -0.000    -0.000     0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Indcom         0.000     0.000     0.000     0.000     0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hiedu          0.000     0.001     0.002     0.002     0.004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Diagnostic Information</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   RSS: 0.123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ENP: 112.902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EDF: 220.098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    R2: 0.836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2adj: 0.832</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   AIC: -1607.940</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  AICc: -1444.543</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  RMSE: 0.019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
