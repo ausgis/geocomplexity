@@ -39,7 +39,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>geographical complexity-geographically weighted regression</h1>
-      <small class="dont-index">Source: <a href="https://github.com/ausgis/geocomplexity/blob/main/R/gwr_geoc.R" class="external-link"><code>R/gwr_geoc.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ausgis/geocomplexity/blob/v0.1.0/R/gwr_geoc.R" class="external-link"><code>R/gwr_geoc.R</code></a></small>
       <div class="d-none name"><code>gwr_geoc.Rd</code></div>
     </div>
 
@@ -115,8 +115,6 @@ selected based on <code>RMSE</code> by default.</p></dd>
 <span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">gwr_geoc</span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">econineq</span>,</span></span>
 <span class="r-in"><span>             bw <span class="op">=</span> <span class="st">"AIC"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>neighbour object has 2 sub-graphs;</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> if this sub-graph count seems unexpected, try increasing the snap argument.</span>
 <span class="r-in"><span><span class="va">g</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geographical Complexity-Geographically Weighted Regression Model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ================================================================</span>
