@@ -1,3 +1,7 @@
+# geocomplexity 0.2.0
+
+* Removing `tidyverse` from the dependencies suggested by package.
+
 # geocomplexity 0.1.0
 
 * Support the computation of geographical complexity by leveraging spatial dependence and     geographical configuration similarity for both spatial vector and spatial raster data.
