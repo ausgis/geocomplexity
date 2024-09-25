@@ -22,7 +22,7 @@ geocomplexity. The selection of the method can be made from any one of the three
 \code{moran}, \code{spvar} or \code{entropy}. Default is \code{moran}.}
 }
 \value{
-A SpatRaster object
+A \code{SpatRaster} object
 }
 \description{
 This function calculates geocomplexity for spatial raster data based on spatial dependence.

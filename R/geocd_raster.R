@@ -20,12 +20,12 @@
 #' Default is `TRUE`.
 #' @param method (optional) In instances where the method is `moran`, geocomplexity is
 #' determined using local moran measure method. Conversely, when the method is `spvar`,
-#' the spatial variance of local attribute data serves to characterize geocomplexity. For all
+#' the spatial variance of attribute data serves to characterize geocomplexity. For all
 #' other methods, the shannon information entropy of attribute data is employed to represent
 #' geocomplexity. The selection of the method can be made from any one of the three options:
 #' `moran`, `spvar` or `entropy`. Default is `moran`.
 #'
-#' @return A SpatRaster object
+#' @return A `SpatRaster` object
 #' @export
 #'
 #' @examples

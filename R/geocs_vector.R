@@ -17,7 +17,7 @@
 #' @param returnsf (optional) When `returnsf` is `TRUE`, return an sf object, otherwise a tibble.
 #' Default is `TRUE`.
 #'
-#' @return A tibble (`returnsf` is `FALSE`) or an sf object (`returnsf` is `TRUE`)
+#' @return A `tibble` (`returnsf` is `FALSE`) or an `sf` object (`returnsf` is `TRUE`)
 #' @export
 #'
 #' @examples

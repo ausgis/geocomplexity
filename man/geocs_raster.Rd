@@ -23,7 +23,7 @@ represented using spatial variance, otherwise shannon information entropy is use
 is \code{spvar}.}
 }
 \value{
-A SpatRaster object
+A \code{SpatRaster} object
 }
 \description{
 This function calculates geocomplexity for spatial raster data based on geographical similarity.

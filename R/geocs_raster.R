@@ -16,7 +16,7 @@
 #' represented using spatial variance, otherwise shannon information entropy is used. Default
 #' is `spvar`.
 #'
-#' @return A SpatRaster object
+#' @return A `SpatRaster` object
 #' @export
 #'
 #' @examples
