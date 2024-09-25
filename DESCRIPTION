@@ -1,6 +1,6 @@
 Package: geocomplexity
 Title: Mitigating Spatial Bias Through Geographical Complexity
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
              email = "lyu.geosocial@gmail.com", 
