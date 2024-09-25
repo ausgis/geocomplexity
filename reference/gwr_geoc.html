@@ -114,36 +114,36 @@ selected based on <code>RMSE</code> by default.</p></dd>
 <span class="r-in"><span><span class="co">## The following code takes a long time to run:</span></span></span>
 <span class="r-in"><span><span class="va">econineq</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/econineq.gpkg'</span>,package <span class="op">=</span> <span class="st">'geocomplexity'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">gwr_geoc</span><span class="op">(</span>formula <span class="op">=</span> <span class="va">Gini</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">econineq</span>,</span></span>
-<span class="r-in"><span>             alpha <span class="op">=</span> <span class="fl">0.5</span>, bw <span class="op">=</span> <span class="st">"AIC"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>             alpha <span class="op">=</span> <span class="fl">0.5</span>, bw <span class="op">=</span> <span class="st">"AICc"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geographical Complexity-Geographically Weighted Regression Model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ================================================================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Kernel:  gaussian</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Bandwidth:  16 (Nearest Neighbours) (Optimized according to AIC)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Bandwidth:  34 (Nearest Neighbours) (Optimized according to AICc)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Alpha:  0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Summary of Coefficient Estimates</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficient      Min.   1st Qu.    Median   3rd Qu.      Max.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Intercept     -0.073     0.319     0.333     0.345     0.424</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Induscale     -0.403    -0.281    -0.249    -0.208    -0.063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IT            -0.003    -0.002    -0.002    -0.002     0.001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Intercept     -0.090     0.314     0.335     0.349     0.422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Induscale     -0.364    -0.271    -0.237    -0.202    -0.106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IT            -0.003    -0.002    -0.002    -0.002     0.002</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Income         0.000     0.000     0.000     0.000     0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sexrat         0.012     0.048     0.058     0.068     0.151</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Houseown       0.002     0.003     0.003     0.003     0.003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sexrat        -0.007     0.044     0.059     0.069     0.119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Houseown       0.002     0.003     0.003     0.003     0.004</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Indemp        -0.000    -0.000    -0.000    -0.000    -0.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Indcom         0.000     0.000     0.000     0.000     0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hiedu          0.000     0.001     0.001     0.002     0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hiedu          0.000     0.001     0.002     0.002     0.002</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Diagnostic Information</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   RSS: 0.222</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ENP: 47.205</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   EDF: 285.795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    R2: 0.704</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2adj: 0.697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   AIC: -1458.466</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  AICc: -1413.992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   RSS: 0.230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ENP: 41.089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   EDF: 291.911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    R2: 0.694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2adj: 0.686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   AIC: -1450.617</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  AICc: -1412.350</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  RMSE: 0.026</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
