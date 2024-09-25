@@ -43,7 +43,7 @@ A list with GCGWR results.
 geographical complexity-geographically weighted regression
 }
 \examples{
-\dontrun{
+\donttest{
 ## The following code takes a long time to run:
 econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
 g = gwr_geoc(formula = Gini ~ ., data = econineq,
