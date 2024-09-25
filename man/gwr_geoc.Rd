@@ -24,8 +24,8 @@ by default using \code{geocd_vector()}.}
 
 \item{alpha}{(optional) Balancing the weights of attribute similarity matrix and geographic distance matrix.}
 
-\item{bw}{(optional) The bandwidth used in selecting models. The optimal bandwidth will be
-selected based on \code{RMSE} by default.}
+\item{bw}{(optional) The bandwidth used in selecting models. The optimal bandwidth can be selected using one
+of three methods: \code{RMSE}, \code{AIC}, and \code{AICc}. Default will use \code{RMSE}.}
 
 \item{adaptive}{(optional) Whether the bandwidth value is adaptive or not. Default is \code{TRUE}.}
 

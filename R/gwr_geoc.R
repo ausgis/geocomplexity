@@ -5,8 +5,8 @@
 #' @param gcs (optional) The geocomplexity matrix corresponding to each variable, which is calculated
 #' by default using `geocd_vector()`.
 #' @param alpha (optional) Balancing the weights of attribute similarity matrix and geographic distance matrix.
-#' @param bw (optional) The bandwidth used in selecting models. The optimal bandwidth will be
-#' selected based on `RMSE` by default.
+#' @param bw (optional) The bandwidth used in selecting models. The optimal bandwidth can be selected using one
+#' of three methods: `RMSE`, `AIC`, and `AICc`. Default will use `RMSE`.
 #' @param adaptive (optional) Whether the bandwidth value is adaptive or not. Default is `TRUE`.
 #' @param kernel (optional) Kernel function. Default is `gaussian`.
 #'
@@ -23,7 +23,7 @@
 #' ## The following code takes a long time to run:
 #' econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
 #' g = gwr_geoc(formula = Gini ~ ., data = econineq,
-#'              alpha = 0.5, bw = "AICc", adaptive = TRUE)
+#'              alpha = 0.5, bw = "AIC", adaptive = TRUE)
 #' g
 #' }
 gwr_geoc = \(formula, data, gcs = NULL, alpha = seq(0.05,1,0.05),
