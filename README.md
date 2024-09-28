@@ -23,7 +23,7 @@ install.packages("geocomplexity", dep = TRUE)
 ```
 
 - Install development binary version from
-  [r-universe](https://ausgis.r-universe.dev/geocomplexity) with:
+  [R-universe](https://ausgis.r-universe.dev/geocomplexity) with:
 
 ``` r
 install.packages('geocomplexity',
