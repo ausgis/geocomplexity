@@ -112,31 +112,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// MI_vec
-Rcpp::DataFrame MI_vec(arma::mat x, arma::mat W, std::string alternative, bool symmetrize);
-RcppExport SEXP _geocomplexity_MI_vec(SEXP xSEXP, SEXP WSEXP, SEXP alternativeSEXP, SEXP symmetrizeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type W(WSEXP);
-    Rcpp::traits::input_parameter< std::string >::type alternative(alternativeSEXP);
-    Rcpp::traits::input_parameter< bool >::type symmetrize(symmetrizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(MI_vec(x, W, alternative, symmetrize));
-    return rcpp_result_gen;
-END_RCPP
-}
-// print_global_moranI
-DataFrame print_global_moranI(DataFrame df);
-RcppExport SEXP _geocomplexity_print_global_moranI(SEXP dfSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DataFrame >::type df(dfSEXP);
-    rcpp_result_gen = Rcpp::wrap(print_global_moranI(df));
-    return rcpp_result_gen;
-END_RCPP
-}
 // PrintGCGWRM
 void PrintGCGWRM(Rcpp::List x, Rcpp::NumericMatrix coefmat, Rcpp::CharacterVector coefname);
 RcppExport SEXP _geocomplexity_PrintGCGWRM(SEXP xSEXP, SEXP coefmatSEXP, SEXP coefnameSEXP) {
@@ -306,8 +281,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_geocomplexity_GeoCGWR", (DL_FUNC) &_geocomplexity_GeoCGWR, 9},
     {"_geocomplexity_InforEntropy", (DL_FUNC) &_geocomplexity_InforEntropy, 1},
     {"_geocomplexity_spatial_variance", (DL_FUNC) &_geocomplexity_spatial_variance, 2},
-    {"_geocomplexity_MI_vec", (DL_FUNC) &_geocomplexity_MI_vec, 4},
-    {"_geocomplexity_print_global_moranI", (DL_FUNC) &_geocomplexity_print_global_moranI, 1},
     {"_geocomplexity_PrintGCGWRM", (DL_FUNC) &_geocomplexity_PrintGCGWRM, 3},
     {"_geocomplexity_RasterGeoCMoranOne", (DL_FUNC) &_geocomplexity_RasterGeoCMoranOne, 3},
     {"_geocomplexity_RasterGeoCMoran", (DL_FUNC) &_geocomplexity_RasterGeoCMoran, 3},

@@ -29,14 +29,6 @@ spatial_variance <- function(x, wt) {
     .Call(`_geocomplexity_spatial_variance`, x, wt)
 }
 
-MI_vec <- function(x, W, alternative = "greater", symmetrize = FALSE) {
-    .Call(`_geocomplexity_MI_vec`, x, W, alternative, symmetrize)
-}
-
-print_global_moranI <- function(df) {
-    .Call(`_geocomplexity_print_global_moranI`, df)
-}
-
 PrintGCGWRM <- function(x, coefmat, coefname) {
     invisible(.Call(`_geocomplexity_PrintGCGWRM`, x, coefmat, coefname))
 }
