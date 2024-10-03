@@ -41,11 +41,6 @@ reference:
   - geocd_swm
   - gwr_geoc
 
-
-- title: Global Spatial Autocorrelation Test
-  contents:
-  - moran_test
-
 # - title: S3 Methods
 #   contents:
 #   - starts_with("print")
