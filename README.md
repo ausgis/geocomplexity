@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# geocomplexity <img src="man/figures/logo.png" align="right" height="120"/>
+# geocomplexity <a href="https://ausgis.github.io/geocomplexity/"><img src="man/figures/logo.png" align="right" height="139" alt="geocomplexity website" /></a>
 
 <!-- badges: start -->
 
