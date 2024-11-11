@@ -1,0 +1,14 @@
+citHeader("To cite geocomplexity package in publications use:")
+
+bibentry(
+ bibtype="Article",
+ title="Geocomplexity explains spatial errors",
+ journal="International Journal of Geographical Information Science",
+ volume= "37",
+ pages="1449–1469",
+ year="2023",
+ number="7",
+ author="Zhang, Zehua and Song, Yongze and Luo, Peng and Wu, Peng",
+ doi="10.1080/13658816.2023.2203212",
+ url="https://doi.org/10.1080/13658816.2023.2203212")
+
