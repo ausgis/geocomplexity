@@ -1,3 +1,7 @@
+# geocomplexity 0.2.1
+
+* Include a citation for the `geocomplexity` package.
+
 # geocomplexity 0.2.0
 
 * Transfer `moran_test` function to `sdsfun` package (#1).
