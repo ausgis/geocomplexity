@@ -1,6 +1,6 @@
 # geocomplexity 0.2.1
 
-* Include a citation for the `geocomplexity` package.
+* Include a citation for the `geocomplexity` package (#2).
 
 # geocomplexity 0.2.0
 
