@@ -2,4 +2,4 @@
 
 0 errors | 0 warnings | 1 note
 
-* This release transfers `moran_test` function to `sdsfun` package.
+* This release includes a citation for the `geocomplexity` package.
