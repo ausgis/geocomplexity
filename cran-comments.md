@@ -2,4 +2,4 @@
 
 0 errors | 0 warnings | 1 note
 
-* This release includes a citation for the `geocomplexity` package.
+* This release enhances support for geographical complexity. See `NEWS.md` for details.
