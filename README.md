@@ -9,6 +9,7 @@
 [![downloads_all](https://badgen.net/cran/dt/geocomplexity?color=orange)](https://CRAN.R-project.org/package=geocomplexity)
 [![downloads_month](https://cranlogs.r-pkg.org/badges/geocomplexity)](https://CRAN.R-project.org/package=geocomplexity)
 [![r-universe](https://ausgis.r-universe.dev/badges/geocomplexity?color=yellow)](https://ausgis.r-universe.dev/geocomplexity)
+[![R-CMD-check](https://github.com/ausgis/geocomplexity/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ausgis/geocomplexity/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **Mitigating Spatial Bias Through Geographical Complexity**
