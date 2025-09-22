@@ -21,7 +21,7 @@ Encoding: UTF-8
 URL: https://ausgis.github.io/geocomplexity/, https://github.com/ausgis/geocomplexity
 BugReports: https://github.com/ausgis/geocomplexity/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Depends: 
     R (>= 4.1.0)
 Imports: 
