@@ -1,0 +1,192 @@
+# GeoComplexity Application
+
+## Improving Model Fitting Utilizing Geographical Complexity in Spatial Regression Tasks
+
+``` r
+library(sf)
+## Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE
+library(tidyverse)
+## ── Attaching core tidyverse packages ───────────────────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2
+## ── Conflicts ─────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+library(geocomplexity)
+
+econineq = sf::read_sf(system.file('extdata/econineq.gpkg',package = 'geocomplexity'))
+wt1 = sdsfun::spdep_contiguity_swm(econineq,queen = TRUE,style = 'B')
+```
+
+#### Incorporating the geographical complexity of each independent variable into the model’s explanatory variables
+
+``` r
+mlr1 = lm(Gini ~ ., data = st_drop_geometry(econineq))
+
+gc1 = geocd_vector(dplyr::select(econineq,-Gini),
+                   wt = wt1, returnsf = FALSE)
+mlr2 = lm(Gini ~ ., data = st_drop_geometry(econineq) %>%
+            dplyr::bind_cols(gc1))
+
+eval_mlr = \(models,mnames){
+  R2 = purrr::map_dbl(models,\(m) summary(m)$r.squared)
+  AdjR2 = purrr::map_dbl(models,\(m) summary(m)$adj.r.squared)
+  t_eval = tibble::tibble(Model = mnames,
+                          R2,AdjR2)
+  return(t_eval)
+}
+
+eval_mlr(list(mlr1,mlr2),
+         c("MLR","GCMLR")) |>
+  pander::pander()
+```
+
+| Model |   R2   | AdjR2  |
+|:-----:|:------:|:------:|
+|  MLR  | 0.5846 | 0.5743 |
+| GCMLR | 0.6215 | 0.6024 |
+
+#### Using spatial weight matrices that account for geographical complexity in spatial regression
+
+``` r
+library(spatialreg)
+## Loading required package: spData
+## Loading required package: Matrix
+## 
+## Attaching package: 'Matrix'
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+
+wtl1 = spdep::mat2listw(wt1)
+## Warning in spdep::mat2listw(wt1): style is M (missing); style should be set to a valid value
+## Warning in spdep::mat2listw(wt1): neighbour object has 2 sub-graphs
+wt2 = geocs_swm(econineq,wt1,style = "W")
+wtl2 = spdep::mat2listw(wt2,zero.policy = TRUE)
+## Warning in spdep::mat2listw(wt2, zero.policy = TRUE): style is M (missing); style should be
+## set to a valid value
+
+slm1 = lagsarlm(Gini ~ ., data = st_drop_geometry(econineq),
+                listw = wtl1, Durbin = FALSE)
+slm2 = lagsarlm(Gini ~ ., data = st_drop_geometry(econineq),
+                listw = wtl2, Durbin = FALSE)
+sem1 = errorsarlm(Gini ~ ., data = st_drop_geometry(econineq),
+                  listw = wtl1, Durbin = FALSE)
+sem2 = errorsarlm(Gini ~ ., data = st_drop_geometry(econineq),
+                  listw = wtl2, Durbin = FALSE)
+
+eval_slm = \(models,mnames){
+  evt = tibble(Model = mnames,
+               AIC = purrr::map_dbl(models,AIC),
+               BIC = purrr::map_dbl(models,BIC),
+               logLik = purrr::map_dbl(models,logLik))
+  return(evt)
+}
+
+eval_slm(list(slm1,slm2,sem1,sem2),
+         c("SLM","GCSLM","SEM","GCSEM")) |>
+  pander::pander()
+```
+
+| Model |  AIC  |  BIC  | logLik |
+|:-----:|:-----:|:-----:|:------:|
+|  SLM  | -1355 | -1313 | 688.6  |
+| GCSLM | -1363 | -1321 | 692.6  |
+|  SEM  | -1468 | -1426 |  745   |
+| GCSEM | -1364 | -1322 | 693.1  |
+
+#### geographical complexity-geographically weighted regression
+
+``` r
+g1 = GWmodel3::gwr_basic(
+  formula = Gini ~ .,
+  data = econineq,
+  bw = "AIC",
+  adaptive = TRUE
+)
+## Warning: st_centroid assumes attributes are constant over geometries
+g1
+## Geographically Weighted Regression Model
+## ========================================
+##   Formula: Gini ~ .
+##      Data: econineq
+##    Kernel: gaussian
+## Bandwidth: 28 (Nearest Neighbours) (Optimized accroding to AIC)
+## 
+## 
+## Summary of Coefficient Estimates
+## --------------------------------
+##  Coefficient    Min.  1st Qu.  Median  3rd Qu.    Max. 
+##    Intercept  -0.373    0.209   0.347    0.424   0.565 
+##    Induscale  -0.342   -0.239  -0.193   -0.147  -0.006 
+##           IT  -0.004   -0.003  -0.002   -0.002   0.004 
+##       Income  -0.000    0.000   0.000    0.000   0.000 
+##       Sexrat  -0.056    0.012   0.052    0.100   0.200 
+##     Houseown   0.001    0.002   0.003    0.004   0.005 
+##       Indemp  -0.000   -0.000  -0.000   -0.000  -0.000 
+##       Indcom   0.000    0.000   0.000    0.000   0.000 
+##        Hiedu   0.000    0.002   0.002    0.002   0.004 
+## 
+## 
+## Diagnostic Information
+## ----------------------
+##   RSS: 0.1482732
+##   ENP: 79.00112
+##   EDF: 253.9989
+##    R2: 0.8025199
+## R2adj: 0.740855
+##   AIC: -1559.969
+##  AICc: -1460.302
+g2 = gwr_geoc(formula = Gini ~ .,
+              data = econineq,
+              bw = "AIC",
+              adaptive = TRUE)
+g2
+## Geographical Complexity-Geographically Weighted Regression Model
+## ================================================================
+##      Kernel:  gaussian
+##   Bandwidth:  16 (Nearest Neighbours) (Optimized according to AIC)
+##       Alpha:  0.05
+## 
+## Summary of Coefficient Estimates
+## --------------------------------
+## Coefficient      Min.   1st Qu.    Median   3rd Qu.      Max.
+## Intercept     -0.356     0.254     0.328     0.391     0.519
+## Induscale     -0.396    -0.267    -0.218    -0.178     0.028
+## IT            -0.004    -0.003    -0.002    -0.002     0.004
+## Income         0.000     0.000     0.000     0.000     0.000
+## Sexrat        -0.045     0.036     0.052     0.093     0.271
+## Houseown       0.001     0.002     0.003     0.003     0.004
+## Indemp        -0.000    -0.000    -0.000    -0.000     0.000
+## Indcom         0.000     0.000     0.000     0.000     0.000
+## Hiedu          0.000     0.001     0.002     0.002     0.004
+## 
+## Diagnostic Information
+## ----------------------
+##   RSS: 0.123
+##   ENP: 112.902
+##   EDF: 220.098
+##    R2: 0.836
+## R2adj: 0.832
+##   AIC: -1607.940
+##  AICc: -1444.543
+##  RMSE: 0.019
+
+tibble::tibble(
+  Model = c("GWR","GeoCGWR"),
+  R2 = c(g1$diagnostic$RSquare,g2$diagnostic$R2),
+  AdjR2 = c(g1$diagnostic$RSquareAdjust,g2$diagnostic$R2_Adj),
+  AICc = c(g1$diagnostic$AICc,g2$diagnostic$AICc),
+  RMSE = c(sqrt(g1$diagnostic$RSS / nrow(econineq)),g2$diagnostic$RMSE)
+)|>
+  pander::pander()
+```
+
+|  Model  |   R2   | AdjR2  | AICc  |  RMSE   |
+|:-------:|:------:|:------:|:-----:|:-------:|
+|   GWR   | 0.8025 | 0.7409 | -1460 | 0.0211  |
+| GeoCGWR | 0.836  | 0.8319 | -1445 | 0.01923 |
