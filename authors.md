@@ -2,8 +2,8 @@
 
 ## Authors
 
-- **Wenbo Lyu**. Author, maintainer, copyright holder.
-  [](https://orcid.org/0009-0002-6003-3800)
+- **[Wenbo Lyu](https://spatlyu.github.io/)**. Author, maintainer,
+  copyright holder. [](https://orcid.org/0009-0002-6003-3800)
 
 - **[Yongze Song](https://yongzesong.com/)**. Author.
   [](https://orcid.org/0000-0003-3420-9622)
