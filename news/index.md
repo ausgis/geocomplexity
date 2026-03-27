@@ -2,22 +2,22 @@
 
 ## geocomplexity 0.3.0
 
+CRAN release: 2026-03-26
+
 - Correct maintainer surname spelling from `Lv` to `Lyu` for pinyin
-  compliance ([\#3](https://github.com/ausgis/geocomplexity/issues/3)).
+  compliance.
 
 ## geocomplexity 0.2.1
 
 CRAN release: 2024-11-11
 
-- Include a citation for the `geocomplexity` package
-  ([\#2](https://github.com/ausgis/geocomplexity/issues/2)).
+- Include a citation for the `geocomplexity` package.
 
 ## geocomplexity 0.2.0
 
 CRAN release: 2024-10-03
 
-- Transfer `moran_test` function to `sdsfun` package
-  ([\#1](https://github.com/ausgis/geocomplexity/issues/1)).
+- Transfer `moran_test` function to `sdsfun` package.
 
 - Removing `tidyverse` from the dependencies suggested by package.
 
