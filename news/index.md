@@ -1,5 +1,7 @@
 # Changelog
 
+## geocomplexity 0.3.1
+
 ## geocomplexity 0.3.0
 
 CRAN release: 2026-03-26
