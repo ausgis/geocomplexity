@@ -14,7 +14,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/ausgis/geocomplexity/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/ausgis/geocomplexity/blob/v0.3.0/inst/CITATION)
 
 Zhang, Zehua, Song, Yongze, Luo, Peng, Wu, Peng (2023). “Geocomplexity
 explains spatial errors.” *International Journal of Geographical

@@ -5,7 +5,7 @@
 CRAN release: 2026-03-26
 
 - Correct maintainer surname spelling from `Lv` to `Lyu` for pinyin
-  compliance.
+  compliance ([\#3](https://github.com/ausgis/geocomplexity/issues/3)).
 
 ## geocomplexity 0.2.1
 
