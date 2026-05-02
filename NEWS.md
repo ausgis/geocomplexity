@@ -4,11 +4,11 @@
 
 # geocomplexity 0.2.1
 
-* Include a citation for the `geocomplexity` package.
+* Include a citation for the `geocomplexity` package (#2).
 
 # geocomplexity 0.2.0
 
-* Transfer `moran_test` function to `sdsfun` package.
+* Transfer `moran_test` function to `sdsfun` package (#1).
 
 * Removing `tidyverse` from the dependencies suggested by package.
 
