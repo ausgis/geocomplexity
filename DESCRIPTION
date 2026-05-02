@@ -34,11 +34,14 @@ Imports:
     terra,
     tibble
 Suggests: 
+    gdverse,
     ggplot2,
+    infoxtr,
     knitr,
     Rcpp,
     RcppArmadillo,
     rmarkdown,
+    spEDM,
     viridis
 LinkingTo: 
     Rcpp,
