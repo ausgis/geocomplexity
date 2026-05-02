@@ -1,3 +1,5 @@
+# geocomplexity 0.3.1
+
 # geocomplexity 0.3.0
 
 * Correct maintainer surname spelling from `Lv` to `Lyu` for pinyin compliance (#3).
